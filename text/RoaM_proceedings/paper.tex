@@ -36,19 +36,24 @@
 
 \begin{abstract}
   We compare level-$k$ utility maximization and level-$k$ regret
-  minimization in evolutionary competition on one-shot plays of
-  arbitrary strategic games. RESULTS \dots
+  minimization in evolutionary competition based on averages of
+  one-shot plays over many randomly generated strategic games. Under
+  the assumption that Theory-of-Mind-reasoning of depth $k$ incurs a
+  cost monotonically increasing with $k$, our results show that mixed
+  states with low levels of reasoning depth $k$ can be evolutionary
+  stable with substantial basins of attraction under the replicator
+  dynamics and that regret minimization can outperform utility
+  maximization.
 \end{abstract}
 
-
-
-The widely accepted normative standard of individual decision making
-under uncertainty is expected utility maximization. An agent is
-rational only if his choices maximize expected utility. In games with
-several players, agents who believe that their opponents are rational
-might thus rule out certain of the opponents' choices. This kind of
-reasoning can be iterated, giving rise to predictions of rational
-choice under arbitrarily deep nestings of mutual beliefs in
+\noindent The widely accepted normative standard of individual
+decision making under uncertainty is expected utility maximization. An
+agent is rational only if his choices maximize expected utility. In
+games with several players, agents who believe that their opponents
+are rational might thus rule out certain of the opponents'
+choices. This kind of reasoning can be iterated, giving rise to
+predictions of rational choice under arbitrarily deep nestings of
+mutual beliefs in
 rationality. % Depending on the detailed specification of what it means
 % to have a belief in the opponents' rationality, and to respond
 % rationally to such beliefs, standard game-theoretic solution concepts
@@ -90,26 +95,15 @@ limited depth of reasoning.
 Extending and generalizing this line of investigation, we use
 numerical simulations to approximate the expected payoff of agents
 with a fixed choice principle who play many \emph{arbitrary} 2-player
-strategic games, not just a small hand-picked selection. This way we
-try to asses the general evolutionary benefit of a choice principle
-across an unbiased sample of games, not just for those games that are
-of particular technical, philosophical or historical
+one-shot strategic games, not just a small hand-picked selection. This
+way we try to assess the general evolutionary benefit of a choice
+principle across an unbiased sample of games, not just for those games
+that are of particular technical, philosophical or historical
 importance. Additionally, we compare not only different ToM reasoning
 capability of utility maximizers, but also variation in the underlying
 method of choice. Concretely, we look at level-$k$ utility
 maximization and level-$k$ iterated regret minimization (IRM)
-\citep{HalpernPass2012:Iterated-Regret}.\footnote{Unlike
-  \citeauthor{Weerdde-WeerdVerbrugge2013:How-much-does-i}, we look at
-  level-$k$ reasoning models
-  \citep[e.g.][]{Crawford2003:Lying-for-Strat,Crawford2007:Lets-Talk-It-Ove},
-  not cognitive hierarchy models
-  \citep[e.g.][]{CamererHo2004:A-Cognitive-Hie}. The former assume
-  that agents of level $k+1$ believe that the opponent is of level
-  $k$, while the latter assume a belief in a level-$l$ opponent with
-  $l \le k$. Moreover, we assume all games to be one-shot encounters,
-  while \citeauthor{Weerdde-WeerdVerbrugge2013:How-much-does-i} look
-  at repeated encounters with the same opponent, and the concomitant
-  possibility of strategic learning.}  The motivation for looking at
+\citep{HalpernPass2012:Iterated-Regret}. The motivation for looking at
 IRM is threefold. For one, regret minimization has been suggested as a
 conceptually appealing alternative to utility maximization and a
 potentially promising descriptive theory of individual decision-making
@@ -126,21 +120,39 @@ iteration steps, making it a serious challenger of the standard theory
 in terms of limited ToM reasoning as well
 \citep[c.f.][]{HalpernPass2012:Iterated-Regret}.
 
-The choice principles we compare are defined as follows. L-0 utility
-maximizers have an arbitrary probabilistic belief about the opponent's
-behavior and are indifferent between any act that maximizes expected
-utility under this belief. L-$k+1$ utility maximizers have an
-arbitrary probabilistic belief over all acts that an L-$k$ opponent
-would be indifferent about. Formally, if $U$ is a matrix of utilities
-for the row player, regret minimization is equivalent to playing
-MaxiMin on the derived matrix $U'$, where $U'_{ij} = U_{ij} -
-\textrm{max}_{k} U_{kj}$ is the negative regret of choosing act $i$
-when the opponent chooses $j$. L-0 regret minimizers are indifferent
-between any act that minimizes regret in this sense. An L-$k+1$ regret
-minimizer chooses like an L-0 regret minimizer in the reduced game in
-which only acts remain that row and column players would choose that
-are L-$k$ regret minimizers
-\citep[see][]{HalpernPass2012:Iterated-Regret}.
+The choice principles we compare are defined as follows. Look at
+level-$k$ utility maximizers first. L-0 utility maximizers have an
+arbitrary probabilistic belief about the opponent's behavior and are
+indifferent between any act that maximizes expected utility under this
+belief. L-$k+1$ utility maximizers have an arbitrary probabilistic
+belief with support only on acts that an L-$k$ opponent might choose,
+and are indifferent between any act that maximizes expected utility
+under this belief. Notice that this construction is different from
+that of \citet{Weerdde-WeerdVerbrugge2013:How-much-does-i} in several
+respects. Firstly, we look at level-$k$ reasoning models
+\citep[e.g.][]{Crawford2003:Lying-for-Strat,Crawford2007:Lets-Talk-It-Ove},
+not cognitive hierarchy models
+\citep[e.g.][]{CamererHo2004:A-Cognitive-Hie}, like
+\citeauthor{Weerdde-WeerdVerbrugge2013:How-much-does-i} do. The former
+models assume that agents of level $k+1$ believe that the opponent is
+of level $k$, while the latter have a more general belief that the
+opponent is of some level-$l$ with $l \le k$. Moreover, we assume all
+games to be one-shot encounters, while
+\citeauthor{Weerdde-WeerdVerbrugge2013:How-much-does-i} look at
+repeated encounters with the same opponent, and the concomitant
+possibility of strategic learning.
+
+
+Let's turn next to the definition of level-$k$ regret
+minimizers. Formally, if $U$ is a matrix of utilities for the row
+player, regret minimization is equivalent to playing MaxiMin on the
+derived matrix $U'$, where $U'_{ij} = U_{ij} - \textrm{max}_{k}
+U_{kj}$ is the negative regret of choosing act $i$ when the opponent
+chooses $j$. L-0 regret minimizers are indifferent between any act
+that minimizes regret in this sense. An L-$k+1$ regret minimizer
+chooses like an L-0 regret minimizer in the reduced game in which only
+acts remain that row and column players would choose that are L-$k$
+regret minimizers \citep[see][]{HalpernPass2012:Iterated-Regret}.
 
 We randomly generate arbitrary strategic games and record the payoff
 earned by each choice principle when playing against any other,
@@ -163,21 +175,21 @@ at random.
 
  
 
-\begin{table}
+\begin{table}[t]
   \centering
 \begin{tabular}{rrrrrrrrr}
   \hline
  & EU-L0 & EU-L1 & EU-L2 & EU-L3 & EU-L4 & RM-L0 & RM-L1 & RM-L2 \\ 
   \hline
-  EU-L0 & 6.754 & 6.764 & 6.729 & 6.889 & 6.790 & 6.747 & 6.767 & 6.767  \\ 
-  EU-L1 & 7.155 & 6.696 & 6.666 & 6.609 & 6.949 & 7.004 & 7.072 & 7.071  \\ 
-  EU-L2 & 6.692 & 7.412 & 6.959 & 6.850 & 6.973 & 6.457 & 6.554 & 6.556  \\ 
-  EU-L3 & 6.707 & 7.002 & 7.610 & 7.132 & 7.165 & 6.474 & 6.524 & 6.525  \\ 
-  EU-L4 & 6.827 & 7.075 & 7.327 & 7.716 & 7.417 & 6.649 & 6.699 & 6.701  \\ 
-  RM-L0 & 6.713 & 6.754 & 6.711 & 6.850 & 6.741 & 6.709 & 6.728 & 6.729  \\ 
-  RM-L1 & 6.877 & 6.851 & 6.803 & 6.941 & 6.874 & 7.085 & 7.107 & 7.107  \\ 
-  RM-L2 & 6.879 & 6.853 & 6.803 & 6.943 & 6.875 & 7.086 & 7.117 & 7.117  \\ 
-   \hline
+  EU-L0 & 6.735 & 6.749 & 6.739 & 6.873 & 6.755 & 6.742 & 6.733 & 6.734 \\ 
+  EU-L1 & 7.126 & 6.650 & 6.649 & 6.610 & 6.954 & 6.969 & 7.016 & 7.017 \\ 
+  EU-L2 & 6.642 & 7.413 & 6.979 & 6.857 & 6.961 & 6.414 & 6.494 & 6.495 \\ 
+  EU-L3 & 6.636 & 6.946 & 7.627 & 7.152 & 7.162 & 6.430 & 6.465 & 6.465 \\ 
+  EU-L4 & 6.780 & 7.038 & 7.314 & 7.734 & 7.388 & 6.592 & 6.620 & 6.619 \\ 
+  RM-L0 & 6.686 & 6.684 & 6.700 & 6.830 & 6.695 & 6.681 & 6.676 & 6.675 \\ 
+  RM-L1 & 6.853 & 6.768 & 6.782 & 6.913 & 6.806 & 7.051 & 7.046 & 7.043 \\ 
+  RM-L2 & 6.856 & 6.770 & 6.784 & 6.916 & 6.810 & 7.052 & 7.057 & 7.053 \\ 
+   \hline \\
 \end{tabular}
 \caption{Average utilities of level-$k$ utility maximizers and
   level-$k$ regret minimizers over 10.000 arbitrary games (see main
@@ -200,7 +212,7 @@ interestingly, some pure populations of EU-L$k$ players can also be
 invaded by EU-L$l$ players, with $l<k$ (see
 Table~\ref{tab:MaxUtil}). On the other hand, if $k\ge2$, then RM-L$k$
 is a neutrally stable strategy (NSS): regret minimizers of a different
-level $k\ge2$ would not be driven to extinction, but would also not
+level $l\ge2$ would not be driven to extinction, but would also not
 take over the population (because they are behaviorally equivalent in
 all games from our random sample).
 
@@ -211,36 +223,33 @@ $k$ (almost always $k\le 3$) for which IRM has reached its fixed point
 in all sampled games and RM-L$k'$ is an NSS for all $k' \ge k$. This
 is a noteworthy result: on randomly sampled games, it is always
 beneficial for utility maximizers to outsmart the opponent by ideally
-one level of ToM reasoning; too much ToM outsmarting is harmful. For
-IRM, levels of ToM reasoning higher than a few steps are
+one level of ToM reasoning, but too much ToM outsmarting is
+harmful. For IRM, levels of ToM reasoning higher than a few steps are
 evolutionarily pointless.
 
-More fine-grained results obtain under the natural hypothesis that ToM
-reasoning incurs a cost $c(k) \in \mathds{R}$, proportional to
-reasoning depth $k$. In that case, the properties of the cost function
-are crucial. If costs are initially small and grow not too
-superlinearly in $k$, it still holds that usually no EU-L$k$ is an ESS
-because it can be invaded by EU-L$k+1$. However, invasion by EU-L$l$
-for $l < k$ is now more prominent than without reasoning costs, so
-that mixed populations containing low-level EU-L$k$ players are often
-the only dynamic attractors, e.g., under the replicator dynamic. If
-costs grow more pronouncedly superlinearly in $k$, there can be $k$
-for which EU-L$k$ is an ESS in the meta-game restricted to utility
-maximizing choice principles, but this requires very particular cost
-functions and is not very likely. The most frequent outcome of
-evolutionary competition between EU-L$k$ players under superlinear
-costs is a mixed population of fairly low level-$k$ players. But all
-of this only holds when RM-L$k$ is excluded from consideration. When
-we also look at IMR, adding reasoning costs of any type results in
-RM-L$k$ being an ESS for some very low $k$. If ToM reasoning costs
-grow pronouncedly superlinearly, this ESS is almost always
-unique. This means that, at least under certain assumptions about the
-costs of ToM reasoning, the iterated security strategy IRM
-evolutionarily outperforms level-$k$ utility maximization.
+More fine-grained results obtain when we look at the predictions of
+the replicator dynamics on the simulated ``meta-games'' together with
+the natural hypothesis that ToM reasoning incurs a cost $c(k) \in
+\mathds{R}$, which is monotonically increasing with $k$. For
+concreteness, we look at a parameterized cost function $c(k \thinspace
+; \thinspace s, a ) = \sum_{i=0}^{k} a^i \thinspace s$ where $s$ is
+the initial step of growth, and $a$ is a parameter that controls for
+superlinear and sublinear growth. For at least linear growth ($a \ge
+1$), there is a threshold $\theta \approx .391$ such that if $s >
+\theta$, the only attractor is EU-L$0$. With $s$ smaller or not too
+much bigger than $\theta$ and sublinear growth (e.g., $a=0.25$), RM-L1
+is a strong attractor, as well as mixed states of low level
+EU-maximizers. For step $s < \theta$ and $a \le 1$ results are more varied. If $.313
+< s < \theta$, the only attracting state is a mix of EU-L0 and
+EU-L1. If $.011 < s < .313$, RM-L1 is a strict symmetric Nash
+equilibrium and therefore an attractor, but also, depending on $s$,
+mixed states of low-level EU-maximizers are attracting. If $0 < s \le
+.011$ RM-L2 is an attractor, together with mixed states of low level
+EU-maximizers.
 
 In sum, our simulation data show that shallow depth of reasoning is
-plausibly evolutionarily advantageous in long run competition with
-``deep ToM'' strategies. Regret minimization often outperforms utility
+plausibly evolutionarily dominant in long run competition with ``deep
+ToM'' strategies. Regret minimization often outperforms utility
 maximization in this evolutionary competition, especially when
 reasoning costs are added. Although already insightful, our results
 are only partial, because many interesting questions have not yet been
@@ -249,14 +258,16 @@ work. Firstly, sequential games might yield different results, because
 they would induce more ties in strategic form, and hence more reasons
 to apply deeper ToM reasoning. Secondly, the payoff of utility
 maximization heavily depends on the type of belief about the
-opponent's choice. Here we used arbitrary beliefs, but certain
-restrictions on belief formation, e.g., using flat beliefs throughout,
-might give utility maximizers a better payoff on average. Finally, it
-would be interesting to extend our comparison to more choice
-principles, e.g., ones including learning from repeated interactions
-with the same players
-\citep[][]{Weerdde-WeerdVerbrugge2013:How-much-does-i}, or choice
+opponent's choice. Here we used arbitrary beliefs compatible with the
+opponent's assumed type, but certain restrictions on belief formation,
+e.g., using maximum-entropy beliefs, might give utility maximizers a
+better payoff on average. Finally, it would be interesting to extend
+our comparison to more choice principles, e.g., ones including
+learning from repeated interactions with the same players
+\citep[e.g.][]{Weerdde-WeerdVerbrugge2013:How-much-does-i}, or choice
 principles building on prospect theory, for example.
+
+\newpage
 
 \printbibliography[heading=bibintoc]
 
