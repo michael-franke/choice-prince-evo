@@ -1,0 +1,28 @@
+to be included:
+
+NON-ITERATION
+
+* analytical proofs
+  - symmetric 2x2: RM best security strategy
+  - RM + beliefs = Max-EU
+
+* simulation results for asymmetric games (arbitrary size):
+  - ...< EU-arbitrary < RM < EU-flat
+
+ITERATION
+
+* iterative choice principles: compare "winners of previous
+  comparison"
+
+* investigate evolutionary dynamics with parameterized costs
+
+---
+
+to do:
+
+* fix procedure for generating "meta-games" & communicate this with
+  Paolo, so he uses right method for analysis
+
+* characterize cost parameters (thresholds) in more general terms
+
+* 
