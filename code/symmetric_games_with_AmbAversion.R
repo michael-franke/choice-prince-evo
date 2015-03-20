@@ -1,148 +1,17 @@
-require('gtools') # for dirichlet distribution
-require('plyr')
-require('reshape2')
-require('ggplot2')
-require('xtable')
+source('functions.R')
 
-source('../../helpers/helpers.R')
 
-create_game = function(ub_util=10, ub_acts=2, symmetric = T){
-  # creates a random 2-player strategic form game with upper-bounds
-  # on utils and acts
-  if (ub_acts == 2){
-    n_acts = c(2,2)
-  }
-  else{
-    n_acts = sample(2:ub_acts,2,replace=TRUE)
-    if (symmetric == T) {
-      n_acts[2] = n_acts[1]
-    }
-  }
-  U = array(0,dim=c(n_acts,2))
-  U[,,1] = matrix(sample(1:ub_util,prod(n_acts),replace=TRUE),nrow=n_acts[1])
-  if (symmetric==T) {
-    U[,,2] = t(U[,,1])
-  }
-  else{
-    U[,,2] = matrix(sample(1:ub_util,prod(n_acts),replace=TRUE),nrow=n_acts[1]) 
-  }
-  return(U)
-}
+CP_names = c("Sec-Reg", "Sec-Id", # security strategy
+             "BFl-Reg", "BFl-Id", # flat belief
+             "BAr-Reg", "BAr-Id", # arbitrary belief
+             "AAs-Reg", "AAs-Id", # symmetric ambiguity aversion
+             "AAa-Reg", "AAa-Id"  # aymmetric ambiguity aversion
+             )
 
-classify_game = function(U){
-  # takes a utility matrix U of a symmetric 2-by-2 game
-  # outputs a string that classifies the game in to one of
-  # 1. coordition, 2. anti-coordination, 
-  # 3. strict dominance, 4. weak dominance
-  # 5. indifference
-  
-  if (length(dim(U)) == 3) {
-    U = U[,,1]
-  }
-  
-  out = ""
-  
-  if (U[1,1] > U[2,1] & U[2,2] > U[1,2]){
-    out = paste(out, "coordination",sep="")
-  }
-  
-  if (U[1,1] < U[2,1] & U[2,2] < U[1,2]){
-    out = paste(out, "anti-coordination",sep="")
-  }
-  
-  if ( (U[1,1] - U[2,1]) * (U[2,2] - U[1,2]) < 0  ){
-    out = paste(out, "str_dominance",sep="")
-  }
-  
-  if ( xor(U[1,1] - U[2,1] == 0, U[2,2] - U[1,2] == 0) ){
-    out = paste(out, "weak_dominance",sep="")
-  }
-  
-  if (U[1,1] == U[2,1] & U[2,2] == U[1,2]){
-    out = paste(out, "indifference",sep="")
-  }
-  
-  if (out == ""){
-    show(U)
-  }
-    
-  return(out)
-}
-
-flip_game = function(U){
-  V = array(0,dim=dim(U)[c(2,1,3)])
-  V[,,1] = t(U[,,2])
-  V[,,2] = t(U[,,1])
-  return(V)
-}
-
-max_value = function(U){
-  if (length(dim(U)) == 3) {
-    U = U[,,1]
-  }
-  eus = rowMeans(U)
-  maxs = which.max(eus)
-  i = sample(length(maxs),1)
-  return(maxs[i])
-}
-
-maximin = function(U){
-  # returns maximin choice for row player in U
-  if (length(dim(U)) == 3) {
-    U = U[,,1]
-  }
-  mins = sapply(1:dim(U)[1], function(x) min(U[x,]))
-  maximins = which(mins == max(mins))
-  i = sample(length(maximins),1)
-  return(maximins[i])
-}
-
-regret_transform = function(U){
-  # take a payoff matrix and return the game based on negative regrets
-  if (length(dim(U)) == 3) {
-    U = U[,,1]
-  }
-  V = t(t(U) - sapply(1:dim(U)[2], function(x) max(U[,x] )))
-  return(V)
-}
-
-relative_power_transform = function(U){
-  # take a game matrix and return equality payoffs
-  if (length(dim(U)) == 2) {
-    X = array(0,dim=c(dim(U),2))
-    X[,,1] = U
-    X[,,2] = t(U)
-    U = X
-  }
-  V = U
-  V[,,1] = U[,,1] - U[,,2]
-  V[,,2] = U[,,2] - U[,,1]
-  return(V)
-}
-
-general_power_transform = function(U){
-  # take a game matrix and return equality payoffs
-  if (length(dim(U)) == 2) {
-    X = array(0,dim=c(dim(U),2))
-    X[,,1] = U
-    X[,,2] = t(U)
-    U = X
-  }
-  V = U
-  V[,,1] = U[,,1] + U[,,2]
-  V[,,2] = U[,,1] + U[,,2]
-  return(V)
-}
-
-CP_names = c("Sec-Reg", "Sec-Id", "Sec-Alt", "Sec-Comp", 
-             "Bel-Reg", "Bel-Id", "Bel-Alt", "Bel-Comp")
-
-rounds = 10000
-trial = c()
+rounds = 50000
 # game_type = c()
-row_choice = c()
-col_choice = c()
-row_util = c()
+row_util = rep(0,rounds*length(CP_names)^2)
+nActs = rep(2,rounds)
 
 pb <- txtProgressBar(max = rounds,style = 3)
 
@@ -150,53 +19,55 @@ pb <- txtProgressBar(max = rounds,style = 3)
 for (i in 1:rounds){
   setTxtProgressBar(pb, i)
   
-  U = create_game(ub_util=10, ub_acts=6, symmetric = T)[,,1]
-#   gt = classify_game(U)
+  U = create_game(ub_util=10, ub_acts=2, symmetric = T)[,,1]
+#   nActs[i] = dim(U)[1]
   
-#   br = matrix(rep(rdirichlet(1,rep(1,dim(U)[2]))[1,], each=dim(U)[1]), nrow=dim(U)[1], ncol=dim(U)[2]) # beliefs of row player
-  br = 1 # flat beliefs
-    
+  #   gt = classify_game(U)
+  
+  BAr = matrix(rep(rdirichlet(1,rep(1,dim(U)[2]))[1,], each=dim(U)[1]), nrow=dim(U)[1], ncol=dim(U)[2]) # arbitrary belief
+  x = runif(n = 1, min = 0, max = 0.5)
+  BAAs = c(x, 1-x)
+  BAAa = sort(runif(n = 2, min = 0, max = 1))
+
   choices = c(maximin(regret_transform(U)), #Sec-Reg
               maximin(U), # Sec-Id
-              maximin(relative_power_transform(U)), # Sec-Alt
-              maximin(general_power_transform(U)),  # Sec-Comp
-              max_value(regret_transform(U)), #Bel-Reg
-              max_value(U), # Bel-Id
-              max_value(relative_power_transform(U)), # Bel-Alt
-              max_value(general_power_transform(U))  # Bel-Comp
-              )
-  
-  choices.c = c(maximin(regret_transform(U)), #Sec-Reg
-              maximin(U), # Sec-Id
-              maximin(relative_power_transform(U)), # Sec-Alt
-              maximin(general_power_transform(U)),  # Sec-Comp
-              max_value(regret_transform(U)), #Bel-Reg
-              max_value(U), # Bel-Id
-              max_value(relative_power_transform(U)), # Bel-Alt
-              max_value(general_power_transform(U))  # Bel-Comp
+              max_value(regret_transform(U)), #BFl-Reg
+              max_value(U), # BFl-Id
+              max_value(regret_transform(U) * BAr), #BAr-Reg
+              max_value(U * BAr), # BAr-Id
+              maximin(AA_transform(regret_transform(U), BAAs)), #AAs-Reg
+              maximin(AA_transform(U, BAAs)), # AAs-Id
+              maximin(AA_transform(regret_transform(U), BAAa)), #AAa-Reg
+              maximin(AA_transform(U, BAAa)) # AAa-Id
   )
   
+  choices.c = c(maximin(regret_transform(U)), #Sec-Reg
+            maximin(U), # Sec-Id
+            max_value(regret_transform(U) * BAr), #BAr-Reg
+            max_value(U * BAr), # BAr-Id
+            max_value(regret_transform(U)), #BFl-Reg
+            max_value(U), # BFl-Id
+            maximin(AA_transform(regret_transform(U), BAAs)), #AAs-Reg
+            maximin(AA_transform(U, BAAs)), # AAs-Id
+            maximin(AA_transform(regret_transform(U), BAAa)), #AAa-Reg
+            maximin(AA_transform(U, BAAa)) # AAa-Id
+  )
+
   
   for (c in 1:length(CP_names)){
     for (d in 1:length(CP_names)){
-#       trial = c(trial,i)
-#       game_type = c(game_type,gt)
-#       row_choice = c(row_choice,CP_names[c])
-#       col_choice = c(col_choice,CP_names[d])
-      row_util = c(row_util,U[choices[c],choices.c[d]])
+      row_util[((i-1)*length(CP_names)^2) + ((c-1)*length(CP_names))+(d)] = U[choices[c],choices.c[d]]
     }
   }  
-
+  
 }
 
 data = data.frame( #trial = factor(trial), 
-#                   game_type = factor(game_type, levels=c("coordination", "anti-coordination",
-#                                                          "str_dominance","weak_dominance","indifference")),
-                  row_choice = factor(rep(CP_names,length(CP_names)),levels = CP_names),
-#                   row_choice = factor(row_choice, levels = CP_names),
-#                   col_choice = factor(col_choice, levels = CP_names),
-                  col_choice = factor(rep(CP_names, each = length(CP_names)),levels = CP_names),
-                  row_util = row_util)
+  #                   game_type = factor(game_type, levels=c("coordination", "anti-coordination",
+  #                                                          "str_dominance","weak_dominance","indifference")),
+  row_choice = factor(rep(rep(CP_names, each = length(CP_names)) , times = rounds), levels = CP_names),
+  col_choice = factor(rep(CP_names, times = length(CP_names)*rounds), levels = CP_names),
+  row_util = row_util)
 
 close(pb)
 
