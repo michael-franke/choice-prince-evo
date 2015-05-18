@@ -1,0 +1,60 @@
+\documentclass[fleqn,reqno,10pt]{article}
+
+%========================================
+% Packages
+%========================================
+
+\usepackage[]{helpers/mypackages}
+%\usepackage[natbib=true,style=authoryear-comp,backend=bibtex,doi=false,url=false]{biblatex}
+\bibliography{helpers/MyRefLocal}
+\usepackage{helpers/myenvironments}
+\usepackage{helpers/mycommands}
+
+\usepackage{todonotes}
+
+%========================================
+% Standard Layout
+%========================================
+
+\usepackage{a4wide}
+
+% Itemize
+\renewcommand{\labelitemi}{\large{$\mathbf{\cdot}$}}    % itemize symbols
+\renewcommand{\labelitemii}{\large{$\mathbf{\cdot}$}}
+\renewcommand{\labelitemiii}{\large{$\mathbf{\cdot}$}}
+\renewcommand{\labelitemiv}{\large{$\mathbf{\cdot}$}}
+% Description
+\renewcommand{\descriptionlabel}[1]{\hspace\labelsep\textsc{#1}}
+
+% Figure Captions
+\usepackage{caption} % use corresponding myfiguresize!
+\setlength{\captionmargin}{20pt}
+\renewcommand{\captionfont}{\small}
+\setlength{\belowcaptionskip}{7pt} % standard is 0pt
+
+
+
+\title{Rationality, Evolution \& the Environment}
+\author{Paolo Galeazzi \& Michael Franke}
+\date{current version: May 18th 2015}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+  We study the evolutionary competition of choice principles in meta games.
+\end{abstract}
+
+\begin{itemize}
+\item We would like to look at the problem of ``rational choice'' from an evolutionary point of
+  view: what choice principles would be promoted, which demoted in evolutionary competition
+  amongst each other?
+\item This depends on the environment; it depends on what choice situations occur. Maybe some
+  choice principle is better in some situations, while another one is better in others. 
+\item 
+
+\end{itemize}
+
+\printbibliography[heading=bibintoc]
+
+\end{document}
