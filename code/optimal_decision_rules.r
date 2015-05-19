@@ -1,24 +1,35 @@
 require('gtools') # for dirichlet distribution
 require('plyr') # to conveniently manipulate data frames
+require('ggplot2')
+require('reshape2')
 
 max.t=10
 max.a=10
-n.rounds = 1000
+n.rounds = 50000
 
-data = data.frame(p.true = rep(0,n.rounds),
-                  a.best = rep(0,n.rounds),
-                  n.t = rep(0,n.rounds),
-                  n.a = rep(0,n.rounds),
-                  a.br = rep(0,n.rounds),
-                  a.mr = rep(0,n.rounds),
-                  u.br = rep(0,n.rounds),
-                  u.mr = rep(0,n.rounds))
+p.trueL = 0
+a.bestL = 0
+n.tL = 0
+n.aL = 0
+a.brL = 0
+a.mrL = 0
+u.brL = 0
+u.mrL = 0                  
 
 for (i in 1:n.rounds) {
-  n.t = sample(2:max.t,1) # number of states
-  n.a = sample(2:max.a,1) # number of acts
-  u = matrix(sample(-100:100,replace=TRUE,size=n.t*n.a),nrow=n.t,ncol=n.a) # utility matrix
-  p = rdirichlet(1,rep(1,n.t))[1,] # probabilities of states
+  if (max.t > 2){
+    n.t = sample(2:max.t,1) # number of states
+  } else {
+    n.t = 2
+  }
+  if (max.a > 2){
+    n.a = sample(2:max.a,1) # number of acts
+  } else {
+    n.a = 2
+  }
+  u = matrix(sample(0:10,replace=TRUE,size=n.t*n.a),nrow=n.t,ncol=n.a) # utility matrix
+#   p = rdirichlet(1,rep(1,n.t))[1,] # probabilities of states
+  p = rep(1/n.t, n.t)
   t = sample(1:n.t,1) # true state
 #   t = sample(1:n.t,1,prob=p) # true state, with bias
   # get best response
@@ -31,15 +42,24 @@ for (i in 1:n.rounds) {
   rgrt = sapply(1:n.a, function(x) max(best.v - u[,x])) # regret of each act
   a.mr = which.min(rgrt) # act that minimizes regret 
   # record data
-  data$p.true[i] = p[t]
-  data$a.best[i] = which.max(u[t,])
-  data$n.t[i] = n.t
-  data$n.a[i] = n.a
-  data$a.br[i] = a.br
-  data$a.mr[i] = a.mr
-  data$u.br[i] = u[t,a.br]
-  data$u.mr[i] = u[t,a.mr]
+  p.trueL[i] = p[t]
+  a.bestL[i] = which.max(u[t,])
+  n.tL[i] = n.t
+  n.aL[i] = n.a
+  a.brL[i] = a.br
+  a.mrL[i] = a.mr
+  u.brL[i] = u[t,a.br]
+  u.mrL[i] = u[t,a.mr]
 }
+
+data = data.frame(p.true = p.trueL,
+                  a.best = a.bestL,
+                  n.t = n.tL,
+                  n.a = n.aL,
+                  a.br = a.brL,
+                  a.mr = a.mrL,
+                  u.br = u.brL,
+                  u.mr = u.mrL)
 
 show(mean(data$u.br))
 show(mean(data$u.mr))
@@ -52,11 +72,18 @@ means = ddply(data, .(data$n.t,data$n.a), summarise,
               diff = mean(u.br) - mean(u.mr), 
               br.best = mean(u.br) > mean(u.mr))
 
+meansLong = melt(data = means, id.vars = c("data$n.t", "data$n.a"), measure.vars = c("mean.br", "mean.mr"))
+colnames(meansLong)[1] = "n.t"
+colnames(meansLong)[2] = "n.a"
 
-diff = matrix(means$diff, byrow=TRUE,nrow=max.t-1)
-rownames(diff) = paste(rep("t",max.t-1),2:max.t, sep="")
-colnames(diff) = paste(rep("a",max.a-1),2:max.a, sep="")
 
-image(diff,xlab="states",ylab="acts")
+meansPlot = ggplot(data = meansLong, aes(x = n.a, y = value, col = variable)) +
+  geom_line() + geom_point() + facet_wrap(~ n.t, nrow = 3)
+
+# diff = matrix(means$diff, byrow=TRUE,nrow=max.t-1)
+# rownames(diff) = paste(rep("t",max.t-1),2:max.t, sep="")
+# colnames(diff) = paste(rep("a",max.a-1),2:max.a, sep="")
+# 
+# image(diff,xlab="states",ylab="acts")
 
 
