@@ -1,4 +1,4 @@
-\documentclass[fleqn,reqno,10pt]{article}
+\documentclass[fleqn,reqno,11pt]{article}
 
 %========================================
 % Packages
@@ -41,19 +41,207 @@
 \begin{document}
 \maketitle
 
-\begin{abstract}
-  We study the evolutionary competition of choice principles in meta games.
-\end{abstract}
+
+\section*{Outline of main argument}
+
 
 \begin{itemize}
-\item We would like to look at the problem of ``rational choice'' from an evolutionary point of
-  view: what choice principles would be promoted, which demoted in evolutionary competition
-  amongst each other?
-\item This depends on the environment; it depends on what choice situations occur. Maybe some
-  choice principle is better in some situations, while another one is better in others. 
-\item 
+\item Evolutionary game theory has become an established philosophical tool for probing into
+  conceptual issues whose complexity requires mathematical modeling. Most applications of EGT
+  look at evolutionary selection of behavior in a single game. This game is then considered
+  fixed, closed and immutable.
+  \begin{itemize}
+  \item there are some notable exceptions where the game is open ended, e.g., by the invention
+    of actions \citep{WordenLevin2007:Evolutionary-es, McKenzie-AlexanderSkymrs2012:Inventing-New-S}
+  \end{itemize}
+
+\item We present an approach to studying evolutionary selection of \emph{choice principles},
+  i.e., ways of choosing consistently across several games. In other words, we would like to
+  look at the problem of ``rational choice'' from an evolutionary point of view: what choice
+  principles would be promoted, which demoted in evolutionary competition amongst each other?
+
+\item This depends on the environment; it depends on what choice situations occur how
+  frequently. Maybe some choice principle is better in some situations, while another one is
+  better in others. To capture the relevant statistics of the environment, we therefore look at
+  the evolutionary competition of choice principles in a ``meta-game'' that consists of the
+  average expected payoffs of choice principles when playing arbitrary games (from a given
+  class). In this sense, a meta-game captures (the modeller's) assumptions about the relevant
+  statistic of the environment in which evolutionary forces operate.
+
+\item To demonstrate how this approach can be theoretically rewarding, we show that, under
+  reasonable additional assumptions, maximization of expected utility is not the only choice
+  principle supported by evolutionary selection. In particular, we show that evolutionary
+  selection can support non-veridical representations of payoffs in terms of regret. 
+
+\item We argue that this ``meta-evolutionary'' approach could eventually help explain attested
+  deviations of human decision making from the classical ideal: choice behavior evolved to be an
+  ``ecologically rational'', near-optimal adaptation to the environment \citep{Anderson1990:The-Adaptive-Ch,Anderson1991:Is-human-cognit,GigerenzerGoldstein1996:Reasoning-the-F,ChaterOaksford2000:The-Rational-An}
 
 \end{itemize}
+
+
+\newpage 
+
+\section{Introduction / Motivation}
+
+\begin{itemize}
+\item evolutionary game theory about one game usually
+\item here class of games
+\item therefore partial solution to the ``closed game'' problem
+\item still not infinite, open ended strategy space
+\item focus on one example for this new method: competition between:
+  \begin{itemize}
+  \item probabilistic vs.~non-probabilistic uncertainty
+  \item veridical vs.~regret-based preferences
+  \end{itemize}
+\item contributes to: (i) methodological reflection on evolutionary game theory, (ii) ecological
+  rationality of choice behavior, (iii) evolution of preferences literature
+\end{itemize}
+
+\section{Faces of rationality}
+
+\begin{itemize}
+  \item \todo[inline]{choose uniform consensual terminology for maximization of EU and regret minimization}
+\item classical notion of rationality: maximization of expected utilities
+  \begin{itemize}
+  \item human choice behavior seems to deviate from classical rational choice in many ways
+    \citep[most
+    notably][]{TverskyKahnemann1974:Judgement-under,KahnemannTversky1979:Prospect-Theory}
+  \end{itemize}
+\item historical competitor: regret minimization
+  \begin{itemize}
+  \item introduced by Savage \& Niehans independently
+  \item worked out (in parameterized form) by \citet{LoomesSugden1982:Regret-Theory:-} and
+    argued to outperform prospect theory
+  \item recently rediscovered by game theorists \citep{HalpernPass2012:Iterated-Regret} as a
+    possible partial explanation of some puzzles (e.g., Travellers Dilemma)
+  \end{itemize}
+\item motivate why we are interested in regret minimization; e.g.:
+  \begin{itemize}
+  \item simple historical alternative; certain prima facie plausibility
+  \item has both components of interest:
+    \begin{itemize}
+    \item epistemic component: probabilistic vs.~non-probabilistic uncertainty  (interesting
+      because of the classical Ellsberg paradox)
+    \item payoff component: veridical vs.~non-veridical preference representations (interesting
+      because of a recent interest in the ``evolution of preference'')
+    \item gives us intriguing results that nicely motivate the general approach of meta-games
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\section{Evolution \& the environment}
+
+here we spell out our model
+
+\subsection{Choice principles}
+
+\begin{itemize}
+\item study evolutionary competition between \emph{choice principles} 
+\item for now a choice principle is a pair (epistemic type, preference type)
+  \begin{itemize}
+  \item two epistemic types:
+    \begin{enumerate}
+    \item probabilistic beliefs (assumed to be flat)
+    \item non-probabilistic beliefs
+    \end{enumerate}
+  \item two preferences types (references to ``evolution of preference'' literature):
+    \begin{enumerate}
+    \item veridical payoff representations
+    \item regret-based payoffs
+    \end{enumerate}
+  \item many other types are conceivable; more in discussion section
+    \begin{itemize}
+    \item we want to keep it simple
+    \item assume that agents are relatively simple as well
+    \item no learning from past encounters \& no reasoning about the opponent: agents simply do
+      not know that there is another player (no strategic thinking possible; in line with idea
+      of evolutionary game theory where agents are ``stupid'' and ``myopic'') \\
+      \textcolor{blue}{this is then the added assumption that may be crude and generally
+        implausible but allows us to deflect the economists' critique}
+    \end{itemize}
+  \item choice principles yield action choices for each game
+    \begin{itemize}
+    \item show how
+    \end{itemize}
+  \item RESULT: types (prob., veridical) and (prob., regret) are choice-equivalent (also
+    mentioned by \citet{HalpernPass2012:Iterated-Regret})
+  \item RESULT: in $2 \times 2$ cases, (prob., veridical), (prob., regret) and (non-prob.,
+    regret) are choice-equivalent (but not for $n \times n$ in general)
+    \begin{itemize}
+    \item still we treat them as separate types because they behave differently under
+      component-wise mutation (see below)
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\subsection{The environment: meta-games}
+
+\begin{itemize}
+\item imagine huge, virtually infinite population of agents, each carrying a choice principle
+\item agents play a randomly sampled game against a randomly sampled opponent
+\item fitness is based on the average payoff of choice principle A against choice principle B,
+  taken over arbitrary games $g$ and weighted their occurrence probability $P(g)$:
+  $\int_g P(g) \times U_g(\text{CP-A}, \text{CP-B}) \text{d}g$
+\item the occurrence probability of games $g$ is the ``environment'' and, possibly, impossible to
+  derive theoretically, or to measure empirically
+\item here, use a relatively neutral approach instead that is practicable:
+  \begin{itemize}
+  \item games are individuated by their payoff matrices (no framing effects or similar)
+  \item each entry in a payoff matrix is an i.~i.~d.~random variable
+    \begin{itemize}
+    \item approach still incorporates a bias (e.g., against strategic form representations of
+      sequential games)
+    \end{itemize}
+  \end{itemize}
+\item example: average payoffs from numerical simulation of ($2 \times 2$ symmetric games)
+\item example: average payoffs from numerical simulation of ($n \times n$ symmetric games, with
+  $n$ uniformly random (up to some upper-bound))
+\end{itemize}
+
+\subsection{Results}
+
+\textcolor{gray}{keep this clean and concise, formal details (proofs) in appendix}
+
+\subsubsection{$2 \times 2$ symmetric games}
+
+\textcolor{gray}{we isolate this case because it is most basic, and we can offer analytical
+  proofs as well}
+
+\begin{itemize}
+\item given previous results, there are really only two kinds of types to look at:
+  \begin{enumerate}
+  \item (prob., veridical), (prob., regret) and (non-prob., regret) \\ 
+    \textcolor{gray}{[all choice-equivalent in this case]}
+  \item (non-prob., veridical)
+  \end{enumerate}
+\item RESULT: the former class ``dominates'' the latter (our main result, Proposition 1 from
+  TARK paper)
+\item this means that evolutionary dynamics would weed out (non-prob., regret); every
+  population composition between the remaining three is neutrally stable; all interior
+  trajectories (of the replicator dynamic) converge to these
+\item further results (from TARK):
+  \begin{itemize}
+  \item component-wise mutation: abundance of regret types
+  \item exogenously given correlated epistemic types: regret types dominate
+  \item exogenously given uncorrelated epistemic types: regret types dominate
+  \end{itemize}
+\todo[inline]{work out these additional results more carefully; present graphs if possible}
+\end{itemize}
+
+\subsubsection{$n \times n$ symmetric games}
+
+\todo[inline]{work out these additional results more carefully; present graphs if possible}
+
+\section{Discussion}
+
+\begin{itemize}
+\item what we achieved
+\item what could be done next
+\end{itemize}
+
+
+
 
 \printbibliography[heading=bibintoc]
 

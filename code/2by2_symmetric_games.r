@@ -2,7 +2,7 @@ source('functions.R')
 CP_names = c("Sec-Reg", "Sec-Id", "Sec-Comp", "Sec-Alt", 
              "Bel-Reg", "Bel-Id", "Bel-Comp", "Bel-Alt")
 
-rounds = 1
+rounds = 10000
 # game_type = c()
 row_util = rep(0,rounds*length(CP_names)^2)
 nActs = rep(2,rounds)
@@ -18,33 +18,33 @@ for (i in 1:rounds){
   
   #   gt = classify_game(U)
   
-  #   br = matrix(rep(rdirichlet(1,rep(1,dim(U)[2]))[1,], each=dim(U)[1]), nrow=dim(U)[1], ncol=dim(U)[2]) # beliefs of row player
+#     br = matrix(rep(rdirichlet(1,rep(1,dim(U)[2]))[1,], each=dim(U)[1]), nrow=dim(U)[1], ncol=dim(U)[2]) # beliefs of row player
   br = 1 # flat beliefs
   
-  choices = c(maximin(regret_transform(U)), #Sec-Reg
+  choices = list(maximin(regret_transform(U)), #Sec-Reg
               maximin(U), # Sec-Id
               maximin(relative_power_transform(U)), # Sec-Alt
               maximin(general_power_transform(U)),  # Sec-Comp
-              max_value(regret_transform(U)), #Bel-Reg
-              max_value(U), # Bel-Id
-              max_value(relative_power_transform(U)), # Bel-Alt
-              max_value(general_power_transform(U))  # Bel-Comp
+              max_value(regret_transform(U), br), #Bel-Reg
+              max_value(U, br), # Bel-Id
+              max_value(relative_power_transform(U), br), # Bel-Alt
+              max_value(general_power_transform(U), br)  # Bel-Comp
   )
   
-  choices.c = c(maximin(regret_transform(U)), #Sec-Reg
-                maximin(U), # Sec-Id
-                maximin(relative_power_transform(U)), # Sec-Alt
-                maximin(general_power_transform(U)),  # Sec-Comp
-                max_value(regret_transform(U)), #Bel-Reg
-                max_value(U), # Bel-Id
-                max_value(relative_power_transform(U)), # Bel-Alt
-                max_value(general_power_transform(U))  # Bel-Comp
-  )
-  
+#   choices.c = list(maximin(regret_transform(U)), #Sec-Reg
+#                 maximin(U), # Sec-Id
+#                 maximin(relative_power_transform(U)), # Sec-Alt
+#                 maximin(general_power_transform(U)),  # Sec-Comp
+#                 max_value(regret_transform(U)), #Bel-Reg
+#                 max_value(U), # Bel-Id
+#                 max_value(relative_power_transform(U)), # Bel-Alt
+#                 max_value(general_power_transform(U))  # Bel-Comp
+#   )
   
   for (c in 1:length(CP_names)){
     for (d in 1:length(CP_names)){
-      row_util[((i-1)*length(CP_names)^2) + ((c-1)*length(CP_names))+(d)] = U[choices[c],choices.c[d]]
+      payoff = mean(as.vector(U[choices[[c]],choices[[d]]]))
+      row_util[((i-1)*length(CP_names)^2) + ((c-1)*length(CP_names))+(d)] = payoff
     }
   }  
   
@@ -55,7 +55,8 @@ data = data.frame( #trial = factor(trial),
   #                                                          "str_dominance","weak_dominance","indifference")),
   row_choice = factor(rep(rep(CP_names, each = length(CP_names)) , times = rounds), levels = CP_names),
   col_choice = factor(rep(CP_names, times = length(CP_names)*rounds), levels = CP_names),
-  row_util = row_util)
+  row_util = row_util,
+  nActs = nActs)
 
 close(pb)
 

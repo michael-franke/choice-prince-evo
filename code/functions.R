@@ -76,14 +76,14 @@ flip_game = function(U){
   return(V)
 }
 
-max_value = function(U){
+max_value = function(U, br){
   if (length(dim(U)) == 3) {
     U = U[,,1]
   }
+  U = U * br
   eus = rowMeans(U)
-  maxs = which.max(eus)
-  i = sample(length(maxs),1)
-  return(maxs[i])
+  maxs = which(eus == max(eus))
+  return(maxs)
 }
 
 maximin = function(U){
@@ -93,8 +93,7 @@ maximin = function(U){
   }
   mins = sapply(1:dim(U)[1], function(x) min(U[x,]))
   maximins = which(mins == max(mins))
-  i = sample(length(maximins),1)
-  return(maximins[i])
+  return(maximins)
 }
 
 regret_transform = function(U){

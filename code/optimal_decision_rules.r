@@ -3,9 +3,9 @@ require('plyr') # to conveniently manipulate data frames
 require('ggplot2')
 require('reshape2')
 
-max.t=10
-max.a=10
-n.rounds = 50000
+max.t=2
+max.a=2
+n.rounds = 5000
 
 p.trueL = 0
 a.bestL = 0
