@@ -5,9 +5,7 @@
 %========================================
 
 \usepackage[]{helpers/mypackages}
-
 %\usepackage[natbib=true,style=authoryear-comp,backend=bibtex,doi=false,url=false]{biblatex}
-
 \bibliography{helpers/MyRefLocal}
 \usepackage{helpers/myenvironments}
 \usepackage{helpers/mycommands}
@@ -34,78 +32,105 @@
 \renewcommand{\captionfont}{\small}
 \setlength{\belowcaptionskip}{7pt} % standard is 0pt
 
-
+\newcommand{\myalert}[1]{\textcolor{red}{#1}}
 
 \title{Rationality, Evolution \& the Environment}
 \author{Paolo Galeazzi \& Michael Franke}
-\date{current version: May 18th 2015}
+\date{current version: May 27th 2015}
 
 \begin{document}
 \maketitle
 
 
-\section*{Outline of main argument}
-
-
-\begin{itemize}
-\item Evolutionary game theory has become an established philosophical tool for probing into
-  conceptual issues whose complexity requires mathematical modeling. Most applications of EGT
-  look at evolutionary selection of behavior in a single game. This game is then considered
-  fixed, closed and immutable.
-  \begin{itemize}
-  \item there are some notable exceptions where the game is open ended, e.g., by the invention
-    of actions \citep{WordenLevin2007:Evolutionary-es, McKenzie-AlexanderSkymrs2012:Inventing-New-S}
-  \end{itemize}
-
-\item We present an approach to studying evolutionary selection of \emph{choice principles},
-  i.e., ways of choosing consistently across several games. In other words, we would like to
-  look at the problem of ``rational choice'' from an evolutionary point of view: what choice
-  principles would be promoted, which demoted in evolutionary competition amongst each other?
-
-\item This depends on the environment; it depends on what choice situations occur how
-  frequently. Maybe some choice principle is better in some situations, while another one is
-  better in others. To capture the relevant statistics of the environment, we therefore look at
-  the evolutionary competition of choice principles in a ``meta-game'' that consists of the
-  average expected payoffs of choice principles when playing arbitrary games (from a given
-  class). In this sense, a meta-game captures (the modeller's) assumptions about the relevant
-  statistic of the environment in which evolutionary forces operate.
-
-\item To demonstrate how this approach can be theoretically rewarding, we show that, under
-  reasonable additional assumptions, maximization of expected utility is not the only choice
-  principle supported by evolutionary selection. In particular, we show that evolutionary
-  selection can support non-veridical representations of payoffs in terms of regret. 
-
-\item We argue that this ``meta-evolutionary'' approach could eventually help explain attested
-  deviations of human decision making from the classical ideal: choice behavior evolved to be
-  an ``ecologically rational'', near-optimal adaptation to the environment
-  \citep{Anderson1990:The-Adaptive-Ch,Anderson1991:Is-human-cognit,GigerenzerGoldstein1996:Reasoning-the-F,ChaterOaksford2000:The-Rational-An}. This
-  is inline with recent aspirations to provide an evolutionary rationale for decision making
-  processes
-  \citep[e.g.][]{HammersteinStevens2012:Six-Reasons-for,FawcettHamblin2013:Exposing-the-be}. Here,
-  we seek to contribute to the formal machinery, an extension of evolutionary game theory, that
-  allows to capture statistical properties of the environment
-  \citep[cf.][]{McNamara2013:Towards-a-Riche}.
-
-\end{itemize}
-
-
-\newpage 
-
 \section{Introduction / Motivation}
 
 \begin{itemize}
-\item evolutionary game theory about one game usually
-\item here class of games
-\item therefore partial solution to the ``closed game'' problem
-\item still not infinite, open ended strategy space
-\item focus on one example for this new method: competition between:
+\item Evolutionary game theory has become an established philosophical tool for probing into
+  conceptual issues whose complexity requires mathematical modeling.
   \begin{itemize}
-  \item probabilistic vs.~non-probabilistic uncertainty
-  \item veridical vs.~regret-based preferences
+  \item helped structure debate about foraging, mating, evolution of cooperation,
+    information-flow, deception etc.
+  \end{itemize}
+\item Most applications of EGT look at evolutionary selection of behavior in a single
+  game. There are two crude simplifications here:
+  \begin{enumerate}
+  \item The stage game is usually considered fixed, closed and immutable.
+    \begin{itemize}
+    \item there are some notable exceptions where the game is open ended, e.g., by the
+      invention of actions \citep{WordenLevin2007:Evolutionary-es,
+        McKenzie-AlexanderSkymrs2012:Inventing-New-S}
+    \end{itemize}
+  \item What evolves are behavioral strategies for the stage game \citep[what][call the
+    ``behavioral gamit'']{FawcettHamblin2013:Exposing-the-be} \myalert{(more references!
+      Gigerenzer etc.)}.
+  \end{enumerate}
+\item It has been argued that we should rather study the evolutionary selection of \emph{choice
+    mechanisms} that are adapted in a rich and variable environment
+  \citep[e.g.][]{FawcettHamblin2013:Exposing-the-be,McNamara2013:Towards-a-Riche}.
+\item However, studies on the adaptive value of choice mechanisms have focused, for the most
+  part, of the evolutionary benefit of learning rules
+  \citep[e.g.][]{ZollmanSmead2010:Plasticity-and-,SmeadZollman2013:The-Stability-o}. (\myalert{More
+    references Harley 1981!!!, \dots}). Moreover, only little attention has been paid to
+  modeling the direct (game-theoretic) meta-competition between alternative choice mechanisms
+  \citep[see][for related criticism]{FawcettHamblin2013:Exposing-the-be}.
+\item Here, we would like to make two contributions to the literature on evolution of choice
+  mechanisms:
+  \begin{enumerate}
+  \item On the conceptual side, we argue that paying attention to the evolution of (subjective
+    representations of) preferences matters. Since almost any reasonable learning or
+    decision-making process will make use of some (subjective, agent-internal (possibly
+    unconscious)) representation of the quality of choice options, the question of which such
+    representations are ecologically valuable (i.e., lead to high fitness) is central. In fact,
+    the evolution of (subjective representations of) preferences has recently been studied in
+    theoretical economics as well \myalert{add references}. However, these studies also suffer
+    from the ``behavioral gambit'' and the usual shortcomings of the closedness of the stage game. 
+  \item On the methodological side, we therefore introduce a conservative extension of the
+    standard EGT that allows us to reuse notions such as evolutionary stability / evolutionary
+    dynamics and yet helps us study the evolutionary competition between choice mechanisms in a
+    statistically variable environment. Concretely, we look at the evolutionary competition of
+    choice mechanisms in a ``meta-game'' that consists of the average expected payoffs of
+    choice mechanisms when playing arbitrary games (from a given class). In this sense, a
+    meta-game captures (the modeller's) assumptions about the relevant statistic of the
+    environment in which evolutionary forces operate.
+  \end{enumerate}
+\item To drive home our conceptual point that preference representations can matter, we try to
+  isolate, as good as we can, the evolution of preferences from considerations of learning or
+  other factors feeding a decision mechanism (such as the acquisition of ecologically useful
+  representations (think: beliefs)). (Obviously, eventually, we would like to study the
+  evolution of all of these relevant components in one swoop.)
+\item To demonstrate how this approach can be theoretically rewarding, we show that, under
+  reasonable additional assumptions, evolutionary selection can support non-veridical
+  representations of payoffs in terms of regret.
+  \begin{itemize}
+  \item We argue that this ``meta-evolutionary'' approach could eventually help explain
+    attested deviations of human decision making from the classical ideal: choice behavior
+    evolved to be an ``ecologically rational'', near-optimal adaptation to the environment
+    \citep{Anderson1990:The-Adaptive-Ch,Anderson1991:Is-human-cognit,GigerenzerGoldstein1996:Reasoning-the-F,ChaterOaksford2000:The-Rational-An}. This
+    is inline with recent aspirations to provide an evolutionary rationale for decision making
+    processes
+    \citep[e.g.][]{HammersteinStevens2012:Six-Reasons-for,FawcettHamblin2013:Exposing-the-be}.
+  \item Non-veridical regret-based representations of payoffs are intuitively appealing (we do,
+    at least on occasion, care about counterfactual or hypothetical losses), but could also
+    help explain, for instance, that decision-makers may violate the independence axiom: human
+    and non-human decision makers can favor $A$ when presented with a choice
+    between $A$ and $B$, but prefer $B$ when presented with $A$, $B$ and $C$ \myalert{(for
+      animals cite from Fawcett page 3)} \myalert{(add
+      citation for human performance)}
+  \item We need to be careful here: we do not want to stress that this approach here (the
+    particular implemenation of a regret-based choice mechanism) explains these empirical
+    findings (better than any other line of explanation). Our point is more general and
+    methodological. Evolution of preferences is something that the literature on evolution of
+    choice mechanisms should care about. We also presented a method that can be useful and an
+    example of that method that should (succinctly) demonstrate our aforementioned conceptual
+    point that evolution of preferences is conceptually important and can give non-trivial,
+    unexpected and philosophically useful results.
   \end{itemize}
 \item contributes to: (i) methodological reflection on evolutionary game theory, (ii) ecological
   rationality of choice behavior, (iii) evolution of preferences literature
 \end{itemize}
+
+\newpage 
+
 
 \section{Faces of rationality}
 
@@ -160,7 +185,6 @@ This is just an example of the kind of insights and results that we can gain by 
 
 
 END VERSION 2
-
 
 
 \begin{itemize}
@@ -312,4 +336,35 @@ here we spell out our model
 
 \printbibliography[heading=bibintoc]
 
+
+\newpage
+
+\section*{Snippets}
+
+\begin{itemize}
+\item We present an approach to studying evolutionary selection of \emph{choice principles},
+  i.e., ways of choosing consistently across several games. In other words, we would like to
+  look at the problem of ``rational choice'' from an evolutionary point of view: what choice
+  principles would be promoted, which demoted in evolutionary competition amongst each other?
+
+\item This depends on the environment; it depends on what choice situations occur how
+  frequently. Maybe some choice principle is better in some situations, while another one is
+  better in others. 
+
+
+\item We argue that this ``meta-evolutionary'' approach could eventually help explain attested
+  deviations of human decision making from the classical ideal: choice behavior evolved to be
+  an ``ecologically rational'', near-optimal adaptation to the environment
+  \citep{Anderson1990:The-Adaptive-Ch,Anderson1991:Is-human-cognit,GigerenzerGoldstein1996:Reasoning-the-F,ChaterOaksford2000:The-Rational-An}. This
+  is inline with recent aspirations to provide an evolutionary rationale for decision making
+  processes
+  \citep[e.g.][]{HammersteinStevens2012:Six-Reasons-for,FawcettHamblin2013:Exposing-the-be}. Here,
+  we seek to contribute to the formal machinery, an extension of evolutionary game theory, that
+  allows to capture statistical properties of the environment
+  \citep[cf.][]{McNamara2013:Towards-a-Riche}.
+\end{itemize}
+
 \end{document}
+
+
+
