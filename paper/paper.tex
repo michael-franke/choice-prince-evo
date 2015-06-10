@@ -16,6 +16,8 @@
 % Standard Layout
 %========================================
 
+\usepackage{bigints}
+\usepackage{MnSymbol}
 \usepackage{a4wide}
 
 % Itemize
@@ -170,44 +172,40 @@
 
 \subsection{Version 1}
 
-The standard use of the word \textit{rationality} in economics and decision theory is to denote the maximization of subjective expected utility. Since the work by vNM [cite], this stance has been justified from the intuitive ''rationality'' of the axioms on the subjective preference relation leading to the representability of the decision maker as a subjective expected utility (SEU) maximizer. 
-While in [vNM] the probability of the outcomes is objectively given a priori, Savage54 provides a set of axioms that represent the decision maker (DM) with both a subjective utility over outcomes \textit{and} a \textit{subjective} probability over states of the world. Savage's axioms constitute the foundation of subjective expected utility theory, that is normally assumed to define the rational behavior of economic agents.
+The standard use of the word \textit{rationality} in economics and decision theory is to denote the maximization of (subjective) expected utility. Since the work by vNM [cite], this stance has been justified from the intuitive ''rationality'' of the axioms on the subjective preference relation leading to the representability of the decision maker as an expected utility maximizer. 
+While in the axiomatization by [vNM] the probability of the outcomes is objectively given a priori, Savage54 provides a larger set of axioms that represent the decision maker (DM) with both a subjective utility over outcomes \textit{and} a \textit{subjective} probability over states of the world. Savage's axioms constitute the foundation of subjective expected utility (SEU) theory, that is normally assumed to define the rational behavior of economic agents.\\
 
+DEFINITION(SEU-maximization): Let $S$ be a set of states of the world, $X$ a set of outcomes and $A$ a set of actions. Given a probability measure $P$ on $S$ and a subjective utility function $u:X \rightarrow \mathbb{R} $, an action $a^*: S \rightarrow X $ is SEU-maximizing if $a^* \in \text{argmax}_{a_i \in A} \bigint_S u(a^*(s))dP(s) $. \\
 
 The subjectivity of preferences plays a very important
-role. From an agent's standpoint, the amount of, say, money achieved does not necessarily
-coincide with the amount of subjective utility attained. The first to notice and formally argue for this difference
+role for the present work. From an agent's standpoint, the amount $x$ of, say, money achieved does not necessarily
+coincide with the amount of subjective utility attained $u(x)$. 
+Historically,  the first to notice and formally argue for this difference
 between objective utility (goods, money, etc.) and subjective utility (preferences) was
-D. Bernoulli in the famous St. Petersburg paradox. Moreover, Bernoulli introduced the idea that a good representation of
+D. Bernoulli with the famous St. Petersburg paradox in 1738. Moreover, Bernoulli introduced the idea that a good representation of
 subjective utility can be carried out in terms of an increasing concave function of objective
 utility. This can be considered the birth of modern decision theory.
 
+Empirically, many violations of Savage's (and vNM's) axioms have been consistently observed in behavioral economics. Most of the attention has been focused on the Independence Axiom and the Sure-thing Principle. Allais' paradox and Ellsberg's paradox are examples of violations of these two axioms, and they are at the origin of Prospect theory [cite] and ambiguity in decision theory [cite].
 
-However, many violations of Savage's (and vNM's) axioms have been consistently observed in behavioral economics. Most of the attention has been focused on the Independence Axiom and the Sure-thing Principle. Allais' paradox and Ellsberg's paradox are examples of violations of these two axioms, and they are at the origin of Prospect theory [cite] and ambiguity in decision theory [cite].\\
-
-The main idea behind Ellesberg's paradox and the literature on ambiguity is that DM treats differently objective and subjective uncertainty. If the probability measure on the possible states of the world is not given a priori and ''known'', then observed preferences leave no room to represent  DM's beliefs via a probability measure on the possible states. The most common solution is then to represent DM's beliefs with a set of probability measures instead of a single one.  
+The main idea behind Ellesberg's paradox and the literature on ambiguity is that DM treats differently objective and subjective uncertainty. If the probability measure on the possible states of the world is not given a priori and not ''known'', then observed preferences leave no room to represent  DM's beliefs via a probability measure on the possible states. The most common solution is then to represent DM's beliefs with a set of probability measures instead of a single one.  
 
 Prospect theory was introduced by Kahnemann and Tversky in
-their famous paper from 1979. By means of experimental results they noticed that the decision
-maker apparently acts as a risk averse agent with respect to gains and as a risk loving agent
+their famous paper from 1979. By means of experimental results they noticed that DM apparently acts as a risk averse agent with respect to gains and as a risk loving agent
 with respect to losses. Consequently, they conjectured that the subjective utility is better
 representable by an S-shaped utility function, concave in the positive domain of gains and
 convex in the negative domain of losses.
-\\
 
 More recently, other possible definitions of the subjective utility function have been proposed
 and justified from a game theoretical point of view (e.g. Fehr and Schmidt, Charness and Rabin,
-etc.). The central goal of these studies is to explain/describe the behavior in social dilemmas
+etc.). The central goal of these studies is to explain/describe the empirical behavior in social dilemmas
 (e.g., Prisoner's dilemma, public goods game, etc.). In the same spirit of Prospect theory, by means of different subjective utility
 functions it is possible to describe/match the behavior observed in game theoretical experiments and to
 explain it as rational (in the sense of maximizing the subjective utility).
-
-
 With this approach every behavior, no matter how far from the maximization of
 objective utility, can be deemed rational if we can only find a subjective utility that
-justifies that behavior as maximizing the subjective utility. Quoting Hegel, (almost)
-everything real is rational (this is just for fun, I will take it away, no problem). The problem here is that it seems possible to consider rational everything
-that is observed, given the adequate subjective utility. The notion
+justifies that behavior as maximizing the subjective utility. The problem here is that it seems possible to consider rational everything
+that is observed, given the adequate subjective utility function. The notion
 of rationality almost collapses onto the observed behavior.
 
 On the other side, other economists (Alchian, Friedman) seem to link the notion of rational choice
@@ -215,8 +213,8 @@ more tightly to the maximization of objective utility. In their classic works th
 profit maximization is a reasonable assumption for characterizing outcomes in a competitive
 market because only firms behaving in a manner that is consistent with profit maximization will
 survive in the long run. If the previous accounts of rationality looked more descriptive, this
-definitely tastes more normative. In this sense, the normative notion of rationality is tightly
-linked to (and almost coincide with) the maximization of objective utility, which is supposed
+definitely tastes more normative. In this sense, a normative notion of rationality would be tightly
+related to (and almost coincide with) the maximization of objective utility, which is supposed
 to drive the evolutionary process. It follows then that being normative in this sense points to an identification of rationality with maximization of objective utility.
 
 It seems that we are stuck between two extrema: a too permissive descriptivism and a too restrictive normativism. On the one hand, if we want to have a
@@ -226,8 +224,15 @@ want to have a normative approach to rationality, then it seems we have to appea
 evolutionary arguments entailing the understanding of rationality as maximization of objective
 utility.
 
+However, it has been argued that in a good theory of choice and decision making the normative and the descriptive components should not come apart. For example, as Douglas Maclean [cite] writes:
 
-There is another violation of Savage's axioms that is particularly relevant for the present work: transitivity of preferences. The first of Savage's axioms states that the preference relation is a (total) preorder, i.e., reflexive and transitive. Moreover, the preorder axiom is often referred to as the rationality axiom [cite], as to suggest that it is somehow the core of rational preferences. Violations of transitivity have been observed and studied in experimental literature [citeTversky69,etc], but can also derive from a more theoretical and normative point of view. \\
+\begin{quote}
+The history of the subject reflects strong reasons why the theory of choice should have this dual character. [...] \\
+A normative theory of choice gains credibility from its predictive and explanatory power, for although empirical success itself may not constitute much of a normative argument, the theory of rational behavior is less likely to be found objectionable if rationality turns out to be widespread. [...] But if, on the other hand, the normative theory turns out to be incompatible with the best established behavioral theory, then the verification of the normative theory will depend entirely on the intrinsic plausibility of its axioms, and that appeal must be quite strong, strong enough to make us overcome our charitable reluctance to conclude that our actual behavior is systematically irrational.
+\end{quote}
+
+
+There is another violation of Savage's axioms that is particularly relevant for the present work: transitivity of preferences. The first of Savage's axioms states that the preference relation is a (total) preorder, i.e., reflexive and transitive. Moreover, the preorder axiom is often referred to as the rationality axiom [cite], as to suggest that it is somehow the core of rational preferences. Violations of transitivity have been observed and studied in experimental literature [citeTversky69,etc], but can also be supported from a normative and theoretical point of view. \\
 In what follows, an important focus of our work will be the role of regret in decision making. Regret theory predicts the violation of both transitivity and Independence of Irrelevant Alternatives (IIA). [CONNECTING TO Fawcett\&al: this is IIA, not independence]
 
 
@@ -235,45 +240,66 @@ In what follows, an important focus of our work will be the role of regret in de
 
 \subsubsection{Regret theory}
 
-Regret theory has been introduced in decision theory by Savage [] and Niherens [], and later developed by Bell [1982], Loomes and Sugden [1982], and Fishburn [1982] independently. Lately, Halpern and Pass show how the use of regret minimization can solve games like the Centipede and the Traveler's dilemma in a way closer to everyday intuition and empirical data. In this paper the notion of regret is defined as in [HalPass12]:
+Regret theory has been introduced in decision theory by Savage [] and Niherens [], and later developed by Bell [1982], Loomes and Sugden [1982], and Fishburn [1982] independently. Lately, Halpern and Pass [cite] show how the use of regret minimization can solve game theoretical puzzles (like the Centipede and the Traveller's dilemma) in a way that is closer to everyday intuition and empirical data. In this paper the notion of regret is defined as in [HalPass12]:
+
+\vspace{.5cm}
 
 DEFINITION(regret): Given a simultaneous-move game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, the regret of an action $a_i \in A_i$ is defined by: $\text{reg}(a_i)= \text{max}_{a_{-i}\in A_{-i}} \pi_i(a_i^*,a_{-i})-\pi_i(a_i,a_{-i}) $, where $a_i^*$ is $i$'s best reply to action $a_{-i} $.\\
 
 DEFINITION(regret minimization): Given a simultaneous-move game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, an action $a^{'}_i $ is regret minimizing if $a^{'}_i \in \text{min}_{a_i} \text{max}_{a_{-i}} \pi_i(a_i^*,a_{-i})-\pi_i(a_i,a_{-i}) $.\\
 
-EXAMPLE. Traveler's dilemma maybe? or maybe 2
+EXAMPLE 1: \textit{Coordination Game.}
+
+Let us consider the coordination game in Figure \ref{coordgame1}.
+
+\begin{figure}
+\begin{center}%
+\begin{tabular}{|c|c|c|}
+\hline 
+ & I & II\tabularnewline
+\hline 
+\hline 
+I & 1;1 & 0;0\tabularnewline
+\hline 
+II & 0;0 & 2;2\tabularnewline
+\hline 
+\end{tabular}\end{center}
+
+\protect\caption{A coordination game}
+\label{coordgame1}
+\end{figure}
+
+It is easy to see that $\text{reg}(I)=2$: when the other player chooses action $I$ the regret of $I$ is $0$ since $I$ is a best reply to $I$, and when the other player chooses $II$ the regret of $I$ is $2$ since $\pi_i(II,II)-\pi_i(I,II)=2$. With the same reasoning, $\text{reg}(II)=1$. Two regret minimizing players would then choose action $II$, each getting a payoff of $2$. In this case regret minimization selects the Pareto-dominant Nash equilibrium. $ \medsquare $
+
+\vspace{.5cm}
+
+EXAMPLE 2: \textit{The Traveller's Dilemma.} (HalpernPass12)
+
+Let us now consider the Traveller's Dilemma case. The story behind the game goes as follows. There are two travellers, Ann and Bob, who lost their luggages. Ann and Bob had exactly the same luggage and they had insured the luggages with the same insurance company. The insurance policy is that the two travellers have to separately claim a certain amount between 2\$ and 100\$ for the reimbursement, and if they both claim the same amount then they will be reimbursed by that amount. Otherwise, if one of them claims more than the other, then the one who claimed the higher amount will get the lower amount minus 2\$, while the one who claimed the lower amount will get what (s)he claimed plus 2\$. The game is symmetric, and the payoff function for both players is:\\
+$\pi_i(a_i,a_{-i}) =  \begin{cases} a_i \text{ \hspace{1cm} if } a_i = a_{-i} \\ a_i + 2 \text{ \hspace{.4cm} if } a_i < a_{-i} \\ a_{-i} -2 \text{ \hspace{.25cm} if } a_{-i} < a_i \end{cases}$ \\
+By a simple computation we have:  $\forall a_i \in \lbrace 96\$, ..., 100\$ \rbrace \text{, } \text{reg}(a_i)=3 $ and $\forall a_i \in \lbrace 2\$, ..., 95\$ \rbrace \text{, } \text{reg}(a_i)>3$. If we now eliminate all the actions that do not minimize regret in the first place and iterate the regret minimization only on the action set $\lbrace 96\$, ..., 100\$ \rbrace$, we get that 97\$ is the action that minimize regret. Indeed, $\text{reg}(97)=2$ and $\forall a_i \in \lbrace 96\$, 98\$, 99\$, 100\$ \rbrace \text{, } \text{reg}(a_i)=3 $. Hence, one step of regret minimizing reasoning eliminates all the actions smaller than 96\$, and if we iterate the process once more the unique outcome is 97\$. Finally, it is worth noticing that the only rationalizable equilibrium of the game corresponds to the outcome $(2,2)$, that is consequently the only Nash equilibrium, the only perfect equilibrium, and the only sequential equilibrium of the game. $ \medsquare $\\ 
 
 
-
-The meta-game perspective that we introduce here can shed more light on the duality of descriptivism and normativism, and opens
+The meta-game perspective that we introduce in this paper can shed more light on the duality of descriptivism and normativism, and opens
 some space in between the two extrema. 
 By keeping the evolutionary approach we want to retain a
 normative perspective on rationality, but our results show that (under certain conditions)
 evolution does not necessarily lead to identifying rationality with maximization of objective
-utility.
-
-[More precisely, from the meta-game perspective many possible subjective
-transformations of the objective utility are eliminated by evolution, but we find some
-evolutionarily stable subjective utility maximizers whose utility does not coincide with the
-objective evolutionary utility. This result leaves some room in between the two extrema: we can
-understand rationality in a normative way, given by evolution, without having to discard all
-the possible subjective utility representations as irrational. CHANGE PLACE OF THIS MAYBE]
-
+utility, contrary to the intuition of Alchian [cite] and Friedman [cite].
 
 In the following we mainly deal with two types of agents: players whose subjective utility is defined
 in terms of regret (as in DEFINITION), and players whose utility
 function coincides with the objective utility $\pi_i$. 
 
-
 The justification for this choice is both historical and behavioral. Among
 the possible competitors of utility maximization, regret has always been in a prominent
-position, both from a descriptive and normative viewpoint. Indeed, Bell82 writes
+position, both from a descriptive and normative viewpoint. Indeed, Bell82 writes:
 \begin{quote}
   By explicitly incorporating regret, expected utility theory not only becomes a better
   descriptive predictor but also may become a more convincing guide for prescribing behavior to
   decision makers.
 \end{quote}
-\citet{LoomesSugden1982:Regret-Theory:-} show that a regret-based theory of choice can match
+In the same year, Graham Loomes and Robert Sugden \citet{LoomesSugden1982:Regret-Theory:-} show that a regret-based theory of choice can match
 and explain all the main experimental results of prospect theory, and claim that
 \begin{quote} [...] we shall challenge the idea that the conventional axioms [of decision
   theory] constitute the only acceptable basis for rational choice under uncertainty. We shall
@@ -287,25 +313,6 @@ and explain all the main experimental results of prospect theory, and claim that
 
 
 
-
-\subsection{Version 2}
-
-The importance of aiming at a richer evolutionary game theory has been recently emphasized by many works in theoretical biology and behavioral ecology [Fawcett\&al., McNamara, etc.]. The biological argument to embrace this goal is related to the criticisms towards the so-called behavioral gambit [Fawcett\&al.]. The behavioral gambit denotes the standard approach in evolutionary game theory that puts the focus of attention on the expressed behavior, and neglects the underlying mechanisms that generate that behavior. From this point of view, the benefit and the reliability coming from the use of evolutionary game theory for biological purposes is also under attack. There are good reasons to claim that focusing on the general psychological mechanisms instead of on behavior itself as the phenotype under evolutionary selection can be more faithful and insightful for natural biology and ecology [Fawcett\&al.].
-Standard evolutionary game theory normally models the agents as playing a single fixed game, and as genetically predetermined to play fixed strategies, that consequently are the only target of natural selection in those frameworks. Standard models of evolutionary game theory cannot take charge of this shift of perspective until they will keep modelling a single game at a time, and until they will keep focusing on actions considered genetically encoded and fixed. ''Instead we should expect animals to have evolved a set of psychological mechanisms which enable them to perform well on average across a range of different circumstances''[Fawcett\&al.].
-
-Attempts to overcome the behavioral gambit have recently been developed in economic literature too. In the last twenty years economists have been using evolutionary game-theoretical models to study evolution of preferences [cite], instead of evolution of behavior only. This approach is called indirect evolutionary approach, because players' behavior and actions stem from their subjective preferences, and it is aimed at investigating what subjective preferences are evolutionarily better off and robust with respect to natural selection. This shift from a direct evolutionary approach about observed actions and behavior to an indirect evolutionary approach takes only partly into account the behavioral gambit criticized by biologists and ecologists. The reason is that the models of evolution of preferences usually consider only one game at a time. This means that there is a single type of interaction that is supposed to drive the whole evolution of preferences: preferences are selected on the basis of one possible interaction only. Clearly, this approach does not take into consideration the variety of possible circumstances that animals are supposed to face during their lifetime. 
-
-The meta-game model we propose pays heed to both components of the behavioral gambit. We retain the indirect evolutionary approach, but our agents in the population play over a class of possible games $\mathcal{G}$. In this way we explicitly model a range of different circumstances, as wished by theoretical biologists.  Consequently, each agent in the population does not represent either a simple behavior or a subjective preference, but a more general player type that associates a subjective preference for each game in the class $\mathcal{G}$. The player type is supposed to encode the general psychological mechanisms that generate the behavior for any possible interaction in $\mathcal{G}$. These general psychological mechanisms then become the target of evolution, and they are selected based on the average fitness over a class of different interactions. 
-
-In particular, in the following we mainly deal with two types of agents: players whose subjective preference coincides with the evolutionary fitness, and players whose subjective preference is defined in terms of regret. It turns out that psychological mechanisms and subjective conceptualizations based on regret can outperform more veridical conceptualizations coinciding with the evolutionary fitness.
-This is just an example of the kind of insights and results that we can gain by adopting a meta-game perspective and by shifting the focus of our attention to psychological mechanisms and subjective conceptualizations as the phenotype under selection.
-
-
--maybe to add: difference with learning. Fawcett\&al. talk more about differences in learning, whereas we model differences in subjective conceptualizations.
-
-
-[A pivotal element of economics and decision theory is the definition of rationality as
-maximization of subjective preferences.]
 
 
 
@@ -432,6 +439,36 @@ here we spell out our model
 \newpage
 
 \section*{Snippets}
+
+[More precisely, from the meta-game perspective many possible subjective
+transformations of the objective utility are eliminated by evolution, but we find some
+evolutionarily stable subjective utility maximizers whose utility does not coincide with the
+objective evolutionary utility. This result leaves some room in between the two extrema: we can
+understand rationality in a normative way, given by evolution, without having to discard all
+the possible subjective utility representations as irrational. CHANGE PLACE OF THIS MAYBE]
+
+
+
+\subsection{Version 2}
+
+The importance of aiming at a richer evolutionary game theory has been recently emphasized by many works in theoretical biology and behavioral ecology [Fawcett\&al., McNamara, etc.]. The biological argument to embrace this goal is related to the criticisms towards the so-called behavioral gambit [Fawcett\&al.]. The behavioral gambit denotes the standard approach in evolutionary game theory that puts the focus of attention on the expressed behavior, and neglects the underlying mechanisms that generate that behavior. From this point of view, the benefit and the reliability coming from the use of evolutionary game theory for biological purposes is also under attack. There are good reasons to claim that focusing on the general psychological mechanisms instead of on behavior itself as the phenotype under evolutionary selection can be more faithful and insightful for natural biology and ecology [Fawcett\&al.].
+Standard evolutionary game theory normally models the agents as playing a single fixed game, and as genetically predetermined to play fixed strategies, that consequently are the only target of natural selection in those frameworks. Standard models of evolutionary game theory cannot take charge of this shift of perspective until they will keep modelling a single game at a time, and until they will keep focusing on actions considered genetically encoded and fixed. ''Instead we should expect animals to have evolved a set of psychological mechanisms which enable them to perform well on average across a range of different circumstances''[Fawcett\&al.].
+
+Attempts to overcome the behavioral gambit have recently been developed in economic literature too. In the last twenty years economists have been using evolutionary game-theoretical models to study evolution of preferences [cite], instead of evolution of behavior only. This approach is called indirect evolutionary approach, because players' behavior and actions stem from their subjective preferences, and it is aimed at investigating what subjective preferences are evolutionarily better off and robust with respect to natural selection. This shift from a direct evolutionary approach about observed actions and behavior to an indirect evolutionary approach takes only partly into account the behavioral gambit criticized by biologists and ecologists. The reason is that the models of evolution of preferences usually consider only one game at a time. This means that there is a single type of interaction that is supposed to drive the whole evolution of preferences: preferences are selected on the basis of one possible interaction only. Clearly, this approach does not take into consideration the variety of possible circumstances that animals are supposed to face during their lifetime. 
+
+The meta-game model we propose pays heed to both components of the behavioral gambit. We retain the indirect evolutionary approach, but our agents in the population play over a class of possible games $\mathcal{G}$. In this way we explicitly model a range of different circumstances, as wished by theoretical biologists.  Consequently, each agent in the population does not represent either a simple behavior or a subjective preference, but a more general player type that associates a subjective preference for each game in the class $\mathcal{G}$. The player type is supposed to encode the general psychological mechanisms that generate the behavior for any possible interaction in $\mathcal{G}$. These general psychological mechanisms then become the target of evolution, and they are selected based on the average fitness over a class of different interactions. 
+
+In particular, in the following we mainly deal with two types of agents: players whose subjective preference coincides with the evolutionary fitness, and players whose subjective preference is defined in terms of regret. It turns out that psychological mechanisms and subjective conceptualizations based on regret can outperform more veridical conceptualizations coinciding with the evolutionary fitness.
+This is just an example of the kind of insights and results that we can gain by adopting a meta-game perspective and by shifting the focus of our attention to psychological mechanisms and subjective conceptualizations as the phenotype under selection.
+
+
+-maybe to add: difference with learning. Fawcett\&al. talk more about differences in learning, whereas we model differences in subjective conceptualizations.
+
+
+[A pivotal element of economics and decision theory is the definition of rationality as
+maximization of subjective preferences.]
+
+
 
 \begin{itemize}
 \item We present an approach to studying evolutionary selection of \emph{choice principles},
