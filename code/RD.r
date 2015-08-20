@@ -3,7 +3,7 @@ require('ggplot2')
 require('reshape2')
 require('fpc') # for function pamk(.) -> wrapper for kmeans!
 
-load("buffered_meta_game_2x2.RDATA")
+load("buffered_meta_game_10x10.RDATA")
 U = means_total
 
 trials = 50

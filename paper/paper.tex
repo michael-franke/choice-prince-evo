@@ -528,11 +528,14 @@ II & c;b & d;d\tabularnewline
 
 
 \section{Results: the basic model}
+\label{sec:results:-basic-model}
+
 
 In this section we present results of computer simulations and analytical proofs for our basic
 model with the four player types introduced in the previous section. 
 
 \subsection{Numerical simulations}
+\label{sec:numer-simul}
 
 Table~\ref{tab:ExpectedFitness_4Types} gives an approximation of expected fitness, obtained
 from averaging over randomly sampled $100,000$ games in $\mathcal{G}$ with
@@ -673,10 +676,6 @@ population of arbitrary frequency of $(\tau^{reg}, \Delta(A_{-i}))$,
 $(\tau^{\pi}, \overline{\mu})$, and $(\tau^{reg}, \overline{\mu})$ players.
 
 
-
-
-
-
 \section{Extensions}
 \label{sec:extensions}
 
@@ -726,54 +725,14 @@ Given $ \mathcal{G} $ the class of symmetric $ 2 \times 2 $ games, we call altru
 
 \end{definition}
 
-Similarly to the evolutionary competition that we simulated before, we can study the evolutionary fitness of this extended set of players when they are all represented in the population. Table \ref{tab:Utils-MetaGame} shows the averge fitness of the enlarged competition. 
+Similarly to the evolutionary competition that we simulated before, we can study the
+evolutionary fitness of this extended set of players when they are all represented in the
+population. Table~\ref{tab:ExpectedFitness_2x2_Full} shows simulation results that approximate the
+expected fitness in the relevant meta-game.
 
-
-
-\begin{table*}[ht]
+\begin{table}[]
 \centering
-\begin{tabular}{ccccccccc}
-  \hline
- & $\tau^{reg}, \Delta(A_{-i})$ 
- & $\tau^{\pi}, \Delta(A_{-i})$ 
- & $\tau^{com}, \Delta(A_{-i})$
- & $\tau^{alt}, \Delta(A_{-i})$ \\ 
-  \hline
-  $\tau^{reg}, \Delta(A_{-i})$ & 6.663 & 6.662 & 5.829 & 7.105 \\ 
-  $\tau^{\pi}, \Delta(A_{-i})$ & 6.486 & 6.484 & 6.088 & 6.703 \\ 
-  $\tau^{com}, \Delta(A_{-i})$ & 6.323 & 6.758 & 5.496 & 6.977 \\ 
-  $\tau^{alt}, \Delta(A_{-i})$ & 5.949 & 5.722 & 5.326 & 6.396 \\ 
-   \hline
-\end{tabular}
-\caption{Average payoff in simulations of 100,000 symmetric $2 \times 2$ games}
-\label{tab:Utils-MetaGame}
-\end{table*}
-
-The following proposition confirms this result.
-
-\begin{proposition} \label{proposition2}
-
-Fix $\Lambda = \lbrace (\tau^{\pi}, \Delta(A_{-i})), (\tau^{reg}, \Delta(A_{-i})), (\tau^{alt}, \Delta(A_{-i})), (\tau^{com}, \Delta(A_{-i})) \rbrace$ and $\mathcal{G}$ the class of symmetric $2 \times 2$ games with payoffs sampled from a finite, or compact and convex, set of i.i.d. values. Then, $(\tau^{reg}, \Delta(A_{-i}))$ is the only evolutionarily stable player in the population.
-
-\end{proposition}
-
-\begin{proof}
-See Appendix.
-\end{proof}
-
-Finally, Table \ref{tab:Utils-MetaGame2} shows the average fitness when all the epistemic and
-player types introduced so far are simultaneously present in the population.
-
-
-
-Again, this shows that there are plausible and simple conditions under which
-agents who represent the game in terms of regret may be favored by
-evolutionary selection and that, more specifically, regret minimizers
-are evolutionarily supported.
-
-
-\begin{table*}[ht]
-\centering
+\footnotesize
 \begin{tabular}{ccccccccc}
   \hline
  & $\tuple{\tau^{reg}, \Delta(A)}$ 
@@ -785,23 +744,106 @@ are evolutionarily supported.
  & $\tuple{\tau^{com}, \bar{\mu}}$
  & $\tuple{\tau^{alt}, \bar{\mu}}$ \\ 
   \hline
-  $\tuple{\tau^{reg}, \Delta(A)}$ &  6.663 & 6.662 & 5.829 & 7.105 & 6.663 & 6.663 & 5.829 & 7.489 \\  
-  $\tuple{\tau^{\pi}, \Delta(A)}$ &  6.486 & 6.484 & 6.088 & 6.703 & 6.486 & 6.486 & 6.088 & 6.875 \\  
-  $\tuple{\tau^{com}, \Delta(A)}$ &  6.323 & 6.758 & 5.496 & 6.977 & 6.323 & 6.323 & 5.496 & 7.149 \\  
-  $\tuple{\tau^{alt}, \Delta(A)}$ &  5.949 & 5.722 & 5.326 & 6.396 & 5.949 & 5.949 & 5.326 & 6.568 \\  
-  $\tuple{\tau^{reg}, \bar{\mu}}$ &  6.663 & 6.662 & 5.829 & 7.105 & 6.663 & 6.663 & 5.829 & 7.489 \\  
-  $\tuple{\tau^{\pi}, \bar{\mu}}$ &  6.663 & 6.662 & 5.829 & 7.105 & 6.663 & 6.663 & 5.829 & 7.489 \\  
-  $\tuple{\tau^{com}, \bar{\mu}}$ &  6.323 & 6.758 & 5.496 & 6.977 & 6.323 & 6.323 & 5.496 & 7.149 \\  
-  $\tuple{\tau^{alt}, \bar{\mu}}$ &  6.331 & 5.893 & 5.497 & 6.566 & 6.331 & 6.331 & 5.497 & 7.152 \\   
+  $\tuple{\tau^{reg}, \Delta(A)}$ & 6.663 & 6.662 & 5.829 & 7.105 & 6.663 & 6.663 & 5.829 & 7.489 \\
+  $\tuple{\tau^{\pi}, \Delta(A)}$ & 6.486 & 6.484 & 6.088 & 6.703 & 6.486 & 6.486 & 6.088 & 6.875 \\
+  $\tuple{\tau^{com}, \Delta(A)}$ & 6.323 & 6.758 & 5.496 & 6.977 & 6.323 & 6.323 & 5.496 & 7.149 \\
+  $\tuple{\tau^{alt}, \Delta(A)}$ & 5.949 & 5.722 & 5.326 & 6.396 & 5.949 & 5.949 & 5.326 & 6.568 \\
+  $\tuple{\tau^{reg}, \bar{\mu}}$ & 6.663 & 6.662 & 5.829 & 7.105 & 6.663 & 6.663 & 5.829 & 7.489 \\
+  $\tuple{\tau^{\pi}, \bar{\mu}}$ & 6.663 & 6.662 & 5.829 & 7.105 & 6.663 & 6.663 & 5.829 & 7.489 \\
+  $\tuple{\tau^{com}, \bar{\mu}}$ & 6.323 & 6.758 & 5.496 & 6.977 & 6.323 & 6.323 & 5.496 & 7.149 \\
+  $\tuple{\tau^{alt}, \bar{\mu}}$ & 6.331 & 5.893 & 5.497 & 6.566 & 6.331 & 6.331 & 5.497 & 7.152 \\
    \hline                          
 \end{tabular}                      
 \caption{Average payoff in simulations of 100,000
   randomly generated $2 \times 2$ symmetric games.}
-\label{tab:Utils-MetaGame2}        
-\end{table*}                       
+\label{tab:ExpectedFitness_2x2_Full}        
+\end{table}   
+ 
+\todo[inline]{is it true that competitive preferences types are behaviorally equivalent under
+  either epistemic type? can we show that?}
+ 
+The approximations in Table~\ref{tab:ExpectedFitness_2x2_Full} confirm basic
+intuitions. Averaging over randomly sampled games, everybody would like to have an altruistic
+opponent and nobody would like to play against a competitive opponent. Moreover, altruistic
+types come up strictly dominated by competitive types, but competitive types themselves are
+always worse than any of the behaviorally equivalent types $(\tau^{reg}, \Delta(A_{-i}))$,
+$(\tau^{\pi}, \overline{\mu})$, and $(\tau^{reg}, \overline{\mu})$, except against maximin
+players $\tuple{\tau^{\pi}, \Delta(A)}$. This is a noteworthy results in the light of the fact
+that evolving altruistic preferences have been shown to support cooperative behavior in a
+single stage game \myalert{[CITE]}.\todo{@Paolo: check whether this is true, please!} In
+contrast, averaging over payoffs in multiple stage games, like we do here, makes altruistic
+preferences prime victims of evolutionary eradication.
+
+It is easy to see then that the previous result still obtains for the larger meta-game in
+Table~\ref{tab:ExpectedFitness_2x2_Full}: $(\tau^{reg}, \Delta(A_{-i}))$,
+$(\tau^{\pi}, \overline{\mu})$, and $(\tau^{reg}, \overline{\mu})$ are still neutrally stable;
+all simulations of the (discrete-time) replicator dynamic end in populations consisting of only
+these types in arbitrary proportion.
+
+The following proposition confirms this result.\todo{rephrase to acknowledge all epistemic types}
+
+\begin{proposition} \label{proposition2}
+
+Fix $\Lambda = \lbrace (\tau^{\pi}, \Delta(A_{-i})), (\tau^{reg}, \Delta(A_{-i})), (\tau^{alt}, \Delta(A_{-i})), (\tau^{com}, \Delta(A_{-i})) \rbrace$ and $\mathcal{G}$ the class of symmetric $2 \times 2$ games with payoffs sampled from a finite, or compact and convex, set of i.i.d. values. Then, $(\tau^{reg}, \Delta(A_{-i}))$ is the only evolutionarily stable player in the population.
+
+\end{proposition}
+
+\begin{proof}
+See Appendix.\todo{is this there already?}
+\end{proof}
+
+In sum, the presence of other plausible preference types, such as competitive and altruistic
+types does not undermine the previous results about the evolutionary drive towards regret-based
+subjective preferences.
+
+
                                    
 \subsection{$n \times n$ symmetric games}
 \label{sec:n-times-n}
+
+Results from Section~\ref{sec:results:-basic-model} relied heavily on
+Fact~\ref{fact:equivalence2x2} that regret minimization $\tuple{\tau^{reg}, \Delta(A)}$ is
+behaviorally equivalent with expected regret minimization $\tuple{\tau^{reg}, \bar{\mu}}$ and
+expected utility maximization $\tuple{\tau^{\pi}, \bar{\mu}}$. This is no longer true when we
+look at arbitrary $n \times n$ games with $n \ge 2$. 
+
+Table~\ref{tab:ExpectedFitness_10x10} therefore gives approximations for expected fitness in a
+meta-game over a class over a class of $n \times n$ symmetric games where $n$ is randomly drawn
+from $\set{2, \dots, 10}$. Concretely, the numbers in Table~\ref{tab:ExpectedFitness_10x10} are
+averages of payoffs obtained in 100,000 randomly sampled games, where each game was sampled by
+first picking a number of acts $n \in \set{2, \dots, 10}$ uniformly at random, and then filling
+the resulting $n \times n$ payoff matrix of the stage game with i.i.d.~sampled payoffs as
+before. 
+
+
+\begin{table}[]
+\centering
+\footnotesize
+\begin{tabular}{ccccccccc}
+  \hline
+ & $\tuple{\tau^{reg}, \Delta(A)}$ 
+ & $\tuple{\tau^{\pi}, \Delta(A)}$ 
+ & $\tuple{\tau^{com}, \Delta(A)}$
+ & $\tuple{\tau^{alt}, \Delta(A)}$
+ & $\tuple{\tau^{reg}, \bar{\mu}}$ 
+ & $\tuple{\tau^{\pi}, \bar{\mu}}$ 
+ & $\tuple{\tau^{com}, \bar{\mu}}$
+ & $\tuple{\tau^{alt}, \bar{\mu}}$ \\ 
+  \hline
+  $\tuple{\tau^{reg}, \Delta(A)}$ & 6.567 & 6.570 & 5.650 & 6.992 & 6.564 & 6.564 & 5.593 & 7.409 \\
+  $\tuple{\tau^{\pi}, \Delta(A)}$ & 6.476 & 6.483 & 5.896 & 6.818 & 6.484 & 6.484 & 5.850 & 7.124 \\
+  $\tuple{\tau^{com}, \Delta(A)}$ & 6.468 & 6.647 & 5.512 & 7.169 & 6.578 & 6.578 & 5.577 & 7.354 \\
+  $\tuple{\tau^{alt}, \Delta(A)}$ & 5.968 & 5.923 & 5.363 & 6.685 & 5.975 & 5.975 & 5.086 & 6.973 \\
+  $\tuple{\tau^{reg}, \bar{\mu}}$ & 6.908 & 6.918 & 5.988 & 7.456 & 6.929 & 6.929 & 5.934 & 7.783 \\
+  $\tuple{\tau^{\pi}, \bar{\mu}}$ & 6.908 & 6.918 & 5.988 & 7.456 & 6.929 & 6.929 & 5.934 & 7.783 \\
+  $\tuple{\tau^{com}, \bar{\mu}}$ & 6.529 & 6.680 & 5.445 & 7.276 & 6.542 & 6.542 & 5.521 & 7.440 \\
+  $\tuple{\tau^{alt}, \bar{\mu}}$ & 6.450 & 6.337 & 5.772 & 6.978 & 6.457 & 6.457 & 5.479 & 7.500 \\
+   \hline                          
+\end{tabular}                      
+\caption{Average payoff in simulations of 100,000
+  randomly generated $n \times n$ symmetric games with $n$ randomly drawn from $\set{2, \dots, 10}$.}
+\label{tab:ExpectedFitness_10x10}        
+\end{table}
 
 \subsection{Solitary decisions}
 \label{sec:solitary-decisions}
