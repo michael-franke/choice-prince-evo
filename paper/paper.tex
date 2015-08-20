@@ -12,6 +12,7 @@
 
 \usepackage{todonotes}
 
+
 %========================================
 % Standard Layout
 %========================================
@@ -19,6 +20,9 @@
 \usepackage{bigints}
 \usepackage{MnSymbol}
 \usepackage{a4wide}
+
+\usepackage[T1]{fontenc}
+
 
 % Itemize
 \renewcommand{\labelitemi}{\large{$\mathbf{\cdot}$}}    % itemize symbols
@@ -175,7 +179,7 @@
 The standard use of the word \textit{rationality} in economics and decision theory is to denote the maximization of (subjective) expected utility. Since the work by vNM [cite], this stance has been justified from the intuitive ''rationality'' of the axioms on the subjective preference relation leading to the representability of the decision maker as an expected utility maximizer. 
 While in the axiomatization by [vNM] the probability of the outcomes is objectively given a priori, Savage54 provides a larger set of axioms that represent the decision maker (DM) with both a subjective utility over outcomes \textit{and} a \textit{subjective} probability over states of the world. Savage's axioms constitute the foundation of subjective expected utility (SEU) theory, that is normally assumed to define the rational behavior of economic agents.\\
 
-DEFINITION(SEU-maximization): Let $S$ be a set of states of the world, $X$ a set of outcomes and $A$ a set of actions. Given a probability measure $P$ on $S$ and a subjective utility function $u:X \rightarrow \mathbb{R} $, an action $a^*: S \rightarrow X $ is SEU-maximizing if $a^* \in \text{argmax}_{a_i \in A} \bigint_S u(a^*(s))dP(s) $. \\
+DEFINITION(SEU-maximization): Let $S$ be a set of states of the world, $X$ a set of outcomes and $A$ a set of actions. Given a probability measure $P$ on $S$ and a subjective utility function $u:X \rightarrow \mathbb{R} $, an action $a^*: S \rightarrow X $ is SEU-maximizing if $a^* \in \text{argmax}_{a_i \in A} \int_S u(a^*(s))dP(s) $. \\
 
 The subjectivity of preferences plays a very important
 role for the present work. From an agent's standpoint, the amount $x$ of, say, money achieved does not necessarily
@@ -238,15 +242,21 @@ In what follows, an important focus of our work will be the role of regret in de
 
 
 
-\subsubsection{Regret theory}
+\subsubsection{Regret theory} \label{sec:regreTheory}
 
 Regret theory has been introduced in decision theory by Savage [] and Niherens [], and later developed by Bell [1982], Loomes and Sugden [1982], and Fishburn [1982] independently. Lately, Halpern and Pass [cite] show how the use of regret minimization can solve game theoretical puzzles (like the Centipede and the Traveller's dilemma) in a way that is closer to everyday intuition and empirical data. In this paper the notion of regret is defined as in [HalPass12]:
 
-\vspace{.5cm}
+\begin{definition}[Pairwise regret] \label{defn:parwreg}
+Given a simultaneous-move game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, the regret of player $i$ at profile $(a_i,a_{-i})$ is defined by: $\text{reg}(a_i,a_{-i}):= \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $, where $a_i^\$ \in A_i$ denotes $i$'s best reply to action $a_{-i} $.
+\end{definition}
 
-DEFINITION(regret): Given a simultaneous-move game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, the regret of an action $a_i \in A_i$ is defined by: $\text{reg}(a_i)= \text{max}_{a_{-i}\in A_{-i}} \pi_i(a_i^*,a_{-i})-\pi_i(a_i,a_{-i}) $, where $a_i^*$ is $i$'s best reply to action $a_{-i} $.\\
+\begin{definition}[Regret] \label{defn:regret}
+Given a simultaneous-move game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, the regret of an action $a_i \in A_i$ is defined by: $\text{reg}(a_i):= \text{max}_{a_{-i}\in A_{-i}} \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $.
+\end{definition}
 
-DEFINITION(regret minimization): Given a simultaneous-move game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, an action $a^{'}_i $ is regret minimizing if $a^{'}_i \in \text{min}_{a_i} \text{max}_{a_{-i}} \pi_i(a_i^*,a_{-i})-\pi_i(a_i,a_{-i}) $.\\
+\begin{definition}[Regret minimization] \label{defn:regmin}
+Given a simultaneous-move game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, an action $a^{r}_i $ is regret minimizing if $a^{r}_i \in \text{min}_{a_i} \text{max}_{a_{-i}} \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $.
+\end{definition}
 
 EXAMPLE 1: \textit{Coordination Game.}
 
@@ -265,7 +275,7 @@ II & 0;0 & 2;2\tabularnewline
 \hline 
 \end{tabular}\end{center}
 
-\protect\caption{A coordination game}
+\protect\caption{A coordination game $G^C$}
 \label{coordgame1}
 \end{figure}
 
@@ -316,9 +326,433 @@ and explain all the main experimental results of prospect theory, and claim that
 
 
 
-\section{Evolution \& the environment}
+\section{The model}
 
-here we spell out our model
+
+We consider an evolutionary model that is different, for the best of our knowledge, from all the standard models of evolutionary game theory. Given a game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, a subjective utility over $G$ is a function $\theta: A \rightarrow \mathbb{R} $, where $ A:=\prod_{i\in N}A_{i} $ as usual. We denote by $ \Theta:= \mathbb{R}^{|A|} $ the set of all the subjective utilities over $G$. The model we introduce here is a multiple game model, that we also call \textit{multi-game} or \textit{meta-game}, where a \textit{class} $\mathcal{G}$ of fitness games is played in a population. All the models used in evolutionary game theory that we are aware of always consider a single game at a time. Our extension is meant to capture both a more general notion of environment and a more general notion of phenotype.\\ 
+There are good reasons to claim that focusing on more general psychological mechanisms instead of on behavior itself as the phenotype under evolutionary selection can be more faithful and insightful for natural biology and ecology [Fawcett\&al.].
+In all classical models the agents are represented as playing a single fixed game, and as genetically predetermined to play fixed strategies, that consequently are the only target of natural selection in those frameworks. Standard evolutionary game theory cannot take charge of this shift of perspective until it will keep modelling a single game at a time, and until it will keep focusing on observed behavior only. ''Instead we should expect animals to have evolved a set of psychological mechanisms which enable them to perform well on average across a range of different circumstances''[Fawcett\&al.]. [maybe add evolution of preferences here]
+
+In this work we take $\mathcal{G}$ to be the class of symmetric $2 \times 2$ games\footnote{Note that this class includes many of the most famous games extensively considered in game theoretical literature, e.g., Prisoner's dilemma, Chicken game, Stag hunt, etc.}. First, a game $G$ is selected from the class of fitness games $\mathcal{G}$, and then players in the population are matched to play the game $G$. Each player is a function $\tau: \mathcal{G} \rightarrow  \Theta$, and we call $\tau$ a \textit{player type}, or just a \textit{type}\footnote{Notice that the function $\tau$ is well-defined since, for any symmetric $2 \times 2$ game, the codomain $\Theta=\mathbb{R}^{4}$ is the same.}. Intuitively, a type can be interpreted as a way of reasoning, a pattern of conceptualization, a thread that relates different subjective utilities across different games. We denote by $T$ the class of player types. For each game $G \in \mathcal{G}$, the evolutionary fitness is determined by the objective utility (payoff) function $\pi_G$, but the player's action choice depends on the player's subjective utility function $\tau(G)$, given by the player's type $\tau$. Notice that, for any symmetric game $G$, the action sets $(A_1, \dots, A_N)$ and the payoff functions $ (\pi_1, \dots, \pi_N)  $ are the same for all $i\in \lbrace 1, \dots N \rbrace$. Consequently, we only write $ A^G $ and $ \pi^G $ for the action set and the payoff function of game $G$, respectively. Moreover, in symmetric $2 \times 2$ games we have $A=A^G \times A^G$. Then, for $x,y \in A^G$ we denote by $\pi^G(x,y)$ the objective payoff of playing action $x$ in response to action $y$.\\
+
+
+
+\subsection{Player types}
+
+The set of all possible player types amouts to the set of all possible functions $ \tau: \mathcal{G} \rightarrow  \Theta $, i.e., $T=\mathbb{R}^{4^{\mathbb{R}^{4}}} $ , but for the sake of simplicity we will focus on types that are relevant and meaningful from a decision-theoretic point of view. We are mainly interested in two types: the objective type and the regret type.\\
+Given a game $G$ and Definition \ref{defn:parwreg}, it is straightforward to define the \textit{regret preference} $\theta^{reg}$ and the \textit{regret type} $\tau^{reg}$ as follows.
+
+\begin{definition}[Regret preference] \label{defn:regpref}
+
+For a game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, we define the regret preference $ \theta^{reg}: A \rightarrow \mathbb{R} $ such that $ \theta^{reg}(a_i,a_{-i})=-\text{reg}(a_i,a_{-i}) $.\footnote{More precisely, this is the negative regret, whereas the (positive) regret, as defined in [halpass], would not have the minus sign at the beginning of the formula. Here it will be easier to define the regret in terms of negative regret.}
+
+\end{definition}
+
+
+
+\begin{definition}[Regret type] \label{defn:regtype}
+
+Given $ \mathcal{G} $ the class of symmetric $ 2 \times 2 $ games, we call regret type the function $\tau^{reg}: \mathcal{G} \rightarrow  \Theta$ such that, for all $G \in \mathcal{G}$, $ \tau^{reg}(G)= \theta^{reg}$.
+
+\end{definition}
+
+\noindent Similarly, let us define the \textit{objective preference} $\theta^{\pi}$ and the \textit{objective type} $ \tau^{\pi} $, that we also call $\pi$\textit{-type}, as follows. 
+
+\begin{definition}[Objective preference] \label{defn:objpref}
+
+For a game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, we define the objective preference $ \theta^{\pi}: A \rightarrow \mathbb{R} $ such that $ \theta^{\pi}(a_i,a_{-i})=\pi(a_i,a_{-i}) $.
+
+\end{definition}
+
+
+\begin{definition}[Objective type] \label{defn:objtype}
+
+Given $ \mathcal{G} $ the class of symmetric $ 2 \times 2 $ games, we call objective type, or $\pi$-type, the function $\tau^{\pi}: \mathcal{G} \rightarrow  \Theta$ such that, for all $G \in \mathcal{G}$, $ \tau^{\pi}(G)= \theta^{\pi}$.
+
+\end{definition}
+
+\noindent In other words, we consider two prominent player types: a type who has a veridical subjective utility that perfectly matches the objective utility (i.e., the evolutionary fitness); and a type who has a non-veridical regret-based subjective utility. 
+
+\iffalse
+(maybe we want to introduce altruistic and competitive only later) Other types of player have been studied in the literature. A famous example is the \textit{altruistic type}.
+
+\begin{definition}[Altruistic preference] \label{defn:altpref}
+
+For a game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, we define the altruistic preference $ \theta^{alt}: A \rightarrow \mathbb{R} $ such that $ \theta^{alt}(a_i,a_{-i})=\pi(a_i,a_{-i}) + \sum_{j \neq i} \pi(a_{j},a_{-j})$.\footnote{A more general formulation [see: REFERENCES] would be to define an $ \alpha$-altruistic type, for $\alpha \in [0,1]$, with subjective utility $ \theta^{\alpha lt}(a_i,a_{-i})=\pi(a_i,a_{-i}) + \alpha \sum_{j \neq i} \pi(a_{j},a_{-j})$. Since we are not interested in the evolution of degrees of altruism here, we simply fix $ \alpha = 1 $.}
+
+\end{definition}
+
+\begin{definition}[Altruistic type] \label{defn:alttype}
+
+Given $ \mathcal{G} $ the class of symmetric $ 2 \times 2 $ games, we call altruistic type the function $\tau^{alt}: \mathcal{G} \rightarrow  \Theta$ such that, for all $G \in \mathcal{G}$, $ \tau^{alt}(G)= \theta^{alt}$.
+
+\end{definition}
+
+\noindent As opposite to the altruistic type, it is possible to define a \textit{competitive type} as follows. 
+
+\begin{definition}[Competitive preference] \label{defn:compref}
+
+For a game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, we define the altruistic preference $ \theta^{com}: A \rightarrow \mathbb{R} $ such that $ \theta^{com}(a_i,a_{-i})=\pi(a_i,a_{-i}) - \sum_{j \neq i} \pi(a_{j},a_{-j})$.
+
+\end{definition}
+
+\begin{definition}[Competitive type] \label{defn:comtype}
+
+Given $ \mathcal{G} $ the class of symmetric $ 2 \times 2 $ games, we call altruistic type the function $\tau^{com}: \mathcal{G} \rightarrow  \Theta$ such that, for all $G \in \mathcal{G}$, $ \tau^{com}(G)= \theta^{com}$.
+
+\end{definition}
+
+\fi
+
+
+\subsection{Epistemic types}
+
+In line with traditional evolutionary game theory, the idea of this work is to model a population of rather unsophisticated and myopic agents that possibly differ from each other with respect to two components: the player type and the epistemic type.
+In full generality, we think of an epistemic type as a general disposition to form beliefs about the co-player’s behavior.    Players in the population obviously face uncertainty about the composition of the population that they are part of, and consequently about the type of co-player that they are randomly paired with at each round and about the co-player's actions. We represent this uncertainty that players entertain in two different ways, a probabilistic flat belief and a non-probabilistic belief. This amounts to having two different epistemic types $e$ in the population, $e \in \lbrace \overline{\mu}, \Delta(A_{-i}) \rbrace $, where $\overline{\mu}$ is the probabilistic type and $\Delta(A_{-i})$ is the non-probabilistic type, defined as follows:
+
+\begin{itemize}
+
+\item $ \Delta(A_{-i}):=\lbrace \mu \in \mathbb{R}^{A_{-i}}: \sum_{a_{-i} \in A_{-i}} \mu(a_{-i}) = 1 \rbrace$;
+
+\item $\overline{\mu} \in \lbrace \mu \in \mathbb{R}^{A_{-i}}: \sum_{a_{-i} \in A_{-i}} \mu(a_{-i}) = 1 \rbrace$ is the probability measure over the co-player's actions such that: $\forall a_{-i} \in A_{-i}$, $\overline{\mu}(a_{-i})= \frac{1}{|A_{-i}|}$.
+
+\end{itemize} 
+
+Hence, we consider two possible epistemic states in the face of uncertainty. The epistemic type $\Delta(A_{-i})$ represents a situation of non-probabilistic radical uncertainty, where the players are not able to narrow down the set of probability distributions over the co-player's actions and they consider all of them as possible. The other epistemic type $\overline{\mu}$ conceptualizes the uncertainty about the population by using the principle of insufficient reason and ascribes equal probability to all the possible alternatives. Both options are reasonable and justifiable ways to deal with situations of uncertainty [REFERENCES]. \\
+Since for the moment we want to model populations of biologically unsophisticated players, we do not endow them with an effective learning procedure. Our players encode both a psychological subjective representation of the interaction (player type) and a conceptualization of uncertainty (epistemic type), but they are too simple to have any learning or belief updating procedure. From this point of view, we can take the learning process away from natural selection and focus on player types and epistemic types as the target of evolutionary pressure.
+
+\subsection{Uncertainty aversion and maxmin rule}
+
+Given a player type and an epistemic type, there are different ways to produce a behavior. A huge body of experimental literature strongly suggests that agents are generally uncertainty (or ambiguity) averse [REF]. This pattern of behavior in the presence of ucertainty has been famously axiomatized by Gilboa and Schmeidler in a paper from 1989. The idea is that being uncertainty averse amounts to behaving in accordance with maximinimizing expected utility over a set of prior probabilities. Whenever the set of priors is a singleton, maximinization of expected utility coincides with maximization of expected utility. In line with empirical data, we assume that players in the population are uncertainty averse and conform to maxmin expected utility. The resulting behavior is then produced by maximinimizing over the subjective utility given by the player type and the set of priors given by the epistemic type. \\
+
+\begin{example}
+Consider the game in Figure \ref{coordgame1} again. When a player characterized by\footnote{To ease notation in the following we will refer to a player directly as a pair $(player \text{ } type \text{ } \tau,\text{ } epistemic\text{ } type \text{ } e)$.} player type $ \tau^{reg} $ and epistemic type $ \Delta(A_{-i}) $ faces the game in Figure \ref{coordgame1}, her player type gives rise to the representation $\tau^{reg}(G^C)$ in Figure \ref{coordgame1reg}. Then, maximinimizing expected utility over the probability simplex $ \Delta(A_{-i}) $ given the game in Figure \ref{coordgame1reg} corresponds to playing the standard maxmin strategy [REF] of that game.\footnote{Notice that this is the case for any game: given a game $G$, maximinimizing expected utility over the probability simplex $ \Delta(A_{-i}) $ amounts to playing the standard maxmin strategy of $G$.} This, in turn, corresponds to the regret minimizing action of the original game $G^C$ of Figure \ref{coordgame1}, namely action $II$, as we have seen in Section \ref{sec:regreTheory}. A player $(\tau^{reg},\overline{\mu})$ instead has subjective representation $\tau^{reg}(G^C)$ of Figure \ref{coordgame1reg} and a flat probability measure $\overline{\mu}=(\frac{1}{2}I,\frac{1}{2}II)$ over the co-player's actions. Consequently, such a player would play action $II$, i.e., the action that maximinimizes expected utility given the flat probability measure $\overline{\mu}$.\footnote{As we already noticed, maximinimizing expected utility given a probability measure $\mu$ is equivalent to maximizing expected utility given $\mu$.} 
+Similarly, a player $(\tau^{\pi},\Delta(A_{-i}))$ will have the subjective representation coinciding with the objective fitness game, i.e., $ \tau^{\pi}(G^C)= G^C $. Then, both actions $I$ and $II$ maximinimize expected utility over the probability simplex $ \Delta(A_{-i}) $. Hence, a player $(\tau^{\pi},\Delta(A_{-i}))$ will be indifferent between $I$ and $II$, and will randomize with equal probability $(\frac{1}{2}I,\frac{1}{2}II)$. Finally, a player $(\tau^{\pi},\overline{\mu})$ maximinimizes the objective fitness game $G^C$ of Figure \ref{coordgame1} with flat probability $\overline{\mu}$ over the co-player's actions, i.e., maximizes objective utility given $\overline{\mu}$. In game $G^C$ this yields action $II$. 
+
+\begin{figure}
+\begin{center}%
+\begin{tabular}{|c|c|c|}
+\hline 
+ & I & II\tabularnewline
+\hline 
+\hline 
+I & 0;0 & -2;-1\tabularnewline
+\hline 
+II & -1;-2 & 0;0\tabularnewline
+\hline 
+\end{tabular}\end{center}
+
+\protect\caption{Regret representation $\tau^{reg}(G^C)$}
+\label{coordgame1reg}
+\end{figure}
+
+\end{example}
+
+We are now in the position of deriving behavior directly from the pair $(\tau, e)$. Definitions \ref{def:utility-belief} and \ref{def:maxminSEU} simply formalize the notions of subjective expected utility and maxmin subjective expective utility, respectively. 
+
+\begin{definition} \label{def:utility-belief}
+
+Given a game $G$, an action $a_i \in A_i$, and a belief $\mu \in \lbrace \mu' \in \mathbb{R}^{A_{-i}}: \sum_{a_{-i} \in A_{-i}} \mu'(a_{-i}) = 1 \rbrace$, we define $\tau(G)(a_i, \mu):= \sum_{a_{-i} \in A_{-i}} \tau(G)(a_i, a_{-i}) \cdot \mu(a_{-i})$. 
+
+\end{definition}
+
+\begin{definition} \label{def:maxminSEU}
+
+Given a game $G$ and a player $(\tau, e)$, we define $\text{maxmin}(\tau(G), e):= \lbrace a'_i \in A_i : a_i \in \text{max}_{a_i \in A_i} \text{ min}_{\mu \in e} \text{ } \tau(G)(a_i, \mu) \rbrace$.
+
+\end{definition}
+
+\noindent Definition \ref{def:expected fitness} gives the expected evolutionary fitness of player $(\tau, e)$ against player $(\tau', e')$ in game $G$.\footnote{As already specified in the previous example, we assume that, whenever the set $\text{maxmin}(\tau(G), e)$ is not a singleton, the player $(\tau, e)$ will mix with equal probability among the actions in $\text{maxmin}(\tau(G), e)$.}
+
+\begin{definition} \label{def:expected fitness}
+
+Given a game $G \in \mathcal{G}$, a player $(\tau, e)$, and a player $(\tau', e')$, we define $\pi^G((\tau, e),(\tau', e')):= \pi^G(\text{maxmin}(\tau(G), e),\text{maxmin}(\tau'(G), e'))$. 
+
+\end{definition}
+
+
+
+Many other alternatives different from maxmin expected utility could produce behavior: choice rules like minmax, maxmax, and minmin expected utility would similarly generate behavior from a player type and an epistemic type. Here we postulate that players are maximinimizers for two main reasons. First, our main interest is the evolution of different patterns of subjective conceptualizations of games (player types), and we want to show that the veridical representation (objective type) is not necessarily the fittest and may not be evolutionarily stable. Assuming that all players use the maxmin rule independent of their player type allows us to factor the choice rule out of the selection process and to focus on player types. Secondly, as already mentioned, among other possible choice rules maxmin is not only intuitively appealing but also corroborated from an empirical point of view.
+
+Before concluding this section, it is worth stressing two important points.
+
+\begin{fact} \label{fact:maxEU-minReg}
+
+For any given single probability $\mu$, maximization of expected utility and minimization of expected regret are behaviorally equivalent.
+
+\end{fact}
+
+\noindent As we have seen in the previous example, this is not the case in the presence of (radical) uncertainty, in the sense of representation of belief state in terms of a set of probability, as in $ \Delta(A_{-i}) $.
+
+\begin{fact} \label{fact:equivalence2x2}
+
+In the class of $2 \times 2$ symmetric games, players $(\tau^{reg}, \Delta(A_{-i}))$, $(\tau^{\pi}, \overline{\mu})$, and $(\tau^{reg},\overline{\mu})$ are behaviorally equivalent.
+
+\end{fact} 
+
+\noindent We still treat them as distinct, because they will perform differently with respect to component-wise mutation (see below). Moreover, Fact \ref{fact:equivalence2x2} does not hold for $n \times n$ symmetric games in general.
+
+\subsection{Evolution \& the environment}
+
+[MAYBE, put part of Version2 from Snippets here, if not in Introduction]
+
+In standard evolutionary game theory a population of agents plays over a single game, that is supposed to represent the interaction driving the evolutionary dynamics. In line with [Fawcett-al.], we claim that the single-game approach is too limiting to encompass the vast variety of interactions that lead evolution. Here we propose the meta-game model in order to account for a more general notion of environment. By allowing the population to play over a class of possible games, we want to take into consideration a notion of environment that comprises a multitude of possible interactions as the driver of natural selection. In this perspective, the meta-game approach represents a model of evolution more faithful and possibly closer to reality. \\
+We assume a huge, possibly infinite, population of players $(\tau,e)$. At each time, a game $G$ is selected from the class of possible games, and players are randomly paired to play $G$. At the end of the play we keep track of the evolutionary fitness achieved by each player. Next, another game $G'$ is randomly selected again, and so on. The evolutionary fitness of each player is then based on the expected objective payoff over the class $\mathcal{G}$. Denoting by $P(G)$ the probability of game $G$ to be selected, the evolutionary fitness of player $(\tau,e)$ against player $(\tau',e')$ is given by: 
+
+$$ EF((\tau,e),(\tau',e'))= \int_G  P(G) \cdot \pi^G((\tau, e),(\tau', e')).  $$
+
+\noindent The framework we propose here is a very neutral and flexible tool to model the notion of environment. We can take into account many different types of environment by simply changing the class $\mathcal{G}$ of possible games, and in the limit case where $\mathcal{G}$ is a sigleton our model reduces to the standard models of evolutionary game theory. 
+By combining field studies and statistics, one could design a more specific class $\mathcal{G}$ with appropriate probabilities $P(G)$ in order to match the natural environment of a given population, but for our theoretical purposes we adopt another approach. As already anticipated, we take $\mathcal{G}$ to be the class of $2 \times 2$ symmetric games. More precisely, we imagine the class $\mathcal{G}$ to be generated from the generic form table of Figure \ref{generic form table}, where $a,b,c,d$ are i.i.d. random variables sampled from a finite set of natural numbers $ \lbrace \underline{n}, \dots, \overline{n}  \rbrace$.
+
+
+\begin{figure}
+\begin{center}%
+\begin{tabular}{|c|c|c|}
+\hline 
+ & I & II\tabularnewline
+\hline 
+\hline 
+I & a;a & b;c\tabularnewline
+\hline 
+II & c;b & d;d\tabularnewline
+\hline 
+\end{tabular}\end{center}
+
+\protect\caption{generic form table for $2 \times 2$ symmetric games}
+\label{generic form table}
+\end{figure}
+
+
+
+
+
+
+\section{Results}
+
+In this section we develop results by means of computer simulations and analytical proofs in parallel. 
+
+\subsection{Statics}
+
+Table \ref{tab:reg vs obj} represent the result of simulations over $50.000$ games in $\mathcal{G}$ with $a,b,c,d \in \lbrace  0, \dots, 10 \rbrace$. The number in each cell corresponds to the average evolutionary fitness of the row player when matched with the column player. 
+
+
+\begin{table}[]
+\centering
+\caption{Average evolutionary fitness in simulations of 50.000 symmetric $2 \times 2$ games}
+\label{tab:reg vs obj}
+\begin{tabular}{cccll}
+\cline{1-3}
+\multicolumn{1}{|c|}{} & \multicolumn{1}{c|}{$\tau^{\pi}, \Delta(A_{-i})$} & \multicolumn{1}{c|}{$\tau^{reg}, \Delta(A_{-i})$} &  &  \\ \cline{1-3}
+\multicolumn{1}{|c|}{$\tau^{\pi}, \Delta(A_{-i})$} & \multicolumn{1}{c|}{6.131} & \multicolumn{1}{c|}{6.128} &  &  \\ \cline{1-3}
+\multicolumn{1}{|c|}{$\tau^{reg}, \Delta(A_{-i})$} & \multicolumn{1}{c|}{6.305} & \multicolumn{1}{c|}{6.302} &  &  \\ \cline{1-3}
+\multicolumn{1}{l}{}   & \multicolumn{1}{l}{}  & \multicolumn{1}{l}{}  &  & 
+\end{tabular}
+\end{table}
+
+
+Table \ref{tab:reg vs obj} shows that when players in the population are radically uncertain ($\Delta(A_{-i})$), the regret player $ \tau^{reg} $ outperforms the objective type $  \tau^{\pi} $, and $ \tau^{reg} $  is evolutionarily stable whereas $ \tau^{\pi} $ is not. This suggests that in the presence of uncertainty, in the sense of a set of probability measures, regret minimization is a better choice rule as compared with standard maxmin from an evolutionary point of view. \\
+\noindent Table \ref{tab:reg vs obj 2} reproduces the results about average evolutionary fitness out of 5.000 randomly generated symmetric $2 \times 2$ games when both types of epistemic uncertainty are present in the population. As we already highlighted in Fact \ref{fact:equivalence2x2}, $(\tau^{reg}, \Delta(A_{-i}))$, $(\tau^{reg}, \overline{\mu})$, and $(\tau^{\pi}, \overline{\mu})$ are behaviorally equivalent, and their evolutionary fitness is indeed the same. [WARNING: it is not exactly identical here, this is probably related to a difference in tie-breaking that is probably a bit different for player $\tau^{reg}, \Delta(A_{-i})$. VERIFY and EQUALIZE.]\\
+Consequently, players $(\tau^{reg}, \Delta(A_{-i}))$, $(\tau^{reg}, \overline{\mu})$, and $(\tau^{\pi}, \overline{\mu})$ are neutrally stable, and again $(\tau^{\pi}, \Delta(A_{-i}))$ is not.
+
+
+
+\begin{table*}[ht]
+\centering
+\begin{tabular}{ccccc}
+  \hline
+ & $\tau^{reg}, \Delta(A_{-i})$ 
+ & $\tau^{\pi}, \Delta(A_{-i})$ 
+ & $\tau^{reg}, \overline{\mu}$ 
+ & $\tau^{\pi}, \overline{\mu}$ \\ 
+  \hline
+  $\tau^{reg}, \Delta(A_{-i})$ & 6.629 & 6.653 &  6.636 & 6.636  \\ 
+  $\tau^{\pi}, \Delta(A_{-i})$  & 6.455 & 6.468 & 6.462 & 6.462  \\ 
+  $\tau^{reg}, \overline{\mu}$ & 6.633 & 6.658 & 6.634 & 6.634  \\ 
+  $\tau^{\pi}, \overline{\mu}$ & 6.633 & 6.658 & 6.634 & 6.634  \\   
+   \hline
+\end{tabular}
+\caption{Average evolutionary fitness in simulations of 5000 symmetric $2 \times 2$ games}
+\label{tab:reg vs obj 2}
+\end{table*}
+
+
+On the top of what we have seen so far, we can proceed with the main analytical results of the paper, which confirm our achievements from simulations. Let us call $\Lambda$ the set of possible players $( \tau, e  )$ in the population. We can now state the following proposition. 
+
+\begin{proposition} \label{proposition1}
+
+Fix $\Lambda = \lbrace (\tau^{\pi}, \Delta(A_{-i})), (\tau^{reg}, \Delta(A_{-i})) \rbrace$ and $\mathcal{G}$ the class of symmetric $2 \times 2$ games with payoffs sampled from a finite, or compact and convex, set of i.i.d. values. Then, $(\tau^{reg}, \Delta(A_{-i}))$ is the only evolutionarily stable player in the population.
+
+\end{proposition}
+
+\begin{proof}
+See Appendix.
+\end{proof}
+
+From Fact \ref{fact:equivalence2x2} and Proposition \ref{proposition1} the following corollary follows.
+
+\begin{corollary} \label{corollary1}
+
+Fix $T = \lbrace \tau^{\pi}, \tau^{reg} \rbrace$, $E = \lbrace \Delta(A_{-i}), \overline{\mu}  \rbrace$, $\Lambda= T \times E$, and $\mathcal{G}$ the class of symmetric $2 \times 2$ games with payoffs sampled from a finite, or compact and convex, set of i.i.d. values. Then, players $(\tau^{reg}, \Delta(A_{-i}))$, $(\tau^{\pi}, \overline{\mu})$, and $(\tau^{reg}, \overline{\mu})$ are neutrally stable, and $(\tau^{\pi}, \Delta(A_{-i}))$ is neither evolutionarily nor neutrally stable.
+
+\end{corollary}
+
+\begin{proof}
+See Appendix.
+\end{proof}
+
+
+
+
+
+\subsection{More types}
+
+In evolutionary game theory other types of player have been investigated. A famous example is the \textit{altruistic type} [REF], introduced in the literature in order to explain the possible survival of altruistic behavior. In our framework, we can represent the altruistic type as follows. 
+
+\begin{definition}[Altruistic preference] \label{defn:altpref}
+
+For a game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, we define the altruistic preference $ \theta^{alt}: A \rightarrow \mathbb{R} $ such that $ \theta^{alt}(a_i,a_{-i})=\pi(a_i,a_{-i}) + \sum_{j \neq i} \pi(a_{j},a_{-j})$.\footnote{A more general formulation [see: REFERENCES] would be to define an $ \alpha$-altruistic type, for $\alpha \in [0,1]$, with subjective utility $ \theta^{\alpha lt}(a_i,a_{-i})=\pi(a_i,a_{-i}) + \alpha \sum_{j \neq i} \pi(a_{j},a_{-j})$. Since we are not interested in the evolution of degrees of altruism here, we simply fix $ \alpha = 1 $.}
+
+\end{definition}
+
+\begin{definition}[Altruistic type] \label{defn:alttype}
+
+Given $ \mathcal{G} $ the class of symmetric $ 2 \times 2 $ games, we call altruistic type the function $\tau^{alt}: \mathcal{G} \rightarrow  \Theta$ such that, for all $G \in \mathcal{G}$, $ \tau^{alt}(G)= \theta^{alt}$.
+
+\end{definition}
+
+\noindent As opposite to the altruistic type, it is possible to define a \textit{competitive type}. 
+
+\begin{definition}[Competitive preference] \label{defn:compref}
+
+For a game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, we define the altruistic preference $ \theta^{com}: A \rightarrow \mathbb{R} $ such that $ \theta^{com}(a_i,a_{-i})=\pi(a_i,a_{-i}) - \sum_{j \neq i} \pi(a_{j},a_{-j})$.
+
+\end{definition}
+
+\begin{definition}[Competitive type] \label{defn:comtype}
+
+Given $ \mathcal{G} $ the class of symmetric $ 2 \times 2 $ games, we call altruistic type the function $\tau^{com}: \mathcal{G} \rightarrow  \Theta$ such that, for all $G \in \mathcal{G}$, $ \tau^{com}(G)= \theta^{com}$.
+
+\end{definition}
+
+Similarly to the evolutionary competition that we simulated before, we can study the evolutionary fitness of this extended set of players when they are all represented in the population. Table \ref{tab:Utils-MetaGame} shows the averge fitness of the enlarged competition. 
+
+
+
+\begin{table*}[ht]
+\centering
+\begin{tabular}{ccccccccc}
+  \hline
+ & $\tau^{reg}, \Delta(A_{-i})$ 
+ & $\tau^{\pi}, \Delta(A_{-i})$ 
+ & $\tau^{alt}, \Delta(A_{-i})$
+ & $\tau^{com}, \Delta(A_{-i})$ \\ 
+  \hline
+  $\tau^{reg}, \Delta(A_{-i})$ & 6.629 & 6.653 & 5.806 & 7.089  \\ 
+  $\tau^{\pi}, \Delta(A_{-i})$  & 6.455 & 6.468 & 6.067 & 6.685  \\ 
+  $\tau^{alt}, \Delta(A_{-i})$ & 6.280 & 6.746 & 5.473 & 6.959 \\ 
+  $\tau^{com}, \Delta(A_{-i})$ & 5.936 & 5.735 & 5.336 & 6.379  \\ 
+   \hline
+\end{tabular}
+\caption{Average evolutionary fitness in simulations of 5000 symmetric $2 \times 2$ games}
+\label{tab:Utils-MetaGame}
+\end{table*}
+
+The following proposition confirms this result.
+
+\begin{proposition} \label{proposition2}
+
+Fix $\Lambda = \lbrace (\tau^{\pi}, \Delta(A_{-i})), (\tau^{reg}, \Delta(A_{-i})), (\tau^{alt}, \Delta(A_{-i})), (\tau^{com}, \Delta(A_{-i})) \rbrace$ and $\mathcal{G}$ the class of symmetric $2 \times 2$ games with payoffs sampled from a finite, or compact and convex, set of i.i.d. values. Then, $(\tau^{reg}, \Delta(A_{-i}))$ is the only evolutionarily stable player in the population.
+
+\end{proposition}
+
+\begin{proof}
+See Appendix.
+\end{proof}
+
+Finally, Table \ref{tab:Utils-MetaGame2} shows the average fitness when all the epistemic and player types introduced so far are simultaneously present in the population. [SAME WARNING: it is not exactly identical here, this is probably related to a difference in tie-breaking that is probably a bit different for player $\tau^{reg}, \Delta(A_{-i})$. VERIFY and EQUALIZE.]\\
+A monomorphic population of regret
+minimizers $\tuple{\tuple{\tau^{reg}, \Delta(A)}}$ is no longer
+evolutionarily stable: it could be invaded by expected utility maximizers of types $\tuple{\tau^{reg}, \bar{\mu}}$ and $\tuple{\tau^{\pi},
+  \bar{\mu}}$. Since the latter are behaviorally equivalent, neither
+is an evolutionarily stable strategy, but could at best be
+\emph{neutrally stable}
+\cite{Maynard-Smith1982:Evolution-and-t}. However, under our simulated
+meta-game payoffs from Table~\ref{tab:Utils-MetaGame2} any population
+consisting entirely of $\tuple{\tau^{reg}, \bar{\mu}}$ and
+$\tuple{\tau^{\pi}, \bar{\mu}}$ can be invaded by regret
+minimizers. This suggests that all three types would persist under
+standard evolutionary dynamics, in various relative proportions.
+
+Simulation results of the (discrete time) \emph{replicator dynamics}
+\cite{TaylorJonker1978:Evolutionary-St} indeed show that random
+initial population configurations are attracted to states with only
+three player types: $\tuple{\tau^{reg}, \Delta(A)}$,
+$\tuple{\tau^{reg}, \bar{\mu}}$ and $\tuple{\tau^{\pi},
+  \bar{\mu}}$. The relative proportions of these depend on the initial
+population. This variability is eradicated if we add a small mutation
+rate to the dynamics. We assume a fixed, small mutation rate
+$\epsilon$ for the probability that a player's preference type
+\emph{or} her epistemic type changes to another random preference type
+or epistemic type. The probability that a player type randomly mutates
+into a completely different player type with altogether different
+preference type and epistemic type would then be $\epsilon^2$. With
+these assumptions about ``local mutations'', numerical simulations of
+the (discrete time) \emph{replicator mutator dynamics}
+\cite{Nowak2006:Evolutionary-Dy} show that for very small
+mutation rates almost all initial populations converge to a single
+fixed point in which the majority of players are regret types. For
+instance, with $\epsilon = 0.001$, almost all initial populations are
+attracted to a final distribution with proportions:
+
+\begin{center}
+  \begin{tabular}{ccc}
+    $\tuple{\tau^{reg}, \Delta(A)}$ & $\tuple{\tau^{reg},
+      \bar{\mu}}$ & $\tuple{\tau^{\pi}, \bar{\mu}}$ \\ \hline
+    0.279  &   0.383 &    0.281 
+  \end{tabular}
+\end{center}
+
+Again, this shows that there are plausible and simple conditions under which
+agents who represent the game in terms of regret may be favored by
+evolutionary selection and that, more specifically, regret minimizers
+are evolutionarily supported.
+
+
+\begin{table*}[ht]
+\centering
+\begin{tabular}{ccccccccc}
+  \hline
+ & $\tuple{\tau^{reg}, \Delta(A)}$ 
+ & $\tuple{\tau^{\pi}, \Delta(A)}$ 
+ & $\tuple{\tau^{alt}, \Delta(A)}$
+ & $\tuple{\tau^{com}, \Delta(A)}$
+ & $\tuple{\tau^{reg}, \bar{\mu}}$ 
+ & $\tuple{\tau^{\pi}, \bar{\mu}}$ 
+ & $\tuple{\tau^{alt}, \bar{\mu}}$
+ & $\tuple{\tau^{com}, \bar{\mu}}$ \\ 
+  \hline
+  $\tuple{\tau^{reg}, \Delta(A)}$ & 6.629 & 6.653 & 5.806 & 7.089 & 6.636 & 6.636 & 5.793 & 7.463 \\ 
+  $\tuple{\tau^{\pi}, \Delta(A)}$  & 6.455 & 6.468 & 6.067 & 6.685 & 6.462 & 6.462 & 6.065 & 6.834 \\ 
+  $\tuple{\tau^{alt}, \Delta(A)}$ & 6.280 & 6.746 & 5.473 & 6.959 & 6.294 & 6.294 & 5.474 & 7.114 \\ 
+  $\tuple{\tau^{com}, \Delta(A)}$ & 5.936 & 5.735 & 5.336 & 6.379 & 5.929 & 5.929 & 5.327 & 6.538 \\ 
+  $\tuple{\tau^{reg}, \bar{\mu}}$ & 6.633 & 6.658 & 5.810 & 7.081 & 6.634 & 6.634 & 5.802 & 7.454 \\ 
+  $\tuple{\tau^{\pi}, \bar{\mu}}$ & 6.633 & 6.658 & 5.810 & 7.081 & 6.634 & 6.634 & 5.802 & 7.454 \\ 
+  $\tuple{\tau^{alt}, \bar{\mu}}$ & 6.278 & 6.750 & 5.476 & 6.953 & 6.293 & 6.293 & 5.484 & 7.112 \\ 
+  $\tuple{\tau^{com}, \bar{\mu}}$ & 6.311 & 5.885 & 5.475 & 6.536 & 6.299 & 6.299 & 5.466 & 7.123 \\ 
+   \hline
+\end{tabular}
+\caption{Average fitness in simulations of 5000
+  randomly generated $2 \times 2$ symmetric games.}
+\label{tab:Utils-MetaGame2}
+\end{table*}
+
+\subsection{Symmetric $n \times n$ games}
+
+...
+
+\subsection{Dynamics}
+
+ADD RESULTS FOR DYNAMICS
 
 \subsection{Choice principles}
 
@@ -433,6 +867,328 @@ here we spell out our model
 
 
 
+
+
+
+
+
+
+
+\section*{APPENDIX: Proofs}
+
+The proof of Proposition 1 relies on a partition of $\mathcal{G}$,
+and on some lemmas. For brevity, let us denote the regret minimizer
+by RM and the maximinimizer by MM. Since the proof is very long and
+all the other cases are similar and easier to prove, we focus here
+on the case of RM against MM players: we prove that RM is evolutionarily
+stable against MM, but MM is not evolutionarily stable against RM. By $EU_{\mathcal{G}}(x,y)$ we denote the expected \textit{objective} utility (or payoff), in terms
+of evolutionary fitness, of player type $x$ against player type $y$
+with respect to the class of fitness games $\mathcal{G}$. 
+
+\medskip{}
+
+
+\textbf{Proof of Proposition 1.} By definition of evolutionary stability, we have to
+show that in the class $\mathcal{G}$ of symmetric $2\times2$ games generated by i.i.d. sampling
+from a finite or compact and convex set of values, it holds:
+\begin{itemize}
+\item[(i)] $EU_{\mathcal{G}}(RM,RM)>EU_{\mathcal{G}}(MM,RM);$
+\item[(ii)] $EU_{\mathcal{G}}(MM,MM)<EU_{\mathcal{G}}(RM,MM).$
+\end{itemize}
+
+
+\noindent To show
+the result we will use the following partition of $\mathcal{G}$.
+\begin{enumerate}
+\item Coordination games $\mathcal{G}^{C}$: $a>c$ and $d>b$;
+\item Anti-coordination games $\mathcal{G}^{A}$: $a<c$ and $d<b$;
+\item Strong dominance games $\mathcal{G}^{S}$: aut $(a>c$ and $b>d)$
+aut $(a<c$ and $b<d)$;
+\item Weak dominance games $\mathcal{G}^{W}$: aut $a=c$ aut $b=d$;
+\item Indifferent games $\mathcal{G}^{I}$: $a=c$ and $b=d$.
+\end{enumerate}
+Before proving the lemmas, it is convenient to fix some notation.
+We denote by $G^{C}$ a coordination game in $\mathcal{G}^{C}$ with
+payoffs $a^{G^{C}}$, $b^{G^{C}}$, $c^{G^{C}}$, and $d^{G^{C}}$;
+similarly, for $G^{A}$, $G^{S}$, $G^{W}$, and $G^{I}$. Let us
+call $I_{G^{C}}^{RM}$ the event that a RM player plays action $I$
+in the game $G^{C}$; and similarly for action $II$, for player MM,
+and for games $G^{A}$, $G^{S}$, $G^{W}$ and $G^{I}$. Moreover,
+let us recall the definition of evolutionarily stable strategy and
+neutrally stable strategy.
+
+\medskip{}
+
+\begin{definition}[ESS-NSS]
+A strategy $s^{\$}$ is \emph{evolutionarily stable
+(ESS)} if for any other strategy $s$:
+\begin{enumerate}
+\item $\pi(s^{\$},s^{\$})>\pi(s,s^{\$})$, or
+\item $\pi(s^{\$},s^{\$})=\pi(s,s^{\$})$ and $\pi(s^{\$},s)>\pi(s,s)$.
+\end{enumerate}
+\noindent A strategy $s^{\$}$ is \emph{neutrally stable (NSS)} if
+for any other strategy $s$:
+\begin{enumerate}
+\item $\pi(s^{\$},s^{\$})>\pi(s,s^{\$})$, or
+\item $\pi(s^{\$},s^{\$})=\pi(s,s^{\$})$ and $\pi(s^{\$},s)\geq\pi(s,s)$.
+\end{enumerate}
+\end{definition}
+
+\medskip{}
+
+\begin{lemma}
+RM and MM perform equally well in $\mathcal{G}^{S}$
+and in $\mathcal{G}^{I}$. 
+\end{lemma}
+
+\begin{proof}
+By definition of regret minimization and maximin it
+is easy to check that whenever in a game there is a strongly dominant
+action $a^{\$}$, then $a^{\$}$ is both the maximin action and the
+regret minimizing action. Then, for all the games in $\mathcal{G}^{S}$,
+a RM chooses action $a$ if and only if MM chooses action $a$. Consequently,
+RM and MM always perform equally (well) in $\mathcal{G}^{S}$. In
+the case of $\mathcal{G}^{I}$ it is trivial to see that all the players
+perform equally.
+\end{proof}
+
+\medskip{}
+
+\begin{lemma}
+In $\mathcal{G}^{W}$ RM is evolutionarily stable
+against MM, but MM is not evolutionarily stable against RM.
+\end{lemma}
+
+\begin{proof}
+Assume without loss of generality that $b=d$. We have
+two cases then: (i) $c<b=d$; (ii) $c>b=d$. In the first case it
+is easy to see that RM and MM perform equally well. Indeed, given
+(i) both MM and RM choose action $I$ if $a>c$, and action $II$
+if $c>a$. If case (ii) holds instead, we have that RM plays $I$
+if $a>c$ and $II$ if $c>a$ as before, but MM plays $(\frac{1}{2}I;\frac{1}{2}II)$,
+since both $I$ and $II$ maximize the minimal payoff. Consider now
+a population of RM and MM playing games from the class $\mathcal{G}^{W}$.
+Whenever (i) is the case both RM and MM perform equally. Suppose that
+(ii) is the case and that $a>c$, without loss of generality. Then,
+a RM population is evolutionarily stable against MM by condition 1
+of ESS, since $a>\frac{1}{2}a+\frac{1}{2}c$, whereas a MM population
+is not evolutionarily stable against RM, because clearly $\frac{1}{4}a+\frac{1}{4}b+\frac{1}{4}c+\frac{1}{4}d<\frac{1}{2}a+\frac{1}{2}b$.
+Hence, we have that in general $EU_{\mathcal{G}^{W}}(RM,RM)>EU_{\mathcal{G}^{W}}(MM,RM),\mbox{ and }EU_{\mathcal{G}^{W}}(MM,MM)<EU_{\mathcal{G}^{W}}(RM,MM)$.
+\end{proof}
+
+\medskip{}
+
+
+Since it is not difficult to see that both RM and MM are evolutionarily
+stable in $\mathcal{G}^{C}$, and that both RM and MM are not evolutionarily
+stable in $\mathcal{G}^{A}$ against each other, the main part of
+the proof will be to show that RM is the only evolutionarily stable
+player in the class $\mathcal{G}^{C}\cup\mathcal{G^{A}}$, that is:
+\begin{itemize}
+\item[(i')] $EU_{\mathcal{G}^{C}\cup\mathcal{G^{A}}}(RM,RM)>EU_{\mathcal{G}^{C}\cup\mathcal{G^{A}}}(MM,RM),$
+\item[(ii')] $EU_{\mathcal{G}^{C}\cup\mathcal{G^{A}}}(MM,MM)<EU_{\mathcal{G}^{C}\cup\mathcal{G^{A}}}(RM,MM).$
+\end{itemize}
+
+
+\noindent This part needs some more lemmas to be proven, but firstly we introduce
+the following bijective function $\phi$ between coordination and
+anti-coordination games.
+
+\medskip{}
+
+\begin{definition}[$\phi$]
+$\phi:\mathcal{G}^{C}\rightarrow\mathcal{G^{A}}$,
+such that $\phi(a,b,c,d)=(c,d,a,b)$, is a bijection that for each
+coordination game $G^{C}\in\mathcal{G}^{C}$ with payoffs $(a^{G^{C}},b^{G^{C}},c^{G^{C}},d^{G^{C}})$
+gives the anti-coordination game $G^{A}\in\mathcal{G}^{A}$ with payoffs
+$(a^{G^{A}},b^{G^{A}},c^{G^{A}},d^{G^{A}})=(c^{G^{C}},d^{G^{C}},a^{G^{C}},b^{G^{C}})$.
+\end{definition}
+
+\medskip{}
+
+\begin{lemma}
+Let $P(E)$ be the probability of event $E$, then
+it holds that:
+\begin{itemize}
+\item $P(I_{G^{C}}^{RM})=P(II_{\phi(G^{C})}^{RM})$, and $P(II_{G^{C}}^{RM})=P(I_{\phi(G^{C})}^{RM})$;
+\item $P(I_{G^{C}}^{MM})=P(II_{\phi(G^{C})}^{MM})$, and $P(II_{G^{C}}^{MM})=P(I_{\phi(G^{C})}^{MM})$.
+\end{itemize}
+\end{lemma}
+
+\begin{proof}
+It is easy to check that if $b^{G^{C}}-d^{G^{C}}>c^{G^{C}}-a^{G^{C}}$,
+a RM player plays action $I$ in $G^{C}$; that if $b^{G^{C}}-d^{G^{C}}<c^{G^{C}}-a^{G^{C}}$,
+RM plays $II$; and that if $b^{G^{C}}-d^{G^{C}}=c^{G^{C}}-a^{G^{C}}$,
+a RM player is indifferent between $I$ and $II$ in $G^{C}$, and
+we assume that randomizes with $(\frac{1}{2}I;\frac{1}{2}II)$. Similarly,
+if $a^{G^{A}}-c^{G^{A}}>d^{G^{A}}-b^{G^{A}}$, a RM player plays action
+$I$ in $G^{A}$; if $a^{G^{A}}-c^{G^{A}}<d^{G^{A}}-b^{G^{A}}$, RM
+plays $II$; and if $a^{G^{A}}-c^{G^{A}}=d^{G^{A}}-b^{G^{A}}$, a
+RM player is indifferent between $I$ and $II$ in $G^{A}$, and randomizes
+with $(\frac{1}{2}I;\frac{1}{2}II)$. Consequently, if $b^{G^{C}}-d^{G^{C}}>c^{G^{C}}-a^{G^{C}}$,
+then $P(I_{G^{C}}^{RM})=1$, and by definition of $\phi$ we have
+$P(II_{\phi(G^{C})}^{RM})=1$. Likewise, if $b^{G^{C}}-d^{G^{C}}<c^{G^{C}}-a^{G^{C}}$,
+then $P(II_{G^{C}}^{RM})=1=P(I_{\phi(G^{C})}^{RM})$; and if $b^{G^{C}}-d^{G^{C}}=c^{G^{C}}-a^{G^{C}}$,
+then $P(I_{G^{C}}^{RM})=P(II_{G^{C}}^{RM})=\frac{1}{2}=P(II_{\phi(G^{C})}^{RM})=P(I_{\phi(G^{C})}^{RM})$. \\
+In the same way, in coordination games we have that if $b^{G^{C}}>c^{G^{C}}$,
+a MM player plays $I$; if $c^{G^{C}}>b^{G^{C}}$, a MM player plays
+$II$; and if $b^{G^{C}}=c^{G^{C}}$, MM is indifferent between $I$
+and $II$, and plays $(\frac{1}{2}I;\frac{1}{2}II)$. In anti-coordination
+games instead, if $a^{G^{A}}>d^{G^{A}}$, MM plays $I$; if $a^{G^{A}}<d^{G^{A}}$,
+MM plays $II$; if $a^{G^{A}}=d^{G^{A}}$, MM plays $(\frac{1}{2}I;\frac{1}{2}II)$.
+By definition of $\phi$: $P(I_{G^{C}}^{MM})=1=P(II_{\phi(G^{C})}^{MM})$
+if $b^{G^{C}}>c^{G^{C}}$; $P(II_{G^{C}}^{MM})=1=P(I_{\phi(G^{C})}^{MM})$
+if $c^{G^{C}}>b^{G^{C}}$; and $P(I_{G^{C}}^{MM})=P(II_{G^{C}}^{MM})=\frac{1}{2}=P(II_{\phi(G^{C})}^{MM})=P(I_{\phi(G^{C})}^{MM})$
+if $b^{G^{C}}=c^{G^{C}}$.
+\end{proof}
+
+\medskip{}
+
+\begin{lemma}
+$P(\phi(G^{C}))=P(G^{C})$.
+\end{lemma}
+
+\begin{proof}
+By definition, each game $G^{C}\equiv(a^{G^{C}},b^{G^{C}},c^{G^{C}},d^{G^{C}})$
+is such that $a^{G^{C}}>c^{G^{C}}$ and $d^{G^{C}}>b^{G^{C}}$, and
+each game $G^{A}\equiv(a^{G^{A}},b^{G^{A}},c^{G^{A}},d^{G^{A}})$
+is such that $a^{G^{A}}<c^{G^{A}}$ and $d^{G^{A}}>b^{G^{A}}$. Since
+$a,b,c,d$ come from i.i.d. sampling, by simple renaming of variables
+it is clear that the probability of $(a^{G^{C}},b^{G^{C}},c^{G^{C}},d^{G^{C}})$
+is equal to the probability of $(c^{G^{C}},d^{G^{C}},a^{G^{C}},b^{G^{C}})$.
+Hence, $P(\phi(G^{C}))=P(G^{C})$.
+\end{proof}
+
+\medskip{}
+
+\begin{lemma}
+It holds that:
+\begin{itemize}
+\item $a^{G^{C}}>d^{G^{C}}\rightarrow(I_{G^{C}}^{MM}\subset I_{G^{C}}^{RM})$;
+\item $a^{G^{C}}<d^{G^{C}}\rightarrow(II_{G^{C}}^{MM}\subset II_{G^{C}}^{RM})$;
+\item $a^{G^{C}}=d^{G^{C}}\rightarrow I_{G^{C}}^{MM}=I_{G^{C}}^{RM}$.
+\end{itemize}
+\end{lemma}
+
+\begin{proof}
+If $b^{G^{C}}-d^{G^{C}}>c^{G^{C}}-a^{G^{C}}$, RM plays
+$I$, and if $b^{G^{C}}-d^{G^{C}}=c^{G^{C}}-a^{G^{C}}$, RM plays
+$(\frac{1}{2}I;\frac{1}{2}II)$, whereas if $b^{G^{C}}>c^{G^{C}}$,
+MM plays $I$, and if $b^{G^{C}}=c^{G^{C}}$, MM plays $(\frac{1}{2}I;\frac{1}{2}II)$.
+Then, $I_{G^{C}}^{RM}$ implies that $b^{G^{C}}-d^{G^{C}}\geq c^{G^{C}}-a^{G^{C}}$,
+and $I_{G^{C}}^{MM}$ implies that $b^{G^{C}}\geq c^{G^{C}}$. Moreover,
+on the assumption that $a^{G^{C}}>d^{G^{C}}$, it is easy to check
+that $b^{G^{C}}\geq c^{G^{C}}$ implies $b^{G^{C}}-d^{G^{C}}>c^{G^{C}}-a^{G^{C}}$.
+Hence, in any $G^{C}$ with $a^{G^{C}}>d^{G^{C}}$ it holds that $I_{G^{C}}^{MM}\mbox{ implies }I_{G^{C}}^{RM}$,
+i.e., $a^{G^{C}}>d^{G^{C}}\rightarrow(I_{G^{C}}^{MM}\subseteq I_{G^{C}}^{RM})$.
+Instead, it is possible that $a^{G^{C}}>d^{G^{C}}$, $b^{G^{C}}-d^{G^{C}}>c^{G^{C}}-a^{G^{C}}$
+and $b^{G^{C}}<c^{G^{C}}$ hold simultaneously, so that $I_{G^{C}}^{MM}\nsupseteq I_{G^{C}}^{RM}$.
+Consequently: $a^{G^{C}}>d^{G^{C}}\rightarrow(I_{G^{C}}^{MM}\subset I_{G^{C}}^{RM})$.
+By symmetric argument it can be shown that $a^{G^{C}}<d^{G^{C}}\rightarrow(II_{G^{C}}^{MM}\subset II_{G^{C}}^{RM})$
+too. \\
+Finally, when $a^{G^{C}}=d^{G^{C}}$ it holds that: $b^{G^{C}}-d^{G^{C}}>c^{G^{C}}-a^{G^{C}}$
+iff $b^{G^{C}}>c^{G^{C}}$; $b^{G^{C}}-d^{G^{C}}<c^{G^{C}}-a^{G^{C}}$
+iff $b^{G^{C}}<c^{G^{C}}$; and $b^{G^{C}}-d^{G^{C}}=c^{G^{C}}-a^{G^{C}}$
+iff $b^{G^{C}}=c^{G^{C}}$. Hence, $a^{G^{C}}=d^{G^{C}}\rightarrow I_{G^{C}}^{MM}=I_{G^{C}}^{RM}$.
+\end{proof}
+
+\medskip{}
+
+
+We are now ready to prove that: 
+\begin{itemize}
+\item[(i')] $EU_{\mathcal{G}^{C}\cup\mathcal{G^{A}}}(RM,RM)>EU_{\mathcal{G}^{C}\cup\mathcal{G^{A}}}(MM,RM);$
+\item[(ii')] $EU_{\mathcal{G}^{C}\cup\mathcal{G^{A}}}(MM,MM)<EU_{\mathcal{G}^{C}\cup\mathcal{G^{A}}}(RM,MM).$
+\end{itemize}
+We can rewrite $EU_{\mathcal{G}^{C}\cup\mathcal{G^{A}}}(RM,RM)>EU_{\mathcal{G}^{C}\cup\mathcal{G^{A}}}(MM,RM)$
+more explicitly as:
+
+\medskip{}
+
+\noindent $\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{MM})\cdot a^{C}+P(II_{G^{C}}^{MM})\cdot d^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{MM})\cdot a^{A}+P(II_{G^{A}}^{MM})\cdot d^{A}]<\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{MM}\cap I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{MM}\cap II_{G^{C}}^{RM})\cdot d^{C}+P(I_{G^{C}}^{MM}\cap II_{G^{C}}^{RM})\cdot c^{C}+P(II_{G^{C}}^{MM}\cap I_{G^{C}}^{RM})\cdot b^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{MM}\cap I_{G^{A}}^{RM})\cdot a^{A}+P(II_{G^{A}}^{MM}\cap II_{G^{A}}^{RM})\cdot d^{A}+P(I_{G^{A}}^{MM}\cap II_{G^{A}}^{RM})\cdot c^{A}+P(II_{G^{A}}^{MM}\cap I_{G^{A}}^{RM})\cdot b^{A}]$
+
+\medskip{}
+
+\noindent Then, the next derivation follows. By Lemma 5 and 6, we can express
+everything in terms of $G^{C}$ only: 
+\begin{itemize}
+\item $\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{RM})\cdot d^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{RM})\cdot a^{A}+P(II_{G^{A}}^{RM})\cdot d^{A}]>\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot a^{C}+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot d^{C}+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot c^{C}+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot b^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{RM}\cap I_{G^{A}}^{MM})\cdot a^{A}+P(II_{G^{A}}^{RM}\cap II_{G^{A}}^{MM})\cdot d^{A}+P(I_{G^{A}}^{RM}\cap II_{G^{A}}^{MM})\cdot c^{A}+P(II_{G^{A}}^{RM}\cap I_{G^{A}}^{MM})\cdot b^{A}]$
+\item $\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{RM})\cdot d^{C}+P(II_{G^{C}}^{RM})\cdot c^{C}+P(I{}_{G^{C}}^{RM})\cdot b^{C}]>\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot a^{C}+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot d^{C}+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot c^{C}+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot b^{C}+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot c^{C}+P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot b^{C}+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot a^{C}+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot d^{C}]$
+\item $\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{RM})\cdot d^{C}+P(II_{G^{C}}^{RM})\cdot c^{C}+P(I{}_{G^{C}}^{RM})\cdot b^{C}]>\sum_{G^{C}}P(G^{C})[a^{C}\cdot(P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM}))+b^{C}\cdot(P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})+P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM}))+c^{C}\cdot(P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))+d^{C}\cdot(P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))]$
+\end{itemize}
+Now let us split into $a>d$ and $a<d$, and consider $a>d$ first.
+Notice that, by Lemma 7, the case $a=d$ is irrelevant in order to
+discriminate between RM and MM. If $a>d$, by Lemma 7 we can eliminate
+the cases where RM plays $II$ and MM plays $I$:
+\begin{itemize}
+\item $\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})[P(I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{RM})\cdot d^{C}+P(II_{G^{C}}^{RM})\cdot c^{C}+P(I{}_{G^{C}}^{RM})\cdot b^{C}]>\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})[a^{C}\cdot P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})+b^{C}\cdot P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})+c^{C}\cdot(P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))+d^{C}\cdot(P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))]$
+\item $\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})[P(I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{RM})\cdot d^{C}+P(II_{G^{C}}^{RM})\cdot c^{C}+P(I{}_{G^{C}}^{RM})\cdot b^{C}-a^{C}\cdot P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})-b^{C}\cdot P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})-c^{C}\cdot(P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))-d^{C}\cdot(P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))]>0$
+\item $\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})[a^{C}\cdot(P(I_{G^{C}}^{RM})-P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM}))+b^{C}\cdot(P(I{}_{G^{C}}^{RM})-P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM}))+c^{C}\cdot(P(II_{G^{C}}^{RM})-P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})-P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))+d^{C}\cdot(P(II_{G^{C}}^{RM})-P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})-P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))]>0$
+\end{itemize}
+By Lemma 7, it is easy to check that $P(I_{G^{C}}^{RM})-P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})=P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})$
+and $P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})=P(II_{G^{C}}^{RM})$.
+Consequently, we have:
+\begin{itemize}
+\item $\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})[a^{C}\cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})+b^{C}\cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})-c^{C}\cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})-d^{C}\cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})]>0$
+\item $\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})\cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot[a^{G^{C}}-c^{G^{C}}]>\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})\cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot[d^{G^{C}}-b^{G^{C}}]$.
+\end{itemize}
+\medskip{}
+
+\noindent We know that $I_{G^{C}}^{RM}$ implies that $b^{G^{C}}-d^{G^{C}}\geq c^{G^{C}}-a^{G^{C}}$,
+and $II_{G^{C}}^{MM}$ implies that $b^{G^{C}}\leq c^{G^{C}}$. From
+$b^{G^{C}}-d^{G^{C}}\geq c^{G^{C}}-a^{G^{C}}$, it is easy to see
+that $\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})\cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot[a^{G^{C}}-c^{G^{C}}]\geq\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})\cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot[d^{G^{C}}-b^{G^{C}}]$
+holds. When the event $I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}$ obtains
+on the assumption that $a^{G^{C}}>d^{G^{C}}$, there are only three
+possible payoff orderings: $a>c\geq d>b$, $a>d>c>b$, and $a>d>c=b$.
+If games are randomly sampled from a finite set with i.i.d. values
+for $a,b,c$ and $d$, then $a>d>c=b$ occurs with positive probability,
+and the last formula of the derivation holds with strict inequality
+too. Hence, RM is evolutionarily stable when the value set for $a,b,c,d$
+is finite. \\
+If i.i.d. values are sampled from a compact and convex set instead,
+it is again easy to see that $\forall a,d,c\ \exists\epsilon$ such
+that $\forall b\in(d,d+\epsilon)$ the above formula holds with strict
+inequality. We can simply take $\epsilon\equiv\frac{a-c}{2}$, and
+the interval $(d,d+\epsilon)$ always has positive probability. Hence,
+RM is evolutionarily stable when the value set for $a,b,c,d$ is a
+compact and convex set too. \\
+Symmetrically, from $a<d$ in the above derivation we get:
+
+\medskip{}
+
+\noindent $\sum_{G_{a<d}^{C}}P(G_{a<d}^{C})\cdot P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot[d^{C}-b^{C}]>\sum_{G_{a<d}^{C}}P(G_{a<d}^{C})\cdot P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot[a^{C}-c^{C}]$
+
+\medskip{}
+
+\noindent and the same argument follows.
+
+\medskip{}
+
+The second half of the result is that MM is not evolutionarily stable
+against RM in $\mathcal{G}^{C}\cup\mathcal{G^{A}}$: $EU_{\mathcal{G}^{C}\cup\mathcal{G^{A}}}(MM,MM)<EU_{\mathcal{G}^{C}\cup\mathcal{G^{A}}}(RM,MM)$.
+As before, we write it more explicitly as:
+
+\medskip{}
+
+
+\noindent $\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{MM})\cdot a^{C}+P(II_{G^{C}}^{MM})\cdot d^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{MM})\cdot a^{A}+P(II_{G^{A}}^{MM})\cdot d^{A}]<\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{MM}\cap I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{MM}\cap II_{G^{C}}^{RM})\cdot d^{C}+P(I_{G^{C}}^{MM}\cap II_{G^{C}}^{RM})\cdot c^{C}+P(II_{G^{C}}^{MM}\cap I_{G^{C}}^{RM})\cdot b^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{MM}\cap I_{G^{A}}^{RM})\cdot a^{A}+P(II_{G^{A}}^{MM}\cap II_{G^{A}}^{RM})\cdot d^{A}+P(I_{G^{A}}^{MM}\cap II_{G^{A}}^{RM})\cdot c^{A}+P(II_{G^{A}}^{MM}\cap I_{G^{A}}^{RM})\cdot b^{A}]$.
+\medskip{}
+
+\noindent Similarly to the above derivation, in the end we get: 
+
+\medskip{}
+
+\noindent $\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})\cdot P(II_{G^{C}}^{MM}\cap I_{G^{C}}^{RM})\cdot[c^{G^{C}}-a^{G^{C}}]<\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})\cdot P(II_{G^{C}}^{MM}\cap I_{G^{C}}^{RM})\cdot[b^{G^{C}}-d^{G^{C}}]$.
+
+\medskip{}
+
+
+\noindent Finally, by the same argument as before we can conclude that MM is
+not evolutionarily stable against RM both when the value set for $a,b,c,d$
+is finite, and when the value set for $a,b,c,d$ is a compact and
+convex set. This concludes the proof. $\dashv$
+
 \printbibliography[heading=bibintoc]
 
 
@@ -492,6 +1248,15 @@ maximization of subjective preferences.]
   allows to capture statistical properties of the environment
   \citep[cf.][]{McNamara2013:Towards-a-Riche}.
 \end{itemize}
+
+
+
+
+
+
+
+
+
 
 \end{document}
 

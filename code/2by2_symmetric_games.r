@@ -2,7 +2,7 @@ source('functions.R')
 CP_names = c("Sec-Reg", "Sec-Id", "Sec-Comp", "Sec-Alt", 
              "Bel-Reg", "Bel-Id", "Bel-Comp", "Bel-Alt")
 
-rounds = 10000
+rounds = 100000
 # game_type = c()
 row_util = rep(0,rounds*length(CP_names)^2)
 nActs = rep(2,rounds)

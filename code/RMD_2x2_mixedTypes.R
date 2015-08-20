@@ -2,7 +2,7 @@ require('gtools') # for dirichlet distribution
 require('ggplot2') # for plotting
 
 # get utilities
-load(file = 'buffered_meta_game_2x2_5000samples_flatBel.RDATA')
+load(file = 'buffered_meta_game_2x2.RDATA')
 U = means_total
 
 # parameters
