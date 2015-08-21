@@ -151,46 +151,19 @@
 
 \section{Rationality \& subjective preference}
 
-\subsection{What should be in this section?}
-
-\myalert{main purpose of this section: introduce max EU and min regret with some background,
-  definitions, simple example and reasons why we care to look at especially these}
-
-\begin{itemize}
-  \item \todo[inline]{choose uniform consensual terminology for maximization of EU and regret minimization}
-\item classical notion of rationality: maximization of expected utilities
-  \begin{itemize}
-  \item human choice behavior seems to deviate from classical rational choice in many ways
-    \citep[most
-    notably][]{TverskyKahnemann1974:Judgement-under,KahnemannTversky1979:Prospect-Theory}
-  \end{itemize}
-\item historical competitor: regret minimization
-  \begin{itemize}
-  \item introduced by Savage \& Niehans independently
-  \item worked out (in parameterized form) by \citet{LoomesSugden1982:Regret-Theory:-} and
-    argued to outperform prospect theory
-  \item recently rediscovered by game theorists \citep{HalpernPass2012:Iterated-Regret} as a
-    possible partial explanation of some puzzles (e.g., Travellers Dilemma)
-  \end{itemize}
-\item definitions of max EU and min reg (with minimal formal notation); simple example where
-  they differ
-\item motivate why we are interested in regret minimization; e.g.:
-  \begin{itemize}
-  \item simple historical alternative; certain prima facie plausibility
-  \item argued to be empirically adequate (Loomes \& Sugden, Bell)
-  \item gives us intriguing results that nicely motivate the general approach of meta-games
-  \item non-independence of choices also for non-human decision makers (cite)
-  \end{itemize}
-\item here we care about game problems, not solitary decision problems
-\end{itemize}
-
-
-\subsection{Version 1}
-
-The standard use of the word \textit{rationality} in economics and decision theory is to denote the maximization of (subjective) expected utility. Since the work by vNM [cite], this stance has been justified from the intuitive ''rationality'' of the axioms on the subjective preference relation leading to the representability of the decision maker as an expected utility maximizer. 
+The standard use of the word \textit{rationality} in economics and decision theory is to denote
+the maximization of (subjective) expected utility. Since the work by vNM [cite], this stance
+has been justified from the intuitive ''rationality'' of the axioms on the subjective
+preference relation leading to the representability of the decision maker as an expected
+utility maximizer.
 While in the axiomatization by [vNM] the probability of the outcomes is objectively given a priori, Savage54 provides a larger set of axioms that represent the decision maker (DM) with both a subjective utility over outcomes \textit{and} a \textit{subjective} probability over states of the world. Savage's axioms constitute the foundation of subjective expected utility (SEU) theory, that is normally assumed to define the rational behavior of economic agents.\\
 
-DEFINITION(SEU-maximization): Let $S$ be a set of states of the world, $X$ a set of outcomes and $A$ a set of actions. Given a probability measure $P$ on $S$ and a subjective utility function $u:X \rightarrow \mathbb{R} $, an action $a^*: S \rightarrow X $ is SEU-maximizing if $a^* \in \text{argmax}_{a_i \in A} \int_S u(a^*(s))dP(s) $. \\
+\begin{definition}[SEU-maximization] Let $S$ be a set of states of the world, $X$ a set of
+  outcomes and $A$ a set of actions. Given a probability measure $P$ on $S$ and a subjective
+  utility function $u:X \rightarrow \mathbb{R} $, an action $a^*: S \rightarrow X $ is
+  SEU-maximizing if $a^* \in \text{argmax}_{a_i \in A} \int_S u(a^*(s))dP(s) $.
+\end{definition}
+
 
 The subjectivity of preferences plays a very important
 role for the present work. From an agent's standpoint, the amount $x$ of, say, money achieved does not necessarily
@@ -854,13 +827,15 @@ Fact~\ref{fact:equivalence2x2} that, for the special case of $2 \times 2$ symmet
 regret minimization $\tuple{\tau^{reg}, \Delta(A)}$ is behaviorally equivalent with expected
 regret minimization $\tuple{\tau^{reg}, \bar{\mu}}$ and expected utility maximization
 $\tuple{\tau^{\pi}, \bar{\mu}}$. This is no longer true when we look at arbitrary $n \times n$
-games with $n \ge 2$. Table~\ref{tab:ExpectedFitness_10x10} therefore gives approximations for
-expected fitness in a meta-game over a class of $n \times n$ symmetric games where
-$n$ is randomly drawn from $\set{2, \dots, 10}$. Concretely, the numbers in
-Table~\ref{tab:ExpectedFitness_10x10} are averages of payoffs obtained in 100,000 randomly
-sampled games, where each game was sampled by first picking a number of acts
-$n \in \set{2, \dots, 10}$ uniformly at random, and then filling the resulting $n \times n$
-payoff matrix of the stage game with i.i.d.~sampled payoffs as before.
+games with $n \ge 2$. We should therefore see what happens in a broader class of games.
+
+Table~\ref{tab:ExpectedFitness_10x10} therefore gives approximations for expected fitness in a
+meta-game over a class of $n \times n$ symmetric games where $n$ is randomly drawn from
+$\set{2, \dots, 10}$. Concretely, the numbers in Table~\ref{tab:ExpectedFitness_10x10} are
+averages of payoffs obtained in 100,000 randomly sampled games, where each game was sampled by
+first picking a number of acts $n \in \set{2, \dots, 10}$ uniformly at random, and then filling
+the resulting $n \times n$ payoff matrix of the stage game with i.i.d.~sampled payoffs as
+before.
 
 
 \begin{table}[]
@@ -891,6 +866,68 @@ payoff matrix of the stage game with i.i.d.~sampled payoffs as before.
   randomly generated $n \times n$ symmetric games with $n$ randomly drawn from $\set{2, \dots, 10}$.}
 \label{tab:ExpectedFitness_10x10}        
 \end{table}
+
+As is to be expected, average payoffs obtained in games with more than 2 acts are higher, as
+can be seen by comparing Table~\ref{tab:ExpectedFitness_10x10} with
+Table~\ref{tab:ExpectedFitness_2x2_Full}. But increases in approximate expected fitness are not
+uniform. Most importantly, the regret minimizing type $\tuple{\tau^{reg}, \Delta(A)}$ is
+strictly dominated by $\tuple{\tau^{reg}, \bar{\mu}}$ and by $\tuple{\tau^{\pi}, \bar{\mu}}$ in
+the meta-game from Table~\ref{tab:ExpectedFitness_10x10}. This means that while regret
+minimization \emph{can} thrive in some evolutionary contexts, there are also contexts where it
+is demonstrably worse off.
+
+Still, although this may be bad news for regret minimizing types
+$\tuple{\tau^{reg}, \Delta(A)}$, it is not the case that regret types \emph{as such} are weeded
+out by selection. Since, by Fact~\ref{fact:maxEU-minReg}, $\tuple{\tau^{reg}, \bar{\mu}}$ and
+$\tuple{\tau^{\pi}, \bar{\mu}}$ are generally behaviorally equivalent, it remains that
+selection based on meta-games constructed from $n \times n$ games will still not eradicate all
+regret types. So, although regret types may not be selected for in this case, they are also not
+selected against.
+
+On the other hand, there are plenty of ways in which the basic insight from
+Proposition~\ref{proposition1} that regret-based preferences can be strictly better than
+veridical objective preferences in case of radical uncertainty could make for situations in
+which evolution would select for regret types exclusively, even in $n \times n$ games. If, for
+example, epistemic types of players are not what biological evolution selects, but rather
+something that the particular choice situation would exogenously give us, then regret-based
+preference \emph{can} again drive out veridical preferences altogether. For concreteness,
+suppose that only preference types compete and that agents' epistemic types are exogenously
+given, in such a way that agents hold flat probabilistic beliefs $\bar{\mu}$ with probability
+$1-p$ and are of type $\Delta(A)$ with probability $p$. This transforms the meta-game from
+Table~\ref{tab:ExpectedFitness_10x10} into the simpler $4 \times 4$ game in which the payoff
+obtained for a preference type is the weighted average over the payoffs of that preference
+types in Table~\ref{tab:ExpectedFitness_10x10}. Setting $p = 0.02$ for illustration, we get the
+meta-game in Table~\ref{tab:ExogeneousEpistemics}. 
+
+\begin{table}[]
+\centering
+\begin{tabular}{ccccc}
+  \toprule
+  & $\tau^{reg}$ 
+  & $\tau^{\pi}$ 
+  & $\tau^{com}$
+  & $\tau^{alt}$ \\ 
+  \midrule
+  $\tau^{reg} $ & 6.926 & 6.926 & 5.942 & 7.757 \\ 
+  $\tau^{\pi} $ & 6.924 & 6.924 & 5.948 & 7.751 \\ 
+  $\tau^{com }$ & 6.566 & 6.570 & 5.481 & 7.434 \\ 
+  $\tau^{alt} $ & 6.463 & 6.461 & 5.478 & 7.469 \\ 
+   \bottomrule
+\end{tabular}
+\caption{Meta-game for the evolutionary competition between preference types when epistemic types are exogenously
+  given}
+\label{tab:ExogeneousEpistemics}
+\end{table}
+
+The only evolutionarily stable state of this meta-game is the regret type. Accordingly, all of
+our simulation runs of the (discrete-time) replicator dynamic converged to monomorphic
+regret-type populations. The reason why regret types prosper is because they have a substantial
+payoff advantage if paired with radical uncertainty. If radical uncertainty is exogenously
+given as something unavoidable that happens to agents (e.g., whenever they really have no
+indication as to what the situation holds for them), and even if that happens only very
+infrequently (i.e., for rather low $p$), regret types \emph{can} outperform veridical
+preference types, as well as competitive and altruistic types.
+
 
 \subsection{Solitary decisions}
 \label{sec:solitary-decisions}
