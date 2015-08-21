@@ -42,11 +42,22 @@
 
 \title{Rationality, Evolution \& the Environment}
 \author{Paolo Galeazzi \& Michael Franke}
-\date{current version: May 27th 2015}
+\date{current version: August 21st 2015}
 
 \begin{document}
-\maketitle
 
+\textbf{some notes and remarks and todo's}
+
+\begin{itemize}
+\item micha: let's have a term for pairs (regret type, epistemic type); I'm inclined to use ``player
+  type'', but that's what you reserved for regret type; maybe use \myalert{meta-type}?
+\item 
+\end{itemize}
+
+\newpage
+
+
+\maketitle
 
 \section{Introduction / Motivation}
 
@@ -258,9 +269,13 @@ Given a simultaneous-move game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $,
 Given a simultaneous-move game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, an action $a^{r}_i $ is regret minimizing if $a^{r}_i \in \text{min}_{a_i} \text{max}_{a_{-i}} \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $.
 \end{definition}
 
-EXAMPLE 1: \textit{Coordination Game.}
-
-Let us consider the coordination game in Figure \ref{coordgame1}.
+\begin{example}[Coordination Game]
+  Let us consider the coordination game in Figure \ref{coordgame1}. It is easy to see that
+  $\text{reg}(I)=2$: when the other player chooses action $I$ the regret of $I$ is $0$ since
+  $I$ is a best reply to $I$, and when the other player chooses $II$ the regret of $I$ is $2$
+  since $\pi_i(II,II)-\pi_i(I,II)=2$. With the same reasoning, $\text{reg}(II)=1$. Two regret
+  minimizing players would then choose action $II$, each getting a payoff of $2$. In this case
+  regret minimization selects the Pareto-dominant Nash equilibrium. $ \medsquare $
 
 \begin{figure}
 \begin{center}%
@@ -279,15 +294,33 @@ II & 0;0 & 2;2\tabularnewline
 \label{coordgame1}
 \end{figure}
 
-It is easy to see that $\text{reg}(I)=2$: when the other player chooses action $I$ the regret of $I$ is $0$ since $I$ is a best reply to $I$, and when the other player chooses $II$ the regret of $I$ is $2$ since $\pi_i(II,II)-\pi_i(I,II)=2$. With the same reasoning, $\text{reg}(II)=1$. Two regret minimizing players would then choose action $II$, each getting a payoff of $2$. In this case regret minimization selects the Pareto-dominant Nash equilibrium. $ \medsquare $
 
-\vspace{.5cm}
 
-EXAMPLE 2: \textit{The Traveller's Dilemma.} (HalpernPass12)
+\end{example}
 
-Let us now consider the Traveller's Dilemma case. The story behind the game goes as follows. There are two travellers, Ann and Bob, who lost their luggages. Ann and Bob had exactly the same luggage and they had insured the luggages with the same insurance company. The insurance policy is that the two travellers have to separately claim a certain amount between 2\$ and 100\$ for the reimbursement, and if they both claim the same amount then they will be reimbursed by that amount. Otherwise, if one of them claims more than the other, then the one who claimed the higher amount will get the lower amount minus 2\$, while the one who claimed the lower amount will get what (s)he claimed plus 2\$. The game is symmetric, and the payoff function for both players is:\\
-$\pi_i(a_i,a_{-i}) =  \begin{cases} a_i \text{ \hspace{1cm} if } a_i = a_{-i} \\ a_i + 2 \text{ \hspace{.4cm} if } a_i < a_{-i} \\ a_{-i} -2 \text{ \hspace{.25cm} if } a_{-i} < a_i \end{cases}$ \\
-By a simple computation we have:  $\forall a_i \in \lbrace 96\$, ..., 100\$ \rbrace \text{, } \text{reg}(a_i)=3 $ and $\forall a_i \in \lbrace 2\$, ..., 95\$ \rbrace \text{, } \text{reg}(a_i)>3$. If we now eliminate all the actions that do not minimize regret in the first place and iterate the regret minimization only on the action set $\lbrace 96\$, ..., 100\$ \rbrace$, we get that 97\$ is the action that minimize regret. Indeed, $\text{reg}(97)=2$ and $\forall a_i \in \lbrace 96\$, 98\$, 99\$, 100\$ \rbrace \text{, } \text{reg}(a_i)=3 $. Hence, one step of regret minimizing reasoning eliminates all the actions smaller than 96\$, and if we iterate the process once more the unique outcome is 97\$. Finally, it is worth noticing that the only rationalizable equilibrium of the game corresponds to the outcome $(2,2)$, that is consequently the only Nash equilibrium, the only perfect equilibrium, and the only sequential equilibrium of the game. $ \medsquare $\\ 
+
+
+\begin{example}[The Traveller's Dilemma \citep{HalpernPass2012:Iterated-Regret}]
+Let us now consider the Traveller's Dilemma case. The story behind the game goes as
+follows. There are two travellers, Ann and Bob, who lost their luggages. Ann and Bob had
+exactly the same luggage and they had insured the luggages with the same insurance company. The
+insurance policy is that the two travellers have to separately claim a certain amount between
+2\$ and 100\$ for the reimbursement, and if they both claim the same amount then they will be
+reimbursed by that amount. Otherwise, if one of them claims more than the other, then the one
+who claimed the higher amount will get the lower amount minus 2\$, while the one who claimed
+the lower amount will get what (s)he claimed plus 2\$. The game is symmetric, and the payoff
+function for both players is:
+\begin{align*}
+  \pi_i(a_i,a_{-i}) = \begin{cases} a_i \text{ \hspace{1cm} if } a_i = a_{-i} \\ a_i + 2 \text{
+      \hspace{.4cm} if } a_i < a_{-i} \\ a_{-i} -2 \text{ \hspace{.25cm} if } a_{-i} <
+    a_i \end{cases}
+\end{align*}
+By a simple computation we have:  $\forall a_i \in \lbrace 96\$, ..., 100\$ \rbrace \text{, } \text{reg}(a_i)=3 $ and $\forall a_i \in \lbrace 2\$, ..., 95\$ \rbrace \text{, } \text{reg}(a_i)>3$. If we now eliminate all the actions that do not minimize regret in the first place and iterate the regret minimization only on the action set $\lbrace 96\$, ..., 100\$ \rbrace$, we get that 97\$ is the action that minimize regret. Indeed, $\text{reg}(97)=2$ and $\forall a_i \in \lbrace 96\$, 98\$, 99\$, 100\$ \rbrace \text{, } \text{reg}(a_i)=3 $. Hence, one step of regret minimizing reasoning eliminates all the actions smaller than 96\$, and if we iterate the process once more the unique outcome is 97\$. Finally, it is worth noticing that the only rationalizable equilibrium of the game corresponds to the outcome $(2,2)$, that is consequently the only Nash equilibrium, the only perfect equilibrium, and the only sequential equilibrium of the game. $ \medsquare $
+  
+\end{example}
+
+
+
 
 
 The meta-game perspective that we introduce in this paper can shed more light on the duality of descriptivism and normativism, and opens
@@ -537,12 +570,17 @@ model with the four player types introduced in the previous section.
 \subsection{Numerical simulations}
 \label{sec:numer-simul}
 
-Table~\ref{tab:ExpectedFitness_4Types} gives an approximation of expected fitness, obtained
-from averaging over randomly sampled $100,000$ games in $\mathcal{G}$ with
-$a,b,c,d \in \lbrace 0, \dots, 10 \rbrace$. The number in each cell corresponds to the average
-evolutionary fitness of the row player when matched with the column player. Whenever a player
-type would not select a unique action in a given game, we recorded unbiased averages over
-playing either.
+Table~\ref{tab:ExpectedFitness_4Types} gives an approximation of expected fitness, obtained by
+numerical simulation from averaging over $100,000$ randomly sampled games in $\mathcal{G}$ with
+$a,b,c,d \in \lbrace 0, \dots, 10 \rbrace$. Concretely, games were sampled repeatedly by
+choosing independently four integers $a,b,c,d \in \lbrace 0, \dots, 10 \rbrace$ uniformly at
+random. For each game, a player type's action choices were determined and payoffs from all
+pairwise encounters recorded. (Whenever a player type would not select a unique action in a
+given game, we recorded unbiased averages over playing either action.) The number in each cell
+of Table~\ref{tab:ExpectedFitness_4Types} is the average payoff for the row player type over
+all 100,000 numbers for each pairing of player types obtained in this way. These averages
+approximate the corresponding average evolutionary fitness of the row player when matched with
+the column player.
 
 \begin{table}[t]
 \centering
@@ -563,48 +601,53 @@ playing either.
 \label{tab:ExpectedFitness_4Types}
 \end{table}
 
-Simulation results reflect Fact~\ref{fact:equivalence2x2} in that all encounters in which
-types $\tau^{reg}, \Delta(A_{-i})$, $\tau^{reg}, \overline{\mu}$ or $\tau^{\pi},
-\overline{\mu}$ are substituted for one another yield identical results. More interestingly,
-Table~\ref{tab:ExpectedFitness_4Types} shows that the maximin strategy $\tau^{\pi},
-\Delta(A_{-i})$ is strictly dominated by either of the three other strategies: in each row
-column (i.e., for each kind of opponent), the maximin strategy is strictly worse than any of
-the three behaviorally equivalent competitors. This has a number of interesting consequences.
+Simulation results obviously reflect Fact~\ref{fact:equivalence2x2} in that all encounters in
+which types $(\tau^{reg}, \Delta(A_{-i}))$, $(\tau^{reg}, \overline{\mu})$ or
+$(\tau^{\pi}, \overline{\mu})$ are substituted for one another yield identical results. More
+interestingly, Table~\ref{tab:ExpectedFitness_4Types} shows that the maximin strategy
+$(\tau^{\pi}, \Delta(A_{-i}))$ is strictly dominated by either of the three other strategies:
+in each column (i.e., for each kind of opponent), the maximin strategy is strictly worse
+than any of the three behaviorally equivalent competitors. This has a number of interesting
+consequences.
 
-Firstly, if we restrict attention to a population of radically uncertain players where only
-epistemic type exists $\Delta(A_{-i})$, the regret type $ \tau^{reg} $ is the only
-evolutionarily stable state; we expect selection that is driven by expected fitness to
-invariably weed out maximin behavior in favor of regret minimization. In other words, in the
-class of random games looked at here, regret minimization is a better choice rule than standard
-maxmin from an evolutionary point of view.
+Let's begin with a restricted scenario and look at more and more complex cases afterwards. If
+we restrict attention to a population of radically uncertain players, i.e., where only
+epistemic type $\Delta(A_{-i})$ exists, the regret type $ \tau^{reg} $ is the only
+\emph{evolutionarily stable state}. An evolutionarily stable state is a state which cannot be
+invaded by a small number of mutants. More strongly, since maximin play is strictly dominated,
+we expect selection that is driven by expected fitness to invariably weed out maximin behavior
+in favor of regret minimization. In other words, when taking average payoffs over the class of
+random games looked at here, regret minimization is a better choice rule than standard maxmin
+from an evolutionary point of view, despite the fact that the former, but not the letter
+entertains non-veridical subjective preferences.
 
-Secondly, if we look at the competition between all four types represented in
-Table~\ref{tab:ExpectedFitness_4Types}, $\tau^{reg}, \Delta(A_{-i})$ is no longer the only
-evolutionarily stable type in this meta-game. Rather, given behavioral equivalence
-(Fact~\ref{fact:equivalence2x2}), types $(\tau^{reg}, \Delta(A_{-i}))$,
-$(\tau^{reg}, \overline{\mu})$, and $(\tau^{\pi}, \overline{\mu})$ are all neutrally stable
-\citep{Maynard-Smith1982:Evolution-and-t}, while $(\tau^{\pi}, \Delta(A_{-i}))$ is strictly
-dominated and so disfavored by fitness-based selection. Based on considerations of evolutionary
-stability in this meta-game, we are drawn to conclude that maximin behavior is weeded out in
-favor of a population with a random distribution of the remaining three types.
+Next, if we look at the competition between all four types represented in
+Table~\ref{tab:ExpectedFitness_4Types}, $(\tau^{reg}, \Delta(A_{-i}))$ is no longer
+evolutionarily stable. Rather, given behavioral equivalence (Fact~\ref{fact:equivalence2x2}),
+types $(\tau^{reg}, \Delta(A_{-i}))$, $(\tau^{reg}, \overline{\mu})$, and
+$(\tau^{\pi}, \overline{\mu})$ are all \emph{neutrally stable}
+\citep{Maynard-Smith1982:Evolution-and-t}. But since $(\tau^{\pi}, \Delta(A_{-i}))$ is strictly
+dominated and so disfavored by fitness-based selection, we are still drawn to conclude that
+maximin behavior is weeded out in favor of a population with a random distribution of the
+remaining three types.
 
 Simulation results of the (discrete time) \emph{replicator dynamics}
 \citep{TaylorJonker1978:Evolutionary-St} indeed show that random initial population
 configurations are attracted to states with only three player types:
 $\tuple{\tau^{reg}, \Delta(A)}$, $\tuple{\tau^{reg}, \bar{\mu}}$ and
 $\tuple{\tau^{\pi}, \bar{\mu}}$. The relative proportions of these depend on the initial
-population.
-
-Interestingly, however, this variability is eradicated if we add a small mutation rate to the
-dynamics. We assume a fixed, small mutation rate $\epsilon$ for the probability that a player's
-preference type \emph{or} her epistemic type changes to another random preference type or
-epistemic type. The probability that a player type randomly mutates into a completely different
-player type with altogether different preference type and epistemic type would then be
-$\epsilon^2$. With these assumptions about ``local mutations'', numerical simulations of the
-(discrete time) \emph{replicator mutator dynamics} \citep{Nowak2006:Evolutionary-Dy} show that
-for very small mutation rates almost all initial populations converge to a single fixed point
-in which the majority of players are regret types. For instance, with $\epsilon = 0.001$,
-almost all initial populations are attracted to a final distribution with proportions:
+population.\todo{check uniform notation for player types: round vs.~square brackets} This
+variability disappears if we add a small mutation rate to the dynamics. We assume a fixed,
+small mutation rate $\epsilon$ for the probability that a player's preference type \emph{or}
+her epistemic type changes to another random preference type or epistemic type. The probability
+that a player type randomly mutates into a completely different player type with altogether
+different preference type and epistemic type would then be $\epsilon^2$. With these assumptions
+about ``component-wise mutations'', numerical simulations of the (discrete time)
+\emph{replicator mutator dynamics} \citep{Nowak2006:Evolutionary-Dy} show that already for very
+small mutation rates almost all initial populations converge to a single fixed point in which
+the majority of players are regret types. For instance, with $\epsilon = 0.001$, almost all
+initial populations are attracted to a final distribution with proportions:\todo{recalculate
+  these numbers for the actual 4x4 game!}
 
 \begin{center}
   \begin{tabular}{ccc}
@@ -619,26 +662,28 @@ not behavior as such, it need not be the case that behaviorally equivalent mecha
 treated equally all the while. If mutation probabilities are a function of individual
 components of such behavior-generating mechanisms, it can be the case that certain components
 are more strongly favored by a process of random mutation and selection. This is exactly the
-case with regret-based subjective preferences in our little toy example here. Since
-regret-based subjective preferences are much better in connection with radical uncertainty than
-veridical preferences are, we see a majority of regret-based preference types paired with
-probabilistic epistemic types. In sum, component-wise mutation could have lead to a majority of
+case with regret-based subjective preferences in the present example. Since regret-based
+subjective preferences are much better in connection with radical uncertainty than veridical
+preferences are, the proportion of expected regret minimizers in the attracting state is
+substantially higher than that of expected utility maximizers, even though these types are
+behaviorally equivalent. In sum, component-wise mutation could have lead to a majority of
 regret-based players even if they are behaviorally indiscernible from decision makers with
-veridical preferences.
+veridical preferences, because regret types are better off under radical uncertainty.
 
 \subsection{Analytical results}
 \label{sec:analytical-results}
 
-Results based on the single meta-game in Table~\ref{tab:Utils-MetaGame}, which was obtained by
-averaging over numerical simulations, are not fully general and possibly spoiled by random
-fluctuations in the sampling procedure. Fortunately, for the case of symmetric $2 \times 2$
-games, the main result that maximin types $(\tau^{\pi}, \Delta(A_{-i}))$ are strictly dominated
-can also be shown analytically for generous general conditions on the nature of $P(G)$.
+Results based on the single meta-game in Table~\ref{tab:ExpectedFitness_4Types}, which was
+obtained by averaging over numerical simulations, are not fully general and possibly spoiled by
+random fluctuations in the sampling procedure. Fortunately, for the case of symmetric
+$2 \times 2$ games, the main result that maximin types $(\tau^{\pi}, \Delta(A_{-i}))$ are
+strictly dominated can also be shown analytically for generous general conditions on how likely
+randomly sampled games are.
 
 \begin{proposition} \label{proposition1}
 
   Let $\Lambda = \lbrace (\tau^{\pi}, \Delta(A_{-i})), (\tau^{reg}, \Delta(A_{-i})) \rbrace$ be
-  the set of possible players $(\tau, e)$ in the population, and let $\mathcal{G}$ be the class
+  the set of possible meta-types $(\tau, e)$ in the population, and let $\mathcal{G}$ be the class
   of symmetric $2 \times 2$ games with payoffs sampled from a finite, or compact and convex,
   set of i.i.d.~values. Then, $(\tau^{reg}, \Delta(A_{-i}))$ is the only strict Nash
   equilibrium in the resulting meta-game.
@@ -666,32 +711,32 @@ From Fact \ref{fact:equivalence2x2} and Proposition \ref{proposition1} the follo
 See Appendix.
 \end{proof}
 
-Corollary~\ref{corollary1} tells us that the results obtained for the meta-game in
-Table~\ref{tab:Utils-MetaGame} hold more generally for any class of games in which the
-probability of encountering a game is the product of independently sampling four identically
-distributed payoff values. As before, player types $(\tau^{reg}, \Delta(A_{-i}))$,
-$(\tau^{\pi}, \overline{\mu})$, and $(\tau^{reg}, \overline{\mu})$ will be neutrally stable,
-and fitness-based selection will tend to weed out maximin-players and leave us with a
-population of arbitrary frequency of $(\tau^{reg}, \Delta(A_{-i}))$,
-$(\tau^{\pi}, \overline{\mu})$, and $(\tau^{reg}, \overline{\mu})$ players.
+Corollary~\ref{corollary1} tells us that the conclusions drawn in the previous section based on
+the meta-game in Table~\ref{tab:ExpectedFitness_4Types} hold more generally for any class of
+games in which the probability of encountering a game is the product of independently sampling
+four identically distributed payoff values. As before, player types
+$(\tau^{reg}, \Delta(A_{-i}))$, $(\tau^{\pi}, \overline{\mu})$, and
+$(\tau^{reg}, \overline{\mu})$ will be neutrally stable, and fitness-based selection will tend
+to weed out maximin play and leave us with a population of arbitrary frequency of
+$(\tau^{reg}, \Delta(A_{-i}))$, $(\tau^{\pi}, \overline{\mu})$, and
+$(\tau^{reg}, \overline{\mu})$ meta-types.
 
-
-\section{Extensions}
-\label{sec:extensions}
-
-The basic results from the previous section demonstrate the main conceptual point that we
-wanted to make: non-veridical subjective preference relations can persist under evolutionary
-selection along a gradient of objective fitness. In particular, regret-based preferences can
+This shows that there is support for the main conceptual point that we wanted to make:
+non-veridical subjective preference relations \emph{can}, under specific circumstances, persist
+under evolutionary selection based on objective fitness. Moreover, regret-based preferences can
 not only persist, but even be favored by natural selection if agents are radically
 uncertain. This holds generally for playing arbitrary $2 \times 2$ games whose payoffs are
 sampled identically and independently at random.
 
+\section{Extensions}
+\label{sec:extensions}
+
 How do the basic results from the previous section carry over to more encompassing, richer
-models? Section~\ref{sec:more-types} first considers a further conceptually interesting
-preference types that have been suggested in the recent literature. Section~XZY then looks at
-the basic cast of player types, but considers the case of $n \times n$ games. Finally, to put
-our results into the proper perspective, Section~XZY ends with a brief comparison of game
-situations with cases of solitary decision making.
+models? Section~\ref{sec:more-types} first considers further conceptually interesting
+preference types that have been suggested in the recent literature. Section~\ref{sec:n-times-n}
+then considers the case of $n \times n$ games for $n \ge 2$. Finally, to put our results into
+the proper perspective, Section~\ref{sec:solitary-decisions} ends with a brief comparison of
+game situations with cases of solitary decision making.
 
 \subsection{More types}
 \label{sec:more-types}
@@ -762,25 +807,28 @@ expected fitness in the relevant meta-game.
 \todo[inline]{is it true that competitive preferences types are behaviorally equivalent under
   either epistemic type? can we show that?}
  
-The approximations in Table~\ref{tab:ExpectedFitness_2x2_Full} confirm basic
-intuitions. Averaging over randomly sampled games, everybody would like to have an altruistic
-opponent and nobody would like to play against a competitive opponent. Moreover, altruistic
-types come up strictly dominated by competitive types, but competitive types themselves are
-always worse than any of the behaviorally equivalent types $(\tau^{reg}, \Delta(A_{-i}))$,
-$(\tau^{\pi}, \overline{\mu})$, and $(\tau^{reg}, \overline{\mu})$, except against maximin
-players $\tuple{\tau^{\pi}, \Delta(A)}$. This is a noteworthy results in the light of the fact
-that evolving altruistic preferences have been shown to support cooperative behavior in a
-single stage game \myalert{[CITE]}.\todo{@Paolo: check whether this is true, please!} In
-contrast, averaging over payoffs in multiple stage games, like we do here, makes altruistic
-preferences prime victims of evolutionary eradication.
+The approximations in Table~\ref{tab:ExpectedFitness_2x2_Full} confirm basic intuitions about
+altruistic and competitive types: averaging over randomly sampled games, everybody would like
+to have an altruistic opponent and nobody would like to play against a competitive
+opponent. Perhaps more surprisingly, altruistic types come up strictly dominated by competitive
+types, but competitive types themselves are worse off against all opponent types except against
+maximin players $\tuple{\tau^{\pi}, \Delta(A)}$ than any of the behaviorally equivalent types
+$(\tau^{reg}, \Delta(A_{-i}))$, $(\tau^{\pi}, \overline{\mu})$, and
+$(\tau^{reg}, \overline{\mu})$.  This is a noteworthy results in the light of the fact that
+evolving altruistic preferences have been shown to support cooperative behavior in a single
+stage game \myalert{[CITE]}. \todo{@Paolo: check whether this is true, please!} In contrast,
+averaging over payoffs in multiple stage games, like we do here, makes altruistic preferences
+prime victims of evolutionary eradication.
 
 It is easy to see then that the previous result still obtains for the larger meta-game in
 Table~\ref{tab:ExpectedFitness_2x2_Full}: $(\tau^{reg}, \Delta(A_{-i}))$,
 $(\tau^{\pi}, \overline{\mu})$, and $(\tau^{reg}, \overline{\mu})$ are still neutrally stable;
-all simulations of the (discrete-time) replicator dynamic end in populations consisting of only
-these types in arbitrary proportion.
+all simulations of the (discrete-time) replicator dynamic on the $8 \times 8$ meta-game from
+Table~\ref{tab:ExpectedFitness_2x2_Full} end up in populations consisting of only these types
+in arbitrary proportion.
 
-The following proposition confirms this result.\todo{rephrase to acknowledge all epistemic types}
+The following proposition (partially) confirms this result.\todo{rephrase to acknowledge all
+  epistemic types?}
 
 \begin{proposition} \label{proposition2}
 
@@ -802,18 +850,17 @@ subjective preferences.
 \label{sec:n-times-n}
 
 Results from Section~\ref{sec:results:-basic-model} relied heavily on
-Fact~\ref{fact:equivalence2x2} that regret minimization $\tuple{\tau^{reg}, \Delta(A)}$ is
-behaviorally equivalent with expected regret minimization $\tuple{\tau^{reg}, \bar{\mu}}$ and
-expected utility maximization $\tuple{\tau^{\pi}, \bar{\mu}}$. This is no longer true when we
-look at arbitrary $n \times n$ games with $n \ge 2$. 
-
-Table~\ref{tab:ExpectedFitness_10x10} therefore gives approximations for expected fitness in a
-meta-game over a class over a class of $n \times n$ symmetric games where $n$ is randomly drawn
-from $\set{2, \dots, 10}$. Concretely, the numbers in Table~\ref{tab:ExpectedFitness_10x10} are
-averages of payoffs obtained in 100,000 randomly sampled games, where each game was sampled by
-first picking a number of acts $n \in \set{2, \dots, 10}$ uniformly at random, and then filling
-the resulting $n \times n$ payoff matrix of the stage game with i.i.d.~sampled payoffs as
-before. 
+Fact~\ref{fact:equivalence2x2} that, for the special case of $2 \times 2$ symmetric games,
+regret minimization $\tuple{\tau^{reg}, \Delta(A)}$ is behaviorally equivalent with expected
+regret minimization $\tuple{\tau^{reg}, \bar{\mu}}$ and expected utility maximization
+$\tuple{\tau^{\pi}, \bar{\mu}}$. This is no longer true when we look at arbitrary $n \times n$
+games with $n \ge 2$. Table~\ref{tab:ExpectedFitness_10x10} therefore gives approximations for
+expected fitness in a meta-game over a class of $n \times n$ symmetric games where
+$n$ is randomly drawn from $\set{2, \dots, 10}$. Concretely, the numbers in
+Table~\ref{tab:ExpectedFitness_10x10} are averages of payoffs obtained in 100,000 randomly
+sampled games, where each game was sampled by first picking a number of acts
+$n \in \set{2, \dots, 10}$ uniformly at random, and then filling the resulting $n \times n$
+payoff matrix of the stage game with i.i.d.~sampled payoffs as before.
 
 
 \begin{table}[]
