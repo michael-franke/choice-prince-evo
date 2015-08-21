@@ -46,12 +46,23 @@
 
 \begin{document}
 
-\textbf{some notes and remarks and todo's}
+\textbf{some general notes and remarks and todo's}
 
 \begin{itemize}
 \item micha: let's have a term for pairs (regret type, epistemic type); I'm inclined to use ``player
   type'', but that's what you reserved for regret type; maybe use \myalert{meta-type}?
-\item 
+\item can we reformulate the main result (proposition 1) in terms of ``strict dominance''
+  and/or strict Nash equilibrium? sometimes the proof is not ideally precise because it
+  actually shows something stronger, namely strict dominance, but everything is formulated in
+  terms of stability; using dominance is also better for arguments about evolutionary dynamics:
+  dynamics can be attracted by states that are not evolutionarily stable (even if there is an
+  ESS), but dominated strategies will die out in any case;
+\item should we give definitions for ESS and NSS in the main text?
+\item should we include definitions of the replicator dynamic and/or the replicator mutator
+  dynamic?
+\item the most important issue with this text is still that we need to motivate why we care
+  about non-probabilistic beliefs and/or security strategies; everything else will fall into
+  place when that is done
 \end{itemize}
 
 \newpage
@@ -60,108 +71,83 @@
 \maketitle
 
 \section{Introduction / Motivation}
+\label{sec:intr--motiv}
 
-\begin{itemize}
-\item Evolutionary game theory has become an established philosophical tool for probing into
-  conceptual issues whose complexity requires mathematical modeling.
-  \begin{itemize}
-  \item helped structure debate about foraging, mating, evolution of cooperation,
-    information-flow, deception etc.
-  \end{itemize}
-\item Most applications of EGT look at evolutionary selection of behavior in a single
-  game. There are two crude simplifications here:
-  \begin{enumerate}
-  \item The stage game is usually considered fixed, closed and immutable.
-    \begin{itemize}
-    \item there are some notable exceptions where the game is open ended, e.g., by the
-      invention of actions \citep{WordenLevin2007:Evolutionary-es,
-        McKenzie-AlexanderSkymrs2012:Inventing-New-S}
-    \end{itemize}
-  \item What evolves are behavioral strategies for the stage game \citep[what][call the
-    ``behavioral gamit'']{FawcettHamblin2013:Exposing-the-be} \myalert{(more references!
-      Gigerenzer etc.)}.
-  \end{enumerate}
-\item It has been argued that we should rather study the evolutionary selection of \emph{choice
-    mechanisms} that are adapted in a rich and variable environment
-  \citep[e.g.][]{FawcettHamblin2013:Exposing-the-be,McNamara2013:Towards-a-Riche}.
-\item However, studies on the adaptive value of choice mechanisms have focused, for the most
-  part, of the evolutionary benefit of learning rules
-  \citep[e.g.][]{ZollmanSmead2010:Plasticity-and-,SmeadZollman2013:The-Stability-o}. (\myalert{More references Harley 1981!!!, \dots}). 
-    Moreover, only little attention has been paid to
-  modeling the direct (game-theoretic) meta-competition between alternative choice mechanisms
-  \citep[see][for related criticism]{FawcettHamblin2013:Exposing-the-be}.
-\item Here, we would like to make two contributions to the literature on evolution of choice
-  mechanisms:
-  \begin{enumerate}
-  \item On the conceptual side, we argue that paying attention to the evolution of (subjective
-    representations of) preferences matters. Since almost any reasonable learning or
-    decision-making process will make use of some (subjective, agent-internal (possibly
-    unconscious)) representation of the quality of choice options, the question of which such
-    representations are ecologically valuable (i.e., lead to high fitness) is central. In fact,
-    the evolution of (subjective representations of) preferences has recently been studied in
-    theoretical economics as well \myalert{add references}. However, these studies also suffer
-    from the ``behavioral gambit'' and the usual shortcomings of the closedness of the stage game. 
-  \item On the methodological side, we therefore introduce a conservative extension of the
-    standard EGT that allows us to reuse notions such as evolutionary stability / evolutionary
-    dynamics and yet helps us study the evolutionary competition between choice mechanisms in a
-    statistically variable environment. Concretely, we look at the evolutionary competition of
-    choice mechanisms in a ``meta-game'' that consists of the average expected payoffs of
-    choice mechanisms when playing arbitrary games (from a given class). In this sense, a
-    meta-game captures (the modeller's) assumptions about the relevant statistic of the
-    environment in which evolutionary forces operate.
-  \end{enumerate}
-\item To drive home our conceptual point that preference representations can matter, we try to
-  isolate, as good as we can, the evolution of preferences from considerations of learning or
-  other factors feeding a decision mechanism (such as the acquisition of ecologically useful
-  representations (think: beliefs)). (Obviously, eventually, we would like to study the
-  evolution of all of these relevant components in one swoop.)
-\item To demonstrate how this approach can be theoretically rewarding, we show that, under
-  reasonable additional assumptions, evolutionary selection can support non-veridical
-  representations of payoffs in terms of regret.
-  \begin{itemize}
-  \item We argue that this ``meta-evolutionary'' approach could eventually help explain
-    attested deviations of human decision making from the classical ideal: choice behavior
-    evolved to be an ``ecologically rational'', near-optimal adaptation to the environment
-    \citep{Anderson1990:The-Adaptive-Ch,Anderson1991:Is-human-cognit,GigerenzerGoldstein1996:Reasoning-the-F,ChaterOaksford2000:The-Rational-An}. This
-    is inline with recent aspirations to provide an evolutionary rationale for decision making
-    processes
-    \citep[e.g.][]{HammersteinStevens2012:Six-Reasons-for,FawcettHamblin2013:Exposing-the-be}.
-  \item Non-veridical regret-based representations of payoffs are intuitively appealing (we do,
-    at least on occasion, care about counterfactual or hypothetical losses), but could also
-    help explain, for instance, that decision-makers may violate the independence axiom: human
-    and non-human decision makers can favor $A$ when presented with a choice
-    between $A$ and $B$, but prefer $B$ when presented with $A$, $B$ and $C$ \myalert{(for
-      animals cite from Fawcett page 3)} \myalert{(add
-      citation for human performance)}
-  \item We need to be careful here: we do not want to stress that this approach here (the
-    particular implemenation of a regret-based choice mechanism) explains these empirical
-    findings (better than any other line of explanation). Our point is more general and
-    methodological. Evolution of preferences is something that the literature on evolution of
-    choice mechanisms should care about. We also presented a method that can be useful and an
-    example of that method that should (succinctly) demonstrate our aforementioned conceptual
-    point that evolution of preferences is conceptually important and can give non-trivial,
-    unexpected and philosophically useful results.
-  \end{itemize}
-\item contributes to: (i) methodological reflection on evolutionary game theory, (ii) ecological
-  rationality of choice behavior, (iii) evolution of preferences literature
-\end{itemize}
+\todo[inline]{this is only a dummy introduction; rewrite eventually with a better focus on the
+  results and main conceptual points we would like to drive home}
 
-\newpage 
+Evolutionary game theory has become an established philosophical tool for probing into
+conceptual issues whose complexity requires mathematical modeling. However, most applications
+of EGT look at evolutionary selection of behavior in a single \emph{stage game}. There are
+actually two crude but common simplifications in this approach. Firstly, the stage game is
+usually considered fixed, closed and immutable \citep[there are exceptions, of course, such
+as][]{WordenLevin2007:Evolutionary-es, McKenzie-AlexanderSkymrs2012:Inventing-New-S}. Secondly,
+what evolves are behavioral strategies for the stage game \citep[what][call the ``behavioral
+gamit'']{FawcettHamblin2013:Exposing-the-be}.
 
+It has consequently been argued that, instead of focusing on a fixed, immutable stage game and
+the behavioral selection for that stage game alone, we should rather study the evolutionary
+selection of \emph{choice mechanisms} that are adapted in a rich and variable environment
+\citep[e.g.][]{FawcettHamblin2013:Exposing-the-be,McNamara2013:Towards-a-Riche}. However,
+formal accounts of the adaptive value of choice mechanisms have focused, for the most part, on
+the evolutionary benefit of learning rules
+\citep[e.g.][]{ZollmanSmead2010:Plasticity-and-,SmeadZollman2013:The-Stability-o}. \todo{More
+  references Harley 1981!!!, O Conor \dots}  Moreover, only little attention has been paid to
+modeling the direct (game-theoretic) meta-competition between alternative choice mechanisms
+\citep[see][for related criticism]{FawcettHamblin2013:Exposing-the-be}.
 
-\section{Rationality \& subjective preference}
+Here, we would therefore make two contributions to the literature on evolution of choice
+mechanisms. On the conceptual side, we argue that paying attention to the evolution of
+(subjective representations of) preferences matters. Since almost any reasonable learning or
+decision-making process will make use of some (subjective, agent-internal (possibly
+unconscious)) representation of the quality of choice options, the question of which such
+representations are ecologically valuable (i.e., lead to high fitness) is central. Na\"ive
+intuition might convince us that obviously preferences that veridically represent the object
+fitness that evolutionary selection is based upon must surely be the best. We demonstrate that,
+if we take into account how agents represent uncertainty, this na\"ive conclusion is premature.
 
-The standard use of the word \textit{rationality} in economics and decision theory is to denote
-the maximization of (subjective) expected utility. Since the work by vNM [cite], this stance
-has been justified from the intuitive ''rationality'' of the axioms on the subjective
-preference relation leading to the representability of the decision maker as an expected
-utility maximizer.
-While in the axiomatization by [vNM] the probability of the outcomes is objectively given a priori, Savage54 provides a larger set of axioms that represent the decision maker (DM) with both a subjective utility over outcomes \textit{and} a \textit{subjective} probability over states of the world. Savage's axioms constitute the foundation of subjective expected utility (SEU) theory, that is normally assumed to define the rational behavior of economic agents.\\
+On the methodological side, we introduce a conservative extension of standard EGT that allows
+us to reuse notions such as evolutionary stability / evolutionary dynamics and yet helps us
+study the evolutionary competition between choice mechanisms in a statistically variable
+environment. Concretely, we look at the evolutionary competition of choice mechanisms in a
+``meta-game'' that consists of the average expected payoffs of choice mechanisms when playing
+arbitrary games (from a given class). In this sense, a meta-game captures (the modeller's)
+assumptions about the relevant statistics of the environment in which evolutionary forces
+operate.
+
+Section~\ref{sec:rati--subj} introduces necessary concepts from formal decision and game
+theory. Section \dots
+
+\todo[inline]{add overview}
+
+\section{Rationality, subjectivity  \& subjective regret}
+\label{sec:rati--subj}
+
+\todo[inline]{would it make sense to tighten and restructure this section a little bit? what
+  about this: rationality says \emph{if} utils, beliefs and rational, then choose this; utils
+  and beliefs are unobservable; in some case utils and preferences \emph{can} be tight to the
+  environment (probability of a fair coin landing heads), in others no (probability of life on
+  Mars); if tight to environment its frequencies and fitness that would pin down a norm for
+  rational behavior, otherwise there's the danger of redescriptionism (just find some belief
+  and preference that rationalizes observed behavior); \dots }
+
+The standard definition of \textit{rationality} in economics and decision theory says that
+choice is rational only if it maximizes (subjective) expected utility. Since the work by vNM
+[cite], this view has been justified from the ``intuitive rationality'' of the axioms on the
+subjective preference relation leading to the representability of the decision maker as an
+expected utility maximizer. \todo{include axioms, or at least those that are mentioned as
+  relevant later} While in the axiomatization by [vNM] the probability of the outcomes is
+objectively given a priori, Savage54 provides a larger set of axioms that represent the
+decision maker (DM) with both a subjective utility over outcomes \textit{and} a
+\textit{subjective} probability over states of the world. Savage's axioms constitute the
+foundation of subjective expected utility (SEU) theory, that is normally assumed to define the
+rational behavior of economic agents.
 
 \begin{definition}[SEU-maximization] Let $S$ be a set of states of the world, $X$ a set of
   outcomes and $A$ a set of actions. Given a probability measure $P$ on $S$ and a subjective
   utility function $u:X \rightarrow \mathbb{R} $, an action $a^*: S \rightarrow X $ is
-  SEU-maximizing if $a^* \in \text{argmax}_{a_i \in A} \int_S u(a^*(s))dP(s) $.
+  SEU-maximizing if $a^* \in \text{argmax}_{a_i \in A} \int_S u(a^*(s))dP(s) $. \todo{do we
+    actually need outcomes for anything in this paper?}
 \end{definition}
 
 
@@ -212,7 +198,12 @@ want to have a normative approach to rationality, then it seems we have to appea
 evolutionary arguments entailing the understanding of rationality as maximization of objective
 utility.
 
-However, it has been argued that in a good theory of choice and decision making the normative and the descriptive components should not come apart. For example, as Douglas Maclean [cite] writes:
+However, it has been argued that in a good theory of choice and decision making the normative
+and the descriptive components should not come apart. For example, as Douglas Maclean [cite]
+writes: 
+
+\todo[inline]{personally, not a big fan of extended quotes; talks: yes, papers: don't know; is
+  this dear to your heart? who's that Maclean anyway? ;-)}
 
 \begin{quote}
 The history of the subject reflects strong reasons why the theory of choice should have this dual character. [...] \\
@@ -324,20 +315,32 @@ and explain all the main experimental results of prospect theory, and claim that
   of rationality. \hfill \citep{LoomesSugden1982:Regret-Theory:-}
 \end{quote}
 
-
-
-
-
-
-
-
-
 \section{The model}
+\label{sec:model}
 
+\todo[inline]{first two paragraphs here are partly redundant}
 
-We consider an evolutionary model that is different, for the best of our knowledge, from all the standard models of evolutionary game theory. Given a game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, a subjective utility over $G$ is a function $\theta: A \rightarrow \mathbb{R} $, where $ A:=\prod_{i\in N}A_{i} $ as usual. We denote by $ \Theta:= \mathbb{R}^{|A|} $ the set of all the subjective utilities over $G$. The model we introduce here is a multiple game model, that we also call \textit{multi-game} or \textit{meta-game}, where a \textit{class} $\mathcal{G}$ of fitness games is played in a population. All the models used in evolutionary game theory that we are aware of always consider a single game at a time. Our extension is meant to capture both a more general notion of environment and a more general notion of phenotype.\\ 
-There are good reasons to claim that focusing on more general psychological mechanisms instead of on behavior itself as the phenotype under evolutionary selection can be more faithful and insightful for natural biology and ecology [Fawcett\&al.].
-In all classical models the agents are represented as playing a single fixed game, and as genetically predetermined to play fixed strategies, that consequently are the only target of natural selection in those frameworks. Standard evolutionary game theory cannot take charge of this shift of perspective until it will keep modelling a single game at a time, and until it will keep focusing on observed behavior only. ''Instead we should expect animals to have evolved a set of psychological mechanisms which enable them to perform well on average across a range of different circumstances''[Fawcett\&al.]. [maybe add evolution of preferences here]
+We consider an evolutionary model that is different, for the best of our knowledge, from all
+the standard models of evolutionary game theory. Given a game
+$ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, a subjective utility over $G$ is a function
+$\theta: A \rightarrow \mathbb{R} $, where $ A:=\prod_{i\in N}A_{i} $ as usual. We denote by
+$ \Theta:= \mathbb{R}^{|A|} $ the set of all the subjective utilities over $G$. The model we
+introduce here is a multiple game model, that we also call \textit{multi-game} or
+\textit{meta-game}, where a \textit{class} $\mathcal{G}$ of fitness games is played in a
+population. All the models used in evolutionary game theory that we are aware of always
+consider a single game at a time. \todo{better formulate less strongly} Our extension is meant
+to capture both a more general notion of environment and a more general notion of phenotype.
+ 
+There are good reasons to claim that focusing on more general psychological mechanisms instead
+of on behavior itself as the phenotype under evolutionary selection can be more faithful and
+insightful for natural biology and ecology [Fawcett\&al.].  In all classical models the agents
+are represented as playing a single fixed game, and as genetically predetermined to play fixed
+strategies, that consequently are the only target of natural selection in those
+frameworks. Standard evolutionary game theory cannot take charge of this shift of perspective
+until it will keep modelling a single game at a time, and until it will keep focusing on
+observed behavior only. ''Instead we should expect animals to have evolved a set of
+psychological mechanisms which enable them to perform well on average across a range of
+different circumstances''[Fawcett\&al.]. [maybe add evolution of preferences here]
 
 In this work we take $\mathcal{G}$ to be the class of symmetric $2 \times 2$ games\footnote{Note that this class includes many of the most famous games extensively considered in game theoretical literature, e.g., Prisoner's dilemma, Chicken game, Stag hunt, etc.}. First, a game $G$ is selected from the class of fitness games $\mathcal{G}$, and then players in the population are matched to play the game $G$. Each player is a function $\tau: \mathcal{G} \rightarrow  \Theta$, and we call $\tau$ a \textit{player type}, or just a \textit{type}\footnote{Notice that the function $\tau$ is well-defined since, for any symmetric $2 \times 2$ game, the codomain $\Theta=\mathbb{R}^{4}$ is the same.}. Intuitively, a type can be interpreted as a way of reasoning, a pattern of conceptualization, a thread that relates different subjective utilities across different games. We denote by $T$ the class of player types. For each game $G \in \mathcal{G}$, the evolutionary fitness is determined by the objective utility (payoff) function $\pi_G$, but the player's action choice depends on the player's subjective utility function $\tau(G)$, given by the player's type $\tau$. Notice that, for any symmetric game $G$, the action sets $(A_1, \dots, A_N)$ and the payoff functions $ (\pi_1, \dots, \pi_N)  $ are the same for all $i\in \lbrace 1, \dots N \rbrace$. Consequently, we only write $ A^G $ and $ \pi^G $ for the action set and the payoff function of game $G$, respectively. Moreover, in symmetric $2 \times 2$ games we have $A=A^G \times A^G$. Then, for $x,y \in A^G$ we denote by $\pi^G(x,y)$ the objective payoff of playing action $x$ in response to action $y$.\\
 
@@ -346,7 +349,13 @@ In this work we take $\mathcal{G}$ to be the class of symmetric $2 \times 2$ gam
 \subsection{Player types}
 
 The set of all possible player types amouts to the set of all possible functions $ \tau: \mathcal{G} \rightarrow  \Theta $, i.e., $T=\mathbb{R}^{4^{\mathbb{R}^{4}}} $ , but for the sake of simplicity we will focus on types that are relevant and meaningful from a decision-theoretic point of view. We are mainly interested in two types: the objective type and the regret type.\\
-Given a game $G$ and Definition \ref{defn:parwreg}, it is straightforward to define the \textit{regret preference} $\theta^{reg}$ and the \textit{regret type} $\tau^{reg}$ as follows.
+Given a game $G$ and Definition \ref{defn:parwreg}, it is straightforward to define the
+\textit{regret preference} $\theta^{reg}$ and the \textit{regret type} $\tau^{reg}$ as
+follows. 
+
+\todo[inline]{can some of these definitions not be written as one? e.g., regret preference and
+  regret type as one definition? seems more elegant to me, because it's less repetitive (``for
+  a game ...'')}
 
 \begin{definition}[Regret preference] \label{defn:regpref}
 
@@ -412,6 +421,11 @@ Given $ \mathcal{G} $ the class of symmetric $ 2 \times 2 $ games, we call altru
 
 
 \subsection{Epistemic types}
+\label{sec:epistemic-types}
+
+\todo[inline]{I think we really need a better (and earlier) justification for these epistemic
+  types; we could appeal to information available to agents; naturalness of situations in which
+  we cannot attach numbers to our beliefs (life on Mars again) \dots}
 
 In line with traditional evolutionary game theory, the idea of this work is to model a population of rather unsophisticated and myopic agents that possibly differ from each other with respect to two components: the player type and the epistemic type.
 In full generality, we think of an epistemic type as a general disposition to form beliefs about the co-player’s behavior.    Players in the population obviously face uncertainty about the composition of the population that they are part of, and consequently about the type of co-player that they are randomly paired with at each round and about the co-player's actions. We represent this uncertainty that players entertain in two different ways, a probabilistic flat belief and a non-probabilistic belief. This amounts to having two different epistemic types $e$ in the population, $e \in \lbrace \overline{\mu}, \Delta(A_{-i}) \rbrace $, where $\overline{\mu}$ is the probabilistic type and $\Delta(A_{-i})$ is the non-probabilistic type, defined as follows:
@@ -429,11 +443,54 @@ Since for the moment we want to model populations of biologically unsophisticate
 
 \subsection{Uncertainty aversion and maxmin rule}
 
-Given a player type and an epistemic type, there are different ways to produce a behavior. A huge body of experimental literature strongly suggests that agents are generally uncertainty (or ambiguity) averse [REF]. This pattern of behavior in the presence of ucertainty has been famously axiomatized by Gilboa and Schmeidler in a paper from 1989. The idea is that being uncertainty averse amounts to behaving in accordance with maximinimizing expected utility over a set of prior probabilities. Whenever the set of priors is a singleton, maximinization of expected utility coincides with maximization of expected utility. In line with empirical data, we assume that players in the population are uncertainty averse and conform to maxmin expected utility. The resulting behavior is then produced by maximinimizing over the subjective utility given by the player type and the set of priors given by the epistemic type. \\
+\todo[inline]{this paragraph seems to presuppose familiarity with maxi-minimization (can we
+  write this with a hyphen, any chance?); we should rewrite this or introduce the notion immediately;}
+
+Given a player type and an epistemic type, there are different ways to produce a behavior. A
+huge body of experimental literature strongly suggests that agents are generally uncertainty
+(or ambiguity) averse [REF]. This pattern of behavior in the presence of ucertainty has been
+famously axiomatized by Gilboa and Schmeidler in a paper from 1989. The idea is that being
+uncertainty averse amounts to behaving in accordance with maximinimizing expected utility over
+a set of prior probabilities. Whenever the set of priors is a singleton, maximinization of
+expected utility coincides with maximization of expected utility. In line with empirical data,
+we assume that players in the population are uncertainty averse and conform to maxmin expected
+utility. The resulting behavior is then produced by maximinimizing over the subjective utility
+given by the player type and the set of priors given by the epistemic type.
+
+  \todo[inline]{I would like to suggest to move Figure 2 next to Figure 1; it is already useful
+  for example 1 and could be referred to there already; I would suggest to use subfigures to
+  put both next to each other}
 
 \begin{example}
-Consider the game in Figure \ref{coordgame1} again. When a player characterized by\footnote{To ease notation in the following we will refer to a player directly as a pair $(player \text{ } type \text{ } \tau,\text{ } epistemic\text{ } type \text{ } e)$.} player type $ \tau^{reg} $ and epistemic type $ \Delta(A_{-i}) $ faces the game in Figure \ref{coordgame1}, her player type gives rise to the representation $\tau^{reg}(G^C)$ in Figure \ref{coordgame1reg}. Then, maximinimizing expected utility over the probability simplex $ \Delta(A_{-i}) $ given the game in Figure \ref{coordgame1reg} corresponds to playing the standard maxmin strategy [REF] of that game.\footnote{Notice that this is the case for any game: given a game $G$, maximinimizing expected utility over the probability simplex $ \Delta(A_{-i}) $ amounts to playing the standard maxmin strategy of $G$.} This, in turn, corresponds to the regret minimizing action of the original game $G^C$ of Figure \ref{coordgame1}, namely action $II$, as we have seen in Section \ref{sec:regreTheory}. A player $(\tau^{reg},\overline{\mu})$ instead has subjective representation $\tau^{reg}(G^C)$ of Figure \ref{coordgame1reg} and a flat probability measure $\overline{\mu}=(\frac{1}{2}I,\frac{1}{2}II)$ over the co-player's actions. Consequently, such a player would play action $II$, i.e., the action that maximinimizes expected utility given the flat probability measure $\overline{\mu}$.\footnote{As we already noticed, maximinimizing expected utility given a probability measure $\mu$ is equivalent to maximizing expected utility given $\mu$.} 
-Similarly, a player $(\tau^{\pi},\Delta(A_{-i}))$ will have the subjective representation coinciding with the objective fitness game, i.e., $ \tau^{\pi}(G^C)= G^C $. Then, both actions $I$ and $II$ maximinimize expected utility over the probability simplex $ \Delta(A_{-i}) $. Hence, a player $(\tau^{\pi},\Delta(A_{-i}))$ will be indifferent between $I$ and $II$, and will randomize with equal probability $(\frac{1}{2}I,\frac{1}{2}II)$. Finally, a player $(\tau^{\pi},\overline{\mu})$ maximinimizes the objective fitness game $G^C$ of Figure \ref{coordgame1} with flat probability $\overline{\mu}$ over the co-player's actions, i.e., maximizes objective utility given $\overline{\mu}$. In game $G^C$ this yields action $II$. 
+  Consider the game in Figure \ref{coordgame1} again. When a player characterized
+  by\footnote{To ease notation in the following we will refer to a player directly as a pair
+    $(player \text{ } type \text{ } \tau,\text{ } epistemic\text{ } type \text{ } e)$.} player
+  type $ \tau^{reg} $ and epistemic type $ \Delta(A_{-i}) $ faces the game in Figure
+  \ref{coordgame1}, her player type gives rise to the representation $\tau^{reg}(G^C)$ in
+  Figure \ref{coordgame1reg}. Then, maximinimizing expected utility over the probability
+  simplex $ \Delta(A_{-i}) $ given the game in Figure \ref{coordgame1reg} corresponds to
+  playing the standard maxmin strategy [REF] of that game.\footnote{Notice that this is the
+    case for any game: given a game $G$, maximinimizing expected utility over the probability
+    simplex $ \Delta(A_{-i}) $ amounts to playing the standard maxmin strategy of $G$.} This,
+  in turn, corresponds to the regret minimizing action of the original game $G^C$ of Figure
+  \ref{coordgame1}, namely action $II$, as we have seen in Section \ref{sec:regreTheory}. A
+  player $(\tau^{reg},\overline{\mu})$ instead has subjective representation $\tau^{reg}(G^C)$
+  of Figure \ref{coordgame1reg} and a flat probability measure
+  $\overline{\mu}=(\frac{1}{2}I,\frac{1}{2}II)$ over the co-player's actions. Consequently,
+  such a player would play action $II$, i.e., the action that maximinimizes expected utility
+  given the flat probability measure $\overline{\mu}$.\footnote{As we already noticed,
+    maximinimizing expected utility given a probability measure $\mu$ is equivalent to
+    maximizing expected utility given $\mu$.}  Similarly, a player
+  $(\tau^{\pi},\Delta(A_{-i}))$ will have the subjective representation coinciding with the
+  objective fitness game, i.e., $ \tau^{\pi}(G^C)= G^C $. Then, both actions $I$ and $II$
+  maximinimize expected utility over the probability simplex $ \Delta(A_{-i}) $. Hence, a
+  player $(\tau^{\pi},\Delta(A_{-i}))$ will be indifferent between $I$ and $II$, and will
+  randomize with equal probability $(\frac{1}{2}I,\frac{1}{2}II)$. Finally, a player
+  $(\tau^{\pi},\overline{\mu})$ maximinimizes the objective fitness game $G^C$ of Figure
+  \ref{coordgame1} with flat probability $\overline{\mu}$ over the co-player's actions, i.e.,
+  maximizes objective utility given $\overline{\mu}$. In game $G^C$ this yields action $II$.
+
+
 
 \begin{figure}
 \begin{center}%
@@ -476,7 +533,8 @@ Given a game $G \in \mathcal{G}$, a player $(\tau, e)$, and a player $(\tau', e'
 
 \end{definition}
 
-
+\todo[inline]{should we explain here, or very soon, what the resulting types really are: regret
+  minimizers, maximin players \dots}
 
 Many other alternatives different from maxmin expected utility could produce behavior: choice rules like minmax, maxmax, and minmin expected utility would similarly generate behavior from a player type and an epistemic type. Here we postulate that players are maximinimizers for two main reasons. First, our main interest is the evolution of different patterns of subjective conceptualizations of games (player types), and we want to show that the veridical representation (objective type) is not necessarily the fittest and may not be evolutionarily stable. Assuming that all players use the maxmin rule independent of their player type allows us to factor the choice rule out of the selection process and to focus on player types. Secondly, as already mentioned, among other possible choice rules maxmin is not only intuitively appealing but also corroborated from an empirical point of view.
 
@@ -496,7 +554,13 @@ In the class of $2 \times 2$ symmetric games, players $(\tau^{reg}, \Delta(A_{-i
 
 \end{fact} 
 
-\noindent We still treat them as distinct, because they will perform differently with respect to component-wise mutation (see below). Moreover, Fact \ref{fact:equivalence2x2} does not hold for $n \times n$ symmetric games in general.
+\noindent Two remarks. Firstly, Fact \ref{fact:equivalence2x2} does not hold for $n \times n$
+symmetric games in general. Secondly, we treat behaviorally equivalent types as distinct,
+because we assume that what is selected by biological evolution is not choice behavior as such,
+but the mechanism which generates behavior. This matters in particular if we assume that
+mutations affect different components of the behavior generating mechanisms (see below). 
+
+
 
 \subsection{Evolution \& the environment}
 
@@ -842,7 +906,7 @@ before.
 \centering
 \footnotesize
 \begin{tabular}{ccccccccc}
-  \hline
+  \toprule
  & $\tuple{\tau^{reg}, \Delta(A)}$ 
  & $\tuple{\tau^{\pi}, \Delta(A)}$ 
  & $\tuple{\tau^{com}, \Delta(A)}$
@@ -851,7 +915,7 @@ before.
  & $\tuple{\tau^{\pi}, \bar{\mu}}$ 
  & $\tuple{\tau^{com}, \bar{\mu}}$
  & $\tuple{\tau^{alt}, \bar{\mu}}$ \\ 
-  \hline
+  \midrule
   $\tuple{\tau^{reg}, \Delta(A)}$ & 6.567 & 6.570 & 5.650 & 6.992 & 6.564 & 6.564 & 5.593 & 7.409 \\
   $\tuple{\tau^{\pi}, \Delta(A)}$ & 6.476 & 6.483 & 5.896 & 6.818 & 6.484 & 6.484 & 5.850 & 7.124 \\
   $\tuple{\tau^{com}, \Delta(A)}$ & 6.468 & 6.647 & 5.512 & 7.169 & 6.578 & 6.578 & 5.577 & 7.354 \\
@@ -860,7 +924,7 @@ before.
   $\tuple{\tau^{\pi}, \bar{\mu}}$ & 6.908 & 6.918 & 5.988 & 7.456 & 6.929 & 6.929 & 5.934 & 7.783 \\
   $\tuple{\tau^{com}, \bar{\mu}}$ & 6.529 & 6.680 & 5.445 & 7.276 & 6.542 & 6.542 & 5.521 & 7.440 \\
   $\tuple{\tau^{alt}, \bar{\mu}}$ & 6.450 & 6.337 & 5.772 & 6.978 & 6.457 & 6.457 & 5.479 & 7.500 \\
-   \hline                          
+   \bottomrule                         
 \end{tabular}                      
 \caption{Average payoff in simulations of 100,000
   randomly generated $n \times n$ symmetric games with $n$ randomly drawn from $\set{2, \dots, 10}$.}
@@ -931,6 +995,96 @@ preference types, as well as competitive and altruistic types.
 
 \subsection{Solitary decisions}
 \label{sec:solitary-decisions}
+
+\todo[inline]{text in this section and the next is rough and unpolished, only intended to have
+  the basic results recorded, so that we can reshape the article around the basic results}
+
+To see how preference types behave in evolutionary competition based on solitary decision
+problems, we approximated, much in the spirit of meta-games, average accumulated payoffs
+obtained in randomly generated solitary decision problems. For our purposes, a decision problem
+$\tuple{\States, \Acts, \Utils}$ consists of a set of world states $\States$, a set of acts
+$\Acts$, and a utility function $\Utils \mycolon \States \times \Acts \rightarrow
+\mathbb{R}$.
+We generated arbitrary decision problems by selecting numbers of states and acts
+$n_\state, n_\act \in \set{2, \dots, 10}$ and then filling the utility table, so to speak, by
+independently picking a number $\Utils(\state, \act) \in \set{0, 10}$ uniformly at random, just
+as we did before with symmetric games. Unlike with two-player games, we need to also sample the
+actual state of the world, which we selected uniformly at random from the available states in
+the current decision problem. Player types, consisting of epistemic types $\bar{\mu}$ and
+$\Delta(\States)$ and preference types $\tau^{reg}$ and $\tau^{\pi}$, give rise to behavior in
+the same way as before. (It is obviously not possible to carry altruistic or competitive
+preference types over to solitary decision making.) As before, we recorded the behavioral
+decisions for each of the four relevant player types in each sampled decision problem, and
+determined the actual payoff obtained, given the actual state. Average payoff over 100,000 decision
+problems are given in Table~\ref{tab:SolitaryDecisions}.
+
+\begin{table}
+  \centering
+  \begin{tabular}{cccc}
+    \toprule
+   $\tuple{\tau^{reg}, \Delta(A)}$ 
+ & $\tuple{\tau^{\pi}, \Delta(A)}$ 
+ & $\tuple{\tau^{reg}, \bar{\mu}}$ 
+ & $\tuple{\tau^{\pi}, \bar{\mu}}$ 
+ \\ \midrule
+    6.318 & 6.237 & 6.661 & 6.661 \\ \bottomrule
+  \end{tabular}
+  \caption{Average payoffs over 100,000 simulated solitary decision problems}
+  \label{tab:SolitaryDecisions}
+\end{table}
+
+Facts~\ref{fact:maxEU-minReg} and \ref{fact:equivalence2x2} still apply:
+$\tuple{\tau^{reg}, \bar{\mu}}$ and $\tuple{\tau^{\pi}, \bar{\mu}}$ are behaviorally equivalent
+in general, and $\tuple{\tau^{reg}, \Delta(A)}$ is behaviorally equivalent to the former two in
+decision problems with 2 states and 2 acts. \todo{show this?} We see this in part in the
+results in Table~\ref{tab:SolitaryDecisions} in that the averages for $\tuple{\tau^{reg},
+  \bar{\mu}}$ and $\tuple{\tau^{\pi}, \bar{\mu}}$ are identical. But since we included decision
+problems with more acts and more states as well, the averages for regret minimizers
+$\tuple{\tau^{reg}, \Delta(A)}$ are not identical. They are, in fact, lower, but not as low as
+those of the minimax choosers. 
+
+What that means is that basically every relevant result about game situations is also borne out
+when reasoning about solitary decisions. Evolutionary selection based on objective fitness will
+not select against regret-based subjective preferences, as these are indistinguishable from
+veridical preferences when paired with probabilistic beliefs. But when paired with
+non-probabilistic belief types, regret-based preferences actually outperform veridical
+preferences. Consequently, if there is a chance, however small, that agents must fall back onto
+non-probabilistic beliefs, evolution will actually positively select for non-veridical
+regret-based preferences.
+
+\subsection{Arbitrary probabilistic beliefs}
+\label{sec:arbitr-prob-beli}
+
+So far, we have assumed that epistemic types $\bar{\mu}$ hold an unbiased, flat belief. It is
+worthwhile considering what happens when this assumption is relaxed and we allow agents with
+probabilistic beliefs to make use of the full spectrum of probabilistic beliefs. It should be
+clear that quality of beliefs directly impacts prospects of successful decision-making: if a
+decision maker knows the actual state, or can put a high level of credence on the actual state,
+accumulated fitness can be expected to be high. We see this, unsurprisingly, in numerical
+simulations. We looked at the average payoff accumulated in 100,000 decision problems sampled
+as before, except that for belief types with probabilistic beliefs we sampled a random
+probabilistic belief $p$ (from an unbiased Dirichlet distribution) and chose the actual world
+state with probability weights $p$. This effectively implements a bias for beliefs of the
+decision maker that tend to put more weight on the actual state (although the procedure does
+admittedly perverse the natural chicken-and-egg logic in this case that the actual world state
+should come first and beliefs be a function of it). As a result, the average payoffs of types
+$\tuple{\tau^{reg}, \bar{\mu}}$ and $\tuple{\tau^{\pi}, \bar{\mu}}$ are still the exact same
+(because we compare what agents with different preference types would do under the same
+beliefs; we are not interested in statistical fluctuations given one type better beliefs by
+pure happenstance), but with $7.125$ notably higher than before. In effect, better
+probabilistic beliefs lead to better decisions. If agents can learn, reason and extrapolate to
+form better probabilistic beliefs, that will help them whenever they take their beliefs into
+account. 
+
+But this is orthogonal to the arguments in this paper, where the focus is on possibilities for
+the evolution of non-veridical preferences. We know from Fact~\ref{fact:maxEU-minReg} that
+regret types and veridical preference types, when paired with probabilistic belief types that
+maximize/minimize expectations, are behaviorally equivalent, \emph{no matter what they belief},
+as long as they belief the same. So, if learning, insight and statistical knowledge of a
+recurrent situation \emph{can} be brought to bear, this will not make evolution select against
+regret-based preferences. If, on the other hand, agents have no basis for probabilistic
+beliefs, then we have shown that there are general and basic circumstances in which
+regret-based preferences can actually be selected, despite their non-veridicality.
 
 \section{Discussion}
 
@@ -1346,6 +1500,90 @@ maximization of subjective preferences.]
 \end{itemize}
 
 
+\begin{itemize}
+\item Evolutionary game theory has become an established philosophical tool for probing into
+  conceptual issues whose complexity requires mathematical modeling.
+  \begin{itemize}
+  \item helped structure debate about foraging, mating, evolution of cooperation,
+    information-flow, deception etc.
+  \end{itemize}
+\item Most applications of EGT look at evolutionary selection of behavior in a single
+  game. There are two crude simplifications here:
+  \begin{enumerate}
+  \item The stage game is usually considered fixed, closed and immutable.
+    \begin{itemize}
+    \item there are some notable exceptions where the game is open ended, e.g., by the
+      invention of actions \citep{WordenLevin2007:Evolutionary-es,
+        McKenzie-AlexanderSkymrs2012:Inventing-New-S}
+    \end{itemize}
+  \item What evolves are behavioral strategies for the stage game \citep[what][call the
+    ``behavioral gamit'']{FawcettHamblin2013:Exposing-the-be} \myalert{(more references!
+      Gigerenzer etc.)}.
+  \end{enumerate}
+\item It has been argued that we should rather study the evolutionary selection of \emph{choice
+    mechanisms} that are adapted in a rich and variable environment
+  \citep[e.g.][]{FawcettHamblin2013:Exposing-the-be,McNamara2013:Towards-a-Riche}.
+\item However, studies on the adaptive value of choice mechanisms have focused, for the most
+  part, on the evolutionary benefit of learning rules
+  \citep[e.g.][]{ZollmanSmead2010:Plasticity-and-,SmeadZollman2013:The-Stability-o}. (\myalert{More references Harley 1981!!!, \dots}). 
+    Moreover, only little attention has been paid to
+  modeling the direct (game-theoretic) meta-competition between alternative choice mechanisms
+  \citep[see][for related criticism]{FawcettHamblin2013:Exposing-the-be}.
+\item Here, we would like to make two contributions to the literature on evolution of choice
+  mechanisms:
+  \begin{enumerate}
+  \item On the conceptual side, we argue that paying attention to the evolution of (subjective
+    representations of) preferences matters. Since almost any reasonable learning or
+    decision-making process will make use of some (subjective, agent-internal (possibly
+    unconscious)) representation of the quality of choice options, the question of which such
+    representations are ecologically valuable (i.e., lead to high fitness) is central. In fact,
+    the evolution of (subjective representations of) preferences has recently been studied in
+    theoretical economics as well \myalert{add references}. However, these studies also suffer
+    from the ``behavioral gambit'' and the usual shortcomings of the closedness of the stage game. 
+  \item On the methodological side, we therefore introduce a conservative extension of the
+    standard EGT that allows us to reuse notions such as evolutionary stability / evolutionary
+    dynamics and yet helps us study the evolutionary competition between choice mechanisms in a
+    statistically variable environment. Concretely, we look at the evolutionary competition of
+    choice mechanisms in a ``meta-game'' that consists of the average expected payoffs of
+    choice mechanisms when playing arbitrary games (from a given class). In this sense, a
+    meta-game captures (the modeller's) assumptions about the relevant statistic of the
+    environment in which evolutionary forces operate.
+  \end{enumerate}
+\item To drive home our conceptual point that preference representations can matter, we try to
+  isolate, as good as we can, the evolution of preferences from considerations of learning or
+  other factors feeding a decision mechanism (such as the acquisition of ecologically useful
+  representations (think: beliefs)). (Obviously, eventually, we would like to study the
+  evolution of all of these relevant components in one swoop.)
+\item To demonstrate how this approach can be theoretically rewarding, we show that, under
+  reasonable additional assumptions, evolutionary selection can support non-veridical
+  representations of payoffs in terms of regret.
+  \begin{itemize}
+  \item We argue that this ``meta-evolutionary'' approach could eventually help explain
+    attested deviations of human decision making from the classical ideal: choice behavior
+    evolved to be an ``ecologically rational'', near-optimal adaptation to the environment
+    \citep{Anderson1990:The-Adaptive-Ch,Anderson1991:Is-human-cognit,GigerenzerGoldstein1996:Reasoning-the-F,ChaterOaksford2000:The-Rational-An}. This
+    is inline with recent aspirations to provide an evolutionary rationale for decision making
+    processes
+    \citep[e.g.][]{HammersteinStevens2012:Six-Reasons-for,FawcettHamblin2013:Exposing-the-be}.
+  \item Non-veridical regret-based representations of payoffs are intuitively appealing (we do,
+    at least on occasion, care about counterfactual or hypothetical losses), but could also
+    help explain, for instance, that decision-makers may violate the independence axiom: human
+    and non-human decision makers can favor $A$ when presented with a choice
+    between $A$ and $B$, but prefer $B$ when presented with $A$, $B$ and $C$ \myalert{(for
+      animals cite from Fawcett page 3)} \myalert{(add
+      citation for human performance)}
+  \item We need to be careful here: we do not want to stress that this approach here (the
+    particular implemenation of a regret-based choice mechanism) explains these empirical
+    findings (better than any other line of explanation). Our point is more general and
+    methodological. Evolution of preferences is something that the literature on evolution of
+    choice mechanisms should care about. We also presented a method that can be useful and an
+    example of that method that should (succinctly) demonstrate our aforementioned conceptual
+    point that evolution of preferences is conceptually important and can give non-trivial,
+    unexpected and philosophically useful results.
+  \end{itemize}
+\item contributes to: (i) methodological reflection on evolutionary game theory, (ii) ecological
+  rationality of choice behavior, (iii) evolution of preferences literature
+\end{itemize}
 
 
 
