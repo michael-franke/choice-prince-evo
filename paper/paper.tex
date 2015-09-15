@@ -6,7 +6,8 @@
 
 \usepackage[]{helpers/mypackages}
 %\usepackage[natbib=true,style=authoryear-comp,backend=bibtex,doi=false,url=false]{biblatex}
-\bibliography{helpers/MyRefLocal}
+% \bibliography{helpers/MyRefLocal}
+\bibliography{MyRefGlobal}
 \usepackage{helpers/myenvironments}
 \usepackage{helpers/mycommands}
 
@@ -42,7 +43,7 @@
 
 \title{Rationality, Evolution \& the Environment}
 \author{Paolo Galeazzi \& Michael Franke}
-\date{current version: August 21st 2015}
+\date{current version: September 15th 2015}
 
 \begin{document}
 
@@ -127,28 +128,83 @@ theory. Section \dots
 
 \todo[inline]{add overview}
 
-\section{Rationality, subjectivity  \& subjective regret}
+\section{Rationality, subjectivity, beliefs \& preferences}
 \label{sec:rati--subj}
 
-\todo[inline]{would it make sense to tighten and restructure this section a little bit? what
-  about this: rationality says \emph{if} utils, beliefs and rational, then choose this; utils
-  and beliefs are unobservable; in some case utils and preferences \emph{can} be tight to the
-  environment (probability of a fair coin landing heads), in others no (probability of life on
-  Mars); if tight to environment its frequencies and fitness that would pin down a norm for
-  rational behavior, otherwise there's the danger of redescriptionism (just find some belief
-  and preference that rationalizes observed behavior); \dots }
+The standard textbook definition of \textit{rationality} in economics and decision theory
+traces back to the seminal work of \citet{Neumannvon-NeumannMorgenstern1944:Theory-of-Games}
+and \citet{Savage1954:The-Foundations}. It says that choice is rational only if it maximizes
+(subjective) expected utility.
 
-The standard definition of \textit{rationality} in economics and decision theory says that
-choice is rational only if it maximizes (subjective) expected utility. Since the work by vNM
-[cite], this view has been justified from the ``intuitive rationality'' of the axioms on the
-subjective preference relation leading to the representability of the decision maker as an
-expected utility maximizer. \todo{include axioms, or at least those that are mentioned as
-  relevant later} While in the axiomatization by [vNM] the probability of the outcomes is
-objectively given a priori, Savage54 provides a larger set of axioms that represent the
-decision maker (DM) with both a subjective utility over outcomes \textit{and} a
-\textit{subjective} probability over states of the world. Savage's axioms constitute the
-foundation of subjective expected utility (SEU) theory, that is normally assumed to define the
-rational behavior of economic agents.
+\begin{definition}[Rational choice from maximization of expected utility] Let $S$ be a (finite)
+  set of states of the world and $A$ a (finite) set of actions. Given a probability
+  distribution $P$ over $S$ and a utility function
+  $u \mycolon S \times A \rightarrow \mathbb{R} $, an action $a^* \in A$ is a rational choice
+  only if it maximizes the \emph{(subjective) expected utility}
+  $\EU(a^*) = \sum_{s \in S} P(s) \ u(s, a^*)$: $a^* \in \text{argmax}_{a_i \in A} \EU(a^*)
+  $. \todo{Give finite formulation? Everything we do here is finite}
+\end{definition}
+
+\noindent Expected utility is subjective in the sense that it is a function of subjective
+preferences and subjective beliefs of the decision maker (DM). To wit, a choice can be
+rational, i.e., the best choice from the DM's point of view, even if based on peculiar beliefs
+and/or aberrant preferences. (Indeed, while
+\citeauthor{Neumannvon-NeumannMorgenstern1944:Theory-of-Games} assumed that probabilities were
+objectively given, it was \citet{Savage1954:The-Foundations} who famously extended von Neumann
+and Morgenstern's axiomatization to include a subjective notion of probabilistic beliefs on top
+of the subjective notion of preference that von Neumann and Morgenstern started out with.)
+
+If beliefs and preferences are subjective, there is room for \emph{rationalization} or
+\emph{redescriptionism} of observable behavior. Prospect theory is, perhaps, the most prominent
+example. \citet{KahnemannTversky1979:Prospect-Theory} looked at experimental data from human
+choices in suitably defined tasks and demonstrated that what appears to be violations of
+rationality norms can be explained as rational on the assumption that subjects' beliefs and
+preferences deviate systematically from the objectively given parameters in the presented
+choice task (e.g., by taking into account reference points and diminishing returns for both
+gains and losses). Similarly, tinkering with the notion of subjective utility, in particular by
+including social preferences such as fairness, reciprocity or similar, allows us to describe as
+rational empirically observed behavior in social dilemmas, such as the prisoners' dilemma or
+public goods games, that might otherwise appear irrational (e.g. Fehr and Schmidt, Charness and
+Rabin, etc.).\todo{@Paolo: please include proper references}
+
+It could be objected that, without additional constraints, the notion of rationality is likely
+to collapse, as it seems possible to deem rational everything that is observed, given the
+freedom to adjust beliefs and preferences freely. Of course, there are many ways in which
+ascription of beliefs and preferences is constrained further by normative considerations of
+rationality. \todo{speak about Dutch books here?} To begin with, if the DM's uncertainty is
+about objective chance, it can be argued that subjective beliefs should conform (at least
+roughly) to objective chance. Similarly, in certain situations it may make sense to postulate
+on normative grounds that subjective preferences should be oriented towards tracking objective
+utility. For instance, in their classic work \myalert{(Alchian, Friedman)} argue that profit
+maximization is a reasonable assumption for characterizing outcomes in a competitive market
+because only firms behaving in a manner that is consistent with profit maximization will
+survive in the long run.\todo{@Paolo: please add references}
+
+An alternative to descriptive vs.~normative views on rationality is \emph{adaptationism}
+\citep[e.g.][]{HagenChater2012:Decision-Making}. \todo{more references} Adaptationism aims to
+explain choice behavior by appeal to evolutionary considerations. The key idea is that we
+should see decision makers (human and other life forms) as having evolved mechanisms for
+choosing that were fitness enhancing (in the relevant domains of choice making, at the relevant
+time of evolution). When it comes to preferences, this is clearly related to Alchian and
+Friedman's argument that firms \emph{should} optimize that which makes them ``live,'' so to
+speak. For biological agents, the argument would be that subjective preferences \emph{should}
+track whatever determines objective fitness.
+
+Taking inspiration from recent economic literature on the evolution of preference, we would
+like to put this latter idea to the test. We 
+
+
+\bigskip
+
+ Since the work by vNM [cite], this view has been justified from
+the ``intuitive rationality'' of the axioms on the subjective preference relation leading to
+the representability of the decision maker as an expected utility maximizer. \todo{include
+  axioms, or at least those that are mentioned as relevant later} While in the axiomatization
+by [vNM] the probability of the outcomes is objectively given a priori, Savage54 provides a
+larger set of axioms that represent the decision maker (DM) with both a subjective utility over
+outcomes \textit{and} a \textit{subjective} probability over states of the world. Savage's
+axioms constitute the foundation of subjective expected utility (SEU) theory, that is normally
+assumed to define the rational behavior of economic agents.
 
 \begin{definition}[SEU-maximization] Let $S$ be a set of states of the world, $X$ a set of
   outcomes and $A$ a set of actions. Given a probability measure $P$ on $S$ and a subjective
