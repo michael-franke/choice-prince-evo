@@ -434,8 +434,17 @@ Given $ \mathcal{G} $ the class of symmetric $ 2 \times 2 $ games, we call altru
   types; we could appeal to information available to agents; naturalness of situations in which
   we cannot attach numbers to our beliefs (life on Mars again) \dots}
 
-In line with traditional evolutionary game theory, the idea of this work is to model a population of rather unsophisticated and myopic agents that possibly differ from each other with respect to two components: the player type and the epistemic type.
-In full generality, we think of an epistemic type as a general disposition to form beliefs about the co-player’s behavior.    Players in the population obviously face uncertainty about the composition of the population that they are part of, and consequently about the type of co-player that they are randomly paired with at each round and about the co-player's actions. We represent this uncertainty that players entertain in two different ways, a probabilistic flat belief and a non-probabilistic belief. This amounts to having two different epistemic types $e$ in the population, $e \in \lbrace \overline{\mu}, \Delta(A_{-i}) \rbrace $, where $\overline{\mu}$ is the probabilistic type and $\Delta(A_{-i})$ is the non-probabilistic type, defined as follows:
+Consider the following problem. I have, on the desk in front of me, a bag containing either red or black marbles. There is no further information about the distribution of the two colors. What is then the probability that I will draw a red marble? As in Walley91-96, we are not talking about physical probability, but rather about epistemic probability, i.e., the subjective probability that an agent would attribute to an event.
+In the literature there are two traditional ways of answering this kind of questions. According to standard Bayesianism, one should always be able to determine a precise betting rate (that immediately translates into a precise probability), which is fair, in the sense that the DM is indifferent between betting on or against red at the fair rate, and would bet on red at any rate that is more favourable than the fair rate and against red at any rate that is less favourable. In this case, a strict Bayesian, in the absence of any further information, would probably rely on the principle of insufficient reason and answer that the DM should have a uniform distribution that considers all the outcomes equipossible. \\
+The second answer involves imprecise probabilities and is related to the literature about uncertainty, or ambiguity. Many authors argued in favor of this kind of approach [e.g., Walley91-96, Levi74, GardenforsANDSahlin82]. Since it is consistent with the information available that all the marbles are red, or that no marble is red, the resulting model should take it into account and specify a lower probability of red $\underline{P}(R)$ and an upper probability of red $\overline{P}(R)$ that define an interval of possible probabilistic beliefs [$\underline{P}(R), \overline{P}(R)$]. Given the information available in this case we would have $\underline{P}(R)=0$ and $\overline{P}(R)=1$. This approach appears particularly relevant and appropriate in a game theoretical context. Indeed, in a recent paper [Battigalliet al.15] Battigalli et al. write
+\begin{quote}
+Such uncertainty is inherent in situations of strategic interaction. This is quite obvious when such situations have been faced only a few times.
+\end{quote}
+In decision theory, the imprecise probability model is in line with most of the representation results about uncertainty [GilboaSchmeidler89,KMM06], and seems justified by empirical observations too (see below). Walley91-96 is a seminal work in the area, and also introduces learning procedures to get useful inferences and narrow down the probability set [$\underline{P}(R), \overline{P}(R)$] after observing data. Since we want to study the evolution of meta-types, the present work does not address the probem of drawing inferences from observations, and we do not endow the players with any learning procedure yet.\\
+In line with traditional evolutionary game theory, the idea of this work is to model a population of rather unsophisticated and myopic agents. %that possibly differ from each other with respect to two components: the player type and the epistemic type. The players 
+The players encode both a psychological subjective representation of the interaction (player type) and a conceptualization of uncertainty (epistemic type), but they are too simple to have any learning or belief updating procedure. From this point of view, we can take the learning process away from natural selection and focus on player types and epistemic types as the target of evolutionary pressure.
+
+In full generality, we think of an epistemic type as a general disposition to form beliefs about the co-player’s behavior.    Players in the population obviously face uncertainty about the composition of the population that they are part of, and consequently about the type of co-player that they are randomly paired with at each round and about the co-player's actions. We represent this uncertainty by the use of both the approaches presented above: a uniform distribution and a probability set. This amounts to having two different epistemic types $e$ in the population, $e \in \lbrace \overline{\mu}, \Delta(A_{-i}) \rbrace $, where $\overline{\mu}$ stands for the uniform distribution and $\Delta(A_{-i})$ is the probability set, defined as follows:
 
 \begin{itemize}
 
@@ -445,8 +454,7 @@ In full generality, we think of an epistemic type as a general disposition to fo
 
 \end{itemize} 
 
-Hence, we consider two possible epistemic states in the face of uncertainty. The epistemic type $\Delta(A_{-i})$ represents a situation of non-probabilistic radical uncertainty, where the players are not able to narrow down the set of probability distributions over the co-player's actions and they consider all of them as possible. The other epistemic type $\overline{\mu}$ conceptualizes the uncertainty about the population by using the principle of insufficient reason and ascribes equal probability to all the possible alternatives. Both options are reasonable and justifiable ways to deal with situations of uncertainty [REFERENCES]. \\
-Since for the moment we want to model populations of biologically unsophisticated players, we do not endow them with an effective learning procedure. Our players encode both a psychological subjective representation of the interaction (player type) and a conceptualization of uncertainty (epistemic type), but they are too simple to have any learning or belief updating procedure. From this point of view, we can take the learning process away from natural selection and focus on player types and epistemic types as the target of evolutionary pressure.
+Hence, we consider two possible epistemic states in the face of uncertainty. The epistemic type $\Delta(A_{-i})$ represents a situation of non-Bayesian radical uncertainty, where the players are not able to narrow down the set of probability distributions to a single one and they consider all of them as possible. The other epistemic type $\overline{\mu}$ conceptualizes the uncertainty about the population by using the principle of insufficient reason and ascribes equal probability to all the possible alternatives. As we have seen, both options are reasonable and justifiable ways to deal with situations of uncertainty [REFERENCES]. \\
 
 \subsection{Uncertainty aversion and maxmin rule}
 
@@ -1336,8 +1344,7 @@ more explicitly as:
 
 \medskip{}
 
-\noindent $\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{MM})\cdot a^{C}+P(II_{G^{C}}^{MM})\cdot d^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{MM})\cdot a^{A}+P(II_{G^{A}}^{MM})\cdot d^{A}]<\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{MM}\cap I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{MM}\cap II_{G^{C}}^{RM})\cdot d^{C}+P(I_{G^{C}}^{MM}\cap II_{G^{C}}^{RM})\cdot c^{C}+P(II_{G^{C}}^{MM}\cap I_{G^{C}}^{RM})\cdot b^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{MM}\cap I_{G^{A}}^{RM})\cdot a^{A}+P(II_{G^{A}}^{MM}\cap II_{G^{A}}^{RM})\cdot d^{A}+P(I_{G^{A}}^{MM}\cap II_{G^{A}}^{RM})\cdot c^{A}+P(II_{G^{A}}^{MM}\cap I_{G^{A}}^{RM})\cdot b^{A}]$
-
+\noindent $\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{RM})\cdot d^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{RM})\cdot a^{A}+P(II_{G^{A}}^{RM})\cdot d^{A}]>\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot a^{C}+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot d^{C}+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot c^{C}+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot b^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{RM}\cap I_{G^{A}}^{MM})\cdot a^{A}+P(II_{G^{A}}^{RM}\cap II_{G^{A}}^{MM})\cdot d^{A}+P(I_{G^{A}}^{RM}\cap II_{G^{A}}^{MM})\cdot c^{A}+P(II_{G^{A}}^{RM}\cap I_{G^{A}}^{MM})\cdot b^{A}]$
 \medskip{}
 
 \noindent Then, the next derivation follows. By Lemma 5 and 6, we can express
@@ -1419,6 +1426,51 @@ As before, we write it more explicitly as:
 not evolutionarily stable against RM both when the value set for $a,b,c,d$
 is finite, and when the value set for $a,b,c,d$ is a compact and
 convex set. This concludes the proof. $\dashv$
+
+
+\textbf{Proof of Proposition 2.} First we prove that regret type is evolutionarily stable against altruistic type and that altruistic type is not evolutionarily stable against regret type, and second we show that regret type is evolutionarily stable against competitive type and that competitive type is not evolutionarily stable against regret type. We make use of the same partition of $\mathcal{G}$ introduced in the proof of Proposition 1. Again, to ease notation let us write ALT and COM in the place of $(\tau^{alt}, \Delta(A))$ and $(\tau^{com}, \Delta(A))$, respectively.
+
+\begin{lemma}
+In $\mathcal{G}^I$, RM and ALT perform equally well.
+\end{lemma}
+
+\begin{proof}
+Trivial.
+\end{proof}
+
+\begin{lemma}
+In $\mathcal{G}^S$, RM is evolutionarily stable against ALT, and ALT is not evolutionarily stable against RM. 
+\end{lemma}
+
+\begin{proof}
+Let us assume, without loss of generality, that $a>c$ and $b>d$. We already know that RM always plays the dominant action $I$, then a population of RM players always coordinates on $I$ with a payoff of $a$. It is possible instead that an ALT player plays the dominated action $II$, for instance when $2d > 2a$ and $2a < b+c$. Then, the payoff of an ALT invader against a population of RMs is $c$. Since $a>c$ by assumption, we get that a RM population cannot be invaded by ALT players in this case. When $b+c < 2a$ and $b+c < 2d$, ALT will play $(\frac{1}{2}I;\frac{1}{2}II)$ for an expected payoff of $\frac{1}{2} a + \frac{1}{2} c$. Since $a > \frac{1}{2} a + \frac{1}{2} c$, a population of RMs is evolutionarily stable against ALT. \\
+When $2d > 2a$ and $2a < b+c$, an ALT population plays action $II$ for a payoff of $d$, whereas a RM invader plays action $I$ for a payoff of $b$. By assumption $b>d$, hence a population of ALTs would not be evolutionarily stable in this case. When $b+c < 2a$ and $b+c < 2d$, the expected payoff of a population of ALTs is $\frac{1}{4}a+\frac{1}{4}b+\frac{1}{4}c+\frac{1}{4}d$, while the expected payoff of a RM invader is $\frac{1}{2}a+\frac{1}{2}b$. Since $\frac{1}{2}a+\frac{1}{2}b > \frac{1}{4}a+\frac{1}{4}b+\frac{1}{4}c+\frac{1}{4}d$, we have that an ALT population is not evolutionarily stable against RM.
+\end{proof}
+
+
+
+\begin{lemma}
+In $\mathcal{G}^W$, RM is evolutionarily stable against ALT, and ALT is not evolutionarily stable against RM. 
+\end{lemma}
+
+\begin{proof}
+Let us assume, WLOG, that $b=d$ and $a>c$. We know that RM always plays the (weakly) dominant action $I$. Again, a RM population always coordinates on $I$ for a payoff of $a$, whereas when $2d > 2a$ and $2a < b+c$ an ALT invader plays $II$. Then, the payoff of an ALT invader against a population of RMs is $c$. Since $a>c$ by assumption, we get that a RM population cannot be invaded by ALT players in this case. When $b+c < 2a$ and $b+c < 2d$, ALT plays $(\frac{1}{2}I;\frac{1}{2}II)$ for an expected payoff of $\frac{1}{2} a + \frac{1}{2} c$. Since $a > \frac{1}{2} a + \frac{1}{2} c$, a population of RMs is evolutionarily stable against ALT. \\
+When $2d > 2a$ and $2a < b+c$, an ALT population plays action $II$ for a payoff of $d$, whereas a RM invader plays action $I$ for a payoff of $b$. Since $b=d$, we have to check the second condition for ESS: an ALT against RM gets $c$, and RM against RM gets $a$. By assumption $a>c$, hence an ALT population would be invaded by RM players in this case. 
+When $b+c < 2a$ and $b+c < 2d$, the expected payoff of a population of ALTs is $\frac{1}{4}a+\frac{1}{4}b+\frac{1}{4}c+\frac{1}{4}d$, while the expected payoff of a RM invader is $\frac{1}{2}a+\frac{1}{2}b$. Since $\frac{1}{2}a+\frac{1}{2}b > \frac{1}{4}a+\frac{1}{4}b+\frac{1}{4}c+\frac{1}{4}d$, we again have that an ALT population is not evolutionarily stable against RM.
+\end{proof}
+
+\begin{lemma}
+In $\mathcal{G}^C$, RM is evolutionarily stable against ALT, and ALT is not evolutionarily stable against RM. 
+\end{lemma}
+
+\begin{proof}
+Let's assume, WLOG, that $a>d$. We know that RM plays $I$ if $ a-c > d-b $ and $II$ if $ a-c < d-b $, whereas  ALT plays $I$ if $2d<b+c$, otherwise ALT plays $(\frac{1}{2}I;\frac{1}{2}II)$. If $2d<b+c$, then $d-b<c-d$, hence $c>d$. Consequently, when $2d<b+c$ the expected payoff of an ALT population is $a$
+\end{proof}
+
+
+
+
+
 
 \printbibliography[heading=bibintoc]
 
