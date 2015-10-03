@@ -12,6 +12,7 @@
 \usepackage{helpers/mycommands}
 
 \usepackage{todonotes}
+\usepackage{subcaption}
 
 
 %========================================
@@ -43,7 +44,7 @@
 
 \title{Rationality, Evolution \& the Environment}
 \author{Paolo Galeazzi \& Michael Franke}
-\date{current version: September 15th 2015}
+\date{current version: October 3rd 2015}
 
 \begin{document}
 
@@ -141,8 +142,8 @@ and \citet{Savage1954:The-Foundations}. It says that choice is rational only if 
   distribution $P$ over $S$ and a utility function
   $u \mycolon S \times A \rightarrow \mathbb{R} $, an action $a^* \in A$ is a rational choice
   only if it maximizes the \emph{(subjective) expected utility}
-  $\EU(a^*) = \sum_{s \in S} P(s) \ u(s, a^*)$: $a^* \in \text{argmax}_{a_i \in A} \EU(a^*)
-  $. \todo{Give finite formulation? Everything we do here is finite}
+  $\EU(a) = \sum_{s \in S} P(s) \ u(s, a)$: $a^* \in \text{argmax}_{a \in A} \EU(a)
+  $.
 \end{definition}
 
 \noindent Expected utility is subjective in the sense that it is a function of subjective
@@ -161,9 +162,9 @@ choices in suitably defined tasks and demonstrated that what appears to be viola
 rationality norms can be explained as rational on the assumption that subjects' beliefs and
 preferences deviate systematically from the objectively given parameters in the presented
 choice task (e.g., by taking into account reference points and diminishing returns for both
-gains and losses). Similarly, tinkering with the notion of subjective utility, in particular by
-including social preferences such as fairness, reciprocity or similar, allows us to describe as
-rational empirically observed behavior in social dilemmas, such as the prisoners' dilemma or
+gains and losses).  Similarly, tinkering with the notion of subjective utility, in particular
+by including social preferences such as fairness, reciprocity or similar, allows us to describe
+as rational empirically observed behavior in social dilemmas, such as the prisoners' dilemma or
 public goods games, that might otherwise appear irrational (e.g. Fehr and Schmidt, Charness and
 Rabin, etc.).\todo{@Paolo: please include proper references}
 
@@ -173,12 +174,15 @@ freedom to adjust beliefs and preferences freely. Of course, there are many ways
 ascription of beliefs and preferences is constrained further by normative considerations of
 rationality. \todo{speak about Dutch books here?} To begin with, if the DM's uncertainty is
 about objective chance, it can be argued that subjective beliefs should conform (at least
-roughly) to objective chance. Similarly, in certain situations it may make sense to postulate
-on normative grounds that subjective preferences should be oriented towards tracking objective
-utility. For instance, in their classic work \myalert{(Alchian, Friedman)} argue that profit
-maximization is a reasonable assumption for characterizing outcomes in a competitive market
-because only firms behaving in a manner that is consistent with profit maximization will
-survive in the long run.\todo{@Paolo: please add references}
+roughly) to objective chance. When the DM's uncertainty cannot be anchored in an objective
+notion of chance, then temporal consistency in his decision making should at least constrain
+his subjective belief, else he fall prey to exploitation by Dutch books. Similarly, in certain
+situations it may make sense to postulate on normative grounds that subjective preferences
+should be oriented towards tracking objective utility, e.g., fitness. For instance, in their
+classic work \myalert{(Alchian, Friedman)} argue that profit maximization is a reasonable
+assumption for characterizing outcomes in a competitive market because only firms behaving in a
+manner that is consistent with profit maximization will survive in the long run.\todo{@Paolo:
+  please add references}
 
 An alternative to descriptive vs.~normative views on rationality is \emph{adaptationism}
 \citep[e.g.][]{HagenChater2012:Decision-Making}. \todo{more references} Adaptationism aims to
@@ -191,109 +195,48 @@ speak. For biological agents, the argument would be that subjective preferences 
 track whatever determines objective fitness.
 
 Taking inspiration from recent economic literature on the evolution of preference, we would
-like to put this latter idea to the test. We 
+like to put this latter idea to the test. We present a formal argument intended to support two
+points: (i) subjective preferences that differ from objective fitness can be sustained and even
+be adaptive; this is brought to the foreground if we acknowledge that (ii) it is important to
+take into account the potential mutual dependence of subjective preferences and subjective
+beliefs in adaptationist approaches to decision making. More specifically, we show that
+subjective, non-veridical preference representations based on a notion of regret can be
+adaptive and even outperform objective, veridical representations of the actual fitness, when
+agents, at least on occasion, lack the ability to form reasonable probabilistic beliefs, in
+which case they hold imprecise probabilistic beliefs (CITE). The following Section~XYZ will
+introduce the basic notions needed for this argument, namely regret, imprecise probabilistic
+beliefs and security strategies.
 
+The method by which we want to advance our argument is to integrate ideas from the recent
+literature on preference evolution (CITE) with basic tenets of adaptationism: we are interested
+in studying the evolutionary competition of choice mechanism, conceived here as pairs of
+(general ways of) subjective preference and subjective belief
+representation. \textcolor{red}{EXAND}. This method is further detailed in
+Section~\ref{sec:model}.
 
-\bigskip
-
- Since the work by vNM [cite], this view has been justified from
-the ``intuitive rationality'' of the axioms on the subjective preference relation leading to
-the representability of the decision maker as an expected utility maximizer. \todo{include
-  axioms, or at least those that are mentioned as relevant later} While in the axiomatization
-by [vNM] the probability of the outcomes is objectively given a priori, Savage54 provides a
-larger set of axioms that represent the decision maker (DM) with both a subjective utility over
-outcomes \textit{and} a \textit{subjective} probability over states of the world. Savage's
-axioms constitute the foundation of subjective expected utility (SEU) theory, that is normally
-assumed to define the rational behavior of economic agents.
-
-\begin{definition}[SEU-maximization] Let $S$ be a set of states of the world, $X$ a set of
-  outcomes and $A$ a set of actions. Given a probability measure $P$ on $S$ and a subjective
-  utility function $u:X \rightarrow \mathbb{R} $, an action $a^*: S \rightarrow X $ is
-  SEU-maximizing if $a^* \in \text{argmax}_{a_i \in A} \int_S u(a^*(s))dP(s) $. \todo{do we
-    actually need outcomes for anything in this paper?}
-\end{definition}
-
-
-The subjectivity of preferences plays a very important
-role for the present work. From an agent's standpoint, the amount $x$ of, say, money achieved does not necessarily
-coincide with the amount of subjective utility attained $u(x)$. 
-Historically,  the first to notice and formally argue for this difference
-between objective utility (goods, money, etc.) and subjective utility (preferences) was
-D. Bernoulli with the famous St. Petersburg paradox in 1738. Moreover, Bernoulli introduced the idea that a good representation of
-subjective utility can be carried out in terms of an increasing concave function of objective
-utility. This can be considered the birth of modern decision theory.
-
-Empirically, many violations of Savage's (and vNM's) axioms have been consistently observed in behavioral economics. Most of the attention has been focused on the Independence Axiom and the Sure-thing Principle. Allais' paradox and Ellsberg's paradox are examples of violations of these two axioms, and they are at the origin of Prospect theory [cite] and ambiguity in decision theory [cite].
-
-The main idea behind Ellesberg's paradox and the literature on ambiguity is that DM treats differently objective and subjective uncertainty. If the probability measure on the possible states of the world is not given a priori and not ''known'', then observed preferences leave no room to represent  DM's beliefs via a probability measure on the possible states. The most common solution is then to represent DM's beliefs with a set of probability measures instead of a single one.  
-
-Prospect theory was introduced by Kahnemann and Tversky in
-their famous paper from 1979. By means of experimental results they noticed that DM apparently acts as a risk averse agent with respect to gains and as a risk loving agent
-with respect to losses. Consequently, they conjectured that the subjective utility is better
-representable by an S-shaped utility function, concave in the positive domain of gains and
-convex in the negative domain of losses.
-
-More recently, other possible definitions of the subjective utility function have been proposed
-and justified from a game theoretical point of view (e.g. Fehr and Schmidt, Charness and Rabin,
-etc.). The central goal of these studies is to explain/describe the empirical behavior in social dilemmas
-(e.g., Prisoner's dilemma, public goods game, etc.). In the same spirit of Prospect theory, by means of different subjective utility
-functions it is possible to describe/match the behavior observed in game theoretical experiments and to
-explain it as rational (in the sense of maximizing the subjective utility).
-With this approach every behavior, no matter how far from the maximization of
-objective utility, can be deemed rational if we can only find a subjective utility that
-justifies that behavior as maximizing the subjective utility. The problem here is that it seems possible to consider rational everything
-that is observed, given the adequate subjective utility function. The notion
-of rationality almost collapses onto the observed behavior.
-
-On the other side, other economists (Alchian, Friedman) seem to link the notion of rational choice
-more tightly to the maximization of objective utility. In their classic works they argue that
-profit maximization is a reasonable assumption for characterizing outcomes in a competitive
-market because only firms behaving in a manner that is consistent with profit maximization will
-survive in the long run. If the previous accounts of rationality looked more descriptive, this
-definitely tastes more normative. In this sense, a normative notion of rationality would be tightly
-related to (and almost coincide with) the maximization of objective utility, which is supposed
-to drive the evolutionary process. It follows then that being normative in this sense points to an identification of rationality with maximization of objective utility.
-
-It seems that we are stuck between two extrema: a too permissive descriptivism and a too restrictive normativism. On the one hand, if we want to have a
-descriptive notion of rationality, then we can (almost) always define an appropriate
-subjective utility whose maximization matches the observed behavior. On the other hand, if we
-want to have a normative approach to rationality, then it seems we have to appeal to
-evolutionary arguments entailing the understanding of rationality as maximization of objective
-utility.
-
-However, it has been argued that in a good theory of choice and decision making the normative
-and the descriptive components should not come apart. For example, as Douglas Maclean [cite]
-writes: 
-
-\todo[inline]{personally, not a big fan of extended quotes; talks: yes, papers: don't know; is
-  this dear to your heart? who's that Maclean anyway? ;-)}
-
-\begin{quote}
-The history of the subject reflects strong reasons why the theory of choice should have this dual character. [...] \\
-A normative theory of choice gains credibility from its predictive and explanatory power, for although empirical success itself may not constitute much of a normative argument, the theory of rational behavior is less likely to be found objectionable if rationality turns out to be widespread. [...] But if, on the other hand, the normative theory turns out to be incompatible with the best established behavioral theory, then the verification of the normative theory will depend entirely on the intrinsic plausibility of its axioms, and that appeal must be quite strong, strong enough to make us overcome our charitable reluctance to conclude that our actual behavior is systematically irrational.
-\end{quote}
-
-
-There is another violation of Savage's axioms that is particularly relevant for the present work: transitivity of preferences. The first of Savage's axioms states that the preference relation is a (total) preorder, i.e., reflexive and transitive. Moreover, the preorder axiom is often referred to as the rationality axiom [cite], as to suggest that it is somehow the core of rational preferences. Violations of transitivity have been observed and studied in experimental literature [citeTversky69,etc], but can also be supported from a normative and theoretical point of view. \\
-In what follows, an important focus of our work will be the role of regret in decision making. Regret theory predicts the violation of both transitivity and Independence of Irrelevant Alternatives (IIA). [CONNECTING TO Fawcett\&al: this is IIA, not independence]
-
-
-
+\section{Regret, imprecise probabilistic beliefs, choice mechanisms}
 
 \subsubsection{Regret theory} \label{sec:regreTheory}
 
-Regret theory has been introduced in decision theory by Savage [] and Niherens [], and later developed by Bell [1982], Loomes and Sugden [1982], and Fishburn [1982] independently. Lately, Halpern and Pass [cite] show how the use of regret minimization can solve game theoretical puzzles (like the Centipede and the Traveller's dilemma) in a way that is closer to everyday intuition and empirical data. In this paper the notion of regret is defined as in [HalPass12]:
+\todo[inline]{this section starts off presupposing to much formal stuff for a philosophy
+  audience; we should first say why we look at games, then give the definition of a game, then
+  define regret, then example, ...}
 
-\begin{definition}[Pairwise regret] \label{defn:parwreg}
-Given a simultaneous-move game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, the regret of player $i$ at profile $(a_i,a_{-i})$ is defined by: $\text{reg}(a_i,a_{-i}):= \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $, where $a_i^\$ \in A_i$ denotes $i$'s best reply to action $a_{-i} $.
-\end{definition}
+Regret theory has been introduced in decision theory by Savage [] and Niherens [], and later
+developed by Bell [1982], Loomes and Sugden [1982], and Fishburn [1982] independently. Lately,
+\citet{HalpernPass2012:Iterated-Regret} showed how the use of regret minimization can solve
+game theoretical puzzles (like the Centipede and the Traveller's dilemma) in a way that is
+closer to everyday intuition and empirical data. In this paper the notion of regret is defined
+as in \citet{HalpernPass2012:Iterated-Regret}:
 
-\begin{definition}[Regret] \label{defn:regret}
-Given a simultaneous-move game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, the regret of an action $a_i \in A_i$ is defined by: $\text{reg}(a_i):= \text{max}_{a_{-i}\in A_{-i}} \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $.
-\end{definition}
-
-\begin{definition}[Regret minimization] \label{defn:regmin}
-Given a simultaneous-move game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, an action $a^{r}_i $ is regret minimizing if $a^{r}_i \in \text{min}_{a_i} \text{max}_{a_{-i}} \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $.
+\begin{definition}[Regret, regret minimization] \label{defn:regret} Given a simultaneous-move
+  game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, the regret of player $i$ at profile
+  $(a_i,a_{-i})$ is $\text{reg}(a_i,a_{-i}):= \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $, where
+  $a_i^\$ \in A_i$ denotes $i$'s best reply to action $a_{-i} $. The regret of an action
+  $a_i \in A_i$ is then
+  $\text{reg}(a_i):= \text{max}_{a_{-i}\in A_{-i}} \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $. An
+  action $a^{r}_i $ is regret minimizing if
+  $a^{r}_i \in \text{min}_{a_i} \text{max}_{a_{-i}} \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $.
 \end{definition}
 
 \begin{example}[Coordination Game]
@@ -305,20 +248,38 @@ Given a simultaneous-move game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $,
   regret minimization selects the Pareto-dominant Nash equilibrium. $ \medsquare $
 
 \begin{figure}
-\begin{center}%
-\begin{tabular}{|c|c|c|}
-\hline 
- & I & II\tabularnewline
-\hline 
-\hline 
-I & 1;1 & 0;0\tabularnewline
-\hline 
-II & 0;0 & 2;2\tabularnewline
-\hline 
-\end{tabular}\end{center}
 
-\protect\caption{A coordination game $G^C$}
-\label{coordgame1}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \begin{tabular}{ccc}
+      \toprule
+      & I & II \\
+      \midrule
+      I & 1;1 & 0;0 \\
+      \hline 
+      II & 0;0 & 2;2\\
+      \bottomrule
+    \end{tabular}
+    \caption{Coordination game $G^C$}
+    \label{coordgame1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \begin{tabular}{ccc}
+      \toprule
+      & I & II \\
+      \midrule
+      I & 0;0 & -2;-1 \\
+      \hline 
+      II & -1;-2 & 0;0\\
+      \bottomrule
+    \end{tabular}
+    \caption{Regret representation $\tau^{reg}(G^C)$}
+    \label{coordgame1reg}
+  \end{subfigure}
+  \caption{A coordination game (left) and its regret representation (right).}
+    \label{coordgame1mainFig}
 \end{figure}
 
 
@@ -346,37 +307,37 @@ By a simple computation we have:  $\forall a_i \in \lbrace 96\$, ..., 100\$ \rbr
   
 \end{example}
 
+\todo[inline]{add results about regret: reg min is security choice on negative regret transform
+(related to Figure 1b); regret choice equal to veridical in case of probabilistic beliefs and
+maximization of expected gains}
 
+\subsection{Imprecise probabilistic beliefs}
+\label{sec:impr-prob-beli}
 
-
-
-The meta-game perspective that we introduce in this paper can shed more light on the duality of descriptivism and normativism, and opens
-some space in between the two extrema. 
-By keeping the evolutionary approach we want to retain a
-normative perspective on rationality, but our results show that (under certain conditions)
-evolution does not necessarily lead to identifying rationality with maximization of objective
-utility, contrary to the intuition of Alchian [cite] and Friedman [cite].
-
-In the following we mainly deal with two types of agents: players whose subjective utility is defined
-in terms of regret (as in DEFINITION), and players whose utility
-function coincides with the objective utility $\pi_i$. 
-
-The justification for this choice is both historical and behavioral. Among
-the possible competitors of utility maximization, regret has always been in a prominent
-position, both from a descriptive and normative viewpoint. Indeed, Bell82 writes:
+Consider the following problem. I have, on the desk in front of me, a bag containing either red or black marbles. There is no further information about the distribution of the two colors. What is then the probability that I will draw a red marble? As in Walley91-96, we are not talking about physical probability, but rather about epistemic probability, i.e., the subjective probability that an agent attributes to an event.
+In the literature there are two traditional ways of answering this kind of questions. According to standard Bayesianism, one should always be able to determine a precise betting rate (that immediately translates into a precise probability distribution), which is fair, in the sense that the DM is indifferent between betting on or against red at the fair rate, and would bet on red at any rate that is more favourable than the fair rate and against red at any rate that is less favourable. In this case, a strict Bayesian, in the absence of any further information, would probably rely on the principle of insufficient reason and answer that the DM should have a uniform distribution that considers all the outcomes equipossible. \\
+The second answer involves imprecise probabilities and is related to the literature about uncertainty, or ambiguity. Many authors argued in favor of this kind of approach [e.g., Walley91-96, Levi74, GardenforsANDSahlin82]. Since it is consistent with the information available that all the marbles are red, or that no marble is red, the resulting model should take it into account and specify a lower probability of red $\underline{P}(R)$ and an upper probability of red $\overline{P}(R)$ that define an interval of possible probabilistic beliefs [$\underline{P}(R), \overline{P}(R)$]. Given the information available in this case we would have $\underline{P}(R)=0$ and $\overline{P}(R)=1$. This approach appears particularly relevant and appropriate in a game theoretical context. Indeed, in a recent paper [Battigalliet al.15] Battigalli et al. write
 \begin{quote}
-  By explicitly incorporating regret, expected utility theory not only becomes a better
-  descriptive predictor but also may become a more convincing guide for prescribing behavior to
-  decision makers.
+Such uncertainty is inherent in situations of strategic interaction. This is quite obvious when such situations have been faced only a few times.
 \end{quote}
-In the same year, Graham Loomes and Robert Sugden \citet{LoomesSugden1982:Regret-Theory:-} show that a regret-based theory of choice can match
-and explain all the main experimental results of prospect theory, and claim that
-\begin{quote} [...] we shall challenge the idea that the conventional axioms [of decision
-  theory] constitute the only acceptable basis for rational choice under uncertainty. We shall
-  argue that it is no less rational to act in accordance with regret theory, and that
-  conventional expected utility theory therefore represents an unnecessarily restrictive notion
-  of rationality. \hfill \citep{LoomesSugden1982:Regret-Theory:-}
-\end{quote}
+In decision theory, the imprecise probability model is in line with most of the representation results about uncertainty [GilboaSchmeidler89,KMM06], and seems justified by empirical observations too (see below). Walley91-96 is a seminal work in the area, that also introduces learning procedures to get useful inferences and narrow down the probability set [$\underline{P}(R), \overline{P}(R)$] after observing data. Since we want to study the evolution of meta-types, the present work does not address the probem of drawing inferences from observations, and for the moment we do not endow the players with any learning procedure.\\
+In line with traditional evolutionary game theory, we model a population of rather unsophisticated and myopic agents. %that possibly differ from each other with respect to two components: the player type and the epistemic type. The players 
+The players encode both a psychological subjective representation of the interaction (player type) and a conceptualization of uncertainty (epistemic type), but they are too simple to have any learning or belief updating procedure. From this point of view, we can take the learning process away from natural selection and focus on player types and epistemic types as the target of evolutionary pressure.
+
+In full generality, we think of an epistemic type as a general disposition to form beliefs about the co-player’s behavior.    Players in the population obviously face uncertainty about the composition of the population that they are part of, and consequently about the type of co-player that they are randomly paired with at each round and about the co-player's actions. We represent this uncertainty by the use of both the approaches presented above: a uniform distribution and a probability set. This amounts to having two different epistemic types $e$ in the population, $e \in \lbrace \overline{\mu}, \Delta(A_{-i}) \rbrace $, where $\overline{\mu}$ stands for the uniform distribution and $\Delta(A_{-i})$ is the probability set, defined as follows:
+
+\begin{itemize}
+
+\item $ \Delta(A_{-i}):=\lbrace \mu \in \mathbb{R}^{A_{-i}}: \sum_{a_{-i} \in A_{-i}} \mu(a_{-i}) = 1 \rbrace$;
+
+\item $\overline{\mu} \in \lbrace \mu \in \mathbb{R}^{A_{-i}}: \sum_{a_{-i} \in A_{-i}} \mu(a_{-i}) = 1 \rbrace$ is the probability measure over the co-player's actions such that: $\forall a_{-i} \in A_{-i}$, $\overline{\mu}(a_{-i})= \frac{1}{|A_{-i}|}$.
+
+\end{itemize} 
+
+Hence, we consider two possible epistemic states in the face of uncertainty. The epistemic type $\Delta(A_{-i})$ represents a situation of non-Bayesian radical uncertainty, where the players are not able to narrow down the set of probability distributions to a single one and they consider all of them as possible. The other epistemic type $\overline{\mu}$ conceptualizes the uncertainty about the population by using the principle of insufficient reason and ascribes equal probability to all the possible alternatives. As we have seen, both options are reasonable and justifiable ways to deal with situations of uncertainty [REFERENCES]. \\
+
+
+\newpage
 
 \section{The model}
 \label{sec:model}
@@ -528,10 +489,6 @@ we assume that players in the population are uncertainty averse and conform to m
 utility. The resulting behavior is then produced by maximinimizing over the subjective utility
 given by the player type and the set of priors given by the epistemic type.
 
-  \todo[inline]{I would like to suggest to move Figure 2 next to Figure 1; it is already useful
-  for example 1 and could be referred to there already; I would suggest to use subfigures to
-  put both next to each other}
-
 \begin{example}
   Consider the game in Figure \ref{coordgame1} again. When a player characterized
   by\footnote{To ease notation in the following we will refer to a player directly as a pair
@@ -563,22 +520,7 @@ given by the player type and the set of priors given by the epistemic type.
 
 
 
-\begin{figure}
-\begin{center}%
-\begin{tabular}{|c|c|c|}
-\hline 
- & I & II\tabularnewline
-\hline 
-\hline 
-I & 0;0 & -2;-1\tabularnewline
-\hline 
-II & -1;-2 & 0;0\tabularnewline
-\hline 
-\end{tabular}\end{center}
 
-\protect\caption{Regret representation $\tau^{reg}(G^C)$}
-\label{coordgame1reg}
-\end{figure}
 
 \end{example}
 
@@ -1700,7 +1642,37 @@ maximization of subjective preferences.]
   rationality of choice behavior, (iii) evolution of preferences literature
 \end{itemize}
 
+\bigskip
 
+\begin{itemize}
+\item The meta-game perspective that we introduce in this paper can shed more light on the duality of descriptivism and normativism, and opens
+some space in between the two extrema. 
+By keeping the evolutionary approach we want to retain a
+normative perspective on rationality, but our results show that (under certain conditions)
+evolution does not necessarily lead to identifying rationality with maximization of objective
+utility, contrary to the intuition of Alchian [cite] and Friedman [cite].
+
+In the following we mainly deal with two types of agents: players whose subjective utility is defined
+in terms of regret (as in DEFINITION), and players whose utility
+function coincides with the objective utility $\pi_i$. 
+
+The justification for this choice is both historical and behavioral. Among
+the possible competitors of utility maximization, regret has always been in a prominent
+position, both from a descriptive and normative viewpoint. Indeed, Bell82 writes:
+\begin{quote}
+  By explicitly incorporating regret, expected utility theory not only becomes a better
+  descriptive predictor but also may become a more convincing guide for prescribing behavior to
+  decision makers.
+\end{quote}
+In the same year, Graham Loomes and Robert Sugden \citet{LoomesSugden1982:Regret-Theory:-} show that a regret-based theory of choice can match
+and explain all the main experimental results of prospect theory, and claim that
+\begin{quote} [...] we shall challenge the idea that the conventional axioms [of decision
+  theory] constitute the only acceptable basis for rational choice under uncertainty. We shall
+  argue that it is no less rational to act in accordance with regret theory, and that
+  conventional expected utility theory therefore represents an unnecessarily restrictive notion
+  of rationality. \hfill \citep{LoomesSugden1982:Regret-Theory:-}
+\end{quote}
+\end{itemize}
 
 
 \end{document}
