@@ -137,13 +137,13 @@ traces back to the seminal work of \citet{Neumannvon-NeumannMorgenstern1944:Theo
 and \citet{Savage1954:The-Foundations}. It says that choice is rational only if it maximizes
 (subjective) expected utility.
 
-\begin{definition}[Rational choice from maximization of expected utility] Let $S$ be a (finite)
-  set of states of the world and $A$ a (finite) set of actions. Given a probability
-  distribution $P$ over $S$ and a utility function
+\begin{definition}[Rational choice from maximization of expected utility]
+  \label{def:rationality}
+  Let $S$ be a (finite) set of states of the world and $A$ a (finite) set of actions. Given a
+  probability distribution $P$ over $S$ and a utility function
   $u \mycolon S \times A \rightarrow \mathbb{R} $, an action $a^* \in A$ is a rational choice
   only if it maximizes the \emph{(subjective) expected utility}
-  $\EU(a) = \sum_{s \in S} P(s) \ u(s, a)$: $a^* \in \text{argmax}_{a \in A} \EU(a)
-  $.
+  $\EU(a) = \sum_{s \in S} P(s) \ u(s, a)$: $a^* \in \text{argmax}_{a \in A} \EU(a) $.
 \end{definition}
 
 \noindent Expected utility is subjective in the sense that it is a function of subjective
@@ -172,51 +172,62 @@ It could be objected that, without additional constraints, the notion of rationa
 to collapse, as it seems possible to deem rational everything that is observed, given the
 freedom to adjust beliefs and preferences freely. Of course, there are many ways in which
 ascription of beliefs and preferences is constrained further by normative considerations of
-rationality. \todo{speak about Dutch books here?} To begin with, if the DM's uncertainty is
-about objective chance, it can be argued that subjective beliefs should conform (at least
-roughly) to objective chance. When the DM's uncertainty cannot be anchored in an objective
-notion of chance, then temporal consistency in his decision making should at least constrain
-his subjective belief, else he fall prey to exploitation by Dutch books. Similarly, in certain
-situations it may make sense to postulate on normative grounds that subjective preferences
-should be oriented towards tracking objective utility, e.g., fitness. For instance, in their
-classic work \myalert{(Alchian, Friedman)} argue that profit maximization is a reasonable
-assumption for characterizing outcomes in a competitive market because only firms behaving in a
-manner that is consistent with profit maximization will survive in the long run.\todo{@Paolo:
-  please add references}
+rationality. To begin with, if the DM's uncertainty is about objective chance, it can be argued
+that subjective beliefs should conform (at least roughly) to objective chance. When the DM's
+uncertainty cannot be anchored in an objective notion of chance, then temporal consistency in
+his decision making should at least constrain his subjective beliefs, else he fall prey to
+exploitation by Dutch books. Similarly, in certain situations it may make sense to postulate on
+normative grounds that subjective preferences should be oriented towards tracking objective
+utility, e.g., fitness. For instance, in their classic work \myalert{(Alchian, Friedman)} argue
+that profit maximization is a reasonable assumption for characterizing outcomes in a
+competitive market because only firms behaving in a manner that is consistent with profit
+maximization will survive in the long run.\todo{@Paolo: please add references}
 
 An alternative to descriptive vs.~normative views on rationality is \emph{adaptationism}
 \citep[e.g.][]{HagenChater2012:Decision-Making}. \todo{more references} Adaptationism aims to
-explain choice behavior by appeal to evolutionary considerations. The key idea is that we
-should see decision makers (human and other life forms) as having evolved mechanisms for
-choosing that were fitness enhancing (in the relevant domains of choice making, at the relevant
-time of evolution). When it comes to preferences, this is clearly related to Alchian and
-Friedman's argument that firms \emph{should} optimize that which makes them ``live,'' so to
-speak. For biological agents, the argument would be that subjective preferences \emph{should}
-track whatever determines objective fitness.
+explain choice behavior by appeal to evolutionary considerations. The key idea is that decision
+makers (human and other life forms) have evolved choice mechanisms which were fitness enhancing
+(in the relevant domains of choice making, at the relevant time of evolution). When it comes to
+preferences, this is clearly related to Alchian and Friedman's argument that firms
+\emph{should} optimize that which makes them ``live,'' so to speak. For biological agents, the
+argument would be that subjective preferences \emph{should} track whatever determines objective
+fitness.
 
-Taking inspiration from recent economic literature on the evolution of preference, we would
-like to put this latter idea to the test. We present a formal argument intended to support two
-points: (i) subjective preferences that differ from objective fitness can be sustained and even
-be adaptive; this is brought to the foreground if we acknowledge that (ii) it is important to
-take into account the potential mutual dependence of subjective preferences and subjective
-beliefs in adaptationist approaches to decision making. More specifically, we show that
-subjective, non-veridical preference representations based on a notion of regret can be
-adaptive and even outperform objective, veridical representations of the actual fitness, when
-agents, at least on occasion, lack the ability to form reasonable probabilistic beliefs, in
-which case they hold imprecise probabilistic beliefs (CITE). The following Section~XYZ will
-introduce the basic notions needed for this argument, namely regret, imprecise probabilistic
-beliefs and security strategies.
+We would like to put this latter idea to the test. We present a formal argument intended to
+support the conclusion that subjective preferences that differ from objective fitness can be
+adaptive. This is brought to the foreground if we acknowledge the potential mutual dependence
+of subjective preferences and subjective beliefs in adaptationist approaches to decision
+making. More specifically, we show that subjective, non-veridical preference representations
+based on a notion of regret
+\citep[e.g.][]{Savage1951:The-theory-of-s,LoomesSugden1982:Regret-Theory:-}\todo{add
+  references?}\ can be adaptive and even outperform objective, veridical representations of the
+actual fitness, when agents, at least on occasion, hold imprecise probabilistic beliefs
+(CITE). 
 
 The method by which we want to advance our argument is to integrate ideas from the recent
 literature on preference evolution (CITE) with basic tenets of adaptationism: we are interested
 in studying the evolutionary competition of choice mechanism, conceived here as pairs of
-(general ways of) subjective preference and subjective belief
-representation. \textcolor{red}{EXAND}. This method is further detailed in
-Section~\ref{sec:model}.
+subjective preference and subjective belief representation. Evolutionary competition between
+choice mechanisms is driven by the expected objective fitness that each choice mechanisms
+accrues when put to use repeatedly in a range of choice situations. We focus on the more
+complex case of multi-agent decision making first, i.e., game situations. Solitary decision
+making is then easy to deal with subsequently.
 
-\section{Regret, imprecise probabilistic beliefs, choice mechanisms}
+The following Section~XYZ will introduce the basic notions needed in the remainder. Section~XYZ
+details our method of using ``meta-games''. \dots
 
-\subsubsection{Regret theory} \label{sec:regreTheory}
+
+\section{Basic notions}
+\label{sec:basic-notions}
+
+A strategic game is a tuple $ G=\tuple{ N, (A_i , \pi_i)_{i \in N} }$ with $N$ a set of
+players, $A_i$ a set of acts and $\pi_i$ a payoff function for each player $i \in N$. The
+classical notion of rationality from Definition~\ref{def:rationality} also applies to
+games. Let $A_{-i} = \bigtimes A_j$ for all $j \neq i$ be the set of all profiles of acts for
+all players excepts $i$. Then player $i$ has a belief $\Delta(A_{-i})$ about the behavior of
+his opponents. 
+
+\subsection{Regret theory} \label{sec:regreTheory}
 
 \todo[inline]{this section starts off presupposing to much formal stuff for a philosophy
   audience; we should first say why we look at games, then give the definition of a game, then
