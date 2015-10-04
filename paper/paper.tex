@@ -230,12 +230,22 @@ all players excepts $i$. If player $i$ has a belief $\mu_i \in \Delta(A_{-i})$ a
 behavior of his opponents, he chooses rationally only his choice $a^*_i$ maximizes expected
 utility $\EU(a) = \sum_{a_{-i} \in A_{-i}} \mu_i \myts \pi_i(a_i, a_{-i})$.
 
-We focus here on symmetric games with two players. A two-player game is symmetric if An example
-is given in Figure~\ref{coordgame1}. \textcolor{red}{EXPAND}
+We focus here on symmetric games with two players. A two-player game is symmetric if players
+have the same action set, $A_1 = A_2$, and payoffs are symmetric:
+$\pi_1(\myact{k}, \myact{l}) = \pi_2(\myact{l}, \myact{k})$ for all $k$ and $j$. An example is
+given in Figure~\ref{coordgame1}, which shows a coordination game. The numbers give the payoff
+for player choosing the row against an opponent who chooses the column acts. Since the game is
+symmetric, it suffices to give just these numbers. A rational player would choose $I$ exactly
+when he beliefs that his opponent will choose $I$ with a probability at least
+$\nicefrac{2}{3}$.
 
-\begin{itemize}
-\item include here: minimax and choice given a belief
-\end{itemize}
+If an agent does not have a concrete probabilistic belief, the \emph{minimax rule} would tell
+him to choose act $\act^*$ only if it maximizes payoffs for all worst case scenarios, i.e.,
+$\act^* \in \argmax_{\myact{i} \in \Acts_i} \min_{\myact{j} \in \Acts_j} \pi_i(\myact{i},
+\myact{j})$.
+Yet another option is to follow \emph{Laplace's rule} which is to choose $\act^*$ only if
+$\act^* \in \argmax_{a \in A}  \sum_{a'} \pi(a, a')$. Laplace's rule is to rationally choosing under a
+\emph{flat belief} that assigns equal probability to all of the opponent's choices.
 
 \todo[inline]{should we define NE, ESS/NSS here? dominance? we should include \emph{best
     reply}, because it is used in the definition of regret.}
