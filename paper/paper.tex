@@ -220,18 +220,27 @@ details our method of using ``meta-games''. \dots
 \section{Basic notions}
 \label{sec:basic-notions}
 
+\subsection{Games} \label{sec:games}
+
 A strategic game is a tuple $ G=\tuple{ N, (A_i , \pi_i)_{i \in N} }$ with $N$ a set of
 players, $A_i$ a set of acts and $\pi_i$ a payoff function for each player $i \in N$. The
 classical notion of rationality from Definition~\ref{def:rationality} also applies to
 games. Let $A_{-i} = \bigtimes A_j$ for all $j \neq i$ be the set of all profiles of acts for
-all players excepts $i$. Then player $i$ has a belief $\Delta(A_{-i})$ about the behavior of
-his opponents. 
+all players excepts $i$. If player $i$ has a belief $\mu_i \in \Delta(A_{-i})$ about the
+behavior of his opponents, he chooses rationally only his choice $a^*_i$ maximizes expected
+utility $\EU(a) = \sum_{a_{-i} \in A_{-i}} \mu_i \myts \pi_i(a_i, a_{-i})$.
+
+We focus here on symmetric games with two players. A two-player game is symmetric if An example
+is given in Figure~\ref{coordgame1}. \textcolor{red}{EXPAND}
+
+\begin{itemize}
+\item include here: minimax and choice given a belief
+\end{itemize}
+
+\todo[inline]{should we define NE, ESS/NSS here? dominance? we should include \emph{best
+    reply}, because it is used in the definition of regret.}
 
 \subsection{Regret theory} \label{sec:regreTheory}
-
-\todo[inline]{this section starts off presupposing to much formal stuff for a philosophy
-  audience; we should first say why we look at games, then give the definition of a game, then
-  define regret, then example, ...}
 
 Regret theory has been introduced in decision theory by Savage [] and Niherens [], and later
 developed by Bell [1982], Loomes and Sugden [1982], and Fishburn [1982] independently. Lately,
@@ -251,45 +260,45 @@ as in \citet{HalpernPass2012:Iterated-Regret}:
 \end{definition}
 
 \begin{example}[Coordination Game]
-  Let us consider the coordination game in Figure \ref{coordgame1}. It is easy to see that
-  $\text{reg}(I)=2$: when the other player chooses action $I$ the regret of $I$ is $0$ since
-  $I$ is a best reply to $I$, and when the other player chooses $II$ the regret of $I$ is $2$
-  since $\pi_i(II,II)-\pi_i(I,II)=2$. With the same reasoning, $\text{reg}(II)=1$. Two regret
-  minimizing players would then choose action $II$, each getting a payoff of $2$. In this case
-  regret minimization selects the Pareto-dominant Nash equilibrium. $ \medsquare $
+  Let us consider the coordination game in Figure \ref{coordgame1}. Figure~\ref{coordgame1reg}
+  shows the pairwise regrets and the regrets of each row-player action. It is easy to see that
+  $\text{reg}(I)=2$: when the other player chooses action $I$ the pairwise regret $reg(I,I)$ is
+  $0$ since $I$ is a best reply to $I$, and when the other player chooses $II$ the pairwise
+  regret $reg(I, II)$ is $2$ since $\pi_i(II,II)-\pi_i(I,II)=2$. With the same reasoning,
+  $\text{reg}(II)=1$. Two regret minimizing players would then choose action $II$, each getting
+  a payoff of $2$. In this case regret minimization selects the Pareto-dominant Nash
+  equilibrium.\todo{explain Pareto-dominant NE; otherwise skip it?} $ \medsquare $
 
 \begin{figure}
 
-  \begin{subfigure}[b]{0.4\textwidth}
+  \begin{subfigure}[b]{0.3\textwidth}
     \centering
     \begin{tabular}{ccc}
       \toprule
       & I & II \\
       \midrule
-      I & 1;1 & 0;0 \\
-      \hline 
-      II & 0;0 & 2;2\\
+      I & 1 & 0 \\
+      II & 0 & 2\\
       \bottomrule
     \end{tabular}
     \caption{Coordination game $G^C$}
     \label{coordgame1}
   \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.4\textwidth}
+  \hspace{1cm}
+  \begin{subfigure}[b]{0.5\textwidth}
     \centering
-    \begin{tabular}{ccc}
+    \begin{tabular}{cccc}
       \toprule
-      & I & II \\
+      & $reg( \cdot, I)$ & $reg(\cdot, II)$ & $reg(\cdot)$ \\
       \midrule
-      I & 0;0 & -2;-1 \\
-      \hline 
-      II & -1;-2 & 0;0\\
+      I  & 0 & 2 & 2 \\ 
+      II & 1 & 0 & 1\\
       \bottomrule
     \end{tabular}
-    \caption{Regret representation $\tau^{reg}(G^C)$}
+    \caption{Pairwise regrets representation $\tau^{reg}(G^C)$}
     \label{coordgame1reg}
   \end{subfigure}
-  \caption{A coordination game (left) and its regret representation (right).}
+  \caption{A coordination game (left) and regrets associated with each row-player actions (right).}
     \label{coordgame1mainFig}
 \end{figure}
 
