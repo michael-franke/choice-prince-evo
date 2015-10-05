@@ -223,47 +223,73 @@ details our method of using ``meta-games''. \dots
 \subsection{Games} \label{sec:games}
 
 A strategic game is a tuple $ G=\tuple{ N, (A_i , \pi_i)_{i \in N} }$ with $N$ a set of
-players, $A_i$ a set of acts and $\pi_i$ a payoff function for each player $i \in N$. The
-classical notion of rationality from Definition~\ref{def:rationality} also applies to
-games. Let $A_{-i} = \bigtimes A_j$ for all $j \neq i$ be the set of all profiles of acts for
-all players excepts $i$. If player $i$ has a belief $\mu_i \in \Delta(A_{-i})$ about the
-behavior of his opponents, he chooses rationally only his choice $a^*_i$ maximizes expected
-utility $\EU(a) = \sum_{a_{-i} \in A_{-i}} \mu_i \myts \pi_i(a_i, a_{-i})$.
-
-We focus here on symmetric games with two players. A two-player game is symmetric if players
-have the same action set, $A_1 = A_2$, and payoffs are symmetric:
+players, $A_i$ a set of acts and $\pi_i$ a payoff function for each player $i \in N$. For the
+most part, this paper will focus on symmetric games with two players. A two-player game is
+symmetric if players have the same action set, $A_1 = A_2$, and payoffs are symmetric:
 $\pi_1(\myact{k}, \myact{l}) = \pi_2(\myact{l}, \myact{k})$ for all $k$ and $j$. An example is
 given in Figure~\ref{coordgame1}, which shows a coordination game. The numbers give the payoff
-for player choosing the row against an opponent who chooses the column acts. Since the game is
-symmetric, it suffices to give just these numbers. A rational player would choose $I$ exactly
-when he beliefs that his opponent will choose $I$ with a probability at least
-$\nicefrac{2}{3}$.
+for the player choosing the row against an opponent who chooses the column acts. Since the game
+is symmetric, it suffices to give just these numbers.
 
-If an agent does not have a concrete probabilistic belief, the \emph{minimax rule} would tell
-him to choose act $\act^*$ only if it maximizes payoffs for all worst case scenarios, i.e.,
+With some due simplification, there are two types of approaches to solving games: one focuses
+on the individual agents' perpectives and gives \emph{choice rules}, another considers sets of
+choices of all agents that are, in some sense or other, locked-in. Let's look at either in
+turn, to the extent necessary for this paper:
+
+\paragraph{Choice rules.} The classical notion of rationality from
+Definition~\ref{def:rationality} also applies to games. Let $A_{-i} = \bigtimes A_j$ for all
+$j \neq i$ be the set of all profiles of acts for all players except $i$. If player $i$ has a
+belief $\mu_i \in \Delta(A_{-i})$ about the behavior of his opponents, he chooses rationally
+only if his choice $a^*_i$ maximizes expected utility
+$\EU(a) = \sum_{\act_{-i} \in \Acts_{-i}} \mu_i(\act_{-i}) \myts \pi_i(a_i, a_{-i})$. So this
+is a choice rule, based on \emph{maximization of expected utilities}. It requires a
+probabilistic belief about the opponents' action choices. In the example from
+Figure~\ref{coordgame1}, a rational player would choose $I$ exactly when he believes that his
+opponent will choose $I$ with a probability at least $\nicefrac{2}{3}$.
+
+If an agent does not have a concrete probabilistic belief (see also
+Section~\ref{sec:impr-prob-beli} below), other rules of choice are available. Perhaps the most
+well-known, the \emph{maximin rule}, would tell the agent to choose act $\act^*$ only if it
+maximizes payoffs for all worst case scenarios, i.e.,
 $\act^* \in \argmax_{\myact{i} \in \Acts_i} \min_{\myact{j} \in \Acts_j} \pi_i(\myact{i},
-\myact{j})$.
-Yet another option is to follow \emph{Laplace's rule} which is to choose $\act^*$ only if
-$\act^* \in \argmax_{a \in A}  \sum_{a'} \pi(a, a')$. Laplace's rule is to rationally choosing under a
-\emph{flat belief} that assigns equal probability to all of the opponent's choices.
+\myact{j})$. For the example in Figure~\ref{coordgame1}, the maximim rule looks at the minima
+in each row, asking: what is the worst possible out come for each possible act? It is $0$ in
+either case. Consequently, the maximin rule would not favor either act; players choosing by the
+maximin rule would be indifferent between acts $I$ and $II$.
 
-\todo[inline]{should we define NE, ESS/NSS here? dominance? we should include \emph{best
-    reply}, because it is used in the definition of regret.}
+Another well-known choice rule is \emph{Laplace's rule} which prescribes to choose $\act^*$ if
+$\act^* \in \argmax_{a \in A} \sum_{a'} \pi(a, a')$. Laplace's rule is equivalent to rationally
+choosing under a \emph{flat belief} that assigns equal probability to all of the opponent's
+choices. In the coordination game of Figure~\ref{coordgame1}, Laplace's rule selects act $II$.
+
+\paragraph{Equilibrium \& stability.}
+
+\begin{itemize}
+\item \textcolor{red}{add here:}
+  \begin{itemize}
+  \item NE, strict, weak
+  \item ESS, NSS
+  \end{itemize}
+\end{itemize}
+
+\todo[inline]{should we also include here: dominance}
 
 \subsection{Regret theory} \label{sec:regreTheory}
 
-Regret theory has been introduced in decision theory by Savage [] and Niherens [], and later
-developed by Bell [1982], Loomes and Sugden [1982], and Fishburn [1982] independently. Lately,
-\citet{HalpernPass2012:Iterated-Regret} showed how the use of regret minimization can solve
-game theoretical puzzles (like the Centipede and the Traveller's dilemma) in a way that is
-closer to everyday intuition and empirical data. In this paper the notion of regret is defined
-as in \citet{HalpernPass2012:Iterated-Regret}:
+Regret theory has been introduced in decision theory by \citet{Savage1951:The-theory-of-s} and
+Niherens [], and later developed by Bell [1982], Loomes and Sugden [1982], and Fishburn [1982]
+independently. Lately, \citet{HalpernPass2012:Iterated-Regret} showed how the use of regret
+minimization can give solutions to game theoretical puzzles (like the Traveller's dilemma, see
+Example~\ref{example:TravelersDilemma}) in a way that is closer to everyday intuition and
+empirical data. In this paper the notion of regret is defined as in
+\citet{HalpernPass2012:Iterated-Regret}:
 
 \begin{definition}[Regret, regret minimization] \label{defn:regret} Given a simultaneous-move
-  game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, the regret of player $i$ at profile
-  $(a_i,a_{-i})$ is $\text{reg}(a_i,a_{-i}):= \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $, where
-  $a_i^\$ \in A_i$ denotes $i$'s best reply to action $a_{-i} $. The regret of an action
-  $a_i \in A_i$ is then
+  game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, the \emph{pairwise regret} of player
+  $i$ at profile $(a_i,a_{-i})$ is
+  $\text{reg}(a_i,a_{-i}):= \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $, where
+  $a_i^\$ \in \argmax_{a_i \in A_i} \pi_i(a_i, a_{-i})$ denotes $i$'s best reply to the
+  opponents' actions $a_{-i}$. The \emph{regret} of a$a_i$ is then
   $\text{reg}(a_i):= \text{max}_{a_{-i}\in A_{-i}} \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $. An
   action $a^{r}_i $ is regret minimizing if
   $a^{r}_i \in \text{min}_{a_i} \text{max}_{a_{-i}} \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $.
@@ -275,9 +301,7 @@ as in \citet{HalpernPass2012:Iterated-Regret}:
   $\text{reg}(I)=2$: when the other player chooses action $I$ the pairwise regret $reg(I,I)$ is
   $0$ since $I$ is a best reply to $I$, and when the other player chooses $II$ the pairwise
   regret $reg(I, II)$ is $2$ since $\pi_i(II,II)-\pi_i(I,II)=2$. With the same reasoning,
-  $\text{reg}(II)=1$. Two regret minimizing players would then choose action $II$, each getting
-  a payoff of $2$. In this case regret minimization selects the Pareto-dominant Nash
-  equilibrium.\todo{explain Pareto-dominant NE; otherwise skip it?} $ \medsquare $
+  $\text{reg}(II)=1$. A regret minimizing player would therefore choose action $II$. $ \medsquare $
 
 \begin{figure}
 
@@ -312,13 +336,11 @@ as in \citet{HalpernPass2012:Iterated-Regret}:
     \label{coordgame1mainFig}
 \end{figure}
 
-
-
 \end{example}
 
 
-
 \begin{example}[The Traveller's Dilemma \citep{HalpernPass2012:Iterated-Regret}]
+\label{example:TravelersDilemma}
 Let us now consider the Traveller's Dilemma case. The story behind the game goes as
 follows. There are two travellers, Ann and Bob, who lost their luggages. Ann and Bob had
 exactly the same luggage and they had insured the luggages with the same insurance company. The
@@ -333,13 +355,89 @@ function for both players is:
       \hspace{.4cm} if } a_i < a_{-i} \\ a_{-i} -2 \text{ \hspace{.25cm} if } a_{-i} <
     a_i \end{cases}
 \end{align*}
-By a simple computation we have:  $\forall a_i \in \lbrace 96\$, ..., 100\$ \rbrace \text{, } \text{reg}(a_i)=3 $ and $\forall a_i \in \lbrace 2\$, ..., 95\$ \rbrace \text{, } \text{reg}(a_i)>3$. If we now eliminate all the actions that do not minimize regret in the first place and iterate the regret minimization only on the action set $\lbrace 96\$, ..., 100\$ \rbrace$, we get that 97\$ is the action that minimize regret. Indeed, $\text{reg}(97)=2$ and $\forall a_i \in \lbrace 96\$, 98\$, 99\$, 100\$ \rbrace \text{, } \text{reg}(a_i)=3 $. Hence, one step of regret minimizing reasoning eliminates all the actions smaller than 96\$, and if we iterate the process once more the unique outcome is 97\$. Finally, it is worth noticing that the only rationalizable equilibrium of the game corresponds to the outcome $(2,2)$, that is consequently the only Nash equilibrium, the only perfect equilibrium, and the only sequential equilibrium of the game. $ \medsquare $
+By a simple computation we have:  $\forall a_i \in \lbrace 96\$, ..., 100\$ \rbrace \text{, }
+\text{reg}(a_i)=3 $ and $\forall a_i \in \lbrace 2\$, ..., 95\$ \rbrace \text{, }
+\text{reg}(a_i)>3$. If we now eliminate all the actions that do not minimize regret in the
+first place and iterate the regret minimization only on the action set $\lbrace 96\$, ...,
+100\$ \rbrace$, we get that 97\$ is the action that minimize regret. Indeed, $\text{reg}(97)=2$
+and $\forall a_i \in \lbrace 96\$, 98\$, 99\$, 100\$ \rbrace \text{, } \text{reg}(a_i)=3
+$. Hence, one step of regret minimizing reasoning eliminates all the actions smaller than 96\$,
+and if we iterate the process once more the unique outcome is 97\$. Finally, it is worth
+noticing that the only rationalizable equilibrium of the game corresponds to the outcome
+$(2,2)$, that is consequently the only Nash equilibrium, the only perfect equilibrium, and the
+only sequential equilibrium of the game.
+
+\begin{itemize}
+\item \textcolor{red}{add here:}
+  \begin{itemize}  
+  \item outcome of rationalizability (max-EU)
+  \item outcome of maximin rule
+  \item outcome of Laplace rule
+  \end{itemize}
+
+\end{itemize}
+
+ $ \medsquare $
   
 \end{example}
 
-\todo[inline]{add results about regret: reg min is security choice on negative regret transform
-(related to Figure 1b); regret choice equal to veridical in case of probabilistic beliefs and
-maximization of expected gains}
+Regret minimization is intimately related to the maximin rule. Let the \emph{negative regret
+  transform} of a strategic game $G$ be the game $G'$ derived from $G$ by substituting the
+payoff $\pi_i(a_i, a_{-i})$ of all players in $G$ by the negative pairwise regret
+$reg(a_i,a_{-1})$. For example, the negative regret transform of the game in
+Figure~\ref{coordgame1} would have the following payoff matrix, i.e., the negatives of the
+pairwise regrets given in Figure~\ref{coordgame1}:
+
+\begin{center}
+    \begin{tabular}{ccc}
+      \toprule
+      & I & II \\
+      \midrule
+      I & -1 & 0 \\
+      II & 0 & -2\\
+      \bottomrule
+    \end{tabular}
+\end{center}
+
+\noindent The acts selected by the maximin rule for the negative regret transpose are exactly
+the acts selected by regret minimization for the original game.
+
+This means that we can think of the maximin rule and regret minimization as being two
+instantiations of the same choice rule, but operating on different subjective representations
+of utility: while maximin considers actual objective payoffs, regret minimization considers
+non-veridical, regret-based subjective utilities. As the example of Figure~\ref{coordgame1}
+shows, the same choice rule can give different behavioral predictions on different preference
+representations. While maximin is indifferent between $I$ and $II$, regret minimization
+uniquely selects $II$.
+
+When we think of regret as a non-veridical subjective payoff representation, we can also pair
+it with other choice rules, such as the maximization of expected utility and Laplace's rule
+(which is just a special case of the former). It turns out, however, that this makes no
+noticeable difference: 
+
+\begin{fact} \label{fact:maxEU-minReg} For any strategic game $G$ and any arbitrary
+  probabilistic belief $\mu \in \Delta(A_{-i})$ about the opponents' behavior, the acts
+  selected by maximization of expected utility for $G$ under $\mu$ are exactly the acts
+  selected by the maximization of expected utility for the negative regret transform of $G$
+  under $\mu$ \citep[e.g.][]{HalpernPass2012:Iterated-Regret}.
+\end{fact}
+
+\noindent In other words, given the same probabilistic belief, maximization of expected
+(objective) payoff and minimization of expected (subjective) regret are behaviorally
+equivalent. This holds for arbitrary games, as well as for solitary decision situations.
+
+\bigskip
+
+In sum, we have so far considered four different types of choice rules, each differing along a
+preference and a belief dimension. As for preference representations, agents could either
+target objective payoffs, or consider non-veridical subjective regret transformations. As for
+beliefs, agents could either hold probabilistic belief or not. In the former case, we would
+assume that they maximize expectations under whatever preference representation they hold; in
+the latter, we would assume that they play maximin based on their preference
+representations. There are doubtlessly many more possible preference and belief types, but
+these are the main characters in the plot to follow. 
+
+\newpage
 
 \subsection{Imprecise probabilistic beliefs}
 \label{sec:impr-prob-beli}
