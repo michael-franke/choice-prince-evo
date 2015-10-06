@@ -195,14 +195,14 @@ fitness.
 
 We would like to put this latter idea to the test. We present a formal argument intended to
 support the conclusion that subjective preferences that differ from objective fitness can be
-adaptive. This is brought to the foreground if we acknowledge the potential mutual dependence
-of subjective preferences and subjective beliefs in adaptationist approaches to decision
+adaptive. We argue that it is important to take into account the potential mutual dependence of
+subjective preferences and subjective beliefs in adaptationist approaches to decision
 making. More specifically, we show that subjective, non-veridical preference representations
 based on a notion of regret
 \citep[e.g.][]{Savage1951:The-theory-of-s,LoomesSugden1982:Regret-Theory:-}\todo{add
   references?}\ can be adaptive and even outperform objective, veridical representations of the
-actual fitness, when agents, at least on occasion, hold imprecise probabilistic beliefs
-(CITE). 
+actual fitness, when agents, at least on occasion, hold imprecise probabilistic beliefs (CITE)
+and make decisions based on a security choice rule (here: the maximin rule).
 
 The method by which we want to advance our argument is to integrate ideas from the recent
 literature on preference evolution (CITE) with basic tenets of adaptationism: we are interested
@@ -213,11 +213,11 @@ accrues when put to use repeatedly in a range of choice situations. We focus on 
 complex case of multi-agent decision making first, i.e., game situations. Solitary decision
 making is then easy to deal with subsequently.
 
-The following Section~XYZ will introduce the basic notions needed in the remainder. Section~XYZ
-details our method of using ``meta-games''. \dots
+The following Section~XYZ will introduce the choice mechanisms that we will focus in on in the
+remainder. Section~XYZ details our method of using ``meta-games''. \dots
 
 
-\section{Basic notions}
+\section{The cast}
 \label{sec:basic-notions}
 
 \subsection{Games} \label{sec:games}
@@ -233,8 +233,13 @@ is symmetric, it suffices to give just these numbers.
 
 With some due simplification, there are two types of approaches to solving games: one focuses
 on the individual agents' perpectives and gives \emph{choice rules}, another considers sets of
-choices of all agents that are, in some sense or other, locked-in. Let's look at either in
-turn, to the extent necessary for this paper:
+choices of all agents that are, in some sense or other, locked-in. We will look at the former
+here; the latter will be relevant only later, when turn to evolutionary competition between
+choice mechanisms in Section~\ref{sec:model}.\footnote{We make a subtle distinction here
+  between \emph{choice rules} and \emph{choice mechanisms}: the former refers to a function of
+  mapping (subjective) preferences and uncertainty unto choices of acts; the latter is more
+  encompassing and contains the choice rule, together with the particular way of forming or
+  representing preferences and uncertainty.}
 
 \paragraph{Choice rules.} The classical notion of rationality from
 Definition~\ref{def:rationality} also applies to games. Let $A_{-i} = \bigtimes A_j$ for all
@@ -262,17 +267,6 @@ $\act^* \in \argmax_{a \in A} \sum_{a'} \pi(a, a')$. Laplace's rule is equivalen
 choosing under a \emph{flat belief} that assigns equal probability to all of the opponent's
 choices. In the coordination game of Figure~\ref{coordgame1}, Laplace's rule selects act $II$.
 
-\paragraph{Equilibrium \& stability.}
-
-\begin{itemize}
-\item \textcolor{red}{add here:}
-  \begin{itemize}
-  \item NE, strict, weak
-  \item ESS, NSS
-  \end{itemize}
-\end{itemize}
-
-\todo[inline]{should we also include here: dominance}
 
 \subsection{Regret theory} \label{sec:regreTheory}
 
@@ -437,7 +431,10 @@ the latter, we would assume that they play maximin based on their preference
 representations. There are doubtlessly many more possible preference and belief types, but
 these are the main characters in the plot to follow. 
 
-\newpage
+Before we turn to evolutionary competition between choice mechanisms, we should justify our
+focus on the two choice rules. In the following we argue that both the minimax rule, as well as
+the Laplace rule can be viewed as the same choice rule under different representations of
+uncertainty. 
 
 \subsection{Imprecise probabilistic beliefs}
 \label{sec:impr-prob-beli}
