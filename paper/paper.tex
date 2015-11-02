@@ -461,34 +461,97 @@ Hence, we consider two possible epistemic states in the face of uncertainty. The
 
 \newpage
 
-\section{The model}
+\section{Meta-games and the evolution of choice mechanisms}
 \label{sec:model}
 
-\todo[inline]{first two paragraphs here are partly redundant}
+Evolutionary game theory has established itself as a useful tool for testing consequences of
+sets of assumptions about complex evolutionary processes. However, the standard approach in
+evolutionary game theory is not enough for our purposes, because it (i) fixes a single
+\emph{stage game} (e.g., the prisoner's dilemma) and (ii) assumes that the object of
+evolutionary selection is behavior for that very game. Following a similar line of argument
+\citep[e.g.][]{FawcettHamblin2013:Exposing-the-be}, we therefore turn towards the evolutionary
+competition of \emph{choice mechanisms}, i.e., general ways of selecting concrete behavior
+across a range of different situations. As a consequence, the expected fitness of a choice
+mechanism will not be determined by only a single (elementary) stage game, but it will be a
+complex function of the statistical properties of the environment: we have to take into account
+how frequently particular concrete situations of choice making are.
 
-We consider an evolutionary model that is different, for the best of our knowledge, from all
-the standard models of evolutionary game theory. Given a game
-$ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, a subjective utility over $G$ is a function
-$\theta: A \rightarrow \mathbb{R} $, where $ A:=\prod_{i\in N}A_{i} $ as usual. We denote by
-$ \Theta:= \mathbb{R}^{|A|} $ the set of all the subjective utilities over $G$. The model we
-introduce here is a multiple game model, that we also call \textit{multi-game} or
-\textit{meta-game}, where a \textit{class} $\mathcal{G}$ of fitness games is played in a
-population. All the models used in evolutionary game theory that we are aware of always
-consider a single game at a time. \todo{better formulate less strongly} Our extension is meant
-to capture both a more general notion of environment and a more general notion of phenotype.
- 
-There are good reasons to claim that focusing on more general psychological mechanisms instead
-of on behavior itself as the phenotype under evolutionary selection can be more faithful and
-insightful for natural biology and ecology [Fawcett\&al.].  In all classical models the agents
-are represented as playing a single fixed game, and as genetically predetermined to play fixed
-strategies, that consequently are the only target of natural selection in those
-frameworks. Standard evolutionary game theory cannot take charge of this shift of perspective
-until it will keep modelling a single game at a time, and until it will keep focusing on
-observed behavior only. ''Instead we should expect animals to have evolved a set of
-psychological mechanisms which enable them to perform well on average across a range of
-different circumstances''[Fawcett\&al.]. [maybe add evolution of preferences here]
+For concreteness, let us fix a class of strategic games $\mathcal{G}$ and a probability measure
+$P \in \Delta(\mathcal{G})$ that gives the occurrence probability $P(G)$ of each game
+$G \in \mathcal{G}$. Together, a class of games and a probability measure over it can be
+thought of as a model of the environment in which different choice mechanisms compete. Let $C$
+the a set of choice mechanisms that we care about. Then each choice mechanism $c \in C$ is a
+associated with an \emph{action selection function} $S_c$ that maps any $G \in \mathcal{G}$
+onto some action $S_c(G)$ of game $G$.\footnote{In all subsequent formal and simulation results
+  we assume that, whenever a choice mechanisms is selects indifferently a set of actions, the
+  agent will realize each with the same (flat) probability. For ease of parlor, we often do as
+  if there was a tie-break rule.} Different choice mechanisms can select the same act in some
+games. More importantly even, different choice mechanisms can have exactly the same action
+selection functions on a particular class of games $\mathcal{G}$. This is because we think of
+the object of evolutionary selection, not as the realized behavior but as the way behavior is
+specified. (We will see below that this can make an important difference, e.g., in the light of
+mutation.)
 
-In this work we take $\mathcal{G}$ to be the class of symmetric $2 \times 2$ games\footnote{Note that this class includes many of the most famous games extensively considered in game theoretical literature, e.g., Prisoner's dilemma, Chicken game, Stag hunt, etc.}. First, a game $G$ is selected from the class of fitness games $\mathcal{G}$, and then players in the population are matched to play the game $G$. Each player is a function $\tau: \mathcal{G} \rightarrow  \Theta$, and we call $\tau$ a \textit{player type}, or just a \textit{type}\footnote{Notice that the function $\tau$ is well-defined since, for any symmetric $2 \times 2$ game, the codomain $\Theta=\mathbb{R}^{4}$ is the same.}. Intuitively, a type can be interpreted as a way of reasoning, a pattern of conceptualization, a thread that relates different subjective utilities across different games. We denote by $T$ the class of player types. For each game $G \in \mathcal{G}$, the evolutionary fitness is determined by the objective utility (payoff) function $\pi_G$, but the player's action choice depends on the player's subjective utility function $\tau(G)$, given by the player's type $\tau$. Notice that, for any symmetric game $G$, the action sets $(A_1, \dots, A_N)$ and the payoff functions $ (\pi_1, \dots, \pi_N)  $ are the same for all $i\in \lbrace 1, \dots N \rbrace$. Consequently, we only write $ A^G $ and $ \pi^G $ for the action set and the payoff function of game $G$, respectively. Moreover, in symmetric $2 \times 2$ games we have $A=A^G \times A^G$. Then, for $x,y \in A^G$ we denote by $\pi^G(x,y)$ the objective payoff of playing action $x$ in response to action $y$.\\
+Imagine a huge, possibly infinite society of agents, each of which carries a choice mechanism
+from $C$. For simplicity, let's assume that $C$ is finite and that $\mathcal{G}$ is
+a finite set of two-player strategic games. The expected fitness $EF(c_1)$ of an agent with
+choice principle $c_1$ is determined by the probability $P(c_2)$ of meeting an agent with
+choice principle $c_2$, which we will assume is the frequency of $c_2$ in the population, the
+probability $P(G)$ of playing game $G \in \mathcal{G}$ and the concrete payoff
+$\pi^G(c_1 \mid c_2)$ that the player with $c_1$ obtains when playing against a player with
+$c_2$ in $G$, which is uniquely defined by the associated action selection rules:
+\begin{align*}
+  EF(c_1) = \sum_{c_2 \in C} P(c_2) \cdot \sum_{G \in \mathcal{G}}  P(G) \cdot \pi^G(c_1 \mid c_2)\,.
+\end{align*}
+Similarly, the expected fitness of a $c_1$-agent, when playing against a $c_2$ agent is:
+\begin{align}
+  \label{eq:ExpectedPayoffs}
+  EF(c_1 \mid c_2) = \sum_{G \in \mathcal{G}}  P(G) \cdot \pi^G(c_1 \mid c_2)\,.
+\end{align}
+
+Notice that expected fitness of a choice mechanism is defined entirely in parallel to the
+expected fitness of an act in a fixed stage game, except that where the latter has a simple
+payoff function, the former has an expectation over payoffs in a statistically rich
+environment. That means that we can think of evolutionary competition between choice mechanisms
+in terms of payoffs defined by a \emph{meta-game} over $\mathcal{G}$ whose ``acts'' are choice
+mechanisms and whose ``payoffs'' are the expected payoffs in
+Equation~(\ref{eq:ExpectedPayoffs}).\footnote{Allowing games in $\mathcal{G}$ that have
+  different numbers of players makes matters more complicated, but we neglect these
+  complications here, because we focus entirely on 2-player games.}
+
+
+\section{The basic model}
+\label{sec:basic-model-1}
+
+To demonstrate the usefulness of a meta-game approach, let us concentrate first on a basic
+model that contains the four choice mechanisms obtained from crossing the preference and belief
+types introduced in Section~\ref{sec:basic-notions}.  For particular empirical purposes, one
+could consult a more specific class $\mathcal{G}$ with appropriate, possibly empirically
+determined probabilities $P(G)$ in order to match the natural environment of a given
+population. But for our theoretical purposes we adopt another approach. For a first basic
+model, let $\mathcal{G}$ be a set of symmetric 2-player games with $2$ acts. (We will look at
+extensions and generalizations in Section~\ref{sec:extensions}). More precisely, we imagine the
+class $\mathcal{G}$ to be generated from the generic form table of Figure \ref{generic form
+  table}, where $a,b,c,d$ are i.i.d.~random variables sampled from a finite set of natural
+numbers $ \lbrace 0, \dots, 10 \rbrace$.
+
+
+\begin{figure}
+\begin{center}%
+\begin{tabular}{|c|c|c|}
+\hline 
+ & I & II\tabularnewline
+\hline 
+\hline 
+I & a;a & b;c\tabularnewline
+\hline 
+II & c;b & d;d\tabularnewline
+\hline 
+\end{tabular}\end{center}
+
+\protect\caption{generic form table for $2 \times 2$ symmetric games}
+\label{generic form table}
+\end{figure}
 
 
 
@@ -534,205 +597,8 @@ Given $ \mathcal{G} $ the class of symmetric $ 2 \times 2 $ games, we call objec
 
 \noindent In other words, we consider two prominent player types: a type who has a veridical subjective utility that perfectly matches the objective utility (i.e., the evolutionary fitness); and a type who has a non-veridical regret-based subjective utility. 
 
-\iffalse
-(maybe we want to introduce altruistic and competitive only later) Other types of player have been studied in the literature. A famous example is the \textit{altruistic type}.
 
-\begin{definition}[Altruistic preference] \label{defn:altpref}
-
-For a game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, we define the altruistic preference $ \theta^{alt}: A \rightarrow \mathbb{R} $ such that $ \theta^{alt}(a_i,a_{-i})=\pi(a_i,a_{-i}) + \sum_{j \neq i} \pi(a_{j},a_{-j})$.\footnote{A more general formulation [see: REFERENCES] would be to define an $ \alpha$-altruistic type, for $\alpha \in [0,1]$, with subjective utility $ \theta^{\alpha lt}(a_i,a_{-i})=\pi(a_i,a_{-i}) + \alpha \sum_{j \neq i} \pi(a_{j},a_{-j})$. Since we are not interested in the evolution of degrees of altruism here, we simply fix $ \alpha = 1 $.}
-
-\end{definition}
-
-\begin{definition}[Altruistic type] \label{defn:alttype}
-
-Given $ \mathcal{G} $ the class of symmetric $ 2 \times 2 $ games, we call altruistic type the function $\tau^{alt}: \mathcal{G} \rightarrow  \Theta$ such that, for all $G \in \mathcal{G}$, $ \tau^{alt}(G)= \theta^{alt}$.
-
-\end{definition}
-
-\noindent As opposite to the altruistic type, it is possible to define a \textit{competitive type} as follows. 
-
-\begin{definition}[Competitive preference] \label{defn:compref}
-
-For a game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, we define the altruistic preference $ \theta^{com}: A \rightarrow \mathbb{R} $ such that $ \theta^{com}(a_i,a_{-i})=\pi(a_i,a_{-i}) - \sum_{j \neq i} \pi(a_{j},a_{-j})$.
-
-\end{definition}
-
-\begin{definition}[Competitive type] \label{defn:comtype}
-
-Given $ \mathcal{G} $ the class of symmetric $ 2 \times 2 $ games, we call altruistic type the function $\tau^{com}: \mathcal{G} \rightarrow  \Theta$ such that, for all $G \in \mathcal{G}$, $ \tau^{com}(G)= \theta^{com}$.
-
-\end{definition}
-
-\fi
-
-
-\subsection{Epistemic types}
-\label{sec:epistemic-types}
-
-\todo[inline]{I think we really need a better (and earlier) justification for these epistemic
-  types; we could appeal to information available to agents; naturalness of situations in which
-  we cannot attach numbers to our beliefs (life on Mars again) \dots}
-
-Consider the following problem. I have, on the desk in front of me, a bag containing either red or black marbles. There is no further information about the distribution of the two colors. What is then the probability that I will draw a red marble? As in Walley91-96, we are not talking about physical probability, but rather about epistemic probability, i.e., the subjective probability that an agent would attribute to an event.
-In the literature there are two traditional ways of answering this kind of questions. According to standard Bayesianism, one should always be able to determine a precise betting rate (that immediately translates into a precise probability), which is fair, in the sense that the DM is indifferent between betting on or against red at the fair rate, and would bet on red at any rate that is more favourable than the fair rate and against red at any rate that is less favourable. In this case, a strict Bayesian, in the absence of any further information, would probably rely on the principle of insufficient reason and answer that the DM should have a uniform distribution that considers all the outcomes equipossible. \\
-The second answer involves imprecise probabilities and is related to the literature about uncertainty, or ambiguity. Many authors argued in favor of this kind of approach [e.g., Walley91-96, Levi74, GardenforsANDSahlin82]. Since it is consistent with the information available that all the marbles are red, or that no marble is red, the resulting model should take it into account and specify a lower probability of red $\underline{P}(R)$ and an upper probability of red $\overline{P}(R)$ that define an interval of possible probabilistic beliefs [$\underline{P}(R), \overline{P}(R)$]. Given the information available in this case we would have $\underline{P}(R)=0$ and $\overline{P}(R)=1$. This approach appears particularly relevant and appropriate in a game theoretical context. Indeed, in a recent paper [Battigalliet al.15] Battigalli et al. write
-\begin{quote}
-Such uncertainty is inherent in situations of strategic interaction. This is quite obvious when such situations have been faced only a few times.
-\end{quote}
-In decision theory, the imprecise probability model is in line with most of the representation results about uncertainty [GilboaSchmeidler89,KMM06], and seems justified by empirical observations too (see below). Walley91-96 is a seminal work in the area, and also introduces learning procedures to get useful inferences and narrow down the probability set [$\underline{P}(R), \overline{P}(R)$] after observing data. Since we want to study the evolution of meta-types, the present work does not address the probem of drawing inferences from observations, and we do not endow the players with any learning procedure yet.\\
-In line with traditional evolutionary game theory, the idea of this work is to model a population of rather unsophisticated and myopic agents. %that possibly differ from each other with respect to two components: the player type and the epistemic type. The players 
-The players encode both a psychological subjective representation of the interaction (player type) and a conceptualization of uncertainty (epistemic type), but they are too simple to have any learning or belief updating procedure. From this point of view, we can take the learning process away from natural selection and focus on player types and epistemic types as the target of evolutionary pressure.
-
-In full generality, we think of an epistemic type as a general disposition to form beliefs about the co-player’s behavior.    Players in the population obviously face uncertainty about the composition of the population that they are part of, and consequently about the type of co-player that they are randomly paired with at each round and about the co-player's actions. We represent this uncertainty by the use of both the approaches presented above: a uniform distribution and a probability set. This amounts to having two different epistemic types $e$ in the population, $e \in \lbrace \overline{\mu}, \Delta(A_{-i}) \rbrace $, where $\overline{\mu}$ stands for the uniform distribution and $\Delta(A_{-i})$ is the probability set, defined as follows:
-
-\begin{itemize}
-
-\item $ \Delta(A_{-i}):=\lbrace \mu \in \mathbb{R}^{A_{-i}}: \sum_{a_{-i} \in A_{-i}} \mu(a_{-i}) = 1 \rbrace$;
-
-\item $\overline{\mu} \in \lbrace \mu \in \mathbb{R}^{A_{-i}}: \sum_{a_{-i} \in A_{-i}} \mu(a_{-i}) = 1 \rbrace$ is the probability measure over the co-player's actions such that: $\forall a_{-i} \in A_{-i}$, $\overline{\mu}(a_{-i})= \frac{1}{|A_{-i}|}$.
-
-\end{itemize} 
-
-Hence, we consider two possible epistemic states in the face of uncertainty. The epistemic type $\Delta(A_{-i})$ represents a situation of non-Bayesian radical uncertainty, where the players are not able to narrow down the set of probability distributions to a single one and they consider all of them as possible. The other epistemic type $\overline{\mu}$ conceptualizes the uncertainty about the population by using the principle of insufficient reason and ascribes equal probability to all the possible alternatives. As we have seen, both options are reasonable and justifiable ways to deal with situations of uncertainty [REFERENCES]. \\
-
-\subsection{Uncertainty aversion and maxmin rule}
-
-\todo[inline]{this paragraph seems to presuppose familiarity with maxi-minimization (can we
-  write this with a hyphen, any chance?); we should rewrite this or introduce the notion immediately;}
-
-Given a player type and an epistemic type, there are different ways to produce a behavior. A
-huge body of experimental literature strongly suggests that agents are generally uncertainty
-(or ambiguity) averse [REF]. This pattern of behavior in the presence of ucertainty has been
-famously axiomatized by Gilboa and Schmeidler in a paper from 1989. The idea is that being
-uncertainty averse amounts to behaving in accordance with maximinimizing expected utility over
-a set of prior probabilities. Whenever the set of priors is a singleton, maximinization of
-expected utility coincides with maximization of expected utility. In line with empirical data,
-we assume that players in the population are uncertainty averse and conform to maxmin expected
-utility. The resulting behavior is then produced by maximinimizing over the subjective utility
-given by the player type and the set of priors given by the epistemic type.
-
-\begin{example}
-  Consider the game in Figure \ref{coordgame1} again. When a player characterized
-  by\footnote{To ease notation in the following we will refer to a player directly as a pair
-    $(player \text{ } type \text{ } \tau,\text{ } epistemic\text{ } type \text{ } e)$.} player
-  type $ \tau^{reg} $ and epistemic type $ \Delta(A_{-i}) $ faces the game in Figure
-  \ref{coordgame1}, her player type gives rise to the representation $\tau^{reg}(G^C)$ in
-  Figure \ref{coordgame1reg}. Then, maximinimizing expected utility over the probability
-  simplex $ \Delta(A_{-i}) $ given the game in Figure \ref{coordgame1reg} corresponds to
-  playing the standard maxmin strategy [REF] of that game.\footnote{Notice that this is the
-    case for any game: given a game $G$, maximinimizing expected utility over the probability
-    simplex $ \Delta(A_{-i}) $ amounts to playing the standard maxmin strategy of $G$.} This,
-  in turn, corresponds to the regret minimizing action of the original game $G^C$ of Figure
-  \ref{coordgame1}, namely action $II$, as we have seen in Section \ref{sec:regreTheory}. A
-  player $(\tau^{reg},\overline{\mu})$ instead has subjective representation $\tau^{reg}(G^C)$
-  of Figure \ref{coordgame1reg} and a flat probability measure
-  $\overline{\mu}=(\frac{1}{2}I,\frac{1}{2}II)$ over the co-player's actions. Consequently,
-  such a player would play action $II$, i.e., the action that maximinimizes expected utility
-  given the flat probability measure $\overline{\mu}$.\footnote{As we already noticed,
-    maximinimizing expected utility given a probability measure $\mu$ is equivalent to
-    maximizing expected utility given $\mu$.}  Similarly, a player
-  $(\tau^{\pi},\Delta(A_{-i}))$ will have the subjective representation coinciding with the
-  objective fitness game, i.e., $ \tau^{\pi}(G^C)= G^C $. Then, both actions $I$ and $II$
-  maximinimize expected utility over the probability simplex $ \Delta(A_{-i}) $. Hence, a
-  player $(\tau^{\pi},\Delta(A_{-i}))$ will be indifferent between $I$ and $II$, and will
-  randomize with equal probability $(\frac{1}{2}I,\frac{1}{2}II)$. Finally, a player
-  $(\tau^{\pi},\overline{\mu})$ maximinimizes the objective fitness game $G^C$ of Figure
-  \ref{coordgame1} with flat probability $\overline{\mu}$ over the co-player's actions, i.e.,
-  maximizes objective utility given $\overline{\mu}$. In game $G^C$ this yields action $II$.
-
-
-
-
-
-\end{example}
-
-We are now in the position of deriving behavior directly from the pair $(\tau, e)$. Definitions \ref{def:utility-belief} and \ref{def:maxminSEU} simply formalize the notions of subjective expected utility and maxmin subjective expective utility, respectively. 
-
-\begin{definition} \label{def:utility-belief}
-
-Given a game $G$, an action $a_i \in A_i$, and a belief $\mu \in \lbrace \mu' \in \mathbb{R}^{A_{-i}}: \sum_{a_{-i} \in A_{-i}} \mu'(a_{-i}) = 1 \rbrace$, we define $\tau(G)(a_i, \mu):= \sum_{a_{-i} \in A_{-i}} \tau(G)(a_i, a_{-i}) \cdot \mu(a_{-i})$. 
-
-\end{definition}
-
-\begin{definition} \label{def:maxminSEU}
-
-Given a game $G$ and a player $(\tau, e)$, we define $\text{maxmin}(\tau(G), e):= \lbrace a'_i \in A_i : a_i \in \text{max}_{a_i \in A_i} \text{ min}_{\mu \in e} \text{ } \tau(G)(a_i, \mu) \rbrace$.
-
-\end{definition}
-
-\noindent Definition \ref{def:expected fitness} gives the expected evolutionary fitness of player $(\tau, e)$ against player $(\tau', e')$ in game $G$.\footnote{As already specified in the previous example, we assume that, whenever the set $\text{maxmin}(\tau(G), e)$ is not a singleton, the player $(\tau, e)$ will mix with equal probability among the actions in $\text{maxmin}(\tau(G), e)$.}
-
-\begin{definition} \label{def:expected fitness}
-
-Given a game $G \in \mathcal{G}$, a player $(\tau, e)$, and a player $(\tau', e')$, we define $\pi^G((\tau, e),(\tau', e')):= \pi^G(\text{maxmin}(\tau(G), e),\text{maxmin}(\tau'(G), e'))$. 
-
-\end{definition}
-
-\todo[inline]{should we explain here, or very soon, what the resulting types really are: regret
-  minimizers, maximin players \dots}
-
-Many other alternatives different from maxmin expected utility could produce behavior: choice rules like minmax, maxmax, and minmin expected utility would similarly generate behavior from a player type and an epistemic type. Here we postulate that players are maximinimizers for two main reasons. First, our main interest is the evolution of different patterns of subjective conceptualizations of games (player types), and we want to show that the veridical representation (objective type) is not necessarily the fittest and may not be evolutionarily stable. Assuming that all players use the maxmin rule independent of their player type allows us to factor the choice rule out of the selection process and to focus on player types. Secondly, as already mentioned, among other possible choice rules maxmin is not only intuitively appealing but also corroborated from an empirical point of view.
-
-Before concluding this section, it is worth stressing two important points.
-
-\begin{fact} \label{fact:maxEU-minReg}
-
-For any given single probability $\mu$, maximization of expected utility and minimization of expected regret are behaviorally equivalent.
-
-\end{fact}
-
-\noindent As we have seen in the previous example, this is not the case in the presence of (radical) uncertainty, in the sense of representation of belief state in terms of a set of probability, as in $ \Delta(A_{-i}) $.
-
-\begin{fact} \label{fact:equivalence2x2}
-
-In the class of $2 \times 2$ symmetric games, players $(\tau^{reg}, \Delta(A_{-i}))$, $(\tau^{\pi}, \overline{\mu})$, and $(\tau^{reg},\overline{\mu})$ are behaviorally equivalent.
-
-\end{fact} 
-
-\noindent Two remarks. Firstly, Fact \ref{fact:equivalence2x2} does not hold for $n \times n$
-symmetric games in general. Secondly, we treat behaviorally equivalent types as distinct,
-because we assume that what is selected by biological evolution is not choice behavior as such,
-but the mechanism which generates behavior. This matters in particular if we assume that
-mutations affect different components of the behavior generating mechanisms (see below). 
-
-
-
-\subsection{Evolution \& the environment}
-
-[MAYBE, put part of Version2 from Snippets here, if not in Introduction]
-
-In standard evolutionary game theory a population of agents plays over a single game, that is supposed to represent the interaction driving the evolutionary dynamics. In line with [Fawcett-al.], we claim that the single-game approach is too limiting to encompass the vast variety of interactions that lead evolution. Here we propose the meta-game model in order to account for a more general notion of environment. By allowing the population to play over a class of possible games, we want to take into consideration a notion of environment that comprises a multitude of possible interactions as the driver of natural selection. In this perspective, the meta-game approach represents a model of evolution more faithful and possibly closer to reality. \\
-We assume a huge, possibly infinite, population of players $(\tau,e)$. At each time, a game $G$ is selected from the class of possible games, and players are randomly paired to play $G$. At the end of the play we keep track of the evolutionary fitness achieved by each player. Next, another game $G'$ is randomly selected again, and so on. The evolutionary fitness of each player is then based on the expected objective payoff over the class $\mathcal{G}$. Denoting by $P(G)$ the probability of game $G$ to be selected, the evolutionary fitness of player $(\tau,e)$ against player $(\tau',e')$ is given by: 
-
-$$ EF((\tau,e),(\tau',e'))= \int_G  P(G) \cdot \pi^G((\tau, e),(\tau', e')).  $$
-
-\noindent The framework we propose here is a very neutral and flexible tool to model the notion of environment. We can take into account many different types of environment by simply changing the class $\mathcal{G}$ of possible games, and in the limit case where $\mathcal{G}$ is a sigleton our model reduces to the standard models of evolutionary game theory. 
-By combining field studies and statistics, one could design a more specific class $\mathcal{G}$ with appropriate probabilities $P(G)$ in order to match the natural environment of a given population, but for our theoretical purposes we adopt another approach. As already anticipated, we take $\mathcal{G}$ to be the class of $2 \times 2$ symmetric games. More precisely, we imagine the class $\mathcal{G}$ to be generated from the generic form table of Figure \ref{generic form table}, where $a,b,c,d$ are i.i.d. random variables sampled from a finite set of natural numbers $ \lbrace \underline{n}, \dots, \overline{n}  \rbrace$.
-
-
-\begin{figure}
-\begin{center}%
-\begin{tabular}{|c|c|c|}
-\hline 
- & I & II\tabularnewline
-\hline 
-\hline 
-I & a;a & b;c\tabularnewline
-\hline 
-II & c;b & d;d\tabularnewline
-\hline 
-\end{tabular}\end{center}
-
-\protect\caption{generic form table for $2 \times 2$ symmetric games}
-\label{generic form table}
-\end{figure}
-
-
-
-
-
-
-\section{Results: the basic model}
+\section{Results for the basic model}
 \label{sec:results:-basic-model}
 
 
