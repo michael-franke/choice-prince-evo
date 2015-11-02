@@ -44,37 +44,37 @@
 
 \title{Rationality, Evolution \& the Environment}
 \author{Paolo Galeazzi \& Michael Franke}
-\date{current version: October 3rd 2015}
+\date{current version: November 2nd 2015}
 
 \begin{document}
 
-\textbf{some general notes and remarks and todo's}
+% \textbf{some general notes and remarks and todo's}
 
-\begin{itemize}
-\item micha: let's have a term for pairs (regret type, epistemic type); I'm inclined to use ``player
-  type'', but that's what you reserved for regret type; maybe use \myalert{meta-type}?
-\item can we reformulate the main result (proposition 1) in terms of ``strict dominance''
-  and/or strict Nash equilibrium? sometimes the proof is not ideally precise because it
-  actually shows something stronger, namely strict dominance, but everything is formulated in
-  terms of stability; using dominance is also better for arguments about evolutionary dynamics:
-  dynamics can be attracted by states that are not evolutionarily stable (even if there is an
-  ESS), but dominated strategies will die out in any case;
-\item should we give definitions for ESS and NSS in the main text?
-\item should we include definitions of the replicator dynamic and/or the replicator mutator
-  dynamic?
-\item the most important issue with this text is still that we need to motivate why we care
-  about non-probabilistic beliefs and/or security strategies; everything else will fall into
-  place when that is done
-\item an important ingredient in our argument pro regret is that radical uncertainty could be
-  exogenously given; as it stands this occurs rather ``suddenly'' in the paper and should
-  ideally be prepared and motivated earlier (e.g., in Sections 2 and 3)
-\item a major contribution of our paper is the ``meta-game'' approach, but in the current
-  version I feel that this is not stressed sufficiently; the introduction and the beginning of
-  section 3 could do a bit more to carve out this idea as something generally cool; especially
-  the formula from 3.4 could occur earlier (albeit in more general notation);
-\end{itemize}
+% \begin{itemize}
+% \item micha: let's have a term for pairs (regret type, epistemic type); I'm inclined to use ``player
+%   type'', but that's what you reserved for regret type; maybe use \myalert{meta-type}?
+% \item can we reformulate the main result (proposition 1) in terms of ``strict dominance''
+%   and/or strict Nash equilibrium? sometimes the proof is not ideally precise because it
+%   actually shows something stronger, namely strict dominance, but everything is formulated in
+%   terms of stability; using dominance is also better for arguments about evolutionary dynamics:
+%   dynamics can be attracted by states that are not evolutionarily stable (even if there is an
+%   ESS), but dominated strategies will die out in any case;
+% \item should we give definitions for ESS and NSS in the main text?
+% \item should we include definitions of the replicator dynamic and/or the replicator mutator
+%   dynamic?
+% \item the most important issue with this text is still that we need to motivate why we care
+%   about non-probabilistic beliefs and/or security strategies; everything else will fall into
+%   place when that is done
+% \item an important ingredient in our argument pro regret is that radical uncertainty could be
+%   exogenously given; as it stands this occurs rather ``suddenly'' in the paper and should
+%   ideally be prepared and motivated earlier (e.g., in Sections 2 and 3)
+% \item a major contribution of our paper is the ``meta-game'' approach, but in the current
+%   version I feel that this is not stressed sufficiently; the introduction and the beginning of
+%   section 3 could do a bit more to carve out this idea as something generally cool; especially
+%   the formula from 3.4 could occur earlier (albeit in more general notation);
+% \end{itemize}
 
-\newpage
+% \newpage
 
 
 \maketitle
@@ -82,17 +82,12 @@
 \section{Introduction / Motivation}
 \label{sec:intr--motiv}
 
-\todo[inline]{this is only a dummy introduction; rewrite eventually with a better focus on the
-  results and main conceptual points we would like to drive home}
-
 Evolutionary game theory has become an established philosophical tool for probing into
 conceptual issues whose complexity requires mathematical modeling. However, most applications
 of EGT look at evolutionary selection of behavior in a single \emph{stage game}. There are
 actually two crude but common simplifications in this approach. Firstly, the stage game is
-usually considered fixed, closed and immutable \citep[there are exceptions, of course, such
-as][]{WordenLevin2007:Evolutionary-es, McKenzie-AlexanderSkymrs2012:Inventing-New-S}. Secondly,
-what evolves are behavioral strategies for the stage game \citep[what][call the ``behavioral
-gamit'']{FawcettHamblin2013:Exposing-the-be}.
+usually considered fixed, closed and immutable. Secondly, what evolves are behavioral
+strategies for the stage game.
 
 It has consequently been argued that, instead of focusing on a fixed, immutable stage game and
 the behavioral selection for that stage game alone, we should rather study the evolutionary
@@ -105,27 +100,26 @@ the evolutionary benefit of learning rules
 modeling the direct (game-theoretic) meta-competition between alternative choice mechanisms
 \citep[see][for related criticism]{FawcettHamblin2013:Exposing-the-be}.
 
-Here, we would therefore make two contributions to the literature on evolution of choice
-mechanisms. On the conceptual side, we argue that paying attention to the evolution of
-(subjective representations of) preferences matters. Since almost any reasonable learning or
-decision-making process will make use of some (subjective, agent-internal (possibly
+This makes two contributions to the literature on evolution of choice mechanisms: one
+methodological and one conceptual. Firstly, on the methodological side, we introduce a
+conservative extension of standard EGT that allows us to reuse notions such as evolutionary
+stability / evolutionary dynamics for the study of the evolutionary competition between choice
+mechanisms in a statistically variable environment. Concretely, we look at the evolutionary
+competition of choice mechanisms in a ``meta-game'' that consists of the average expected
+payoffs of choice mechanisms when playing arbitrary games (from a given class). In this sense,
+a meta-game captures (the modeller's) assumptions about the relevant statistics of the
+environment in which evolutionary forces operate.
+
+Secondly, and in order to show that our method is useful for a conceptual debate about
+evolution of choice mechanisms, we argue that paying attention to the interaction of subjective
+belief and subjective preference representations is important. Since almost any reasonable
+learning or decision-making process will make use of some (subjective, agent-internal (possibly
 unconscious)) representation of the quality of choice options, the question of which such
 representations are ecologically valuable (i.e., lead to high fitness) is central. Na\"ive
-intuition might convince us that obviously preferences that veridically represent the object
-fitness that evolutionary selection is based upon must surely be the best. We demonstrate that,
-if we take into account how agents represent uncertainty, this na\"ive conclusion is premature.
-
-On the methodological side, we introduce a conservative extension of standard EGT that allows
-us to reuse notions such as evolutionary stability / evolutionary dynamics and yet helps us
-study the evolutionary competition between choice mechanisms in a statistically variable
-environment. Concretely, we look at the evolutionary competition of choice mechanisms in a
-``meta-game'' that consists of the average expected payoffs of choice mechanisms when playing
-arbitrary games (from a given class). In this sense, a meta-game captures (the modeller's)
-assumptions about the relevant statistics of the environment in which evolutionary forces
-operate.
-
-Section~\ref{sec:rati--subj} introduces necessary concepts from formal decision and game
-theory. Section \dots
+intuition might convince us that preferences that veridically represent the actual, true
+fitness measure that evolutionary selection is based upon must surely be the best. We
+demonstrate that, if we take into account how agents represent uncertainty, this na\"ive
+conclusion is premature.
 
 \todo[inline]{add overview}
 
@@ -143,34 +137,34 @@ and \citet{Savage1954:The-Foundations}. It says that choice is rational only if 
   probability distribution $P$ over $S$ and a utility function
   $u \mycolon S \times A \rightarrow \mathbb{R} $, an action $a^* \in A$ is a rational choice
   only if it maximizes the \emph{(subjective) expected utility}
-  $\EU(a) = \sum_{s \in S} P(s) \ u(s, a)$: $a^* \in \text{argmax}_{a \in A} \EU(a) $.
+  $\EU(a) = \sum_{s \in S} P(s) \ u(s, a)$.
 \end{definition}
 
 \noindent Expected utility is subjective in the sense that it is a function of subjective
 preferences and subjective beliefs of the decision maker (DM). To wit, a choice can be
 rational, i.e., the best choice from the DM's point of view, even if based on peculiar beliefs
-and/or aberrant preferences. (Indeed, while
-\citeauthor{Neumannvon-NeumannMorgenstern1944:Theory-of-Games} assumed that probabilities were
-objectively given, it was \citet{Savage1954:The-Foundations} who famously extended von Neumann
-and Morgenstern's axiomatization to include a subjective notion of probabilistic beliefs on top
-of the subjective notion of preference that von Neumann and Morgenstern started out with.)
+and/or aberrant preferences. % (Indeed, while
+% \citeauthor{Neumannvon-NeumannMorgenstern1944:Theory-of-Games} assumed that probabilities were
+% objectively given, it was \citet{Savage1954:The-Foundations} who famously extended von Neumann
+% and Morgenstern's axiomatization to include a subjective notion of probabilistic beliefs on top
+% of the subjective notion of preference that von Neumann and Morgenstern started out with.)
 
 If beliefs and preferences are subjective, there is room for \emph{rationalization} or
 \emph{redescriptionism} of observable behavior. Prospect theory is, perhaps, the most prominent
 example. \citet{KahnemannTversky1979:Prospect-Theory} looked at experimental data from human
 choices in suitably defined tasks and demonstrated that what appears to be violations of
-rationality norms can be explained as rational on the assumption that subjects' beliefs and
-preferences deviate systematically from the objectively given parameters in the presented
-choice task (e.g., by taking into account reference points and diminishing returns for both
-gains and losses).  Similarly, tinkering with the notion of subjective utility, in particular
-by including social preferences such as fairness, reciprocity or similar, allows us to describe
-as rational empirically observed behavior in social dilemmas, such as the prisoners' dilemma or
-public goods games, that might otherwise appear irrational (e.g. Fehr and Schmidt, Charness and
-Rabin, etc.).\todo{@Paolo: please include proper references}
+rationality norms can be explained on the assumption that subjects' beliefs and preferences
+deviate systematically from the objectively given parameters in the presented choice task
+(e.g., by taking into account reference points and diminishing returns for both gains and
+losses).  Similarly, tinkering with the notion of subjective utility, in particular by
+including social preferences such as fairness, reciprocity or similar, allows us to describe as
+rational empirically observed behavior in situations of social decision making, such as the
+prisoners' dilemma or public goods games, that might otherwise appear irrational (e.g. Fehr and
+Schmidt, Charness and Rabin, etc.).\todo{@Paolo: please include proper references}
 
 It could be objected that, without additional constraints, the notion of rationality is likely
 to collapse, as it seems possible to deem rational everything that is observed, given the
-freedom to adjust beliefs and preferences freely. Of course, there are many ways in which
+freedom to adjust beliefs and preferences at will. But there are many ways in which
 ascription of beliefs and preferences is constrained further by normative considerations of
 rationality. To begin with, if the DM's uncertainty is about objective chance, it can be argued
 that subjective beliefs should conform (at least roughly) to objective chance. When the DM's
@@ -187,7 +181,7 @@ An alternative to descriptive vs.~normative views on rationality is \emph{adapta
 \citep[e.g.][]{HagenChater2012:Decision-Making}. \todo{more references} Adaptationism aims to
 explain choice behavior by appeal to evolutionary considerations. The key idea is that decision
 makers (human and other life forms) have evolved choice mechanisms which were fitness enhancing
-(in the relevant domains of choice making, at the relevant time of evolution). When it comes to
+in the relevant domains of choice making, at the relevant time of evolution. When it comes to
 preferences, this is clearly related to Alchian and Friedman's argument that firms
 \emph{should} optimize that which makes them ``live,'' so to speak. For biological agents, the
 argument would be that subjective preferences \emph{should} track whatever determines objective
@@ -201,7 +195,7 @@ making. More specifically, we show that subjective, non-veridical preference rep
 based on a notion of regret
 \citep[e.g.][]{Savage1951:The-theory-of-s,LoomesSugden1982:Regret-Theory:-}\todo{add
   references?}\ can be adaptive and even outperform objective, veridical representations of the
-actual fitness, when agents, at least on occasion, hold imprecise probabilistic beliefs (CITE)
+actual, true fitness, when agents, at least on occasion, hold imprecise probabilistic beliefs (CITE)
 and make decisions based on a security choice rule (here: the maximin rule).
 
 The method by which we want to advance our argument is to integrate ideas from the recent
@@ -212,9 +206,6 @@ choice mechanisms is driven by the expected objective fitness that each choice m
 accrues when put to use repeatedly in a range of choice situations. We focus on the more
 complex case of multi-agent decision making first, i.e., game situations. Solitary decision
 making is then easy to deal with subsequently.
-
-The following Section~XYZ will introduce the choice mechanisms that we will focus in on in the
-remainder. Section~XYZ details our method of using ``meta-games''. \dots
 
 
 \section{The cast}
@@ -228,8 +219,8 @@ most part, this paper will focus on symmetric games with two players. A two-play
 symmetric if players have the same action set, $A_1 = A_2$, and payoffs are symmetric:
 $\pi_1(\myact{k}, \myact{l}) = \pi_2(\myact{l}, \myact{k})$ for all $k$ and $j$. An example is
 given in Figure~\ref{coordgame1}, which shows a coordination game. The numbers give the payoff
-for the player choosing the row against an opponent who chooses the column acts. Since the game
-is symmetric, it suffices to give just these numbers.
+for the player choosing a row act against an opponent choosing a column act. Since the game is
+symmetric, it suffices to give just these numbers.
 
 With some due simplification, there are two types of approaches to solving games: one focuses
 on the individual agents' perpectives and gives \emph{choice rules}, another considers sets of
@@ -243,9 +234,9 @@ choice mechanisms in Section~\ref{sec:model}.\footnote{We make a subtle distinct
 
 \paragraph{Choice rules.} The classical notion of rationality from
 Definition~\ref{def:rationality} also applies to games. Let $A_{-i} = \bigtimes A_j$ for all
-$j \neq i$ be the set of all profiles of acts for all players except $i$. If player $i$ has a
-belief $\mu_i \in \Delta(A_{-i})$ about the behavior of his opponents, he chooses rationally
-only if his choice $a^*_i$ maximizes expected utility
+$j \neq i$ be the set of all \emph{profiles} of acts for all players except $i$. If player $i$
+has a belief $\mu_i \in \Delta(A_{-i})$ about the behavior of his opponents, he chooses
+rationally only if his choice $a^*_i$ maximizes expected utility
 $\EU(a) = \sum_{\act_{-i} \in \Acts_{-i}} \mu_i(\act_{-i}) \myts \pi_i(a_i, a_{-i})$. So this
 is a choice rule, based on \emph{maximization of expected utilities}. It requires a
 probabilistic belief about the opponents' action choices. In the example from
@@ -255,11 +246,13 @@ opponent will choose $I$ with a probability at least $\nicefrac{2}{3}$.
 If an agent does not have a concrete probabilistic belief (see also
 Section~\ref{sec:impr-prob-beli} below), other rules of choice are available. Perhaps the most
 well-known, the \emph{maximin rule}, would tell the agent to choose act $\act^*$ only if it
-maximizes payoffs for all worst case scenarios, i.e.,
+maximizes payoffs for all worst case scenarios. For a strategic game with 2 players this can be
+formalized as
 $\act^* \in \argmax_{\myact{i} \in \Acts_i} \min_{\myact{j} \in \Acts_j} \pi_i(\myact{i},
-\myact{j})$. For the example in Figure~\ref{coordgame1}, the maximim rule looks at the minima
-in each row, asking: what is the worst possible out come for each possible act? It is $0$ in
-either case. Consequently, the maximin rule would not favor either act; players choosing by the
+\myact{j})$.
+For the example in Figure~\ref{coordgame1}, the maximim rule looks at the minima in each row,
+asking: what is the worst possible out come for each row act? It is $0$ in either
+case. Consequently, the maximin rule would not favor either act; players choosing by the
 maximin rule would be indifferent between acts $I$ and $II$.
 
 Another well-known choice rule is \emph{Laplace's rule} which prescribes to choose $\act^*$ if
@@ -278,24 +271,25 @@ Example~\ref{example:TravelersDilemma}) in a way that is closer to everyday intu
 empirical data. In this paper the notion of regret is defined as in
 \citet{HalpernPass2012:Iterated-Regret}:
 
-\begin{definition}[Regret, regret minimization] \label{defn:regret} Given a simultaneous-move
-  game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, the \emph{pairwise regret} of player
-  $i$ at profile $(a_i,a_{-i})$ is
+\begin{definition}[Regret, regret minimization] \label{defn:regret} Given a strategic game
+  $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, the \emph{pairwise regret} of player $i$'s
+  act $a_i$ against profile $a_{-1}$ is
   $\text{reg}(a_i,a_{-i}):= \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $, where
   $a_i^\$ \in \argmax_{a_i \in A_i} \pi_i(a_i, a_{-i})$ denotes $i$'s best reply to the
-  opponents' actions $a_{-i}$. The \emph{regret} of a$a_i$ is then
+  opponents' actions $a_{-i}$. The \emph{regret} of $a_i$ is then
   $\text{reg}(a_i):= \text{max}_{a_{-i}\in A_{-i}} \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $. An
-  action $a^{r}_i $ is regret minimizing if
-  $a^{r}_i \in \text{min}_{a_i} \text{max}_{a_{-i}} \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $.
+  action $a^{*}_i $ is regret minimizing if
+  $a^{*}_i \in \text{min}_{a_i} \text{max}_{a_{-i}} \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $.
 \end{definition}
 
 \begin{example}[Coordination Game]
   Let us consider the coordination game in Figure \ref{coordgame1}. Figure~\ref{coordgame1reg}
-  shows the pairwise regrets and the regrets of each row-player action. It is easy to see that
-  $\text{reg}(I)=2$: when the other player chooses action $I$ the pairwise regret $reg(I,I)$ is
-  $0$ since $I$ is a best reply to $I$, and when the other player chooses $II$ the pairwise
-  regret $reg(I, II)$ is $2$ since $\pi_i(II,II)-\pi_i(I,II)=2$. With the same reasoning,
-  $\text{reg}(II)=1$. A regret minimizing player would therefore choose action $II$. $ \medsquare $
+  shows the pairwise regrets and the regrets of each row-player action. We have
+  $\text{reg}(I)=2$, because when the other player chooses action $I$ the pairwise regret
+  $reg(I,I)$ is $0$ since $I$ is a best reply to $I$, and when the other player chooses $II$
+  the pairwise regret $reg(I, II)$ is $2$ since $\pi_i(II,II)-\pi_i(I,II)=2$. With the same
+  reasoning, $\text{reg}(II)=1$. A regret minimizing player would therefore choose act
+  $II$. $ \medsquare $
 
 \begin{figure}
 
@@ -376,19 +370,20 @@ only sequential equilibrium of the game.
 \end{example}
 
 Regret minimization is intimately related to the maximin rule. Let the \emph{negative regret
-  transform} of a strategic game $G$ be the game $G'$ derived from $G$ by substituting the
-payoff $\pi_i(a_i, a_{-i})$ of all players in $G$ by the negative pairwise regret
-$reg(a_i,a_{-1})$. For example, the negative regret transform of the game in
-Figure~\ref{coordgame1} would have the following payoff matrix, i.e., the negatives of the
-pairwise regrets given in Figure~\ref{coordgame1}:
+  transform} of a strategic game $G$ be the game $G'$ derived from $G$ by replacing the payoff
+function $\pi$ of $G$ with $\pi'$ such that $\pi'_i(a_i, a_{-i}) = - reg(a_i,a_{-1})$, i.e.,
+the payoff of all players is the pairwise negative regret (under the payoffs from $G$). For
+example, the negative regret transform of the game in Figure~\ref{coordgame1} would have the
+following payoff matrix, i.e., the negatives of the pairwise regrets given in
+Figure~\ref{coordgame1reg}:
 
 \begin{center}
     \begin{tabular}{ccc}
       \toprule
       & I & II \\
       \midrule
-      I & -1 & 0 \\
-      II & 0 & -2\\
+      I & 0 & -2 \\
+      II & -1 & 0\\
       \bottomrule
     \end{tabular}
 \end{center}
@@ -419,6 +414,8 @@ noticeable difference:
 \noindent In other words, given the same probabilistic belief, maximization of expected
 (objective) payoff and minimization of expected (subjective) regret are behaviorally
 equivalent. This holds for arbitrary games, as well as for solitary decision situations.
+
+\todo[inline]{Minor edits up to here}
 
 \bigskip
 
