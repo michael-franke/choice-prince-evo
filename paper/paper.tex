@@ -243,7 +243,7 @@ probabilistic belief about the opponents' action choices. In the example from
 Figure~\ref{coordgame1}, a rational player would choose $I$ exactly when he believes that his
 opponent will choose $I$ with a probability at least $\nicefrac{2}{3}$.
 
-If an agent does not have a concrete probabilistic belief (see also
+If an agent does not have a precise probabilistic belief (see also
 Section~\ref{sec:impr-prob-beli} below), other rules of choice are available. Perhaps the most
 well-known, the \emph{maximin rule}, would tell the agent to choose act $\act^*$ only if it
 maximizes payoffs for all worst case scenarios. For a strategic game with 2 players this can be
@@ -259,6 +259,8 @@ Another well-known choice rule is \emph{Laplace's rule} which prescribes to choo
 $\act^* \in \argmax_{a \in A} \sum_{a'} \pi(a, a')$. Laplace's rule is equivalent to rationally
 choosing under a \emph{flat belief} that assigns equal probability to all of the opponent's
 choices. In the coordination game of Figure~\ref{coordgame1}, Laplace's rule selects act $II$.
+
+
 
 
 \subsection{Regret theory} \label{sec:regreTheory}
@@ -369,8 +371,10 @@ only sequential equilibrium of the game.
   
 \end{example}
 
+
+
 Regret minimization is intimately related to the maximin rule. Let the \emph{negative regret
-  transform} of a strategic game $G$ be the game $G'$ derived from $G$ by replacing the payoff
+  transformation} of a strategic game $G$ be the game $G'$ derived from $G$ by replacing the payoff
 function $\pi$ of $G$ with $\pi'$ such that $\pi'_i(a_i, a_{-i}) = - reg(a_i,a_{-1})$, i.e.,
 the payoff of all players is the pairwise negative regret (under the payoffs from $G$). For
 example, the negative regret transform of the game in Figure~\ref{coordgame1} would have the
@@ -388,7 +392,7 @@ Figure~\ref{coordgame1reg}:
     \end{tabular}
 \end{center}
 
-\noindent The acts selected by the maximin rule for the negative regret transpose are exactly
+\noindent The acts selected by the maximin rule for the negative regret transformation are exactly
 the acts selected by regret minimization for the original game.
 
 This means that we can think of the maximin rule and regret minimization as being two
@@ -419,29 +423,221 @@ equivalent. This holds for arbitrary games, as well as for solitary decision sit
 
 \bigskip
 
-In sum, we have so far considered four different types of choice rules, each differing along a
+
+In sum, we have so far considered four different alternatives, each differing along a
 preference and a belief dimension. As for preference representations, agents could either
-target objective payoffs, or consider non-veridical subjective regret transformations. As for
+target objective payoffs, or consider non-veridical subjective regret transformations. Given a game $G$, we will denote by $ \tau^{reg}(G)$ the regret representation (corresponding to the negative regret transformation) of the game, and $\tau^{\pi}(G)$ the objective representation (corresponding to the identity transformation) of the game. \\
+As for
 beliefs, agents could either hold probabilistic belief or not. In the former case, we would
 assume that they maximize expectations under whatever preference representation they hold; in
 the latter, we would assume that they play maximin based on their preference
 representations. There are doubtlessly many more possible preference and belief types, but
 these are the main characters in the plot to follow. 
 
-Before we turn to evolutionary competition between choice mechanisms, we should justify our
-focus on the two choice rules. In the following we argue that both the minimax rule, as well as
-the Laplace rule can be viewed as the same choice rule under different representations of
+Before we turn to evolutionary competition between choice principles, we should justify our
+focus on the two choice rules. In the following we argue that both the minimax rule, as well as the maximization of expected utility 
+(and the Laplace rule as a special case) can be viewed as the same choice rule under different representations of
 uncertainty. 
+
 
 \subsection{Imprecise probabilistic beliefs}
 \label{sec:impr-prob-beli}
 
 Consider the following problem. I have, on the desk in front of me, a bag containing either red or black marbles. There is no further information about the distribution of the two colors. What is then the probability that I will draw a red marble? As in Walley91-96, we are not talking about physical probability, but rather about epistemic probability, i.e., the subjective probability that an agent attributes to an event.
 In the literature there are two traditional ways of answering this kind of questions. According to standard Bayesianism, one should always be able to determine a precise betting rate (that immediately translates into a precise probability distribution), which is fair, in the sense that the DM is indifferent between betting on or against red at the fair rate, and would bet on red at any rate that is more favourable than the fair rate and against red at any rate that is less favourable. In this case, a strict Bayesian, in the absence of any further information, would probably rely on the principle of insufficient reason and answer that the DM should have a uniform distribution that considers all the outcomes equipossible. \\
-The second answer involves imprecise probabilities and is related to the literature about uncertainty, or ambiguity. Many authors argued in favor of this kind of approach [e.g., Walley91-96, Levi74, GardenforsANDSahlin82]. Since it is consistent with the information available that all the marbles are red, or that no marble is red, the resulting model should take it into account and specify a lower probability of red $\underline{P}(R)$ and an upper probability of red $\overline{P}(R)$ that define an interval of possible probabilistic beliefs [$\underline{P}(R), \overline{P}(R)$]. Given the information available in this case we would have $\underline{P}(R)=0$ and $\overline{P}(R)=1$. This approach appears particularly relevant and appropriate in a game theoretical context. Indeed, in a recent paper [Battigalliet al.15] Battigalli et al. write
+The second answer involves imprecise probabilities and is related to the literature about unmeasurable uncertainty. Many authors argued in favor of this kind of approach [e.g., Walley91-96, Levi74, GardenforsANDSahlin82]. Since it is consistent with the information available that all the marbles are red, or that no marble is red, the resulting model should take it into account and specify a lower probability of red $\underline{P}(R)$ and an upper probability of red $\overline{P}(R)$ that define an interval of possible probabilistic beliefs [$\underline{P}(R), \overline{P}(R)$]. Given the information available in this case we would have $\underline{P}(R)=0$ and $\overline{P}(R)=1$. This approach appears particularly relevant and appropriate in a game theoretical context. Indeed, in a recent paper [Battigalliet al.15] Battigalli et al. write
+
 \begin{quote}
 Such uncertainty is inherent in situations of strategic interaction. This is quite obvious when such situations have been faced only a few times.
 \end{quote}
+
+
+
+In decision theory, the imprecise probability model is in line with most of the representation results about uncertainty [GilboaSchmeidler89,KMM06], and seems justified by empirical observations too. 
+
+A prominent example is Ellsberg's paradox. A bag contains 90 marbles, 30 are red and the remaining 60 are either black or yellow. A marble is to be drawn and DM can win 100€ if she guesses the color of the drawn marble. The DM is offered two different bets. In the first one she can choose to bet either on red (R) or on yellow (Y), while in the second she can bet either on red or black (RB) or on yellow or black (YB), as shown in Table \ref{Ellsberg}.
+
+\definecolor{yellow}{RGB}{255,188,1}
+
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}llll@{}}
+\cmidrule(l){2-4}
+\multicolumn{1}{c}{} & {\color{red}R}   & {\color{yellow}Y}   & B   \\ \cmidrule(l){2-4} 
+$f_{{\color{red}R}}$              & 100 & 0   & 0   \\
+$f_{{\color{yellow}Y}}$              & 0   & 100 & 0   \\
+$f_{{\color{red}R}B}$            & 100 & 0   & 100 \\
+$f_{{\color{yellow}Y}B}$             & 0   & 100 & 100 \\ \bottomrule
+\end{tabular}
+\caption{Ellsberg's paradox}
+\label{Ellsberg}
+\end{table}
+
+The pattern consistently observed in experimets is: $f_{{\color{red}R}} \succ f_{{\color{yellow}Y}}$ and $f_{{\color{red}R}B} \prec f_{{\color{yellow}Y}B}$. This is clearly incompatible with any precise probabilistic belief about the proportion of black and yellow marbles. This kind of behavior has been
+famously axiomatized by Gilboa and Schmeidler in a paper from 1989. The choice pattern is normally explained in terms of aversion to uncertainty, and the standard representation is given by means of probability sets together with maxmin rule. We can think of the DM in Ellsberg's example as maximinimizing expected utility over the probability set $ [\underline{P}(R)=\frac{1}{3},\underline{P}(Y)=0,\underline{P}(B)=0,\overline{P}(R)=\frac{1}{3},\overline{P}(Y)=\frac{2}{3},\overline{P}(B)=\frac{2}{3}]  $. This amounts to calculating for any probability distribution contained in the probability set the expected utility of any available action, and then to choosing the action that guarantees the highest minimal expected utility. The following observation is then trivial.
+
+\begin{fact} \label{fact:singleton probability set}
+Whenever the probability set is a singleton, maximinization of
+expected utility coincides with maximization of expected utility.
+\end{fact}
+
+A huge body of experimental literature strongly suggests that agents are generally uncertainty
+averse [REF]. In line with empirical data,
+we assume that players in the population are uncertainty averse and conform to maxmin expected
+utility. The resulting behavior is then produced by maximinimizing the subjective utility
+given by the player type over the set of probabilities given by the belief state, or epistemic type, of the agent.
+
+In full generality, we think of an epistemic type as a general disposition to form beliefs about the co-player’s behavior.    Players in the population obviously face uncertainty about the composition of the population that they are part of, and consequently about the type of co-player that they are randomly paired with at each round and about the co-player's actions. We represent this uncertainty in two different ways that correspond to the two approaches discussed above: a Bayesian uniform distribution and an imprecise probability set. This amounts to having two different epistemic types, $ \overline{\mu}$ and $ \Delta(A_{-i}) \rbrace $, where $\overline{\mu}$ stands for the uniform distribution and $\Delta(A_{-i})$ is the probability set, defined as follows:
+
+\begin{itemize}
+
+\item $ \Delta(A_{-i}):=\lbrace \mu \in \mathbb{R}^{A_{-i}}: \sum_{a_{-i} \in A_{-i}} \mu(a_{-i}) = 1 \rbrace$;
+
+\item $\overline{\mu} \in \Delta(A_{-i})$ is the probability measure over the co-player's actions such that: $\forall a_{-i} \in A_{-i}$, $\overline{\mu}(a_{-i})= \frac{1}{|A_{-i}|}$.
+
+\end{itemize} 
+
+Hence, we consider two possible epistemic states in the face of uncertainty. The epistemic type $\Delta(A_{-i})$ represents a situation of non-Bayesian radical uncertainty, where the players are not able to narrow down the set of probability distributions to a single one and they consider all of them as possible. The other epistemic type $\overline{\mu}$ conceptualizes the uncertainty about the population by using the principle of insufficient reason and ascribes equal probability to all the possible alternatives. As we have seen, both options are reasonable and justifiable ways to deal with situations of uncertainty [REFERENCES]. \\
+
+
+To sum up, here we consider the choice of an action as depending on two features: the subjective preference and the belief state. Definition \ref{def:choice rule} makes this point clear.
+
+\begin{definition} \label{def:choice rule}
+
+Given a set of subjective preferences $\Theta$ and a set of epistemic types $E$, we define \textit{choice rule} a function $\kappa: \Theta \times E  \rightarrow A_i$ that associates an action choice to a pair $(\theta, e) \in \Theta \times E$.
+
+\end{definition}
+
+According to what we argued in this section, we will assume that the choice rule that turns subjective preferences and beliefs into actions is maxmin expected utility.
+
+
+
+\begin{example}
+  Consider the game in Figure \ref{coordgame1} again. When a player characterized
+  by\footnote{To ease notation in the following we will refer to a player directly as a pair
+    $(player \text{ } type \text{ } \tau,\text{ } epistemic\text{ } type \text{ } e)$.} player
+  type $ \tau^{reg} $ and epistemic type $ \Delta(A_{-i}) $ faces the game in Figure
+  \ref{coordgame1}, her player type gives rise to the representation $\tau^{reg}(G^C)$ in
+  Figure \ref{coordgame1reg}. Then, maximinimizing expected utility over the probability
+  simplex $ \Delta(A_{-i}) $ given the game in Figure \ref{coordgame1reg} corresponds to
+  playing the standard maxmin strategy [REF] of that game.\footnote{Notice that this is the
+    case for any game: given a game $G$, maximinimizing expected utility over the probability
+    simplex $ \Delta(A_{-i}) $ amounts to playing the standard maxmin strategy of $G$.} This,
+  in turn, corresponds to the regret minimizing action of the original game $G^C$ of Figure
+  \ref{coordgame1}, namely action $II$, as we have seen in Section \ref{sec:regreTheory}. A
+  player $(\tau^{reg},\overline{\mu})$ instead has subjective representation $\tau^{reg}(G^C)$
+  of Figure \ref{coordgame1reg} and a flat probability measure
+  $\overline{\mu}=(\frac{1}{2}I,\frac{1}{2}II)$ over the co-player's actions. Consequently,
+  such a player would play action $II$, i.e., the action that maximinimizes expected utility
+  given the flat probability measure $\overline{\mu}$.\footnote{As we already noticed,
+    maximinimizing expected utility given a probability measure $\mu$ is equivalent to
+    maximizing expected utility given $\mu$.}  Similarly, a player
+  $(\tau^{\pi},\Delta(A_{-i}))$ will have the subjective representation coinciding with the
+  objective fitness game, i.e., $ \tau^{\pi}(G^C)= G^C $. Then, both actions $I$ and $II$
+  maximinimize expected utility over the probability simplex $ \Delta(A_{-i}) $. Hence, a
+  player $(\tau^{\pi},\Delta(A_{-i}))$ will be indifferent between $I$ and $II$, and will
+  randomize with equal probability $(\frac{1}{2}I,\frac{1}{2}II)$. Finally, a player
+  $(\tau^{\pi},\overline{\mu})$ maximinimizes the objective fitness game $G^C$ of Figure
+  \ref{coordgame1} with flat probability $\overline{\mu}$ over the co-player's actions, i.e.,
+  maximizes objective utility given $\overline{\mu}$. In game $G^C$ this yields action $II$.
+
+
+
+\begin{figure}
+\begin{center}%
+\begin{tabular}{|c|c|c|}
+\hline 
+ & I & II\tabularnewline
+\hline 
+\hline 
+I & 0;0 & -2;-1\tabularnewline
+\hline 
+II & -1;-2 & 0;0\tabularnewline
+\hline 
+\end{tabular}\end{center}
+
+\protect\caption{Regret representation $\tau^{reg}(G^C)$}
+\label{coordgame1reg}
+\end{figure}
+
+\end{example}
+
+We are now in the position of deriving behavior directly from the pair $(\tau, e)$. Definitions \ref{def:utility-belief} and \ref{def:maxminSEU} simply formalize the notions of subjective expected utility and maxmin subjective expective utility, respectively. 
+
+\begin{definition} \label{def:utility-belief}
+
+Given a game $G$, an action $a_i \in A_i$, and a belief $\mu \in \lbrace \mu' \in \mathbb{R}^{A_{-i}}: \sum_{a_{-i} \in A_{-i}} \mu'(a_{-i}) = 1 \rbrace$, we define $\tau(G)(a_i, \mu):= \sum_{a_{-i} \in A_{-i}} \tau(G)(a_i, a_{-i}) \cdot \mu(a_{-i})$. 
+
+\end{definition}
+
+\begin{definition} \label{def:maxminSEU}
+
+Given a game $G$ and a player $(\tau, e)$, we define $\text{maxmin}(\tau(G), e):= \lbrace a'_i \in A_i : a_i \in \text{max}_{a_i \in A_i} \text{ min}_{\mu \in e} \text{ } \tau(G)(a_i, \mu) \rbrace$.
+
+\end{definition}
+
+\noindent Definition \ref{def:expected fitness} gives the expected evolutionary fitness of player $(\tau, e)$ against player $(\tau', e')$ in game $G$.\footnote{As already specified in the previous example, we assume that, whenever the set $\text{maxmin}(\tau(G), e)$ is not a singleton, the player $(\tau, e)$ will mix with equal probability among the actions in $\text{maxmin}(\tau(G), e)$.}
+
+\begin{definition} \label{def:expected fitness}
+
+Given a game $G \in \mathcal{G}$, a player $(\tau, e)$, and a player $(\tau', e')$, we define $\pi^G((\tau, e),(\tau', e')):= \pi^G(\text{maxmin}(\tau(G), e),\text{maxmin}(\tau'(G), e'))$. 
+
+\end{definition}
+
+%\todo[inline]{should we explain here, or very soon, what the resulting types really are: regret minimizers, maximin players \dots}
+
+Many other alternatives different from maxmin could produce behavior: choice rules like minmax, maxmax, and minmin would similarly generate behavior in case of a lack of precise probabilistic belief. Here we postulate that players use maxmin for two main reasons that we will expand in the next section. First, among other possible choice rules maxmin is not only intuitively appealing but also corroborated from an empirical point of view. Secondly, as it will be clear in the following, our main interest is the evolution of different patterns of subjective conceptualizations of games (player types), and we want to show that the veridical representation (objective type) is not necessarily the fittest and may not be evolutionarily stable. Assuming that all players use a fixed rule (maxmin) independent of their player type allows us to factor the choice rule out of the selection process and to focus on player types.
+
+Before concluding this section, it is worth stressing that player $(\tau^{\pi}, \Delta(A_{-i}))$ turns out to be the objective maximinimizer, player $(\tau^{reg}, \Delta(A_{-i}))$ is the regret minimizer, player $(\tau^{\pi}, \overline{\mu})$ is the objective expected utility maximizer, and player $(\tau^{reg}, \overline{\mu})$ is the expected regret minimizer. Moreover, the following fact holds.
+
+\iffalse
+
+\begin{fact} \label{fact:maxEU-minReg}
+
+For any probability measure $\mu$, maximization of expected utility and minimization of expected regret are behaviorally equivalent.
+
+\end{fact}
+
+\noindent As we have seen in the previous example, this is not the case in the presence of (radical) uncertainty, in the sense of representation of belief state in terms of a set of probability, as in $ \Delta(A_{-i}) $.
+\fi
+
+
+\begin{fact} \label{fact:equivalence2x2}
+
+In the class of $2 \times 2$ symmetric games, players $(\tau^{reg}, \Delta(A_{-i}))$, $(\tau^{\pi}, \overline{\mu})$, and $(\tau^{reg},\overline{\mu})$ are behaviorally equivalent.
+
+\end{fact} 
+
+\noindent Two remarks. Firstly, Fact \ref{fact:equivalence2x2} does not hold for $n \times n$
+symmetric games in general. Secondly, we treat behaviorally equivalent types as distinct,
+because we assume that what is selected by biological evolution is not choice behavior as such,
+but the mechanism which generates behavior. This matters in particular if we assume that
+mutations affect different components of the behavior generating mechanisms (see below). 
+
+
+
+
+
+
+\iffalse
+
+\subsection{Epistemic types}
+\label{sec:epistemic-types}
+
+\todo[inline]{I think we really need a better (and earlier) justification for these epistemic
+  types; we could appeal to information available to agents; naturalness of situations in which
+  we cannot attach numbers to our beliefs (life on Mars again) \dots}
+
+Consider the following problem. I have, on the desk in front of me, a bag containing either red or black marbles. There is no further information about the distribution of the two colors. What is then the probability that I will draw a red marble? As in Walley91-96, we are not talking about physical probability, but rather about epistemic probability, i.e., the subjective probability that an agent attributes to an event.
+In the literature there are two traditional ways of answering this kind of questions. According to standard Bayesianism, one should always be able to determine a precise betting rate (that immediately translates into a precise probability distribution), which is fair, in the sense that the DM is indifferent between betting on or against red at the fair rate, and would bet on red at any rate that is more favourable than the fair rate and against red at any rate that is less favourable. In this case, a strict Bayesian, in the absence of any further information, would probably rely on the principle of insufficient reason and answer that the DM should have a uniform distribution that considers all the outcomes equipossible. \\
+The second answer involves imprecise probabilities and is related to the literature about uncertainty, or ambiguity. Many authors argued in favor of this kind of approach [e.g., Walley91-96, Levi74, GardenforsANDSahlin82]. Since it is consistent with the information available that all the marbles are red, or that no marble is red, the resulting model should take it into account and specify a lower probability of red $\underline{P}(R)$ and an upper probability of red $\overline{P}(R)$ that define an interval of possible probabilistic beliefs [$\underline{P}(R), \overline{P}(R)$]. Given the information available in this case we would have $\underline{P}(R)=0$ and $\overline{P}(R)=1$. This approach appears particularly relevant and appropriate in a game theoretical context. Indeed, in a recent paper [Battigalliet al.15] Battigalli et al. write
+
+\begin{quote}
+Such uncertainty is inherent in situations of strategic interaction. This is quite obvious when such situations have been faced only a few times.
+\end{quote}
+
+
 In decision theory, the imprecise probability model is in line with most of the representation results about uncertainty [GilboaSchmeidler89,KMM06], and seems justified by empirical observations too (see below). Walley91-96 is a seminal work in the area, that also introduces learning procedures to get useful inferences and narrow down the probability set [$\underline{P}(R), \overline{P}(R)$] after observing data. Since we want to study the evolution of meta-types, the present work does not address the probem of drawing inferences from observations, and for the moment we do not endow the players with any learning procedure.\\
 In line with traditional evolutionary game theory, we model a population of rather unsophisticated and myopic agents. %that possibly differ from each other with respect to two components: the player type and the epistemic type. The players 
 The players encode both a psychological subjective representation of the interaction (player type) and a conceptualization of uncertainty (epistemic type), but they are too simple to have any learning or belief updating procedure. From this point of view, we can take the learning process away from natural selection and focus on player types and epistemic types as the target of evolutionary pressure.
@@ -457,6 +653,148 @@ In full generality, we think of an epistemic type as a general disposition to fo
 \end{itemize} 
 
 Hence, we consider two possible epistemic states in the face of uncertainty. The epistemic type $\Delta(A_{-i})$ represents a situation of non-Bayesian radical uncertainty, where the players are not able to narrow down the set of probability distributions to a single one and they consider all of them as possible. The other epistemic type $\overline{\mu}$ conceptualizes the uncertainty about the population by using the principle of insufficient reason and ascribes equal probability to all the possible alternatives. As we have seen, both options are reasonable and justifiable ways to deal with situations of uncertainty [REFERENCES]. \\
+
+\subsection{Uncertainty aversion and maxmin rule}
+
+\todo[inline]{this paragraph seems to presuppose familiarity with maxi-minimization (can we
+  write this with a hyphen, any chance?); we should rewrite this or introduce the notion immediately;}
+
+An important part of the latest literature, both experimental and theoretical, in decision theory deals with the issue of uncertainty, also called ambiguity. Technically, there is uncertainty about an event when no precise objective probability distribution about the possible outcomes is given. A prominent example is the above mentioned Ellsberg's paradox. A bag contains 90 marbles, 30 are red and the remaining 60 are either black or yellow. A marble is to be drawn and DM can win 100€ if she guesses the color of the drawn marble. The DM is offered two different bets. In the first one she can choose to bet either on red (R) or on yellow (Y), while in the second she can bet either on red or black (RB) or on yellow or black (YB), as shown in Table \ref{Ellsberg}.
+
+\definecolor{yellow}{RGB}{255,188,1}
+
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}llll@{}}
+\cmidrule(l){2-4}
+\multicolumn{1}{c}{} & {\color{red}R}   & {\color{yellow}Y}   & B   \\ \cmidrule(l){2-4} 
+$f_{{\color{red}R}}$              & 100 & 0   & 0   \\
+$f_{{\color{yellow}Y}}$              & 0   & 100 & 0   \\
+$f_{{\color{red}R}B}$            & 100 & 0   & 100 \\
+$f_{{\color{yellow}Y}B}$             & 0   & 100 & 100 \\ \bottomrule
+\end{tabular}
+\caption{Ellsberg's paradox}
+\label{Ellsberg}
+\end{table}
+
+The pattern consistently observed in experimets is: $f_{{\color{red}R}} \succ f_{{\color{yellow}Y}}$ and $f_{{\color{red}R}B} \prec f_{{\color{yellow}Y}B}$. This is clearly incompatible with any precise probabilistic belief about the proportion of black and yellow marbles. This kind of behavior has been
+famously axiomatized by Gilboa and Schmeidler in a paper from 1989. The choice pattern is normally explained in terms of aversion to uncertainty, and the standard representation is given by means of probability sets together with maxmin rule. We can think of the DM in Ellsberg's example as maximinimizing expected utility over the probability set $ [\underline{P}(R)=\frac{1}{3},\underline{P}(Y)=0,\underline{P}(B)=0,\overline{P}(R)=\frac{1}{3},\overline{P}(Y)=\frac{2}{3},\overline{P}(B)=\frac{2}{3}]  $. This amounts to calculating for any probability distribution contained in the probability set the expected utility of any available action, and then to choosing the action that guarantees the highest minimal expected utility. Whenever the set of priors is a singleton, maximinization of
+expected utility coincides with maximization of expected utility.\\
+%Given a player type and an epistemic type, there are different ways to produce a behavior. 
+A huge body of experimental literature strongly suggests that agents are generally uncertainty
+(or ambiguity) averse [REF]. In line with empirical data,
+we assume that players in the population are uncertainty averse and conform to maxmin expected
+utility. The resulting behavior is then produced by maximinimizing the subjective utility
+given by the player type over the set of priors given by the epistemic type.
+
+  \todo[inline]{I would like to suggest to move Figure 2 next to Figure 1; it is already useful
+  for example 1 and could be referred to there already; I would suggest to use subfigures to
+  put both next to each other}
+
+\begin{example}
+  Consider the game in Figure \ref{coordgame1} again. When a player characterized
+  by\footnote{To ease notation in the following we will refer to a player directly as a pair
+    $(player \text{ } type \text{ } \tau,\text{ } epistemic\text{ } type \text{ } e)$.} player
+  type $ \tau^{reg} $ and epistemic type $ \Delta(A_{-i}) $ faces the game in Figure
+  \ref{coordgame1}, her player type gives rise to the representation $\tau^{reg}(G^C)$ in
+  Figure \ref{coordgame1reg}. Then, maximinimizing expected utility over the probability
+  simplex $ \Delta(A_{-i}) $ given the game in Figure \ref{coordgame1reg} corresponds to
+  playing the standard maxmin strategy [REF] of that game.\footnote{Notice that this is the
+    case for any game: given a game $G$, maximinimizing expected utility over the probability
+    simplex $ \Delta(A_{-i}) $ amounts to playing the standard maxmin strategy of $G$.} This,
+  in turn, corresponds to the regret minimizing action of the original game $G^C$ of Figure
+  \ref{coordgame1}, namely action $II$, as we have seen in Section \ref{sec:regreTheory}. A
+  player $(\tau^{reg},\overline{\mu})$ instead has subjective representation $\tau^{reg}(G^C)$
+  of Figure \ref{coordgame1reg} and a flat probability measure
+  $\overline{\mu}=(\frac{1}{2}I,\frac{1}{2}II)$ over the co-player's actions. Consequently,
+  such a player would play action $II$, i.e., the action that maximinimizes expected utility
+  given the flat probability measure $\overline{\mu}$.\footnote{As we already noticed,
+    maximinimizing expected utility given a probability measure $\mu$ is equivalent to
+    maximizing expected utility given $\mu$.}  Similarly, a player
+  $(\tau^{\pi},\Delta(A_{-i}))$ will have the subjective representation coinciding with the
+  objective fitness game, i.e., $ \tau^{\pi}(G^C)= G^C $. Then, both actions $I$ and $II$
+  maximinimize expected utility over the probability simplex $ \Delta(A_{-i}) $. Hence, a
+  player $(\tau^{\pi},\Delta(A_{-i}))$ will be indifferent between $I$ and $II$, and will
+  randomize with equal probability $(\frac{1}{2}I,\frac{1}{2}II)$. Finally, a player
+  $(\tau^{\pi},\overline{\mu})$ maximinimizes the objective fitness game $G^C$ of Figure
+  \ref{coordgame1} with flat probability $\overline{\mu}$ over the co-player's actions, i.e.,
+  maximizes objective utility given $\overline{\mu}$. In game $G^C$ this yields action $II$.
+
+
+
+\begin{figure}
+\begin{center}%
+\begin{tabular}{|c|c|c|}
+\hline 
+ & I & II\tabularnewline
+\hline 
+\hline 
+I & 0;0 & -2;-1\tabularnewline
+\hline 
+II & -1;-2 & 0;0\tabularnewline
+\hline 
+\end{tabular}\end{center}
+
+\protect\caption{Regret representation $\tau^{reg}(G^C)$}
+\label{coordgame1reg}
+\end{figure}
+
+\end{example}
+
+We are now in the position of deriving behavior directly from the pair $(\tau, e)$. Definitions \ref{def:utility-belief} and \ref{def:maxminSEU} simply formalize the notions of subjective expected utility and maxmin subjective expective utility, respectively. 
+
+\begin{definition} \label{def:utility-belief}
+
+Given a game $G$, an action $a_i \in A_i$, and a belief $\mu \in \lbrace \mu' \in \mathbb{R}^{A_{-i}}: \sum_{a_{-i} \in A_{-i}} \mu'(a_{-i}) = 1 \rbrace$, we define $\tau(G)(a_i, \mu):= \sum_{a_{-i} \in A_{-i}} \tau(G)(a_i, a_{-i}) \cdot \mu(a_{-i})$. 
+
+\end{definition}
+
+\begin{definition} \label{def:maxminSEU}
+
+Given a game $G$ and a player $(\tau, e)$, we define $\text{maxmin}(\tau(G), e):= \lbrace a'_i \in A_i : a_i \in \text{max}_{a_i \in A_i} \text{ min}_{\mu \in e} \text{ } \tau(G)(a_i, \mu) \rbrace$.
+
+\end{definition}
+
+\noindent Definition \ref{def:expected fitness} gives the expected evolutionary fitness of player $(\tau, e)$ against player $(\tau', e')$ in game $G$.\footnote{As already specified in the previous example, we assume that, whenever the set $\text{maxmin}(\tau(G), e)$ is not a singleton, the player $(\tau, e)$ will mix with equal probability among the actions in $\text{maxmin}(\tau(G), e)$.}
+
+\begin{definition} \label{def:expected fitness}
+
+Given a game $G \in \mathcal{G}$, a player $(\tau, e)$, and a player $(\tau', e')$, we define $\pi^G((\tau, e),(\tau', e')):= \pi^G(\text{maxmin}(\tau(G), e),\text{maxmin}(\tau'(G), e'))$. 
+
+\end{definition}
+
+%\todo[inline]{should we explain here, or very soon, what the resulting types really are: regret minimizers, maximin players \dots}
+
+Many other alternatives different from maxmin expected utility could produce behavior: choice rules like minmax, maxmax, and minmin expected utility would similarly generate behavior from a player type and an epistemic type. Here we postulate that players are maximinimizers for two main reasons. First, as already mentioned, among other possible choice rules maxmin is not only intuitively appealing but also corroborated from an empirical point of view. Secondly, our main interest is the evolution of different patterns of subjective conceptualizations of games (player types), and we want to show that the veridical representation (objective type) is not necessarily the fittest and may not be evolutionarily stable. Assuming that all players use the maxmin rule independent of their player type allows us to factor the choice rule out of the selection process and to focus on player types.
+
+Before concluding this section, it is worth stressing that player $(\tau^{\pi}, \Delta(A_{-i}))$ turns out to be the objective maximinimizer, player $(\tau^{reg}, \Delta(A_{-i}))$ is the regret minimizer, player $(\tau^{\pi}, \overline{\mu})$ is the objective expected utility maximizer, and player $(\tau^{reg}, \overline{\mu})$ is the expected regret minimizer. Moreover, the following facts hold.
+
+\begin{fact} \label{fact:maxEU-minReg}
+
+For any probability measure $\mu$, maximization of expected utility and minimization of expected regret are behaviorally equivalent.
+
+\end{fact}
+
+\noindent As we have seen in the previous example, this is not the case in the presence of (radical) uncertainty, in the sense of representation of belief state in terms of a set of probability, as in $ \Delta(A_{-i}) $.
+
+\begin{fact} \label{fact:equivalence2x2}
+
+In the class of $2 \times 2$ symmetric games, players $(\tau^{reg}, \Delta(A_{-i}))$, $(\tau^{\pi}, \overline{\mu})$, and $(\tau^{reg},\overline{\mu})$ are behaviorally equivalent.
+
+\end{fact} 
+
+\noindent Two remarks. Firstly, Fact \ref{fact:equivalence2x2} does not hold for $n \times n$
+symmetric games in general. Secondly, we treat behaviorally equivalent types as distinct,
+because we assume that what is selected by biological evolution is not choice behavior as such,
+but the mechanism which generates behavior. This matters in particular if we assume that
+mutations affect different components of the behavior generating mechanisms (see below). 
+
+\fi
+
+
+
+
 
 
 \newpage
@@ -1096,6 +1434,7 @@ regret-based preferences can actually be selected, despite their non-veridicalit
 
 
 
+
 \appendix
 
 
@@ -1122,7 +1461,7 @@ from a finite or compact and convex set of values, it holds:
 \end{itemize}
 
 
-\noindent To show
+\noindent Let us consider the case of sampling from a finite set of values first. To show
 the result we will use the following partition of $\mathcal{G}$.
 \begin{enumerate}
 \item Coordination games $\mathcal{G}^{C}$: $a>c$ and $d>b$;
@@ -1330,62 +1669,87 @@ more explicitly as:
 
 \medskip{}
 
-\noindent $\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{RM})\cdot d^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{RM})\cdot a^{A}+P(II_{G^{A}}^{RM})\cdot d^{A}]>\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot a^{C}+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot d^{C}+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot c^{C}+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot b^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{RM}\cap I_{G^{A}}^{MM})\cdot a^{A}+P(II_{G^{A}}^{RM}\cap II_{G^{A}}^{MM})\cdot d^{A}+P(I_{G^{A}}^{RM}\cap II_{G^{A}}^{MM})\cdot c^{A}+P(II_{G^{A}}^{RM}\cap I_{G^{A}}^{MM})\cdot b^{A}]$
+\noindent $\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})\cdot d^{C}+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})\cdot b^{C}+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{RM})\cdot c^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{RM}\cap I_{G^{A}}^{RM})\cdot a^{A}+P(II_{G^{A}}^{RM}\cap II_{G^{A}}^{RM})\cdot d^{A}+P(I_{G^{A}}^{RM}\cap II_{G^{A}}^{RM})\cdot b^{A}+P(II_{G^{A}}^{RM}\cap I_{G^{A}}^{RM})\cdot c^{A}] > \sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot a^{C}+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot d^{C}+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot c^{C}+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot b^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{RM}\cap I_{G^{A}}^{MM})\cdot a^{A}+P(II_{G^{A}}^{RM}\cap II_{G^{A}}^{MM})\cdot d^{A}+P(I_{G^{A}}^{RM}\cap II_{G^{A}}^{MM})\cdot c^{A}+P(II_{G^{A}}^{RM}\cap I_{G^{A}}^{MM})\cdot b^{A}]$
 \medskip{}
 
 \noindent Then, the next derivation follows. By Lemma 5 and 6, we can express
 everything in terms of $G^{C}$ only: 
 \begin{itemize}
-\item $\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{RM})\cdot d^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{RM})\cdot a^{A}+P(II_{G^{A}}^{RM})\cdot d^{A}]>\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot a^{C}+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot d^{C}+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot c^{C}+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot b^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{RM}\cap I_{G^{A}}^{MM})\cdot a^{A}+P(II_{G^{A}}^{RM}\cap II_{G^{A}}^{MM})\cdot d^{A}+P(I_{G^{A}}^{RM}\cap II_{G^{A}}^{MM})\cdot c^{A}+P(II_{G^{A}}^{RM}\cap I_{G^{A}}^{MM})\cdot b^{A}]$
-\item $\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{RM})\cdot d^{C}+P(II_{G^{C}}^{RM})\cdot c^{C}+P(I{}_{G^{C}}^{RM})\cdot b^{C}]>\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot a^{C}+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot d^{C}+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot c^{C}+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot b^{C}+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot c^{C}+P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot b^{C}+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot a^{C}+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot d^{C}]$
-\item $\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{RM})\cdot d^{C}+P(II_{G^{C}}^{RM})\cdot c^{C}+P(I{}_{G^{C}}^{RM})\cdot b^{C}]>\sum_{G^{C}}P(G^{C})[a^{C}\cdot(P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM}))+b^{C}\cdot(P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})+P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM}))+c^{C}\cdot(P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))+d^{C}\cdot(P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))]$
+
+\item $\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})\cdot d^{C}+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})\cdot b^{C}+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{RM})\cdot c^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{RM}\cap I_{G^{A}}^{RM})\cdot a^{A}+P(II_{G^{A}}^{RM}\cap II_{G^{A}}^{RM})\cdot d^{A}+P(I_{G^{A}}^{RM}\cap II_{G^{A}}^{RM})\cdot b^{A}+P(II_{G^{A}}^{RM}\cap I_{G^{A}}^{RM})\cdot c^{A}] > \sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot a^{C}+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot d^{C}+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot c^{C}+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot b^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{RM}\cap I_{G^{A}}^{MM})\cdot a^{A}+P(II_{G^{A}}^{RM}\cap II_{G^{A}}^{MM})\cdot d^{A}+P(I_{G^{A}}^{RM}\cap II_{G^{A}}^{MM})\cdot c^{A}+P(II_{G^{A}}^{RM}\cap I_{G^{A}}^{MM})\cdot b^{A}]$
+
+\item $\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})\cdot d^{C}+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})\cdot b^{C}+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{RM})\cdot c^{C} +P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})\cdot c^{C}+P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{RM})\cdot b^{C}+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{RM})\cdot d^{C}+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})\cdot a^{C}] > \sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot a^{C}+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot d^{C}+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot c^{C}+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot b^{C}+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot c^{C}+P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot b^{C}+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot a^{C}+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot d^{C}]$
+
+\item $\sum_{G^{C}}P(G^{C})[a^{C} \cdot (P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{RM}) + P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})) + b^{C} \cdot  (P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{RM}) + P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{RM})) + c^{C} \cdot (P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{RM}) +P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})) + d^{C} \cdot (P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{RM}))]> \sum_{G^{C}}P(G^{C})[a^{C} \cdot (P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})) + b^{C} \cdot (P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})+P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})) + c^{C} \cdot (P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})) + d^{C} \cdot (P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))]$
+
 \end{itemize}
-Now let us split into $a>d$ and $a<d$, and consider $a>d$ first.
+
+\noindent Now let us split into $a>d$ and $a<d$, and consider $a>d$ first.
 Notice that, by Lemma 7, the case $a=d$ is irrelevant in order to
 discriminate between RM and MM. If $a>d$, by Lemma 7 we can eliminate
 the cases where RM plays $II$ and MM plays $I$:
+
 \begin{itemize}
-\item $\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})[P(I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{RM})\cdot d^{C}+P(II_{G^{C}}^{RM})\cdot c^{C}+P(I{}_{G^{C}}^{RM})\cdot b^{C}]>\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})[a^{C}\cdot P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})+b^{C}\cdot P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})+c^{C}\cdot(P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))+d^{C}\cdot(P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))]$
-\item $\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})[P(I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{RM})\cdot d^{C}+P(II_{G^{C}}^{RM})\cdot c^{C}+P(I{}_{G^{C}}^{RM})\cdot b^{C}-a^{C}\cdot P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})-b^{C}\cdot P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})-c^{C}\cdot(P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))-d^{C}\cdot(P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))]>0$
-\item $\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})[a^{C}\cdot(P(I_{G^{C}}^{RM})-P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM}))+b^{C}\cdot(P(I{}_{G^{C}}^{RM})-P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM}))+c^{C}\cdot(P(II_{G^{C}}^{RM})-P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})-P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))+d^{C}\cdot(P(II_{G^{C}}^{RM})-P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})-P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))]>0$
+
+\item $\sum_{G_{a>d}^{C}} P(G^{C})[a^{C} \cdot (P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{RM}) + P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})) + b^{C} \cdot  (P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{RM}) + P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{RM})) + c^{C} \cdot (P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{RM}) +P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})) + d^{C} \cdot (P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{RM}))]> 
+\sum_{G_{a>d}^{C}} P(G^{C})[a^{C} \cdot P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM}) + b^{C} \cdot P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM}) + c^{C} \cdot (P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})) + d^{C} \cdot (P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))]$
+
+\item $\sum_{G_{a>d}^{C}} P(G^{C})[a^{C} \cdot (P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{RM}) + P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})- P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})) + b^{C} \cdot  (P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{RM}) + P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{RM})- P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})) + c^{C} \cdot (P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{RM}) +P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})- P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})- P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})) + d^{C} \cdot (P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{RM})- P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})- P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))]> 0$
+
 \end{itemize}
-By Lemma 7, it is easy to check that $P(I_{G^{C}}^{RM})-P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})=P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})$
-and $P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})=P(II_{G^{C}}^{RM})$.
+
+\noindent We now distinguish between two cases: (1) $ a-c = d-b $ and (2) $  a-c \neq d-b $. Notice that $P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{RM}) \neq 0$ if and only if case (1) obtains, and that $a>d$ and (1) imply $II_{G^{C}}^{MM}$. Then, from (1) we have:
+
+\begin{itemize}
+
+\item $\sum_{G_{a>d}^{C}} P(G^{C})[a^{C} \cdot (P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{RM}) + P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})) + b^{C} \cdot  (P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{RM}) + P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{RM})) + c^{C} \cdot (P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{RM}) +P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})- P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})- P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})) + d^{C} \cdot (P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{RM})- P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})- P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))]> 0$
+
+\item $\sum_{G_{a>d}^{C}} P(G^{C})[a^{C} \cdot (\frac{1}{4}+\frac{1}{4}) + b^{C} \cdot  (\frac{1}{4}+\frac{1}{4}) + c^{C} \cdot (\frac{1}{4}+\frac{1}{4}-\frac{1}{2}-\frac{1}{2}) + d^{C} \cdot (\frac{1}{4}+\frac{1}{4}-\frac{1}{2}-\frac{1}{2})]> 0$
+
+\item $\sum_{G_{a>d}^{C}} P(G^{C})[\frac{1}{2}a^{C}+ \frac{1}{2}b^{C} - \frac{1}{2}c^{C} - \frac{1}{2}d^{C}]> 0$
+
+\end{itemize}
+
+\noindent Since we have assumed $ a-c = d-b $, the last inequality is not satisfied. We have instead: 
+
+$$ \sum_{G_{a>d}^{C}} P(G^{C})[\frac{1}{2}a^{C}+ \frac{1}{2}b^{C} - \frac{1}{2}c^{C} - \frac{1}{2}d^{C}]= 0 $$
+
+\noindent This means that, when (1) is the case, RM and MM are neutrally stable. To prove the result we then have to show that the inequality is strict in favor of RM when case (2) obtains. \\
+When (2) is the case, it is easy to check, by Lemma 7, that $P(I_{G^{C}}^{RM} \cap I_{G^{C}}^{RM})-P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})=P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})$
+and $P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})=P(II_{G^{C}}^{RM} \cap II_{G^{C}}^{RM})$.
 Consequently, we have:
+
 \begin{itemize}
-\item $\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})[a^{C}\cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})+b^{C}\cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})-c^{C}\cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})-d^{C}\cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})]>0$
-\item $\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})\cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot[a^{G^{C}}-c^{G^{C}}]>\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})\cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot[d^{G^{C}}-b^{G^{C}}]$.
+
+\item $\sum_{G_{a>d}^{C}} P(G^{C})[a^{C} \cdot (P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{RM}) - P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})) + b^{C} \cdot  (P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{RM})- P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})) + c^{C} \cdot (P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})- P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})- P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})) + d^{C} \cdot (P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{RM})- P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})- P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))]> 0$
+
+\item $\sum_{G_{a>d}^{C}} P(G^{C})[a^{C} \cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}) + b^{C} \cdot  P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}) - c^{C} \cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}) - d^{C} \cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})]> 0$
+
+\item $\sum_{G_{a>d}^{C}} P(G^{C})[P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot (a^{C} + b^{C} - c^{C} - d^{C})]> 0$
+
 \end{itemize}
 \medskip{}
 
-\noindent We know that $I_{G^{C}}^{RM}$ implies that $b^{G^{C}}-d^{G^{C}}\geq c^{G^{C}}-a^{G^{C}}$,
-and $II_{G^{C}}^{MM}$ implies that $b^{G^{C}}\leq c^{G^{C}}$. From
-$b^{G^{C}}-d^{G^{C}}\geq c^{G^{C}}-a^{G^{C}}$, it is easy to see
-that $\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})\cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot[a^{G^{C}}-c^{G^{C}}]\geq\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})\cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot[d^{G^{C}}-b^{G^{C}}]$
-holds. When the event $I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}$ obtains
-on the assumption that $a^{G^{C}}>d^{G^{C}}$, there are only three
-possible payoff orderings: $a>c\geq d>b$, $a>d>c>b$, and $a>d>c=b$.
-If games are randomly sampled from a finite set with i.i.d. values
-for $a,b,c$ and $d$, then $a>d>c=b$ occurs with positive probability,
-and the last formula of the derivation holds with strict inequality
-too. Hence, RM is evolutionarily stable when the value set for $a,b,c,d$
-is finite. \\
-If i.i.d. values are sampled from a compact and convex set instead,
-it is again easy to see that $\forall a,d,c\ \exists\epsilon$ such
-that $\forall b\in(d,d+\epsilon)$ the above formula holds with strict
-inequality. We can simply take $\epsilon\equiv\frac{a-c}{2}$, and
-the interval $(d,d+\epsilon)$ always has positive probability. Hence,
-RM is evolutionarily stable when the value set for $a,b,c,d$ is a
-compact and convex set too. \\
-Symmetrically, from $a<d$ in the above derivation we get:
+\noindent We know that $I_{G^{C}}^{RM}$ implies that $a^{G^{C}}-c^{G^{C}}\geq d^{G^{C}}-b^{G^{C}}$.
+%and $II_{G^{C}}^{MM}$ implies that $b^{G^{C}}\leq c^{G^{C}}$. 
+Since we have assumed that $a^{G^{C}}-c^{G^{C}}\neq d^{G^{C}}-b^{G^{C}}$, we have that $a^{G^{C}}-c^{G^{C}} > d^{G^{C}}-b^{G^{C}}$. Hence, the inequality 
+$$\sum_{G_{a>d}^{C}} P(G^{C})[P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot (a^{C} + b^{C} - c^{C} - d^{C})]> 0$$
+is satisfied. So, when (2) obtains, RM is evolutionarily stable against MM.
+%From $b^{G^{C}}-d^{G^{C}}\geq c^{G^{C}}-a^{G^{C}}$, it is easy to see that $\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})\cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot[a^{G^{C}}-c^{G^{C}}]\geq\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})\cdot P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot[d^{G^{C}}-b^{G^{C}}]$ holds. When the event $I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}$ obtains on the assumption that $a^{G^{C}}>d^{G^{C}}$, there are only three possible payoff orderings: $a>c\geq d>b$, $a>d>c>b$, and $a>d>c=b$. If games are randomly sampled from a finite set with i.i.d. values for $a,b,c$ and $d$, then $a>d>c=b$ occurs with positive probability, and the last formula of the derivation holds with strict inequality too. Hence, RM is evolutionarily stable when the value set for $a,b,c,d$ is finite. \\ 
+%If i.i.d. values are sampled from a compact and convex set instead, it is again easy to see that $\forall a,d,c\ \exists\epsilon$ such that $\forall b\in(d,d+\epsilon)$ the above formula holds with strict inequality. We can simply take $\epsilon\equiv\frac{a-c}{2}$, and the interval $(d,d+\epsilon)$ always has positive probability. Hence, RM is evolutionarily stable when the value set for $a,b,c,d$ is a compact and convex set too. \\ 
+Symmetrically, from $a<d$ and by distinguishing between the two cases (1) and (2) as before, in the end  we get:
 
-\medskip{}
+\begin{itemize}
 
-\noindent $\sum_{G_{a<d}^{C}}P(G_{a<d}^{C})\cdot P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot[d^{C}-b^{C}]>\sum_{G_{a<d}^{C}}P(G_{a<d}^{C})\cdot P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot[a^{C}-c^{C}]$
+\item[(1)] $\sum_{G_{a<d}^{C}} P(G^{C})[-\frac{1}{2}a^{C}- \frac{1}{2}b^{C} + \frac{1}{2}c^{C} + \frac{1}{2}d^{C}]= 0$; and
 
-\medskip{}
+\item[(2)] $\sum_{G_{a<d}^{C}} P(G^{C})[P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot (-a^{C} - b^{C} + c^{C} + d^{C})]> 0$.
 
-\noindent and the same argument follows.
+\end{itemize}
+
+
+\noindent Hence, we can conclude that RM is evolutionarily stable against MM in the class $\mathcal{G}^{C}\cup\mathcal{G^{A}}$. \\
+In the case of sampling i.i.d. values from a real interval instead, games in $\mathcal{G}^I $ and $\mathcal{G}^W $ never arise, and the proof is the same for the remaining games in $\mathcal{G}^S $,  $\mathcal{G}^C $ and $\mathcal{G}^A $.
 
 \medskip{}
 
@@ -1396,23 +1760,45 @@ As before, we write it more explicitly as:
 \medskip{}
 
 
-\noindent $\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{MM})\cdot a^{C}+P(II_{G^{C}}^{MM})\cdot d^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{MM})\cdot a^{A}+P(II_{G^{A}}^{MM})\cdot d^{A}]<\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{MM}\cap I_{G^{C}}^{RM})\cdot a^{C}+P(II_{G^{C}}^{MM}\cap II_{G^{C}}^{RM})\cdot d^{C}+P(I_{G^{C}}^{MM}\cap II_{G^{C}}^{RM})\cdot c^{C}+P(II_{G^{C}}^{MM}\cap I_{G^{C}}^{RM})\cdot b^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{MM}\cap I_{G^{A}}^{RM})\cdot a^{A}+P(II_{G^{A}}^{MM}\cap II_{G^{A}}^{RM})\cdot d^{A}+P(I_{G^{A}}^{MM}\cap II_{G^{A}}^{RM})\cdot c^{A}+P(II_{G^{A}}^{MM}\cap I_{G^{A}}^{RM})\cdot b^{A}]$.
+\noindent $\sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{MM}\cap I_{G^{C}}^{MM})\cdot a^{C}+P(II_{G^{C}}^{MM}\cap II_{G^{C}}^{MM})\cdot d^{C}+P(I_{G^{C}}^{MM}\cap II_{G^{C}}^{MM})\cdot b^{C}+P(II_{G^{C}}^{MM}\cap I_{G^{C}}^{MM})\cdot c^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{MM}\cap I_{G^{A}}^{MM})\cdot a^{A}+P(II_{G^{A}}^{MM}\cap II_{G^{A}}^{MM})\cdot d^{A}+P(I_{G^{A}}^{MM}\cap II_{G^{A}}^{MM})\cdot b^{A}+P(II_{G^{A}}^{MM}\cap I_{G^{A}}^{MM})\cdot c^{A}] < \sum_{G^{C}}P(G^{C})[P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot a^{C}+P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot d^{C}+P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})\cdot b^{C}+P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})\cdot c^{C}]+\sum_{G^{A}}P(G^{A})[P(I_{G^{A}}^{RM}\cap I_{G^{A}}^{MM})\cdot a^{A}+P(II_{G^{A}}^{RM}\cap II_{G^{A}}^{MM})\cdot d^{A}+P(I_{G^{A}}^{RM}\cap II_{G^{A}}^{MM})\cdot b^{A}+P(II_{G^{A}}^{RM}\cap I_{G^{A}}^{MM})\cdot c^{A}]$.
 \medskip{}
 
-\noindent Similarly to the above derivation, in the end we get: 
+\noindent When $a>d$, similarly to the above derivation, we get: 
 
 \medskip{}
-
-\noindent $\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})\cdot P(II_{G^{C}}^{MM}\cap I_{G^{C}}^{RM})\cdot[c^{G^{C}}-a^{G^{C}}]<\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})\cdot P(II_{G^{C}}^{MM}\cap I_{G^{C}}^{RM})\cdot[b^{G^{C}}-d^{G^{C}}]$.
-
+\noindent $\sum_{G_{a>d}^{C}} P(G^{C})[a^{C} \cdot (P(I_{G^{C}}^{MM}\cap I_{G^{C}}^{MM}) + P(I_{G^{C}}^{MM}\cap II_{G^{C}}^{MM})- P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM}) - P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})) + b^{C} \cdot  (P(I_{G^{C}}^{MM}\cap I_{G^{C}}^{MM}) + P(I_{G^{C}}^{MM}\cap II_{G^{C}}^{MM})- P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM}) - P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})) + c^{C} \cdot (P(II_{G^{C}}^{MM}\cap I_{G^{C}}^{MM}) +P(II_{G^{C}}^{MM}\cap II_{G^{C}}^{MM})- P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})) + d^{C} \cdot (P(II_{G^{C}}^{MM}\cap II_{G^{C}}^{MM})+P(II_{G^{C}}^{MM}\cap I_{G^{C}}^{MM})- P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))]< 0$
 \medskip{}
 
+\noindent We now distinguish between (1) $b=c$, (2) $b>c$, and (3) $b<c$. Notice that either (1) or (2), together with $a>d$, implies $I_{G^{C}}^{RM}$. Then we obtain: 
+\begin{itemize}
 
-\noindent Finally, by the same argument as before we can conclude that MM is
+\item[(1)] $\sum_{G_{a<d}^{C}} P(G^{C})[-\frac{1}{2}a^{C} - \frac{1}{2}b^{C} + \frac{1}{2}c^{C} + \frac{1}{2}d^{C}]< 0$;
+
+\item[(2)] $\sum_{G_{a>d}^{C}} P(G^{C})[a^{C} \cdot (P(I_{G^{C}}^{MM}\cap I_{G^{C}}^{MM}) - P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})) + b^{C} \cdot  (P(I_{G^{C}}^{MM}\cap I_{G^{C}}^{MM}) - P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM}))]= 0$;
+
+\item[(3)] $\sum_{G_{a>d}^{C}} P(G^{C})[a^{C} \cdot (- P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})) + b^{C} \cdot  (- P(I_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})) + c^{C} \cdot (P(II_{G^{C}}^{MM}\cap II_{G^{C}}^{MM})- P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})) + d^{C} \cdot (P(II_{G^{C}}^{MM}\cap II_{G^{C}}^{MM})- P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))] \leq 0$.
+
+\end{itemize}
+
+\noindent When $a<d$, the derivation proceeds symmetrically and we get: 
+
+\begin{itemize}
+
+\item[(1)] $\sum_{G_{a<d}^{C}} P(G^{C})[\frac{1}{2}a^{C} + \frac{1}{2}b^{C} - \frac{1}{2}c^{C} - \frac{1}{2}d^{C}]< 0$;
+
+\item[(2)] $\sum_{G_{a>d}^{C}} P(G^{C})[a^{C} \cdot (P(I_{G^{C}}^{MM}\cap I_{G^{C}}^{MM}) - P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})) + b^{C} \cdot  (P(I_{G^{C}}^{MM}\cap I_{G^{C}}^{MM}) - P(I_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})) + c^{C} \cdot (- P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM})) + d^{C} \cdot (- P(II_{G^{C}}^{RM}\cap I_{G^{C}}^{MM}))] \leq 0$
+
+\item[(3)] $\sum_{G_{a>d}^{C}} P(G^{C})[c^{C} \cdot (P(II_{G^{C}}^{MM}\cap II_{G^{C}}^{MM})- P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM})) + d^{C} \cdot (P(II_{G^{C}}^{MM}\cap II_{G^{C}}^{MM})- P(II_{G^{C}}^{RM}\cap II_{G^{C}}^{MM}))] = 0$.
+
+\end{itemize}
+
+
+\noindent Finally, we can conclude that MM is
 not evolutionarily stable against RM both when the value set for $a,b,c,d$
 is finite, and when the value set for $a,b,c,d$ is a compact and
 convex set. This concludes the proof. $\dashv$
 
+\newpage
 
 \textbf{Proof of Proposition 2.} First we prove that regret type is evolutionarily stable against altruistic type and that altruistic type is not evolutionarily stable against regret type, and second we show that regret type is evolutionarily stable against competitive type and that competitive type is not evolutionarily stable against regret type. We make use of the same partition of $\mathcal{G}$ introduced in the proof of Proposition 1. Again, to ease notation let us write ALT and COM in the place of $(\tau^{alt}, \Delta(A))$ and $(\tau^{com}, \Delta(A))$, respectively.
 
