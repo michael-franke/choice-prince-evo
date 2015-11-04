@@ -42,9 +42,9 @@
 
 \newcommand{\myalert}[1]{\textcolor{red}{#1}}
 
-\title{Rationality, Evolution \& the Environment}
+\title{Rationality, Regret, Evolution \& the Environment}
 \author{Paolo Galeazzi \& Michael Franke}
-\date{current version: November 2nd 2015}
+\date{current version: November 4, 2015}
 
 \begin{document}
 
@@ -87,28 +87,29 @@ conceptual issues whose complexity requires mathematical modeling. However, most
 of EGT look at evolutionary selection of behavior in a single \emph{stage game}. There are
 actually two crude but common simplifications in this approach. Firstly, the stage game is
 usually considered fixed, closed and immutable. Secondly, what evolves are behavioral
-strategies for the stage game.
+strategies for the stage game. It has consequently been argued that, instead of focusing on a
+fixed, immutable stage game and the behavioral selection for that stage game alone, we should
+rather study the evolutionary selection of \emph{choice mechanisms} that are adapted in a rich
+and variable environment
+\citep[e.g.][]{FawcettHamblin2013:Exposing-the-be,McNamara2013:Towards-a-Riche}. % However,
+% formal accounts of the adaptive value of choice mechanisms have focused, for the most part, on
+% the evolutionary benefit of learning rules
+% \citep[e.g.][]{ZollmanSmead2010:Plasticity-and-,SmeadZollman2013:The-Stability-o}. \todo{More
+%   references Harley 1981!!!, O Conor \dots} Moreover,
+But only little attention has been paid to modeling the evolutionary competition between choice
+mechanisms in a game-theoretic framework \citep[but
+see][]{ZollmanSmead2010:Plasticity-and-,SmeadZollman2013:The-Stability-o}.\todo{More references
+  Harley 1981!!!, O Conor \dots}.
 
-It has consequently been argued that, instead of focusing on a fixed, immutable stage game and
-the behavioral selection for that stage game alone, we should rather study the evolutionary
-selection of \emph{choice mechanisms} that are adapted in a rich and variable environment
-\citep[e.g.][]{FawcettHamblin2013:Exposing-the-be,McNamara2013:Towards-a-Riche}. However,
-formal accounts of the adaptive value of choice mechanisms have focused, for the most part, on
-the evolutionary benefit of learning rules
-\citep[e.g.][]{ZollmanSmead2010:Plasticity-and-,SmeadZollman2013:The-Stability-o}. \todo{More
-  references Harley 1981!!!, O Conor \dots}  Moreover, only little attention has been paid to
-modeling the direct (game-theoretic) meta-competition between alternative choice mechanisms
-\citep[see][for related criticism]{FawcettHamblin2013:Exposing-the-be}.
-
-This makes two contributions to the literature on evolution of choice mechanisms: one
+This paper makes two contributions to the literature on evolution of choice mechanisms: one
 methodological and one conceptual. Firstly, on the methodological side, we introduce a
 conservative extension of standard EGT that allows us to reuse notions such as evolutionary
 stability / evolutionary dynamics for the study of the evolutionary competition between choice
 mechanisms in a statistically variable environment. Concretely, we look at the evolutionary
-competition of choice mechanisms in a ``meta-game'' that consists of the average expected
-payoffs of choice mechanisms when playing arbitrary games (from a given class). In this sense,
-a meta-game captures (the modeller's) assumptions about the relevant statistics of the
-environment in which evolutionary forces operate.
+competition of choice mechanisms in a ``meta-game'' whose payoffs represent the average
+expected fitness choice mechanisms when playing arbitrary games (from a given class) against
+themselves. In this sense, a meta-game captures (the modeller's) assumptions about the relevant
+statistics of the environment in which evolutionary forces operate.
 
 Secondly, and in order to show that our method is useful for a conceptual debate about
 evolution of choice mechanisms, we argue that paying attention to the interaction of subjective
@@ -119,7 +120,8 @@ representations are ecologically valuable (i.e., lead to high fitness) is centra
 intuition might convince us that preferences that veridically represent the actual, true
 fitness measure that evolutionary selection is based upon must surely be the best. We
 demonstrate that, if we take into account how agents represent uncertainty, this na\"ive
-conclusion is premature.
+conclusion is premature. Under certain reasonable epistemic conditions, non-veridical
+preference representations in terms of regret can be evolutionarily beneficial.
 
 \todo[inline]{add overview}
 
@@ -164,18 +166,18 @@ Schmidt, Charness and Rabin, etc.).\todo{@Paolo: please include proper reference
 
 It could be objected that, without additional constraints, the notion of rationality is likely
 to collapse, as it seems possible to deem rational everything that is observed, given the
-freedom to adjust beliefs and preferences at will. But there are many ways in which
-ascription of beliefs and preferences is constrained further by normative considerations of
-rationality. To begin with, if the DM's uncertainty is about objective chance, it can be argued
-that subjective beliefs should conform (at least roughly) to objective chance. When the DM's
-uncertainty cannot be anchored in an objective notion of chance, then temporal consistency in
-his decision making should at least constrain his subjective beliefs, else he fall prey to
-exploitation by Dutch books. Similarly, in certain situations it may make sense to postulate on
-normative grounds that subjective preferences should be oriented towards tracking objective
-utility, e.g., fitness. For instance, in their classic work \myalert{(Alchian, Friedman)} argue
-that profit maximization is a reasonable assumption for characterizing outcomes in a
-competitive market because only firms behaving in a manner that is consistent with profit
-maximization will survive in the long run.\todo{@Paolo: please add references}
+freedom to adjust beliefs and preferences at will. But there are many ways in which ascriptions
+of beliefs and preferences are constrained by normative considerations of rationality. To begin
+with, if the DM's uncertainty is about objective chance, it can be argued that subjective
+beliefs should conform (at least roughly) to objective chance. When the DM's uncertainty cannot
+be anchored in an objective notion of chance, then temporal consistency in his decision making
+should at least constrain his subjective beliefs, else he fall prey to exploitation by Dutch
+books. Similarly, in certain situations it may make sense to postulate on normative grounds
+that subjective preferences should be oriented towards tracking objective utility, e.g.,
+fitness. For instance, in their classic work \myalert{(Alchian, Friedman)} argue that profit
+maximization is a reasonable assumption for characterizing outcomes in a competitive market
+because only firms behaving in a manner that is consistent with profit maximization will
+survive in the long run.\todo{@Paolo: please add references}
 
 An alternative to descriptive vs.~normative views on rationality is \emph{adaptationism}
 \citep[e.g.][]{HagenChater2012:Decision-Making}. \todo{more references} Adaptationism aims to
@@ -200,18 +202,18 @@ and make decisions based on a security choice rule (here: the maximin rule).
 
 The method by which we want to advance our argument is to integrate ideas from the recent
 literature on preference evolution (CITE) with basic tenets of adaptationism: we are interested
-in studying the evolutionary competition of choice mechanism, conceived here as pairs of
-subjective preference and subjective belief representation. Evolutionary competition between
+in studying the evolutionary competition of choice mechanisms, conceived here as pairs of
+subjective preference and subjective belief representations. Evolutionary competition between
 choice mechanisms is driven by the expected objective fitness that each choice mechanisms
 accrues when put to use repeatedly in a range of choice situations. We focus on the more
 complex case of multi-agent decision making first, i.e., game situations. Solitary decision
-making is then easy to deal with subsequently.
+making is then easy to deal with subsequently. The next section introduces the choice
+mechanisms we focus on. After that, Section~\ref{sec:model} introduces the ``meta-game''
+modeling approach.
 
 
-\section{The cast}
+\section{Choice mechanisms: preferences, beliefs and action choice}
 \label{sec:basic-notions}
-
-\subsection{Games} \label{sec:games}
 
 A strategic game is a tuple $ G=\tuple{ N, (A_i , \pi_i)_{i \in N} }$ with $N$ a set of
 players, $A_i$ a set of acts and $\pi_i$ a payoff function for each player $i \in N$. For the
@@ -222,36 +224,48 @@ given in Figure~\ref{coordgame1}, which shows a coordination game. The numbers g
 for the player choosing a row act against an opponent choosing a column act. Since the game is
 symmetric, it suffices to give just these numbers.
 
-With some due simplification, there are two types of approaches to solving games: one focuses
-on the individual agents' perpectives and gives \emph{choice rules}, another considers sets of
-choices of all agents that are, in some sense or other, locked-in. We will look at the former
-here; the latter will be relevant only later, when turn to evolutionary competition between
-choice mechanisms in Section~\ref{sec:model}.\footnote{We make a subtle distinction here
-  between \emph{choice rules} and \emph{choice mechanisms}: the former refers to a function of
-  mapping (subjective) preferences and uncertainty unto choices of acts; the latter is more
-  encompassing and contains the choice rule, together with the particular way of forming or
-  representing preferences and uncertainty.}
+With some due simplification, there are two types of approaches to solving games. One looks at
+a collection of players (e.g., a whole population of them) and considers sets of choices of all
+players that are, in some sense or other, stable or in equilibrium. Another approach is to
+focus on each individual agent's perpective and specify which of her actions the agent
+\emph{should} choose if she is rational. We will look at the latter here; the former will be
+relevant only later, when turn to evolutionary competition between choice mechanisms in
+Section~\ref{sec:model}. We will first look at what we call \emph{choice rules}: classical
+proposals of how rational agents should choose acts. We will then introduce our notion of
+\emph{choice mechanism} which makes explicit several elements that choice rules might brush
+under the table.
 
-\paragraph{Choice rules.} The classical notion of rationality from
-Definition~\ref{def:rationality} also applies to games. Let $A_{-i} = \bigtimes A_j$ for all
-$j \neq i$ be the set of all \emph{profiles} of acts for all players except $i$. If player $i$
-has a belief $\mu_i \in \Delta(A_{-i})$ about the behavior of his opponents, he chooses
-rationally only if his choice $a^*_i$ maximizes expected utility
+
+\subsection{Choice rules} 
+\label{sec:choice-rules}
+
+For the purposes of this paper, we think of a choice rule as a function that takes a
+(strategic) game as input and delivers a choice of action for that game. The literatures has
+suggested a number of choice rules that aspire to capture a normative element of rational
+choice. For reasons that will become clear as we go along, we focus here on three classical
+choice rules: (i) maximin, (ii) Laplace and (iii) regret minimization.
+
+But first an important digression. Rational choice from maximization of expected utilities, as
+given in Definition~\ref{def:rationality}, is \emph{not} a choice rule in the present sense, if
+we apply it strictly. Although the notion applies to game situations, of course, it requires an
+additional component, namely a belief of the DM, before it can say which acts the DM should
+choose. Let $A_{-i} = \bigtimes A_j$ for all $j \neq i$ be the set of all \emph{profiles} of
+acts for all players except $i$. If player $i$ has a belief $\mu_i \in \Delta(A_{-i})$ about
+the behavior of his opponents, he chooses rationally only if his choice $a^*_i$ maximizes
+expected utility
 $\EU(a) = \sum_{\act_{-i} \in \Acts_{-i}} \mu_i(\act_{-i}) \myts \pi_i(a_i, a_{-i})$. So this
-is a choice rule, based on \emph{maximization of expected utilities}. It requires a
-probabilistic belief about the opponents' action choices. In the example from
-Figure~\ref{coordgame1}, a rational player would choose $I$ exactly when he believes that his
-opponent will choose $I$ with a probability at least $\nicefrac{2}{3}$.
+requires a probabilistic belief about the opponents' action choices. In the example from
+Figure~\ref{coordgame1}, a rational player would choose act $I$ exactly when he believes that
+his opponent will choose act $I$ with a probability at least $\nicefrac{2}{3}$.
 
-If an agent does not have a precise probabilistic belief (see also
-Section~\ref{sec:impr-prob-beli} below), other rules of choice are available. Perhaps the most
-well-known, the \emph{maximin rule}, would tell the agent to choose act $\act^*$ only if it
+Perhaps the most well-known choice rule that does not require explicitly stating the DM's
+beliefs is the \emph{maximin rule}. It tells our agent to choose act $\act^*$ only if it
 maximizes payoffs for all worst case scenarios. For a strategic game with 2 players this can be
 formalized as
 $\act^* \in \argmax_{\myact{i} \in \Acts_i} \min_{\myact{j} \in \Acts_j} \pi_i(\myact{i},
 \myact{j})$.
 For the example in Figure~\ref{coordgame1}, the maximim rule looks at the minima in each row,
-asking: what is the worst possible out come for each row act? It is $0$ in either
+asking: what is the worst possible outcome for each row act? It is $0$ in either
 case. Consequently, the maximin rule would not favor either act; players choosing by the
 maximin rule would be indifferent between acts $I$ and $II$.
 
@@ -260,17 +274,13 @@ $\act^* \in \argmax_{a \in A} \sum_{a'} \pi(a, a')$. Laplace's rule is equivalen
 choosing under a \emph{flat belief} that assigns equal probability to all of the opponent's
 choices. In the coordination game of Figure~\ref{coordgame1}, Laplace's rule selects act $II$.
 
-
-
-
-\subsection{Regret theory} \label{sec:regreTheory}
-
-Regret theory has been introduced in decision theory by \citet{Savage1951:The-theory-of-s} and
-Niherens [], and later developed by Bell [1982], Loomes and Sugden [1982], and Fishburn [1982]
-independently. Lately, \citet{HalpernPass2012:Iterated-Regret} showed how the use of regret
-minimization can give solutions to game theoretical puzzles (like the Traveller's dilemma, see
-Example~\ref{example:TravelersDilemma}) in a way that is closer to everyday intuition and
-empirical data. In this paper the notion of regret is defined as in
+The final choice rule that is relevant for our purposes here is \emph{regret
+  minimization}. Regret theory has been introduced in decision theory by
+\citet{Savage1951:The-theory-of-s} and Niherens [], and later developed by Bell [1982], Loomes
+and Sugden [1982], and Fishburn [1982] independently. Lately,
+\citet{HalpernPass2012:Iterated-Regret} showed how the use of regret minimization can give
+solutions to game theoretical puzzles (like the Traveller's dilemma) in a way that is closer to
+everyday intuition and empirical data. In this paper the notion of regret is defined as in
 \citet{HalpernPass2012:Iterated-Regret}:
 
 \begin{definition}[Regret, regret minimization] \label{defn:regret} Given a strategic game
@@ -284,14 +294,14 @@ empirical data. In this paper the notion of regret is defined as in
   $a^{*}_i \in \text{min}_{a_i} \text{max}_{a_{-i}} \pi_i(a_i^\$,a_{-i})-\pi_i(a_i,a_{-i}) $.
 \end{definition}
 
-\begin{example}[Coordination Game]
-  Let us consider the coordination game in Figure \ref{coordgame1}. Figure~\ref{coordgame1reg}
-  shows the pairwise regrets and the regrets of each row-player action. We have
-  $\text{reg}(I)=2$, because when the other player chooses action $I$ the pairwise regret
-  $reg(I,I)$ is $0$ since $I$ is a best reply to $I$, and when the other player chooses $II$
-  the pairwise regret $reg(I, II)$ is $2$ since $\pi_i(II,II)-\pi_i(I,II)=2$. With the same
-  reasoning, $\text{reg}(II)=1$. A regret minimizing player would therefore choose act
-  $II$. $ \medsquare $
+
+To illustrate, Figure~\ref{coordgame1reg} shows the pairwise regrets and the regrets of each
+row-player action for the coordination game in Figure \ref{coordgame1}. We have
+$\text{reg}(I)=2$, because when the other player chooses action $I$ the pairwise regret
+$reg(I,I)$ is $0$ since $I$ is a best reply to $I$, and when the other player chooses $II$ the
+pairwise regret $reg(I, II)$ is $2$ since $\pi_i(II,II)-\pi_i(I,II)=2$. With the same
+reasoning, $\text{reg}(II)=1$. A regret minimizing player would therefore choose act $II$.
+
 
 \begin{figure}
 
@@ -326,52 +336,49 @@ empirical data. In this paper the notion of regret is defined as in
     \label{coordgame1mainFig}
 \end{figure}
 
-\end{example}
 
 
-\begin{example}[The Traveller's Dilemma \citep{HalpernPass2012:Iterated-Regret}]
-\label{example:TravelersDilemma}
-Let us now consider the Traveller's Dilemma case. The story behind the game goes as
-follows. There are two travellers, Ann and Bob, who lost their luggages. Ann and Bob had
-exactly the same luggage and they had insured the luggages with the same insurance company. The
-insurance policy is that the two travellers have to separately claim a certain amount between
-2\$ and 100\$ for the reimbursement, and if they both claim the same amount then they will be
-reimbursed by that amount. Otherwise, if one of them claims more than the other, then the one
-who claimed the higher amount will get the lower amount minus 2\$, while the one who claimed
-the lower amount will get what (s)he claimed plus 2\$. The game is symmetric, and the payoff
-function for both players is:
-\begin{align*}
-  \pi_i(a_i,a_{-i}) = \begin{cases} a_i \text{ \hspace{1cm} if } a_i = a_{-i} \\ a_i + 2 \text{
-      \hspace{.4cm} if } a_i < a_{-i} \\ a_{-i} -2 \text{ \hspace{.25cm} if } a_{-i} <
-    a_i \end{cases}
-\end{align*}
-By a simple computation we have:  $\forall a_i \in \lbrace 96\$, ..., 100\$ \rbrace \text{, }
-\text{reg}(a_i)=3 $ and $\forall a_i \in \lbrace 2\$, ..., 95\$ \rbrace \text{, }
-\text{reg}(a_i)>3$. If we now eliminate all the actions that do not minimize regret in the
-first place and iterate the regret minimization only on the action set $\lbrace 96\$, ...,
-100\$ \rbrace$, we get that 97\$ is the action that minimize regret. Indeed, $\text{reg}(97)=2$
-and $\forall a_i \in \lbrace 96\$, 98\$, 99\$, 100\$ \rbrace \text{, } \text{reg}(a_i)=3
-$. Hence, one step of regret minimizing reasoning eliminates all the actions smaller than 96\$,
-and if we iterate the process once more the unique outcome is 97\$. Finally, it is worth
-noticing that the only rationalizable equilibrium of the game corresponds to the outcome
-$(2,2)$, that is consequently the only Nash equilibrium, the only perfect equilibrium, and the
-only sequential equilibrium of the game.
+% \begin{example}[The Traveller's Dilemma \citep{HalpernPass2012:Iterated-Regret}]
+% \label{example:TravelersDilemma}
+% Let us now consider the Traveller's Dilemma case. The story behind the game goes as
+% follows. There are two travellers, Ann and Bob, who lost their luggages. Ann and Bob had
+% exactly the same luggage and they had insured the luggages with the same insurance company. The
+% insurance policy is that the two travellers have to separately claim a certain amount between
+% 2\$ and 100\$ for the reimbursement, and if they both claim the same amount then they will be
+% reimbursed by that amount. Otherwise, if one of them claims more than the other, then the one
+% who claimed the higher amount will get the lower amount minus 2\$, while the one who claimed
+% the lower amount will get what (s)he claimed plus 2\$. The game is symmetric, and the payoff
+% function for both players is:
+% \begin{align*}
+%   \pi_i(a_i,a_{-i}) = \begin{cases} a_i \text{ \hspace{1cm} if } a_i = a_{-i} \\ a_i + 2 \text{
+%       \hspace{.4cm} if } a_i < a_{-i} \\ a_{-i} -2 \text{ \hspace{.25cm} if } a_{-i} <
+%     a_i \end{cases}
+% \end{align*}
+% By a simple computation we have:  $\forall a_i \in \lbrace 96\$, ..., 100\$ \rbrace \text{, }
+% \text{reg}(a_i)=3 $ and $\forall a_i \in \lbrace 2\$, ..., 95\$ \rbrace \text{, }
+% \text{reg}(a_i)>3$. If we now eliminate all the actions that do not minimize regret in the
+% first place and iterate the regret minimization only on the action set $\lbrace 96\$, ...,
+% 100\$ \rbrace$, we get that 97\$ is the action that minimize regret. Indeed, $\text{reg}(97)=2$
+% and $\forall a_i \in \lbrace 96\$, 98\$, 99\$, 100\$ \rbrace \text{, } \text{reg}(a_i)=3
+% $. Hence, one step of regret minimizing reasoning eliminates all the actions smaller than 96\$,
+% and if we iterate the process once more the unique outcome is 97\$. Finally, it is worth
+% noticing that the only rationalizable equilibrium of the game corresponds to the outcome
+% $(2,2)$, that is consequently the only Nash equilibrium, the only perfect equilibrium, and the
+% only sequential equilibrium of the game.
 
-\begin{itemize}
-\item \textcolor{red}{add here:}
-  \begin{itemize}  
-  \item outcome of rationalizability (max-EU)
-  \item outcome of maximin rule
-  \item outcome of Laplace rule
-  \end{itemize}
+% \begin{itemize}
+% \item \textcolor{red}{add here:}
+%   \begin{itemize}  
+%   \item outcome of rationalizability (max-EU)
+%   \item outcome of maximin rule
+%   \item outcome of Laplace rule
+%   \end{itemize}
 
-\end{itemize}
+% \end{itemize}
 
- $ \medsquare $
+%  $ \medsquare $
   
-\end{example}
-
-
+% \end{example}
 
 Regret minimization is intimately related to the maximin rule. Let the \emph{negative regret
   transformation} of a strategic game $G$ be the game $G'$ derived from $G$ by replacing the payoff
@@ -392,52 +399,61 @@ Figure~\ref{coordgame1reg}:
     \end{tabular}
 \end{center}
 
-\noindent The acts selected by the maximin rule for the negative regret transformation are exactly
-the acts selected by regret minimization for the original game.
+\noindent Acts selected by the maximin rule for the negative regret transformation of $G$ are
+always exactly the acts selected by regret minimization for the original game $G$.\todo{can we
+  cite a paper that proves this? should we give a proof ourselves?}
 
-This means that we can think of the maximin rule and regret minimization as being two
-instantiations of the same choice rule, but operating on different subjective representations
-of utility: while maximin considers actual objective payoffs, regret minimization considers
-non-veridical, regret-based subjective utilities. As the example of Figure~\ref{coordgame1}
-shows, the same choice rule can give different behavioral predictions on different preference
-representations. While maximin is indifferent between $I$ and $II$, regret minimization
-uniquely selects $II$.
+This means that we can think of the maximin rule and regret minimization as essentially the
+same operation on different subjective representations of preference: while maximin considers
+actual objective payoffs (as defined by the modeller's game), regret minimization considers
+non-veridical, regret-based subjective preferences. As the example of Figure~\ref{coordgame1}
+shows, different subjective preferences can give rise to different choice prescriptions all
+else equal. While maximin is indifferent between $I$ and $II$, regret minimization uniquely
+selects $II$.
 
-When we think of regret as a non-veridical subjective payoff representation, we can also pair
-it with other choice rules, such as the maximization of expected utility and Laplace's rule
-(which is just a special case of the former). It turns out, however, that this makes no
-noticeable difference: 
+In sum, a choice rule is a normative prescription of action choices for a rational agent in any
+game situation. Choice rules may rest on implicit assumptions about what the DM believes (e.g.,
+when interpreting Laplace rule as rational choice under flat beliefs). They may also make
+implicit assumptions about what the DM prefers (e.g., when reconstructing regret minimization
+in terms of maximin-choices on the regret transformation). This is rather messy. To disentangle
+and avoid confusion, we turn to choice mechanisms.
 
-\begin{fact} \label{fact:maxEU-minReg} For any strategic game $G$ and any arbitrary
-  probabilistic belief $\mu \in \Delta(A_{-i})$ about the opponents' behavior, the acts
-  selected by maximization of expected utility for $G$ under $\mu$ are exactly the acts
-  selected by the maximization of expected utility for the negative regret transform of $G$
-  under $\mu$ \citep[e.g.][]{HalpernPass2012:Iterated-Regret}.
-\end{fact}
+\subsection{Choice mechanisms}
+\label{sec:choice-mechanisms}
 
-\noindent In other words, given the same probabilistic belief, maximization of expected
-(objective) payoff and minimization of expected (subjective) regret are behaviorally
-equivalent. This holds for arbitrary games, as well as for solitary decision situations.
+We think of a choice mechanism as a function that maps a game (or more generally any decision
+situation) onto a triple that consists of: (i) the DM's \emph{subjective preferences} (possibly
+diverging from the actual objective payoffs defined ) in the game, (ii) the DM's
+\emph{subjective beliefs} about the opponents' behavior, and (iii) an \emph{action selection
+  function} which maps the former two components onto a concrete choice of action in the
+game. A choice mechanism could be a set of distinct heuristics (the DM's \emph{adaptive
+  toolbox}) that have little in common
+\citep[e.g.][]{TverskyKahnemann1981:The-Framing-of-,GigerenzerGoldstein1996:Reasoning-the-F,ScheibehenneRieskamp2013:Testing-the-Ada}. But
+to keep matters simple, we will here only look at choice mechanisms that use a uniform way of
+forming preferences and beliefs and a uniform way of making choices based on them. More
+concretely, we focus on two \emph{preference types} and two \emph{belief types}, and neglect
+variation in the action selection component. 
 
-\todo[inline]{Minor edits up to here}
+We are most interested here in studying whether evolutionary pressure could support
+non-veridical subjective preferences under certain conditions. We therefore focus on two
+\emph{preference types}: veridical types $\tau^\pi$, who use the actual payoff function $\pi$ of the
+actual game $G$, and regret types $\tau^{reg}$, who look at the regret transformation of the
+actual game $G$. 
 
-\bigskip
+It turns out that whether $\tau^{reg}$ can have a fitness advantage over $\tau^\pi$ depends on
+the general \emph{kind} of (probabilistic) beliefs that DM's form about the opponent's
+behavior. In other words, we even abstract away from the content of the DM's beliefs about his
+opponents' behavior that he could have acquired by learning or observation, but first turn on
+the more general question of how uncertainty should be represented in order to interact with
+subjective preferences in such a way that the resulting behavior will be fitness enhancing for
+the DM in the long run. We consider therefore two \emph{belief types} (to be defined below):
+imprecise belief types $\Delta(A_{-i})$, who have a set of probabilistic beliefs about the
+opponents' behavior and precise belief types $\overline{\mu}$ who have a single probabilistic
+belief.
 
-
-In sum, we have so far considered four different alternatives, each differing along a
-preference and a belief dimension. As for preference representations, agents could either
-target objective payoffs, or consider non-veridical subjective regret transformations. Given a game $G$, we will denote by $ \tau^{reg}(G)$ the regret representation (corresponding to the negative regret transformation) of the game, and $\tau^{\pi}(G)$ the objective representation (corresponding to the identity transformation) of the game. \\
-As for
-beliefs, agents could either hold probabilistic belief or not. In the former case, we would
-assume that they maximize expectations under whatever preference representation they hold; in
-the latter, we would assume that they play maximin based on their preference
-representations. There are doubtlessly many more possible preference and belief types, but
-these are the main characters in the plot to follow. 
-
-Before we turn to evolutionary competition between choice principles, we should justify our
-focus on the two choice rules. In the following we argue that both the minimax rule, as well as the maximization of expected utility 
-(and the Laplace rule as a special case) can be viewed as the same choice rule under different representations of
-uncertainty. 
+The following subsection describes what these belief types are and how a single action
+selection function (maximin expected utility) gives rise to an intersting parallel with
+classical choice rules.
 
 
 \subsection{Imprecise probabilistic beliefs}
@@ -501,6 +517,79 @@ In full generality, we think of an epistemic type as a general disposition to fo
 Hence, we consider two possible epistemic states in the face of uncertainty. The epistemic type $\Delta(A_{-i})$ represents a situation of non-Bayesian radical uncertainty, where the players are not able to narrow down the set of probability distributions to a single one and they consider all of them as possible. The other epistemic type $\overline{\mu}$ conceptualizes the uncertainty about the population by using the principle of insufficient reason and ascribes equal probability to all the possible alternatives. As we have seen, both options are reasonable and justifiable ways to deal with situations of uncertainty [REFERENCES]. \\
 
 
+\subsection{Choice mechanisms \& classical choice rules}
+
+Fixing the action selection component to maximin expected utility, and allowing two belief and
+two preference types, we end up with four basic choice mechanisms summed up in
+Table~\ref{tab:CMs}. Different choice mechanisms can give rise to identical action predictions,
+either in a restricted class of games, or in general. This is also the case here.
+
+\begin{table}[t]
+  \centering
+  \begin{tabular}{ccc}
+    preference type & belief type & corresponding choice rule \\ \midrule
+    $\tau^\pi$ & $\overline{\mu}$ & Laplace \\
+    $\tau^\pi$ & $\Delta(A_{-i})$ & maximin \\ 
+    $\tau^{reg}$ & $\overline{\mu}$ & Laplace \\
+    $\tau^{reg}$ & $\Delta(A_{-i})$ & regret minimization \\ 
+  \end{tabular}
+  \caption{Overview relevant choice mechanisms and the corresponding (behaviorally equivalent) classical choice rule}
+  \label{tab:CMs}
+\end{table}
+
+
+\begin{fact} \label{fact:maxEU-minReg} For any strategic game $G$ and any arbitrary
+  probabilistic belief $\mu \in \Delta(A_{-i})$ about the opponents' behavior, the acts
+  selected by maximization of expected utility for $G$ under $\mu$ are exactly the acts
+  selected by the maximization of expected utility for the negative regret transform of $G$
+  under $\mu$ \citep[e.g.][]{HalpernPass2012:Iterated-Regret}.
+\end{fact}
+
+\noindent In other words, given the same probabilistic belief, maximization of expected
+(objective) payoff and minimization of expected (subjective) regret are behaviorally
+equivalent. This holds for arbitrary games, as well as for solitary decision situations. On the
+other hand, the following does not hold in general:
+
+\begin{fact} \label{fact:equivalence2x2}
+In the class of $2 \times 2$ symmetric games, players $(\tau^{reg}, \Delta(A_{-i}))$, $(\tau^{\pi}, \overline{\mu})$, and $(\tau^{reg},\overline{\mu})$ are behaviorally equivalent.
+\end{fact} 
+
+Moreover, our choice mechanism $(\tau^{\pi}, \Delta(A_{-i}))$ turns out to be the objective
+maximinimizer, player $(\tau^{reg}, \Delta(A_{-i}))$ is the regret minimizer, player
+$(\tau^{\pi}, \overline{\mu})$ is the objective expected utility maximizer, and player
+$(\tau^{reg}, \overline{\mu})$ is the expected regret minimizer. In other words, behaviorally,
+the choice mechanisms we defined here correspond to the classical choice rules in
+Table~\ref{tab:CMs}. 
+
+
+\bigskip
+\bigskip
+
+\todo[inline]{Micha rewrite up to here!!! Please check which bits of text/information from the
+  following need to be integrated and what can go.}
+
+\bigskip
+\bigskip
+
+
+
+
+In sum, we have so far considered four different alternatives, each differing along a
+preference and a belief dimension. As for preference representations, agents could either
+target objective payoffs, or consider non-veridical subjective regret transformations. Given a game $G$, we will denote by $ \tau^{reg}(G)$ the regret representation (corresponding to the negative regret transformation) of the game, and $\tau^{\pi}(G)$ the objective representation (corresponding to the identity transformation) of the game. \\
+As for
+beliefs, agents could either hold probabilistic belief or not. In the former case, we would
+assume that they maximize expectations under whatever preference representation they hold; in
+the latter, we would assume that they play maximin based on their preference
+representations. There are doubtlessly many more possible preference and belief types, but
+these are the main characters in the plot to follow. 
+
+Before we turn to evolutionary competition between choice principles, we should justify our
+focus on the two choice rules. In the following we argue that both the minimax rule, as well as the maximization of expected utility 
+(and the Laplace rule as a special case) can be viewed as the same choice rule under different representations of
+uncertainty. 
+
+
 To sum up, here we consider the choice of an action as depending on two features: the subjective preference and the belief state. Definition \ref{def:choice rule} makes this point clear.
 
 \begin{definition} \label{def:choice rule}
@@ -542,25 +631,6 @@ According to what we argued in this section, we will assume that the choice rule
   \ref{coordgame1} with flat probability $\overline{\mu}$ over the co-player's actions, i.e.,
   maximizes objective utility given $\overline{\mu}$. In game $G^C$ this yields action $II$.
 
-
-
-\begin{figure}
-\begin{center}%
-\begin{tabular}{|c|c|c|}
-\hline 
- & I & II\tabularnewline
-\hline 
-\hline 
-I & 0;0 & -2;-1\tabularnewline
-\hline 
-II & -1;-2 & 0;0\tabularnewline
-\hline 
-\end{tabular}\end{center}
-
-\protect\caption{Regret representation $\tau^{reg}(G^C)$}
-\label{coordgame1reg}
-\end{figure}
-
 \end{example}
 
 We are now in the position of deriving behavior directly from the pair $(\tau, e)$. Definitions \ref{def:utility-belief} and \ref{def:maxminSEU} simply formalize the notions of subjective expected utility and maxmin subjective expective utility, respectively. 
@@ -589,7 +659,6 @@ Given a game $G \in \mathcal{G}$, a player $(\tau, e)$, and a player $(\tau', e'
 
 Many other alternatives different from maxmin could produce behavior: choice rules like minmax, maxmax, and minmin would similarly generate behavior in case of a lack of precise probabilistic belief. Here we postulate that players use maxmin for two main reasons that we will expand in the next section. First, among other possible choice rules maxmin is not only intuitively appealing but also corroborated from an empirical point of view. Secondly, as it will be clear in the following, our main interest is the evolution of different patterns of subjective conceptualizations of games (player types), and we want to show that the veridical representation (objective type) is not necessarily the fittest and may not be evolutionarily stable. Assuming that all players use a fixed rule (maxmin) independent of their player type allows us to factor the choice rule out of the selection process and to focus on player types.
 
-Before concluding this section, it is worth stressing that player $(\tau^{\pi}, \Delta(A_{-i}))$ turns out to be the objective maximinimizer, player $(\tau^{reg}, \Delta(A_{-i}))$ is the regret minimizer, player $(\tau^{\pi}, \overline{\mu})$ is the objective expected utility maximizer, and player $(\tau^{reg}, \overline{\mu})$ is the expected regret minimizer. Moreover, the following fact holds.
 
 \iffalse
 
@@ -601,22 +670,6 @@ For any probability measure $\mu$, maximization of expected utility and minimiza
 
 \noindent As we have seen in the previous example, this is not the case in the presence of (radical) uncertainty, in the sense of representation of belief state in terms of a set of probability, as in $ \Delta(A_{-i}) $.
 \fi
-
-
-\begin{fact} \label{fact:equivalence2x2}
-
-In the class of $2 \times 2$ symmetric games, players $(\tau^{reg}, \Delta(A_{-i}))$, $(\tau^{\pi}, \overline{\mu})$, and $(\tau^{reg},\overline{\mu})$ are behaviorally equivalent.
-
-\end{fact} 
-
-\noindent Two remarks. Firstly, Fact \ref{fact:equivalence2x2} does not hold for $n \times n$
-symmetric games in general. Secondly, we treat behaviorally equivalent types as distinct,
-because we assume that what is selected by biological evolution is not choice behavior as such,
-but the mechanism which generates behavior. This matters in particular if we assume that
-mutations affect different components of the behavior generating mechanisms (see below). 
-
-
-
 
 
 
@@ -1010,8 +1063,8 @@ remaining three types.
 Simulation results of the (discrete time) \emph{replicator dynamics}
 \citep{TaylorJonker1978:Evolutionary-St} indeed show that random initial population
 configurations are attracted to states with only three player types:
-$\tuple{\tau^{reg}, \Delta(A)}$, $\tuple{\tau^{reg}, \bar{\mu}}$ and
-$\tuple{\tau^{\pi}, \bar{\mu}}$. The relative proportions of these depend on the initial
+$\tuple{\tau^{reg}, \Delta(A)}$, $\tuple{\tau^{reg}, \overline{\mu}}$ and
+$\tuple{\tau^{\pi}, \overline{\mu}}$. The relative proportions of these depend on the initial
 population.\todo{check uniform notation for player types: round vs.~square brackets} This
 variability disappears if we add a small mutation rate to the dynamics. We assume a fixed,
 small mutation rate $\epsilon$ for the probability that a player's preference type \emph{or}
@@ -1028,7 +1081,7 @@ initial populations are attracted to a final distribution with proportions:\todo
 \begin{center}
   \begin{tabular}{ccc}
     $\tuple{\tau^{reg}, \Delta(A)}$ & $\tuple{\tau^{reg},
-      \bar{\mu}}$ & $\tuple{\tau^{\pi}, \bar{\mu}}$ \\ \hline
+      \overline{\mu}}$ & $\tuple{\tau^{\pi}, \overline{\mu}}$ \\ \hline
     0.279  &   0.383 &    0.281 
   \end{tabular}
 \end{center}
@@ -1160,19 +1213,19 @@ expected fitness in the relevant meta-game.
  & $\tuple{\tau^{\pi}, \Delta(A)}$ 
  & $\tuple{\tau^{com}, \Delta(A)}$
  & $\tuple{\tau^{alt}, \Delta(A)}$
- & $\tuple{\tau^{reg}, \bar{\mu}}$ 
- & $\tuple{\tau^{\pi}, \bar{\mu}}$ 
- & $\tuple{\tau^{com}, \bar{\mu}}$
- & $\tuple{\tau^{alt}, \bar{\mu}}$ \\ 
+ & $\tuple{\tau^{reg}, \overline{\mu}}$ 
+ & $\tuple{\tau^{\pi}, \overline{\mu}}$ 
+ & $\tuple{\tau^{com}, \overline{\mu}}$
+ & $\tuple{\tau^{alt}, \overline{\mu}}$ \\ 
   \hline
   $\tuple{\tau^{reg}, \Delta(A)}$ & 6.663 & 6.662 & 5.829 & 7.105 & 6.663 & 6.663 & 5.829 & 7.489 \\
   $\tuple{\tau^{\pi}, \Delta(A)}$ & 6.486 & 6.484 & 6.088 & 6.703 & 6.486 & 6.486 & 6.088 & 6.875 \\
   $\tuple{\tau^{com}, \Delta(A)}$ & 6.323 & 6.758 & 5.496 & 6.977 & 6.323 & 6.323 & 5.496 & 7.149 \\
   $\tuple{\tau^{alt}, \Delta(A)}$ & 5.949 & 5.722 & 5.326 & 6.396 & 5.949 & 5.949 & 5.326 & 6.568 \\
-  $\tuple{\tau^{reg}, \bar{\mu}}$ & 6.663 & 6.662 & 5.829 & 7.105 & 6.663 & 6.663 & 5.829 & 7.489 \\
-  $\tuple{\tau^{\pi}, \bar{\mu}}$ & 6.663 & 6.662 & 5.829 & 7.105 & 6.663 & 6.663 & 5.829 & 7.489 \\
-  $\tuple{\tau^{com}, \bar{\mu}}$ & 6.323 & 6.758 & 5.496 & 6.977 & 6.323 & 6.323 & 5.496 & 7.149 \\
-  $\tuple{\tau^{alt}, \bar{\mu}}$ & 6.331 & 5.893 & 5.497 & 6.566 & 6.331 & 6.331 & 5.497 & 7.152 \\
+  $\tuple{\tau^{reg}, \overline{\mu}}$ & 6.663 & 6.662 & 5.829 & 7.105 & 6.663 & 6.663 & 5.829 & 7.489 \\
+  $\tuple{\tau^{\pi}, \overline{\mu}}$ & 6.663 & 6.662 & 5.829 & 7.105 & 6.663 & 6.663 & 5.829 & 7.489 \\
+  $\tuple{\tau^{com}, \overline{\mu}}$ & 6.323 & 6.758 & 5.496 & 6.977 & 6.323 & 6.323 & 5.496 & 7.149 \\
+  $\tuple{\tau^{alt}, \overline{\mu}}$ & 6.331 & 5.893 & 5.497 & 6.566 & 6.331 & 6.331 & 5.497 & 7.152 \\
    \hline                          
 \end{tabular}                      
 \caption{Average payoff in simulations of 100,000
@@ -1228,8 +1281,8 @@ subjective preferences.
 Results from Section~\ref{sec:results:-basic-model} relied heavily on
 Fact~\ref{fact:equivalence2x2} that, for the special case of $2 \times 2$ symmetric games,
 regret minimization $\tuple{\tau^{reg}, \Delta(A)}$ is behaviorally equivalent with expected
-regret minimization $\tuple{\tau^{reg}, \bar{\mu}}$ and expected utility maximization
-$\tuple{\tau^{\pi}, \bar{\mu}}$. This is no longer true when we look at arbitrary $n \times n$
+regret minimization $\tuple{\tau^{reg}, \overline{\mu}}$ and expected utility maximization
+$\tuple{\tau^{\pi}, \overline{\mu}}$. This is no longer true when we look at arbitrary $n \times n$
 games with $n \ge 2$. We should therefore see what happens in a broader class of games.
 
 Table~\ref{tab:ExpectedFitness_10x10} therefore gives approximations for expected fitness in a
@@ -1250,19 +1303,19 @@ before.
  & $\tuple{\tau^{\pi}, \Delta(A)}$ 
  & $\tuple{\tau^{com}, \Delta(A)}$
  & $\tuple{\tau^{alt}, \Delta(A)}$
- & $\tuple{\tau^{reg}, \bar{\mu}}$ 
- & $\tuple{\tau^{\pi}, \bar{\mu}}$ 
- & $\tuple{\tau^{com}, \bar{\mu}}$
- & $\tuple{\tau^{alt}, \bar{\mu}}$ \\ 
+ & $\tuple{\tau^{reg}, \overline{\mu}}$ 
+ & $\tuple{\tau^{\pi}, \overline{\mu}}$ 
+ & $\tuple{\tau^{com}, \overline{\mu}}$
+ & $\tuple{\tau^{alt}, \overline{\mu}}$ \\ 
   \midrule
   $\tuple{\tau^{reg}, \Delta(A)}$ & 6.567 & 6.570 & 5.650 & 6.992 & 6.564 & 6.564 & 5.593 & 7.409 \\
   $\tuple{\tau^{\pi}, \Delta(A)}$ & 6.476 & 6.483 & 5.896 & 6.818 & 6.484 & 6.484 & 5.850 & 7.124 \\
   $\tuple{\tau^{com}, \Delta(A)}$ & 6.468 & 6.647 & 5.512 & 7.169 & 6.578 & 6.578 & 5.577 & 7.354 \\
   $\tuple{\tau^{alt}, \Delta(A)}$ & 5.968 & 5.923 & 5.363 & 6.685 & 5.975 & 5.975 & 5.086 & 6.973 \\
-  $\tuple{\tau^{reg}, \bar{\mu}}$ & 6.908 & 6.918 & 5.988 & 7.456 & 6.929 & 6.929 & 5.934 & 7.783 \\
-  $\tuple{\tau^{\pi}, \bar{\mu}}$ & 6.908 & 6.918 & 5.988 & 7.456 & 6.929 & 6.929 & 5.934 & 7.783 \\
-  $\tuple{\tau^{com}, \bar{\mu}}$ & 6.529 & 6.680 & 5.445 & 7.276 & 6.542 & 6.542 & 5.521 & 7.440 \\
-  $\tuple{\tau^{alt}, \bar{\mu}}$ & 6.450 & 6.337 & 5.772 & 6.978 & 6.457 & 6.457 & 5.479 & 7.500 \\
+  $\tuple{\tau^{reg}, \overline{\mu}}$ & 6.908 & 6.918 & 5.988 & 7.456 & 6.929 & 6.929 & 5.934 & 7.783 \\
+  $\tuple{\tau^{\pi}, \overline{\mu}}$ & 6.908 & 6.918 & 5.988 & 7.456 & 6.929 & 6.929 & 5.934 & 7.783 \\
+  $\tuple{\tau^{com}, \overline{\mu}}$ & 6.529 & 6.680 & 5.445 & 7.276 & 6.542 & 6.542 & 5.521 & 7.440 \\
+  $\tuple{\tau^{alt}, \overline{\mu}}$ & 6.450 & 6.337 & 5.772 & 6.978 & 6.457 & 6.457 & 5.479 & 7.500 \\
    \bottomrule                         
 \end{tabular}                      
 \caption{Average payoff in simulations of 100,000
@@ -1274,15 +1327,15 @@ As is to be expected, average payoffs obtained in games with more than 2 acts ar
 can be seen by comparing Table~\ref{tab:ExpectedFitness_10x10} with
 Table~\ref{tab:ExpectedFitness_2x2_Full}. But increases in approximate expected fitness are not
 uniform. Most importantly, the regret minimizing type $\tuple{\tau^{reg}, \Delta(A)}$ is
-strictly dominated by $\tuple{\tau^{reg}, \bar{\mu}}$ and by $\tuple{\tau^{\pi}, \bar{\mu}}$ in
+strictly dominated by $\tuple{\tau^{reg}, \overline{\mu}}$ and by $\tuple{\tau^{\pi}, \overline{\mu}}$ in
 the meta-game from Table~\ref{tab:ExpectedFitness_10x10}. This means that while regret
 minimization \emph{can} thrive in some evolutionary contexts, there are also contexts where it
 is demonstrably worse off.
 
 Still, although this may be bad news for regret minimizing types
 $\tuple{\tau^{reg}, \Delta(A)}$, it is not the case that regret types \emph{as such} are weeded
-out by selection. Since, by Fact~\ref{fact:maxEU-minReg}, $\tuple{\tau^{reg}, \bar{\mu}}$ and
-$\tuple{\tau^{\pi}, \bar{\mu}}$ are generally behaviorally equivalent, it remains that
+out by selection. Since, by Fact~\ref{fact:maxEU-minReg}, $\tuple{\tau^{reg}, \overline{\mu}}$ and
+$\tuple{\tau^{\pi}, \overline{\mu}}$ are generally behaviorally equivalent, it remains that
 selection based on meta-games constructed from $n \times n$ games will still not eradicate all
 regret types. So, although regret types may not be selected for in this case, they are also not
 selected against.
@@ -1295,7 +1348,7 @@ example, epistemic types of players are not what biological evolution selects, b
 something that the particular choice situation would exogenously give us, then regret-based
 preference \emph{can} again drive out veridical preferences altogether. For concreteness,
 suppose that only preference types compete and that agents' epistemic types are exogenously
-given, in such a way that agents hold flat probabilistic beliefs $\bar{\mu}$ with probability
+given, in such a way that agents hold flat probabilistic beliefs $\overline{\mu}$ with probability
 $1-p$ and are of type $\Delta(A)$ with probability $p$. This transforms the meta-game from
 Table~\ref{tab:ExpectedFitness_10x10} into the simpler $4 \times 4$ game in which the payoff
 obtained for a preference type is the weighted average over the payoffs of that preference
@@ -1349,7 +1402,7 @@ $n_\state, n_\act \in \set{2, \dots, 10}$ and then filling the utility table, so
 independently picking a number $\Utils(\state, \act) \in \set{0, 10}$ uniformly at random, just
 as we did before with symmetric games. Unlike with two-player games, we need to also sample the
 actual state of the world, which we selected uniformly at random from the available states in
-the current decision problem. Player types, consisting of epistemic types $\bar{\mu}$ and
+the current decision problem. Player types, consisting of epistemic types $\overline{\mu}$ and
 $\Delta(\States)$ and preference types $\tau^{reg}$ and $\tau^{\pi}$, give rise to behavior in
 the same way as before. (It is obviously not possible to carry altruistic or competitive
 preference types over to solitary decision making.) As before, we recorded the behavioral
@@ -1363,8 +1416,8 @@ problems are given in Table~\ref{tab:SolitaryDecisions}.
     \toprule
    $\tuple{\tau^{reg}, \Delta(A)}$ 
  & $\tuple{\tau^{\pi}, \Delta(A)}$ 
- & $\tuple{\tau^{reg}, \bar{\mu}}$ 
- & $\tuple{\tau^{\pi}, \bar{\mu}}$ 
+ & $\tuple{\tau^{reg}, \overline{\mu}}$ 
+ & $\tuple{\tau^{\pi}, \overline{\mu}}$ 
  \\ \midrule
     6.318 & 6.237 & 6.661 & 6.661 \\ \bottomrule
   \end{tabular}
@@ -1373,11 +1426,11 @@ problems are given in Table~\ref{tab:SolitaryDecisions}.
 \end{table}
 
 Facts~\ref{fact:maxEU-minReg} and \ref{fact:equivalence2x2} still apply:
-$\tuple{\tau^{reg}, \bar{\mu}}$ and $\tuple{\tau^{\pi}, \bar{\mu}}$ are behaviorally equivalent
+$\tuple{\tau^{reg}, \overline{\mu}}$ and $\tuple{\tau^{\pi}, \overline{\mu}}$ are behaviorally equivalent
 in general, and $\tuple{\tau^{reg}, \Delta(A)}$ is behaviorally equivalent to the former two in
 decision problems with 2 states and 2 acts. \todo{show this?} We see this in part in the
 results in Table~\ref{tab:SolitaryDecisions} in that the averages for $\tuple{\tau^{reg},
-  \bar{\mu}}$ and $\tuple{\tau^{\pi}, \bar{\mu}}$ are identical. But since we included decision
+  \overline{\mu}}$ and $\tuple{\tau^{\pi}, \overline{\mu}}$ are identical. But since we included decision
 problems with more acts and more states as well, the averages for regret minimizers
 $\tuple{\tau^{reg}, \Delta(A)}$ are not identical. They are, in fact, lower, but not as low as
 those of the minimax choosers. 
@@ -1394,7 +1447,7 @@ regret-based preferences.
 \subsection{Arbitrary probabilistic beliefs}
 \label{sec:arbitr-prob-beli}
 
-So far, we have assumed that epistemic types $\bar{\mu}$ hold an unbiased, flat belief. It is
+So far, we have assumed that epistemic types $\overline{\mu}$ hold an unbiased, flat belief. It is
 worthwhile considering what happens when this assumption is relaxed and we allow agents with
 probabilistic beliefs to make use of the full spectrum of probabilistic beliefs. It should be
 clear that quality of beliefs directly impacts prospects of successful decision-making: if a
@@ -1407,7 +1460,7 @@ state with probability weights $p$. This effectively implements a bias for belie
 decision maker that tend to put more weight on the actual state (although the procedure does
 admittedly perverse the natural chicken-and-egg logic in this case that the actual world state
 should come first and beliefs be a function of it). As a result, the average payoffs of types
-$\tuple{\tau^{reg}, \bar{\mu}}$ and $\tuple{\tau^{\pi}, \bar{\mu}}$ are still the exact same
+$\tuple{\tau^{reg}, \overline{\mu}}$ and $\tuple{\tau^{\pi}, \overline{\mu}}$ are still the exact same
 (because we compare what agents with different preference types would do under the same
 beliefs; we are not interested in statistical fluctuations given one type better beliefs by
 pure happenstance), but with $7.125$ notably higher than before. In effect, better
