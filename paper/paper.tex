@@ -93,33 +93,31 @@ environment \citep[e.g.][]{FawcettHamblin2013:Exposing-the-be,McNamara2013:Towar
 But only little attention has been paid to modeling the evolutionary competition between choice
 mechanisms in a game-theoretic framework \citep[but
 see][]{ZollmanSmead2010:Plasticity-and-,SmeadZollman2013:The-Stability-o}.\todo{More references
-  Harley 1981!!!, O Conor \dots}.
+  Harley 1981!!!, O Conor \dots}
 
 If agents deal with a rich and varied environment, they face many different choice
-situations. A crucial part of a choice mechanism (conceived of as a mapping from a choice
-situation to a concrete choice of action) is a \emph{subjective representation} of that choice
-situation, i.e., the agents' manner of representing their preferences and the manner of forming
-decision relevant beliefs. Since almost any reasonable learning or decision-making process will
-make use of some (subjective, agent-internal (possibly unconscious)) representation of the
-quality of choice options, the question of which such representations are ecologically valuable
-(i.e., lead to high fitness) is central and has been subject of recent interest
-(\textcolor{red}{CITE literature on evolution of preferences}). Na\"ive intuition might
-convince us that preferences that veridically represent the actual, true fitness measure that
-evolutionary selection is based upon must surely be the best. We demonstrate that, if we take
-into account how agents represent uncertainty, this na\"ive conclusion is premature. Under
-certain reasonable epistemic conditions, non-veridical preference representations in terms of
-regret can be evolutionarily beneficial.
+situations. A crucial part of any choice mechanism is a \emph{subjective representation} of the
+choice situation, e.g., the agent's manner of representing their preferences and her way of
+forming decision relevant beliefs in the case of uncertainty. Since almost any reasonable
+learning or decision-making process will make use of some (subjective, agent-internal (possibly
+unconscious)) representation of the quality of choice options, the question of which such
+representations are ecologically valuable (i.e., lead to high fitness) is central and has been
+subject of recent interest (\textcolor{red}{CITE literature on evolution of
+  preferences}). Na\"ive intuition might convince us that preferences that veridically
+represent the actual, true fitness measure that evolutionary selection is based upon must
+surely be the best. We demonstrate that, if we take into account how agents represent
+uncertainty, this na\"ive conclusion is premature. Under certain reasonable epistemic
+conditions, non-veridical preference representations can be evolutionarily beneficial.
 
 To show this, we study the evolutionary competition of choice mechanisms, or more specifically
 the competition of subjective representations of choice situations, in a variable
 environment. Concretely, we look at evolutionary ``meta-games'' whose ``acts'' are types of
 subjective representations of games and whose ``payoffs'' represent the average expected
 fitness that choice mechanisms using these representation types would accrue when playing
-arbitrary games (from a given class, with a given occurrence probability) against other
-subjective representations of games. In this sense, a meta-game captures (the modeller's)
-assumptions about the relevant statistics of the environment in which evolutionary forces
-operate, while we are still able to use standard methods from evolutionary game theory, like
-stability or evolutionary dynamics.
+arbitrary games (from a given class, with a given occurrence probability). In this sense, a
+meta-game captures (the modeller's) assumptions about the relevant statistics of the
+environment in which evolutionary forces operate, while we are still able to use standard
+methods from evolutionary game theory, like stability or evolutionary dynamics.
 
 
 
@@ -244,10 +242,10 @@ evolutionary selection we are most interested in.
 \label{sec:choice-rules}
 
 For the purposes of this paper, we think of a choice rule as a function that takes a
-(strategic) game as input and outputs a choice of action for that game. The literatures has
+(strategic) game as input and outputs a choice of action for that game. The literature has
 suggested a number of choice rules that aspire to capture a normative element of rational
-choice. For reasons that will become clear as we go along, we focus here on three classical
-choice rules: (i) maximin, (ii) Laplace and (iii) regret minimization.
+choice. We focus here on three classical choice rules: (i) maximin, (ii) Laplace and (iii)
+regret minimization.
 
 Rational choice from maximization of expected utilities, as given in
 Definition~\ref{def:rationality}, is \emph{not} a choice rule in the present sense. Although
@@ -427,50 +425,55 @@ and avoid confusion, we turn to choice mechanisms.
 
 A \emph{choice mechanism} is a map from choice situations to action choices that, unlike choice
 rules, contains an explicit level of subjective representation of a decision situation. For our
-purposes, we should think of a choice mechanism is a pair of functions $\gamma$ and $\kappa$,
+purposes, we should think of a choice mechanism as a pair of functions $\gamma$ and $\kappa$,
 where $\gamma$ is a \emph{subjective representation scheme} and $\kappa$ is an \emph{action
   selection function} (see FigureXYZ).\todo{make figure when notation and terminology are
   fixed}\ The subjective representation scheme $\gamma$ maps a game (or more generally any
 decision situation) onto a subjective representation of the game (or choice situation) and
 other decision-relevant beliefs (e.g., about what the opponent is likely to play). The action
-selection function $\kappa$ takes such a subjective representation that $\gamma$ returns, and
+selection function $\kappa$ takes such a subjective representation that $\gamma$ returns and
 maps it onto a concrete action choice. The crucial bit for our purposes here is the
-representation function $\gamma$, because we are interested in which ways of conceptualizing a
-decision situation are evolutionarily successful.
+representation function $\gamma$, because we are interested in studying which ways of
+conceptualizing a decision situation are evolutionarily successful.
 
-More generally even, a choice mechanism could be a set of distinct heuristics (the DM's
-\emph{adaptive toolbox}) that have little in common
+A choice mechanism could be a set of distinct heuristics (the DM's \emph{adaptive toolbox})
+that have little in common
 \citep[e.g.][]{TverskyKahnemann1981:The-Framing-of-,GigerenzerGoldstein1996:Reasoning-the-F,ScheibehenneRieskamp2013:Testing-the-Ada}. But
 to keep matters simple and implementable for a start, we will here only look at choice
 mechanisms that differ only with respect to their subjective representation function $\gamma$,
 which in turn is conceived of as a \emph{uniform} way of forming preference and belief
-\emph{types}. 
+\emph{types}: we look at general \emph{subjective representation schemes}.
 
-Formally, given a class $ \mathcal{G} $ of games, $\gamma: \mathcal{G} \rightarrow \Theta \times E$ is a function that assigns a subjective preference $\theta \in \Theta$ and an epistemic state (or belief type) $e \in E$ to any game $G \in \mathcal{G}$.\footnote{Given a game $G$, the set $ \Theta $ is the set of all subjective preferences, or subjective utility functions, on $G$. I.e., $\Theta$ is the set of all functions $\theta: A \rightarrow \mathbb{R}$.} 
-Then, given a set of subjective
-  preferences $ \Theta $ and
-  a set of or belief types $E$, an action selection function is a function
-  $\kappa: \Theta \times E \rightarrow A_i $, that associates any subjective representation of the game $ (\theta,e) \in \Theta \times E$ with an action $a^{*} \in A_i $. 
+Formally, given a class $ \mathcal{G} $ of strategic games,
+$\gamma_i: \mathcal{G} \rightarrow \Theta_i \times E_i$ is a function that assigns a subjective
+preference $\theta_i \in \Theta_i$ and an epistemic state $e_i \in E_i$ to any game
+$G \in \mathcal{G}$ for some agent $i$. A subjective preference $\theta_i$ for game $G$ and
+agent $i$ is just a payoff function for $i$ suitable to the acts and co-players in
+$G$. Crucially, this subjective payoff function can be different from the actual payoff in $G$,
+which we interpret as the objective fitness. An epistemic state $e_i$ for game $G$ and agent
+$i$ is some specification of $i$'s uncertainty about the co-players' behavior. Finally, an
+action selection function for agent $i$ is a function
+$\kappa_i: \Theta_i \times E_i \rightarrow \pow{A_i} $, that associates any subjective
+representation of the game $ (\theta_i,e_i) \in \Theta_i \times E_i$ with a set of prescribed
+actions for $i$ in $G$ under $i$'s subjective representation of $G$. We drop the index $i$ for
+readability in the following.
 
-More concretely, we focus on two (\textit{subjective}) \emph{preference types} and two \emph{belief
-    types}. We view a preference type as a function $\tau: \mathcal{G} \rightarrow \Theta$, and
-  a belief type as a general disposition to form beliefs about the co-player’s behavior. The
-  two possible dispositions that we take account of are precise probabilistic belief and
-  imprecise belief, as we will explain in the next section.
-
-Since we are most interested here in studying whether evolutionary pressure could
-  support non-veridical subjective preferences, the two preference types that we consider are: the veridical type $\tau^\pi$, who uses the actual payoff function
-  $\pi$ of the actual game $G$, and the regret type $\tau^{reg}$, who looks at the regret
-  transformation of the actual game $G$.
-
-Finally, the action selection function $\kappa$ that we use in this paper is \textit{maxmin expected
-    utility} [GS89], for reasons that will be clear and justified in the following two
-  sections.
+We focus on two (\textit{subjective}) \emph{preference types} and two \emph{belief types}. We
+view a preference type as a function $\tau: \mathcal{G} \rightarrow \Theta$, and a belief type
+as a general disposition to form beliefs about the co-player’s behavior. The two possible
+dispositions that we take account of are precise probabilistic belief and imprecise belief, as
+we will explain in the next section. Since we are most interested here in studying whether
+evolutionary pressure could support non-veridical subjective preferences, the two preference
+types that we consider are: the veridical type $\tau^\pi$, who uses the actual payoff function
+$\pi$ of the actual game $G$, and the regret type $\tau^{reg}$, who looks at the regret
+transformation of the actual game $G$. Finally, the action selection function $\kappa$ that we
+use in this paper is \textit{maxmin expected utility} [GS89], for reasons that will be clear
+and justified in the following two sections.
 
 % It turns out that whether $\tau^{reg}$ can have a fitness advantage over $\tau^\pi$ depends on
 % the general \emph{kind} of (probabilistic) beliefs that DM's form about the opponent's
 % behavior. In other words, we even abstract away from the content of the DM's beliefs about his
-% opponents' behavior that he could have acquired by learning or observation, but first turn on
+% opponents' behavior that he could have acquiresd by learning or observation, but first turn on
 % the more general question of how uncertainty should be represented in order to interact with
 % subjective preferences in such a way that the resulting behavior will be fitness enhancing for
 % the DM in the long run. We consider therefore two \emph{belief types} (to be defined below):
@@ -493,13 +496,13 @@ The second answer involves imprecise probabilities and is related to the literat
 Such uncertainty is inherent in situations of strategic interaction. This is quite obvious when such situations have been faced only a few times.
 \end{quote}
 
-In evolutionary game theory, for instance, players in a population obviously face uncertainty about the composition of the population that they are part of, and consequently about the co-player that they are randomly paired with at each round and about the co-player's action. We represent this uncertainty in two different ways that correspond to the two approaches discussed above: a Bayesian uniform distribution and an imprecise probability set. This amounts to having two different belief types, $ \overline{\mu}$ and $ \Delta(A_{-i})$, where $\overline{\mu}$ stands for the uniform distribution and $\Delta(A_{-i})$ is the probability set, defined as follows:
+In evolutionary game theory, for instance, players in a population obviously face uncertainty about the composition of the population that they are part of, and consequently about the co-player that they are randomly paired with at each round and about the co-players' action. We represent this uncertainty in two different ways that correspond to the two approaches discussed above: a Bayesian uniform distribution and an imprecise probability set. This amounts to having two different belief types, $ \overline{\mu}$ and $ \Delta(A_{-i})$, where $\overline{\mu}$ stands for the uniform distribution and $\Delta(A_{-i})$ is the probability set, defined as follows:
 
 \begin{itemize}
 
 \item $ \Delta(A_{-i}):=\lbrace \mu \in \mathbb{R}^{A_{-i}}: \sum_{a_{-i} \in A_{-i}} \mu(a_{-i}) = 1 \rbrace$;
 
-\item $\overline{\mu} \in \Delta(A_{-i})$ is the probability measure over the co-player's actions such that: $\forall a_{-i} \in A_{-i}$, $\overline{\mu}(a_{-i})= \frac{1}{|A_{-i}|}$.
+\item $\overline{\mu} \in \Delta(A_{-i})$ is the probability measure over the co-players' actions such that: $\forall a_{-i} \in A_{-i}$, $\overline{\mu}(a_{-i})= \frac{1}{|A_{-i}|}$.
 
 \end{itemize} 
 
