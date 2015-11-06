@@ -218,8 +218,8 @@ maximin rule applied to expected utility). The next section introduces all of th
 \section{Choice mechanisms: preferences, beliefs and action choice}
 \label{sec:basic-notions}
 
-A strategic game is a tuple $ G=\tuple{ N, (A_i , \pi_i)_{i \in N} }$ with $N$ a set of
-players, $A_i$ a set of acts and $\pi_i$ a payoff function for each player $i \in N$. For the
+A strategic game is a tuple $ G=\tuple{ N, (A_i , \pi_i)_{i \in N} }$ with $N$ a finite set of
+players, $A_i$ a finite set of acts and $\pi_i$ a payoff function for each player $i \in N$. For the
 most part, this paper will focus on symmetric games with two players. A two-player game is
 symmetric if players have the same action set, $A_1 = A_2$, and payoffs are symmetric:
 $\pi_1(\myact{k}, \myact{l}) = \pi_2(\myact{l}, \myact{k})$ for all $k$ and $j$. An example is
@@ -444,27 +444,28 @@ More generally even, a choice mechanism could be a set of distinct heuristics (t
 to keep matters simple and implementable for a start, we will here only look at choice
 mechanisms that differ only with respect to their subjective representation function $\gamma$,
 which in turn is conceived of as a \emph{uniform} way of forming preference and belief
-\emph{types}. \textcolor{red}{Formally, $\gamma$ is a function in
-  $\mathcal{G} \rightarrow \Theta \times E$, where \dots. Then, given a set of subjective
-  preferences $ \Theta $ [@Paolo: minimally define subjective preferences somewhere above] and
-  a set of epistemic states (or belief types) $E$, a choice mechanism is a function
-  $\kappa: \Theta \times E \rightarrow A_i $.}
+\emph{types}. 
 
-\textcolor{red}{More concretely, we focus on two \emph{preference types} and two \emph{belief
+Formally, given a class $ \mathcal{G} $ of games, $\gamma: \mathcal{G} \rightarrow \Theta \times E$ is a function that assigns a subjective preference $\theta \in \Theta$ and an epistemic state (or belief type) $e \in E$ to any game $G \in \mathcal{G}$.\footnote{Given a game $G$, the set $ \Theta $ is the set of all subjective preferences, or subjective utility functions, on $G$. I.e., $\Theta$ is the set of all functions $\theta: A \rightarrow \mathbb{R}$.} 
+Then, given a set of subjective
+  preferences $ \Theta $ and
+  a set of or belief types $E$, an action selection function is a function
+  $\kappa: \Theta \times E \rightarrow A_i $, that associates any subjective representation of the game $ (\theta,e) \in \Theta \times E$ with an action $a^{*} \in A_i $. 
+
+More concretely, we focus on two (\textit{subjective}) \emph{preference types} and two \emph{belief
     types}. We view a preference type as a function $\tau: \mathcal{G} \rightarrow \Theta$, and
   a belief type as a general disposition to form beliefs about the co-player’s behavior. The
-  two possible dispositions that we take account of are probabilistic (precise) belief and
-  non-probabilistic (imprecise) belief, as we will explain in the next section.}
+  two possible dispositions that we take account of are precise probabilistic belief and
+  imprecise belief, as we will explain in the next section.
 
-\textcolor{red}{We are most interested here in studying whether evolutionary pressure could
-  support non-veridical subjective preferences under certain conditions. We therefore consider
-  two \emph{preference types}: veridical type $\tau^\pi$, who uses the actual payoff function
-  $\pi$ of the actual game $G$, and regret type $\tau^{reg}$, who looks at the regret
-  transformation of the actual game $G$.}
+Since we are most interested here in studying whether evolutionary pressure could
+  support non-veridical subjective preferences, the two preference types that we consider are: the veridical type $\tau^\pi$, who uses the actual payoff function
+  $\pi$ of the actual game $G$, and the regret type $\tau^{reg}$, who looks at the regret
+  transformation of the actual game $G$.
 
-\textcolor{red}{The choice mechanism that we use in this paper is \textit{maxmin expected
+Finally, the action selection function $\kappa$ that we use in this paper is \textit{maxmin expected
     utility} [GS89], for reasons that will be clear and justified in the following two
-  sections.  }
+  sections.
 
 % It turns out that whether $\tau^{reg}$ can have a fitness advantage over $\tau^\pi$ depends on
 % the general \emph{kind} of (probabilistic) beliefs that DM's form about the opponent's
@@ -492,7 +493,7 @@ The second answer involves imprecise probabilities and is related to the literat
 Such uncertainty is inherent in situations of strategic interaction. This is quite obvious when such situations have been faced only a few times.
 \end{quote}
 
-In evolutionary game theory, for instance, players in a population obviously face uncertainty about the composition of the population that they are part of, and consequently about the co-player that they are randomly paired with at each round and about the co-player's action. We represent this uncertainty in two different ways that correspond to the two approaches discussed above: a Bayesian uniform distribution and an imprecise probability set. This amounts to having two different belief types, $ \overline{\mu}$ and $ \Delta(A_{-i}) \rbrace $, where $\overline{\mu}$ stands for the uniform distribution and $\Delta(A_{-i})$ is the probability set, defined as follows:
+In evolutionary game theory, for instance, players in a population obviously face uncertainty about the composition of the population that they are part of, and consequently about the co-player that they are randomly paired with at each round and about the co-player's action. We represent this uncertainty in two different ways that correspond to the two approaches discussed above: a Bayesian uniform distribution and an imprecise probability set. This amounts to having two different belief types, $ \overline{\mu}$ and $ \Delta(A_{-i})$, where $\overline{\mu}$ stands for the uniform distribution and $\Delta(A_{-i})$ is the probability set, defined as follows:
 
 \begin{itemize}
 
@@ -504,7 +505,7 @@ In evolutionary game theory, for instance, players in a population obviously fac
 
 Hence, we consider two possible epistemic states in the face of uncertainty. The belief type $\Delta(A_{-i})$ represents a situation of non-Bayesian radical uncertainty, where the players are not able to narrow down the set of probability distributions to a single one and they consider all of them as possible. The other belief type $\overline{\mu}$ conceptualizes the uncertainty about the population by using the principle of insufficient reason and ascribes equal probability to all the possible alternatives. As we have seen, both options are reasonable and justifiable ways to deal with situations of uncertainty [REFERENCES]. \\
 
-In decision theory, the imprecise probability model is in line with most of the representation results in decision making under uncertainty [GilboaSchmeidler89,KMM06], and seems justified by empirical observations too.
+In decision theory, the imprecise probability model is in line with most of the representation results of decision making under uncertainty [GilboaSchmeidler89,KMM06], and seems justified by empirical observations too.
 
 A prominent example is Ellsberg's paradox. A bag contains 90 marbles, 30 are red and the remaining 60 are either black or yellow. A marble is to be drawn and DM can win 100€ if she guesses the color of the drawn marble. The DM is offered two different bets. In the first one she can choose to bet either on red (R) or on yellow (Y), while in the second she can bet either on red or black (RB) or on yellow or black (YB), as shown in Table \ref{Ellsberg}.
 
@@ -526,7 +527,7 @@ $f_{{\color{yellow}Y}B}$             & 0   & 100 & 100 \\ \bottomrule
 \end{table}
 
 The pattern consistently observed in experimets is: $f_{{\color{red}R}} \succ f_{{\color{yellow}Y}}$ and $f_{{\color{red}R}B} \prec f_{{\color{yellow}Y}B}$. This is clearly incompatible with any precise probabilistic belief about the proportion of black and yellow marbles. This kind of behavior has been
-famously axiomatized by Gilboa and Schmeidler in a paper from 1989. The choice pattern is normally explained in terms of aversion to uncertainty, and the standard representation is given by means of probability sets together with maxmin rule. We can think of the DM in Ellsberg's example as maximinimizing expected utility over the probability set $ [\underline{P}(R)=\frac{1}{3},\underline{P}(Y)=0,\underline{P}(B)=0,\overline{P}(R)=\frac{1}{3},\overline{P}(Y)=\frac{2}{3},\overline{P}(B)=\frac{2}{3}]  $. This amounts to calculating for any probability distribution contained in the probability set the expected utility of any available action, and then to choosing the action that guarantees the highest minimal expected utility. The following observation is then trivial.
+famously axiomatized by Gilboa and Schmeidler in a paper from 1989. The choice pattern is normally explained in terms of aversion to uncertainty, and the standard representation is given by means of a set of probability measures together with maxmin rule. We can think of the DM in Ellsberg's example as maximinimizing expected utility over the probability set $ [\underline{P}(R)=\overline{P}(R)=\frac{1}{3},\underline{P}(Y)=0,\underline{P}(B)=0,\overline{P}(Y)=\frac{2}{3},\overline{P}(B)=\frac{2}{3}]  $. This amounts to calculating for any probability measure contained in the probability set the expected utility of any available action, and then to choosing the action that guarantees the highest minimal expected utility. The following observation is then trivial.
 
 \begin{fact} \label{fact:singleton probability set}
 Whenever the probability set is a singleton, maximinization of
@@ -537,13 +538,13 @@ Evidence from experimental literature suggests that agents are mainly uncertaint
 averse [REF]. In line with empirical data,
 we assume that players in the population are uncertainty averse and conform to maxmin expected
 utility. The resulting behavior is then produced by maximinimizing the subjective utility
-given by the player (preference, UNIFORM TERMINOLOGY CHECK) type over the set of probabilities given by the belief type of the agent.
+given by the player's preference type over the set of probabilities given by the belief type.
 
 
 
 \subsection{Choice mechanisms \& classical choice rules}
 
-Fixing the choice mechanism (action selection component) to maximin expected utility, and allowing two belief and
+By fixing the action selection component to maximin expected utility, and allowing two belief and
 two preference types, we regain all the choice rules considered in sectionNN from a more general and unified standpoint, as it is summed up in
 Table~\ref{tab:CMs}. \\
 We are now in the position of formally deriving behavior from a pair $(\theta, e) \in \Theta \times E$.
@@ -556,22 +557,22 @@ Given a game $G$, an action $a_i \in A_i$, and a belief $\mu \in \lbrace \mu' \i
 
 \begin{definition} \label{def:maxminSEU}
 
-Given a game $G$ and a player $(\tau, e)$, we define $\text{maxmin}(\tau(G), e):= \lbrace a'_i \in A_i : a_i \in \text{max}_{a_i \in A_i} \text{ min}_{\mu \in e} \text{ } \tau(G)(a_i, \mu) \rbrace$.
+Given a game $G$, a preference type $\tau$ and a belief type $e$, we define $\kappa(\tau(G), e):= \lbrace a_i \in A_i : a_i \in \text{max}_{a'_i \in A_i} \text{ min}_{\mu \in e} \text{ } \tau(G)(a'_i, \mu) \rbrace$.\footnote{As already specified in the previous example, we assume that, whenever the set $\kappa(\tau(G), e)$ is not a singleton, the player $(\tau, e)$ will mix with equal probability among the actions in $\kappa(\tau(G), e)$.}
 
 \end{definition}
 
-[[\noindent Definition \ref{def:expected fitness} gives the expected evolutionary fitness of player $(\tau, e)$ against player $(\tau', e')$ in game $G$.\footnote{As already specified in the previous example, we assume that, whenever the set $\text{maxmin}(\tau(G), e)$ is not a singleton, the player $(\tau, e)$ will mix with equal probability among the actions in $\text{maxmin}(\tau(G), e)$.}
+[[\noindent Definition \ref{def:expected fitness} gives the expected evolutionary fitness of player $(\tau, e)$ against player $(\tau', e')$ in game $G$.
 [OF COURSE we will postpone the definition of evolutionary fitness, it is only momentarily here!]
 \begin{definition} \label{def:expected fitness}
 
-Given a game $G \in \mathcal{G}$, a player $(\tau, e)$, and a player $(\tau', e')$, we define $\pi^G((\tau, e),(\tau', e')):= \pi^G(\text{maxmin}(\tau(G), e),\text{maxmin}(\tau'(G), e'))$. 
+Given a game $G \in \mathcal{G}$, a player $(\tau, e)$, and a player $(\tau', e')$, we define $\pi^G((\tau, e),(\tau', e')):= \pi^G(\kappa(\tau(G), e),\kappa(\tau'(G), e'))$. 
 
 \end{definition}
 [OF COURSE we will postpone the definition of evolutionary fitness, it is only momentarily here!]]]
 
-It is then worth stressing here that $\kappa(\tau^{\pi}, \Delta(A_{-i}))$ turns out to be the objective
+It is then worth stressing here that $\kappa(\tau^{\pi}, \Delta(A_{-i}))$ turns out to be the actual payoff
 maximinimizer, $\kappa(\tau^{reg}, \Delta(A_{-i}))$ corresponds to the regret minimizer,
-$\kappa(\tau^{\pi}, \overline{\mu})$ is the objective expected utility maximizer (with flat beliefs), and
+$\kappa(\tau^{\pi}, \overline{\mu})$ is the expected actual payoff maximizer (with flat beliefs), and
 $\kappa(\tau^{reg}, \overline{\mu})$ is the expected regret minimizer (with flat beliefs).
 Moreover, different subjective preferences and belief types can give rise to identical action predictions,
 either in a restricted class of games, or in general. This is also the case here.
@@ -598,7 +599,7 @@ either in a restricted class of games, or in general. This is also the case here
 \end{fact}
 
 \noindent In other words, given the same probabilistic belief, maximization of expected
-(objective) payoff and minimization of expected (subjective) regret are behaviorally
+(objective) payoff and minimization of expected regret are behaviorally
 equivalent. This holds for arbitrary games, as well as for solitary decision situations. On the
 other hand, the following does not hold in general:
 
@@ -643,46 +644,20 @@ In the class of $2 \times 2$ symmetric games, players $(\tau^{reg}, \Delta(A_{-i
 
 %\todo[inline]{should we explain here, or very soon, what the resulting types really are: regret minimizers, maximin players \dots}
 
-Many other alternatives different from maxmin could produce behavior: choice rules like minmax, maxmax, and minmin would similarly generate behavior in case of a lack of precise probabilistic belief. Here we postulate that players use maxmin for two main reasons that we will expand in the next section. First, among other possible choice rules maxmin is not only intuitively appealing but also corroborated from an empirical point of view. Secondly, as it will be clear in the following, our main interest is the evolution of different patterns of subjective conceptualizations of games (player types), and we want to show that the veridical representation (objective type) is not necessarily the fittest and may not be evolutionarily stable. Assuming that all players use a fixed rule (maxmin) independent of their player type allows us to factor the choice rule out of the selection process and to focus on player types.
+Many other alternatives different from maxmin could produce behavior: choice rules like minmax, maxmax, and minmin would similarly generate behavior in case of a lack of precise probabilistic belief. As it should be clear by now, here we postulate that players use maxmin for two main reasons. First, among other possible choice rules maxmin is not only intuitively appealing but also corroborated from an empirical point of view. Secondly, our main interest is the evolution of different patterns of subjective conceptualizations of games, and we want to show that the veridical representation is not necessarily the fittest and may not be evolutionarily stable. Assuming that all players use a fixed rule (maxmin expected utility) independent of their preference and belief type allows us to factor the choice rule out of the selection process and to focus on subjective representations only.
 
 
 
 \bigskip
 \bigskip
 
-\todo[inline]{PAOLO rewrite up to here!!! BUT the last 2-3 paragraphs must be rearranged a bit more!}
+\todo[inline]{PAOLO rewrites up to here!!! }
 
 \bigskip
 \bigskip
 
 
 
-
-In sum, we have so far considered four different alternatives, each differing along a
-preference and a belief dimension. As for preference representations, agents could either
-target objective payoffs, or consider non-veridical subjective regret transformations. Given a game $G$, we will denote by $ \tau^{reg}(G)$ the regret representation (corresponding to the negative regret transformation) of the game, and $\tau^{\pi}(G)$ the objective representation (corresponding to the identity transformation) of the game. \\
-As for
-beliefs, agents could either hold probabilistic belief or not. In the former case, we would
-assume that they maximize expectations under whatever preference representation they hold; in
-the latter, we would assume that they play maximin based on their preference
-representations. There are doubtlessly many more possible preference and belief types, but
-these are the main characters in the plot to follow. 
-
-Before we turn to evolutionary competition between choice principles, we should justify our
-focus on the two choice rules. In the following we argue that both the minimax rule, as well as the maximization of expected utility 
-(and the Laplace rule as a special case) can be viewed as the same choice rule under different representations of
-uncertainty. 
-
-
-To sum up, here we consider the choice of an action as depending on two features: the subjective preference and the belief state. Definition \ref{def:choice rule} makes this point clear.
-
-\begin{definition} \label{def:choice rule}
-
-Given a set of subjective preferences $\Theta$ and a set of epistemic types $E$, we define \textit{choice rule} a function $\kappa: \Theta \times E  \rightarrow A_i$ that associates an action choice to a pair $(\theta, e) \in \Theta \times E$.
-
-\end{definition}
-
-According to what we argued in this section, we will assume that the choice rule that turns subjective preferences and beliefs into actions is maxmin expected utility.
 
 
 
