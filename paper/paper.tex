@@ -4,10 +4,10 @@
 % Packages
 %========================================
 
-\usepackage[]{helpers/mypackages}
-%\usepackage[natbib=true,style=authoryear-comp,backend=bibtex,doi=false,url=false]{biblatex}
-% \bibliography{helpers/MyRefLocal}
-\bibliography{choicePrince}
+\usepackage{etex}
+\usepackage[nobiblatex]{helpers/mypackages}
+\usepackage[backend=bibtex,natbib=true,style=authoryear-comp,backend=bibtex,doi=false,url=false]{biblatex}
+\bibliography{choicePrince,biblio}
 \usepackage{helpers/myenvironments}
 \usepackage{helpers/mycommands}
 
@@ -82,16 +82,16 @@
 \label{sec:intr--motiv}
 
 Evolutionary game theory has become an established philosophical tool for probing into
-conceptual issues whose complexity requires mathematical modeling. However, most applications
+conceptual issues whose complexity requires mathematical modelling. However, most applications
 look at evolutionary selection of behavior in a single \emph{stage game}. There are two common
 simplifications in this approach. Firstly, the stage game is usually considered fixed, closed
 and immutable. Secondly, what evolves are behavioral strategies for the stage game. It has
 consequently been argued that, instead of focusing on a fixed, immutable stage game and the
 behavioral selection for that stage game alone, we should rather study the evolutionary
 competition of \emph{choice mechanisms} under selective pressure in a rich and variable
-environment \citep[e.g.][]{FawcettHamblin2013:Exposing-the-be,McNamara2013:Towards-a-Riche}.
+environment \citep[e.g.][]{FawcettHamblin2013:Exposing-the-be,McNamara2013:Towards-a-Riche}. 
 But only little attention has been paid to modeling the evolutionary competition between choice
-mechanisms in a game-theoretic framework \citep[but
+mechanisms in a game-theoretical framework \citep[but
 see][]{ZollmanSmead2010:Plasticity-and-,SmeadZollman2013:The-Stability-o}.\todo{More references
   Harley 1981!!!, O Conor \dots}
 
@@ -102,8 +102,7 @@ forming decision relevant beliefs in the case of uncertainty. Since almost any r
 learning or decision-making process will make use of some (subjective, agent-internal (possibly
 unconscious)) representation of the quality of choice options, the question of which such
 representations are ecologically valuable (i.e., lead to high fitness) is central and has been
-subject of recent interest (\textcolor{red}{CITE literature on evolution of
-  preferences}). Na\"ive intuition might convince us that preferences that veridically
+subject of recent interest \citep[e.g.][]{algweib13,DekElyYlan07,Sam01,RobSam11}. Na\"ive intuition might convince us that preferences that veridically
 represent the actual, true fitness measure that evolutionary selection is based upon must
 surely be the best. We demonstrate that, if we take into account how agents represent
 uncertainty, this na\"ive conclusion is premature. Under certain reasonable epistemic
@@ -127,7 +126,7 @@ methods from evolutionary game theory, like stability or evolutionary dynamics.
 \label{sec:rati--subj}
 
 The standard textbook definition of \textit{rationality} in economics and decision theory
-traces back to the seminal work of \citet{Neumannvon-NeumannMorgenstern1944:Theory-of-Games}
+traces back to the seminal work of \citet{deFinetti37}, \citet{Neumannvon-NeumannMorgenstern1944:Theory-of-Games}
 and \citet{Savage1954:The-Foundations}. It says that choice is rational only if it maximizes
 (subjective) expected utility.
 
@@ -159,11 +158,10 @@ deviate systematically from the objectively given parameters in the presented ch
 losses).  Similarly, tinkering with the notion of subjective utility, in particular by
 including social preferences such as fairness, reciprocity or similar, allows us to describe as
 rational empirically observed behavior in situations of social decision making, such as the
-prisoners' dilemma or public goods games, that might otherwise appear irrational (e.g. Fehr and
-Schmidt, Charness and Rabin, etc.).\todo{@Paolo: please include proper references}
+prisoners' dilemma or public goods games, that might otherwise appear irrational \citep[e.g.][]{fehrschmidt99,charrab02}.
 
 It could be objected that, without additional constraints, the notion of rationality is likely
-to collapse, as it seems possible to deem rational everything that is observed, given the
+to collapse, as it seems possible to deem rational almost everything that is observed, given the
 freedom to adjust beliefs and preferences at will. But there are many ways in which ascriptions
 of beliefs and preferences are constrained by normative considerations of rationality. To begin
 with, if the DM's uncertainty is about objective chance, it can be argued that subjective
@@ -184,7 +182,7 @@ makers (human and other life forms) have evolved choice mechanisms which were fi
 in the relevant domains of choice making, at the relevant time of evolution. When it comes to
 preferences, this is clearly related to Alchian and Friedman's argument that firms
 \emph{should} optimize that which makes them ``live,'' so to speak. For biological agents, the
-argument would be that subjective preferences \emph{should} track whatever determines objective
+argument would be that subjective preferences \emph{should} stay as close as possible to whatever determines objective
 fitness.
 
 We would like to put this latter idea to the test. We present a formal argument intended to
@@ -192,9 +190,9 @@ support the conclusion that subjective preferences that differ from objective fi
 adaptive. We argue that it is important to take into account the potential mutual dependence of
 subjective preferences and subjective beliefs in adaptationist approaches to decision
 making. In other words, we focus on the evolutionary competition between \emph{subjective
-  representation schemes}: general ways of forming subjective preferences and types of
+  representation schemes}: general ways of forming subjective preferences and
 subjective beliefs. We show that subjective, non-veridical preference representations based on
-a notion of regret \citep[e.g.][]{Savage1951:The-theory-of-s,LoomesSugden1982:Regret-Theory:-}
+a notion of regret \citep[e.g.][]{Savage1951:The-theory-of-s,}
 can be adaptive and even outperform objective, veridical representations of the actual, true
 fitness, when agents, at least on occasion, hold \emph{imprecise probabilistic beliefs}
 (\textcolor{red}{CITATIONS}) and make decisions based on a security choice rule (here: the
@@ -216,11 +214,11 @@ maximin rule applied to expected utility). The next section introduces all of th
 \section{Choice mechanisms: preferences, beliefs and action choice}
 \label{sec:basic-notions}
 
-A strategic game is a tuple $ G=\tuple{ N, (A_i , \pi_i)_{i \in N} }$ with $N$ a finite set of
+A simultaneous-move game is a tuple $ G=\tuple{ N, (A_i , \pi_i)_{i \in N} }$ with $N$ a finite set of
 players, $A_i$ a finite set of acts and $\pi_i$ a payoff function for each player $i \in N$. For the
 most part, this paper will focus on symmetric games with two players. A two-player game is
 symmetric if players have the same action set, $A_1 = A_2$, and payoffs are symmetric:
-$\pi_1(\myact{k}, \myact{l}) = \pi_2(\myact{l}, \myact{k})$ for all $k$ and $j$. An example is
+$\pi_1(a_k, a_j) = \pi_2(a_j, a_k)$ for all $a_j,a_k \in A_1$. An example is
 given in Figure~\ref{coordgame1}, which shows a coordination game. The numbers give the payoff
 for the player choosing a row act against an opponent choosing a column act. Since the game is
 symmetric, it suffices to give just these numbers.
@@ -249,12 +247,12 @@ regret minimization.
 
 Rational choice from maximization of expected utilities, as given in
 Definition~\ref{def:rationality}, is \emph{not} a choice rule in the present sense. Although
-the notion applies to game situations, of course, it requires an additional component, namely a
+the notion applies to game situations, it requires an additional component, namely a
 belief of the DM, before it can say which acts the DM should choose. Let
 $A_{-i} = \bigtimes A_j$ for all $j \neq i$ be the set of all \emph{profiles} of acts for all
 players except $i$. If player $i$ has a belief $\mu_i \in \Delta(A_{-i})$ about the behavior of
 his opponents, he chooses rationally only if his choice $a^*_i$ maximizes expected utility
-$\EU(a) = \sum_{\act_{-i} \in \Acts_{-i}} \mu_i(\act_{-i}) \myts \pi_i(a_i, a_{-i})$. So this
+$\EU(a_i) := \sum_{\act_{-i} \in \Acts_{-i}} \mu_i(\act_{-i}) \myts \pi_i(a_i, a_{-i})$. So this
 requires a probabilistic belief about the opponents' action choices. In the example from
 Figure~\ref{coordgame1}, a rational player would choose act $I$ exactly when he believes that
 his opponent will choose act $I$ with a probability at least $\nicefrac{2}{3}$.
@@ -267,18 +265,16 @@ $\act^* \in \argmax_{\myact{i} \in \Acts_i} \min_{\myact{j} \in \Acts_j} \pi_i(\
 \myact{j})$.
 For the example in Figure~\ref{coordgame1}, the maximim rule looks at the minima in each row,
 asking: what is the worst possible outcome for each row act? It is $0$ in either
-case. Consequently, the maximin rule would not favor either act; players choosing by the
+case. Consequently, the maximin rule would not favor either act: players choosing by the
 maximin rule would be indifferent between acts $I$ and $II$.
 
 Another well-known choice rule is \emph{Laplace's rule} which prescribes to choose $\act^*$ if
-$\act^* \in \argmax_{a \in A} \sum_{a'} \pi(a, a')$. Laplace's rule is equivalent to rationally
-choosing under a \emph{flat belief} that assigns equal probability to all of the opponent's
+$\act^* \in \argmax_{a \in A} \sum_{a'} \pi(a, a')$. Laplace's rule is equivalent to expected utility maximization under a \emph{flat belief} that assigns equal probability to all of the opponent's
 choices. In the coordination game of Figure~\ref{coordgame1}, Laplace's rule selects act $II$.
 
 The final choice rule that is relevant for our purposes here is \emph{regret
-  minimization}. Regret theory has been introduced in decision theory by
-\citet{Savage1951:The-theory-of-s} and Niherens [], and later developed by Bell [1982], Loomes
-and Sugden [1982], and Fishburn [1982] independently.\todo{fix references}\ Lately,
+  minimization}. The notion of regret in decision theory dates back at least to the work by
+\citet{Savage1951:The-theory-of-s}, and has later been developed by \citet{bell82}, \citet{fish82} and \citet{loosug82} independently. Lately,
 \citet{HalpernPass2012:Iterated-Regret} showed how the use of regret minimization can give
 solutions to game theoretical puzzles (like the Traveller's dilemma) in a way that is closer to
 everyday intuition and empirical data. In this paper the notion of regret is defined as in
@@ -449,8 +445,8 @@ $\gamma_i: \mathcal{G} \rightarrow \Theta_i \times E_i$ is a function that assig
 preference $\theta_i \in \Theta_i$ and an epistemic state $e_i \in E_i$ to any game
 $G \in \mathcal{G}$ for some agent $i$. A subjective preference $\theta_i$ for game $G$ and
 agent $i$ is just a payoff function for $i$ suitable to the acts and co-players in
-$G$. Crucially, this subjective payoff function can be different from the actual payoff in $G$,
-which we interpret as the objective fitness. An epistemic state $e_i$ for game $G$ and agent
+$G$. Crucially, this subjective payoff function can be different from the actual payoff function $\pi^G$ of $G$,
+which we interpret as the objective evolutionary fitness. An epistemic state $e_i$ for game $G$ and agent
 $i$ is some specification of $i$'s uncertainty about the co-players' behavior. Finally, an
 action selection function for agent $i$ is a function
 $\kappa_i: \Theta_i \times E_i \rightarrow \pow{A_i} $, that associates any subjective
@@ -490,7 +486,7 @@ and justified in the following two sections.
 
 Consider the following problem. I have, on the desk in front of me, a bag containing either red or black marbles. There is no further information about the distribution of the two colors. What is then the probability that I will draw a red marble? As in Walley91-96, we are not talking about physical probability, but rather about epistemic probability, i.e., the subjective probability that an agent attributes to an event.
 In the literature there are two traditional ways of answering this kind of questions. According to standard Bayesianism, one should always be able to determine a precise betting rate (that immediately translates into a precise probability distribution), which is fair, in the sense that the DM is indifferent between betting on or against red at the fair rate, and would bet on red at any rate that is more favourable than the fair rate and against red at any rate that is less favourable. In the case of the bag on my desk, a strict Bayesian, in the absence of any further information, would probably rely on the \textit{principle of insufficient reason} and answer that the DM should have a uniform distribution that considers all the outcomes equipossible. \\
-The second answer involves imprecise probabilities and is related to the literature about unmeasurable uncertainty. Many authors argued in favor of this kind of approach [e.g., Walley91-96, Levi74, GardenforsANDSahlin82]. Since it is consistent with the information available that all the marbles are red, or that no marble is red, the resulting model should take it into account and specify a lower probability of red $\underline{P}(R)$ and an upper probability of red $\overline{P}(R)$ that define an interval of possible probabilistic beliefs [$\underline{P}(R), \overline{P}(R)$]. Given the information available in this case we would have $\underline{P}(R)=0$ and $\overline{P}(R)=1$. This approach appears particularly relevant in a game theoretical context. Indeed, in a recent paper [Battigalliet al.15] Battigalli et al. write
+The second answer involves imprecise probabilities and is related to the literature about unmeasurable uncertainty. Many authors argued in favor of this kind of approach \citep[e.g.][]{levi74,gardsah82,walley96}. Since it is consistent with the information available that all the marbles are red, or that no marble is red, the resulting model should take it into account and specify a lower probability of red $\underline{P}(R)$ and an upper probability of red $\overline{P}(R)$ that define an interval of possible probabilistic beliefs [$\underline{P}(R), \overline{P}(R)$]. Given the information available in this case we would have $\underline{P}(R)=0$ and $\overline{P}(R)=1$. This approach appears particularly relevant in a game theoretical context. Indeed, in a recent paper \citet{BattCerrMM15} write
 
 \begin{quote}
 Such uncertainty is inherent in situations of strategic interaction. This is quite obvious when such situations have been faced only a few times.
@@ -506,11 +502,11 @@ In evolutionary game theory, for instance, players in a population obviously fac
 
 \end{itemize} 
 
-Hence, we consider two possible epistemic states in the face of uncertainty. The belief type $\Delta(A_{-i})$ represents a situation of non-Bayesian radical uncertainty, where the players are not able to narrow down the set of probability distributions to a single one and they consider all of them as possible. The other belief type $\overline{\mu}$ conceptualizes the uncertainty about the population by using the principle of insufficient reason and ascribes equal probability to all the possible alternatives. As we have seen, both options are reasonable and justifiable ways to deal with situations of uncertainty [REFERENCES]. \\
+Hence, we consider two possible epistemic states in the face of uncertainty. The belief type $\Delta(A_{-i})$ represents a situation of non-Bayesian radical uncertainty, where the players are not able to narrow down the set of probability distributions to a single one and they consider all of them as possible. The other belief type $\overline{\mu}$ conceptualizes the uncertainty about the population by using the principle of insufficient reason and ascribes equal probability to all the possible alternatives. As we have seen, both options are reasonable and justifiable ways to deal with situations of uncertainty. \\
 
-In decision theory, the imprecise probability model is in line with most of the representation results of decision making under uncertainty [GilboaSchmeidler89,KMM06], and seems justified by empirical observations too.
+In decision theory, the imprecise probability model is in line with most of the representation results of decision making under uncertainty \citep[e.g.][]{gilsch89,KlibMarMuk05}, and seems justified by empirical observations too.
 
-A prominent example is Ellsberg's paradox. A bag contains 90 marbles, 30 are red and the remaining 60 are either black or yellow. A marble is to be drawn and DM can win 100€ if she guesses the color of the drawn marble. The DM is offered two different bets. In the first one she can choose to bet either on red (R) or on yellow (Y), while in the second she can bet either on red or black (RB) or on yellow or black (YB), as shown in Table \ref{Ellsberg}.
+A prominent example is Ellsberg's paradox (\citet{ells61}). A bag contains 90 marbles, 30 are red and the remaining 60 are either black or yellow. A marble is to be drawn and DM can win 100€ if she guesses the color of the drawn marble. The DM is offered two different bets. In the first one she can choose to bet either on red (R) or on yellow (Y), while in the second she can bet either on red or black (RB) or on yellow or black (YB), as shown in Table \ref{Ellsberg}.
 
 \definecolor{yellow}{RGB}{255,188,1}
 
@@ -564,16 +560,7 @@ Given a game $G$, a preference type $\tau$ and a belief type $e$, we define $\ka
 
 \end{definition}
 
-[[\noindent Definition \ref{def:expected fitness} gives the expected evolutionary fitness of player $(\tau, e)$ against player $(\tau', e')$ in game $G$.
-[OF COURSE we will postpone the definition of evolutionary fitness, it is only momentarily here!]
-\begin{definition} \label{def:expected fitness}
-
-Given a game $G \in \mathcal{G}$, a player $(\tau, e)$, and a player $(\tau', e')$, we define $\pi^G((\tau, e),(\tau', e')):= \pi^G(\kappa(\tau(G), e),\kappa(\tau'(G), e'))$. 
-
-\end{definition}
-[OF COURSE we will postpone the definition of evolutionary fitness, it is only momentarily here!]]]
-
-It is then worth stressing here that $\kappa(\tau^{\pi}, \Delta(A_{-i}))$ turns out to be the actual payoff
+It is then worth stressing that $\kappa(\tau^{\pi}, \Delta(A_{-i}))$ turns out to be the actual payoff
 maximinimizer, $\kappa(\tau^{reg}, \Delta(A_{-i}))$ corresponds to the regret minimizer,
 $\kappa(\tau^{\pi}, \overline{\mu})$ is the expected actual payoff maximizer (with flat beliefs), and
 $\kappa(\tau^{reg}, \overline{\mu})$ is the expected regret minimizer (with flat beliefs).
@@ -625,7 +612,7 @@ In the class of $2 \times 2$ symmetric games, players $(\tau^{reg}, \Delta(A_{-i
     case for any game: given a game $G$, maximinimizing expected utility over the probability
     simplex $ \Delta(A_{-i}) $ amounts to playing the standard maxmin strategy of $G$.} This,
   in turn, corresponds to the regret minimizing action of the original game $G^C$ of Figure
-  \ref{coordgame1}, namely action $II$, as we have seen in Section \ref{sec:regreTheory}. A
+  \ref{coordgame1}, namely action $II$, as we have seen in Section \ref{sec:choice-rules}. A
   player $(\tau^{reg},\overline{\mu})$ instead has subjective representation $\tau^{reg}(G^C)$
   of Figure \ref{coordgame1reg} and a flat probability measure
   $\overline{\mu}=(\frac{1}{2}I,\frac{1}{2}II)$ over the co-player's actions. Consequently,
@@ -651,20 +638,6 @@ Many other alternatives different from maxmin could produce behavior: choice rul
 
 
 
-\bigskip
-\bigskip
-
-\todo[inline]{PAOLO rewrites up to here!!! }
-
-\bigskip
-\bigskip
-
-
-
-
-
-
-
 
 \iffalse
 
@@ -682,67 +655,71 @@ For any probability measure $\mu$, maximization of expected utility and minimiza
 
 
 
-
-
 \newpage
 
 \section{Meta-games and the evolution of choice mechanisms}
 \label{sec:model}
 
-Evolutionary game theory has established itself as a useful tool for testing consequences of
-sets of assumptions about complex evolutionary processes. However, the standard approach in
-evolutionary game theory is not enough for our purposes, because it (i) fixes a single
+The standard approach in
+evolutionary game theory is not enough for our purposes, because it (i) fixes a unique and immutable
 \emph{stage game} (e.g., the prisoner's dilemma) and (ii) assumes that the object of
-evolutionary selection is behavior for that very game. Following a similar line of argument
+evolutionary selection is behavior for that very game. Following a line of argument coming from theoretical biology and behavioral ecology
 \citep[e.g.][]{FawcettHamblin2013:Exposing-the-be}, we therefore turn towards the evolutionary
 competition of \emph{choice mechanisms}, i.e., general ways of selecting concrete behavior
-across a range of different situations. As a consequence, the expected fitness of a choice
-mechanism will not be determined by only a single (elementary) stage game, but it will be a
+across a range of different situations, defined by the two functions $\gamma$ and $\kappa$. With this approach, the expected fitness of a choice
+mechanism will not be determined by a unique stage game, but it will be a
 complex function of the statistical properties of the environment: we have to take into account
 how frequently particular concrete situations of choice making are.
 
 For concreteness, let us fix a class of strategic games $\mathcal{G}$ and a probability measure
 $P \in \Delta(\mathcal{G})$ that gives the occurrence probability $P(G)$ of each game
 $G \in \mathcal{G}$. Together, a class of games and a probability measure over it can be
-thought of as a model of the environment in which different choice mechanisms compete. Let $C$
-the a set of choice mechanisms that we care about. Then each choice mechanism $c \in C$ is a
-associated with an \emph{action selection function} $S_c$ that maps any $G \in \mathcal{G}$
-onto some action $S_c(G)$ of game $G$.\footnote{In all subsequent formal and simulation results
-  we assume that, whenever a choice mechanisms is selects indifferently a set of actions, the
-  agent will realize each with the same (flat) probability. For ease of parlor, we often do as
-  if there was a tie-break rule.} Different choice mechanisms can select the same act in some
-games. More importantly even, different choice mechanisms can have exactly the same action
-selection functions on a particular class of games $\mathcal{G}$. This is because we think of
-the object of evolutionary selection, not as the realized behavior but as the way behavior is
-specified. (We will see below that this can make an important difference, e.g., in the light of
-mutation.)
+thought of as a model of the environment in which different choice mechanisms compete. As we have seen in Definition \ref{def:maxminSEU}, given a game $G \in \mathcal{G}$, a choice mechanism prescribes the action(s) $\kappa(\gamma(G))$. Now imagine a huge, possibly infinite society of agents, each of which carries a choice mechanism, and a class $\mathcal{G}$ of symmetric two player games for simplicity.
+Definition \ref{def:expected evolutionary payoff} gives the expected evolutionary payoff of choice mechanism $\kappa(\tau, e)$ against choice mechanism $\kappa(\tau', e')$ in game $G \in \mathcal{G}$.
 
-Imagine a huge, possibly infinite society of agents, each of which carries a choice mechanism
-from $C$. For simplicity, let's assume that $C$ is finite and that $\mathcal{G}$ is
-a finite set of two-player strategic games. The expected fitness $EF(c_1)$ of an agent with
-choice principle $c_1$ is determined by the probability $P(c_2)$ of meeting an agent with
-choice principle $c_2$, which we will assume is the frequency of $c_2$ in the population, the
-probability $P(G)$ of playing game $G \in \mathcal{G}$ and the concrete payoff
-$\pi^G(c_1 \mid c_2)$ that the player with $c_1$ obtains when playing against a player with
-$c_2$ in $G$, which is uniquely defined by the associated action selection rules:
-\begin{align*}
-  EF(c_1) = \sum_{c_2 \in C} P(c_2) \cdot \sum_{G \in \mathcal{G}}  P(G) \cdot \pi^G(c_1 \mid c_2)\,.
-\end{align*}
-Similarly, the expected fitness of a $c_1$-agent, when playing against a $c_2$ agent is:
+\begin{definition} \label{def:expected evolutionary payoff}
+
+Given a game $G \in \mathcal{G}$, a choice mechanism $\kappa(\tau, e)$, and a choice mechanism $\kappa(\tau', e')$, we define $$\pi^G(\kappa(\tau(G), e),\kappa(\tau'(G), e')):= \sum_{a_i \in \kappa(\tau(G), e)} \sum_{a_j \in \kappa(\tau'(G), e')} \pi^G(a_i , a_j) \cdot \frac{1}{|\kappa(\tau(G), e)|} \cdot \frac{1}{|\kappa(\tau'(G), e')|}.$$
+
+\end{definition}
+
+
+
+Then the expected fitness $EF(\kappa(\tau, e))$ of an agent with
+choice mechanism $\kappa(\tau, e)$ is determined by the probability $P((\tau',e'))$ of meeting an agent with
+choice mechanism $\kappa(\tau',e')$, which we will assume is the frequency of $(\tau',e')$ in the population, the
+probability $P(G)$ of playing game $G \in \mathcal{G}$ and the evolutionary payoff
+$\pi^G(\kappa(\tau, e),\kappa(\tau', e'))$:
+
 \begin{align}
-  \label{eq:ExpectedPayoffs}
-  EF(c_1 \mid c_2) = \sum_{G \in \mathcal{G}}  P(G) \cdot \pi^G(c_1 \mid c_2)\,.
+\label{eq:EF}
+  EF(\kappa(\tau, e)) := \sum_{G \in \mathcal{G}} \sum_{(\tau',e') \in T \times E} P(G) \cdot P((\tau',e')) \cdot \pi^G (\kappa(\tau(G), e),\kappa(\tau'(G), e'))\,.
 \end{align}
 
-Notice that expected fitness of a choice mechanism is defined entirely in parallel to the
-expected fitness of an act in a fixed stage game, except that where the latter has a simple
+\noindent Similarly, the expected fitness of a choice mechanism $\kappa(\tau, e)$, when playing against another choice mechanism $\kappa(\tau', e')$ is:
+\begin{align}
+  \label{eq:pairwiseEF}
+  EF(\kappa(\tau, e),\kappa(\tau', e')) := \sum_{G \in \mathcal{G}}  P(G) \cdot \pi^G(\kappa(\tau(G), e),\kappa(\tau'(G), e'))\,.
+\end{align}
+
+Notice that the expected fitness of a choice mechanism is defined entirely in parallel to the
+expected payoff of an act in a fixed stage game (Definition \ref{def:expected evolutionary payoff}), except that where the latter has a simple
 payoff function, the former has an expectation over payoffs in a statistically rich
 environment. That means that we can think of evolutionary competition between choice mechanisms
 in terms of payoffs defined by a \emph{meta-game} over $\mathcal{G}$ whose ``acts'' are choice
-mechanisms and whose ``payoffs'' are the expected payoffs in
-Equation~(\ref{eq:ExpectedPayoffs}).\footnote{Allowing games in $\mathcal{G}$ that have
-  different numbers of players makes matters more complicated, but we neglect these
-  complications here, because we focus entirely on 2-player games.}
+mechanisms and whose ``payoffs'' are the expected evolutionary payoffs of
+Equation~(\ref{eq:pairwiseEF}).\footnote{Allowing games in $\mathcal{G}$ with different numbers of players makes matters formally, but not conceptually, more complicated. In the following we will focus entirely on two player games, hence we can neglect further complications for the moment.}
+
+
+
+\bigskip
+\bigskip
+
+\todo[inline]{PAOLO rewrites up to here!!! }
+
+\bigskip
+\bigskip
+
 
 
 \section{The basic model}
