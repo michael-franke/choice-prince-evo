@@ -1,0 +1,127 @@
+\documentclass{article}
+
+\usepackage[]{mypackages}
+
+\usepackage{mycommands}
+
+\usepackage{verbatim}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5pt}
+
+\usetikzlibrary{positioning,arrows,calc,fit}
+
+% \usepackage{pgfplots}
+
+\begin{document}
+
+
+
+\begin{tikzpicture}[node distance = 2.5cm]
+
+  \begin{scope}
+
+    \node[] (environment) {};
+
+    \node[rounded corners, draw, rectangle, minimum height = 0.75cm, text width=6cm, text
+    centered, below of = environment, node distance = 2cm] (situation)
+    {\textbf{decision situation} $d$};
+
+    \node[rounded corners, draw, rectangle, minimum height = 0.75cm, text width=6cm, text
+    centered, below of = situation] (representation) 
+    {\textbf{subjective representation} $s$ of $d$ \\ \textcolor{gray}{[preference, beliefs, \dots]}};
+
+    \node[rounded corners, draw, rectangle, minimum height = 0.75cm, text width=6cm, text centered, below of = representation] (action)
+    {\textbf{action choice} $a$ based on $s$};
+
+    \node[rounded corners, draw, rectangle, minimum height = 0.75cm, text width=6cm, text
+    centered, below of = action] (payoff) {\textbf{payoff} for $a$ in $d$};
+
+    \draw[->, thick]
+    ([xshift=-1.75cm]environment.center)--([xshift=-1.75cm,yshift=0.5cm]situation.center)
+    node[midway, right] {environment presents random $d$};
+
+    \draw[->, thick]
+    ([xshift=-1.75cm,yshift=-0.5cm]situation.center)--([xshift=-1.75cm,yshift=0.55cm]representation.center)
+    node[midway, right] {subj.~representation scheme $\gamma$};
+
+    \draw[->, thick]
+    ([xshift=-1.75cm,yshift=-0.55cm]representation.center)--([xshift=-1.75cm,yshift=0.5cm]action.center)
+    node[midway, right] {action selection function $\kappa$};
+
+    \draw[->, thick]
+    ([xshift=-1.75cm,yshift=-0.55cm]action.center)--([xshift=-1.75cm,yshift=0.5cm]payoff.center)
+    node[midway, right] {};
+
+    \node[minimum height = 0.75cm, text width=6cm, text
+    centered, right of = representation, xshift = 2cm, rotate = 90] (mechanism) {choice mechanism};
+
+    \begin{pgfonlayer}{background}
+             \node [rounded corners,
+       very thick,draw=black!40,fit={($(situation.south)+(0,+30pt)$) 
+                                 ($(mechanism.west)+(+5pt,0)$) 
+                                 ($(action.north)+(0,-30pt)$) 
+                                 ($(representation.west)+(-7pt,0)$)}] (box) {};
+    \end{pgfonlayer}
+
+  \end{scope}
+
+
+
+\end{tikzpicture}
+
+
+\begin{tikzpicture}[]
+
+  \begin{scope}
+
+    \node (tpic) at ( -5,0)  {\includegraphics[width=4cm]{s1_vx.png}};
+
+    \node (cpic) at (0,0)    {\includegraphics[width=4cm]{s1_v2.png}};
+
+    \node (dpic) at ( 5,0)   {\includegraphics[width=4cm]{s2_v1.png}};
+
+    \node (tlabel) at (-5, -4) {\Large{\mystate{t}}};
+    
+    \node (clabel) at (  0,-4) {\Large{$\mystate{c}^*$}};
+    
+    \node (dlabel) at (5,-4)   {\Large{\mystate{d}}};
+
+    \node (mainlabel) at (0, -5.3) {\Large{Possible Referents}};
+
+    \begin{pgfonlayer}{background}
+       \node [thick,draw=black!40,fit=(tpic) (dlabel) (mainlabel) (dpic)] {};
+    \end{pgfonlayer}
+  \end{scope}
+
+\begin{scope}[xshift = 7.5cm, yshift = -2.8cm, x=1.05cm, y = 1.1cm]
+
+    \node (tpic) at  (0,3)    {\includegraphics[height=1.4cm]{v2.png}};
+    \node (d1pic) at (3,3)    {\includegraphics[height=1.4cm]{s1.png}};
+    \node (cpic) at  (0,0)    {\includegraphics[height=1.4cm]{s2.png}};
+    \node (d2pic) at (3,0)    {\includegraphics[height=1.4cm]{v1.png}};
+
+    \node (tlabel) at  (0,2)  {\Large{\mymessg{t}}};
+    \node (d1label) at (3,2)  {\Large{$\mymessg{c}^*$}};
+    \node (clabel) at  (0,-1) {\Large{\mymessg{d1}}};
+    \node (d2label) at (3,-1) {\Large{\mymessg{d2}}};
+
+    \node (mainlabel) at (1.5, 4.3) {\Large{Message Options}};
+
+    \begin{pgfonlayer}{background}
+       \node [thick,draw=black!40,fit=(tpic) (d2label) (mainlabel) (d2pic)] {};
+    \end{pgfonlayer}
+  \end{scope}
+
+
+\end{tikzpicture}
+
+
+
+
+
+
+
+
+\end{document}
+
