@@ -25,7 +25,7 @@
 
     \node[rounded corners, draw, rectangle, minimum height = 0.75cm, text width=6cm, text
     centered, below of = environment, node distance = 2cm] (situation)
-    {\textbf{decision situation} $d$};
+    {environment produces random \\ \textbf{decision situation} $d$};
 
     \node[rounded corners, draw, rectangle, minimum height = 0.75cm, text width=6cm, text
     centered, below of = situation] (representation) 
@@ -36,10 +36,6 @@
 
     \node[rounded corners, draw, rectangle, minimum height = 0.75cm, text width=6cm, text
     centered, below of = action] (payoff) {\textbf{payoff} for $a$ in $d$};
-
-    \draw[->, thick]
-    ([xshift=-1.75cm]environment.center)--([xshift=-1.75cm,yshift=0.5cm]situation.center)
-    node[midway, right] {environment presents random $d$};
 
     \draw[->, thick]
     ([xshift=-1.75cm,yshift=-0.5cm]situation.center)--([xshift=-1.75cm,yshift=0.55cm]representation.center)
@@ -57,11 +53,12 @@
     centered, right of = representation, xshift = 2cm, rotate = 90] (mechanism) {choice mechanism};
 
     \begin{pgfonlayer}{background}
-             \node [rounded corners,
-       very thick,draw=black!40,fit={($(situation.south)+(0,+30pt)$) 
-                                 ($(mechanism.west)+(+5pt,0)$) 
-                                 ($(action.north)+(0,-30pt)$) 
-                                 ($(representation.west)+(-7pt,0)$)}] (box) {};
+             \node [rounded corners, dashed,
+       very thick,draw=black!40,fit={($(situation.south)+(0,-10pt)$) 
+                                     ($(mechanism.west)+(+5pt,+42pt)$) 
+                                     % ($(action.north)+(0,+10pt)$) 
+                                     ($(representation.west)+(-7pt,0)$)
+                                   }] (box) {};
     \end{pgfonlayer}
 
   \end{scope}
