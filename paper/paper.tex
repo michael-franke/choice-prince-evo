@@ -541,38 +541,26 @@ concrete action choice.
 % situation are evolutionarily successful.
 
 
-Formally, given a class $\mathcal{G} $ of strategic games, the subjective representation scheme
+Formally, given a class of strategic games $\mathcal{G}$, the subjective representation scheme
 for agent $i$ is a function $\gamma_i: \mathcal{G} \rightarrow \Theta \times E$ that gives a
 subjective preference $\theta \in \Theta$ and an epistemic state $e \in E$ for any game
-$G \in \mathcal{G}$. A subjective preference $\theta$ for game $G$ and agent $i$ is just a
-utility function for $G$. This can but need not be different from the actual payoff function of
-$G$, which we interpret as the objective evolutionary fitness. An epistemic state $e$ for game
-$G$ is some specification of a player's uncertainty about the co-players' behavior. Finally, an
-action selection function for agent $i$ is a function
+$G \in \mathcal{G}$. A subjective preference $\theta$ for $G$ and $i$ is just a utility
+function for $G$. This can but need not be different from the actual payoff function of $G$. An
+epistemic state $e$ for $G$ and $i$ is some specification of $i$'s uncertainty about the
+co-players' behavior. Finally, an action selection function for agent $i$ is a function
 $\kappa_i: \Theta \times E \rightarrow \pow{A_i} $, that associates any subjective
-representation of the game $ (\theta,e) \in \Theta \times E$ with a set of prescribed actions
+representation $\gamma_i(G) = (\theta,e)$ of $G$ with a set of prescribed actions
 for $i$ in $G$ under $i$'s subjective representation of $G$. We drop the index $i$ for
 readability in the following.
 
-\bigskip
-
-To keep matters simple the focus is on \emph{uniform}
-and \emph{general} ways of forming preference and beliefs consistently across decision
-situations.
-
-\bigskip
-
-We focus on two (\textit{subjective}) \emph{preference types} and two \emph{belief types}. We
-view a preference type as a function $\tau: \mathcal{G} \rightarrow \Theta$, and a belief type
-as a general disposition to form beliefs about the co-player’s behavior. The two possible
-dispositions that we take account of are precise probabilistic belief and imprecise belief, as
-we will explain in the next section. Since we are most interested here in studying whether
-evolutionary pressure could support non-veridical subjective preferences, the two preference
-types that we consider are: the veridical type $\tau^\pi$, who uses the actual payoff function
-$\pi$ of the actual game $G$, and the regret type $\tau^{reg}$, who looks at the regret
-transformation of the actual game $G$. Finally, the action selection function $\kappa$ that we
-use in this paper is \textit{maxmin expected utility} \citep{gilsch89}, for reasons that will be clear
-and justified in the following two sections.
+To keep matters simple the focus is on \emph{uniform} and \emph{general} ways of forming
+preferences and beliefs consistently across decision situations. We consider two
+\emph{preference types} and two \emph{belief types}: subjective preferences either coincide
+with the actual, true payoffs or are given by the regret transformation of the actual game;
+beliefs are either precise probabilistic beliefs modelled by a single probability distribution,
+or they are imprecise probabilistic beliefs modelled by a set of probability distributions. The
+action selection function $\kappa$ is fixed to \textit{maxmin expected utility}
+\citep{gilsch89}, for reasons explained in the following.
 
 % It turns out that whether $\tau^{reg}$ can have a fitness advantage over $\tau^\pi$ depends on
 % the general \emph{kind} of (probabilistic) beliefs that DM's form about the opponent's
