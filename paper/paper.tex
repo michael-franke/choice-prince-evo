@@ -85,12 +85,12 @@
 
 Evolutionary game theory has become an established philosophical tool for probing into
 conceptual issues whose complexity requires mathematical modelling at a high level of
-abstraction.  Abstraction entails simplifying assumptions. Evolutionary game models heavily
-simplify reality in many ways as well. Two simplifications relevant here are that the
-environment is represented as a fixed, closed and immutable \emph{stage game} and that the
-focus of evolutionary selection is behavior for this stage game alone. In contrast, some argue
-for studying instead the evolutionary competition of general \emph{choice mechanisms} in a rich
-and variable environment
+abstraction.  Abstraction entails simplifying assumptions. Evolutionary game models frequently
+simplify reality in two ways that are relevant for present purposes. Firstly, the environment
+is represented as a fixed, closed and immutable \emph{stage game}; secondly, the focus of
+evolutionary selection is behavior for this stage game alone. In contrast, some argue for
+studying instead the evolutionary competition of general \emph{choice mechanisms} in a rich and
+variable environment
 \citep[e.g.,][]{FawcettHamblin2013:Exposing-the-be,McNamara2013:Towards-a-Riche}. To show that
 there is no tension here, this paper introduces a method for reconciling established notions of
 evolutionary game theory with evolutionary selection of choice mechanisms in variable
@@ -98,18 +98,19 @@ environments \citep[see related work
 by][]{ZollmanSmead2010:Plasticity-and-,SmeadZollman2013:The-Stability-o}.\todo{More references
   Harley 1981!!!, O Conor \dots}
 
-If agents deal with a rich and varied environment, they face many different choice
-situations. A crucial part of any choice mechanism is a \emph{subjective representation} of the
-choice situation, in particular a manner of forming preferences and beliefs about a possibly
-uncertain world. This paper asks: which preference and belief representations are ecologically
-valuable (i.e., lead to high fitness)? The evolution of preferences has been subject of recent
-interest in theoretical economics \citep[e.g.,][]{algweib13,DekElyYlan07,RobSam11}. The
-particular contribution of this paper is to provide a case, spelled out formally, that
-questions about the evolution of preferences cannot be separated from questions about the
-evolution of beliefs. As a point in case, we demonstrate that if agents have imprecise
-probabilistic beliefs \citep[e.g.][]{gardsah82,levi74,walley96}, preference representations in
-terms of regret that deviate from the
-true, objective fitness that evolutionary selection operates on can be selected for.
+If agents deal with a rich and variable environment, they face many different choice
+situations. A choice mechanism associates decision situations with action choices. A crucial
+part of any choice mechanism is a \emph{subjective representation} of the decision situation,
+in particular a manner of forming preferences and beliefs about a possibly uncertain world (see
+Figure~\ref{fig:ChoiceMechanism} below). This paper asks: which preference and belief
+representations are ecologically valuable (i.e., lead to high fitness)? The evolution of
+preferences has been subject of recent interest in theoretical economics
+\citep[e.g.,][]{algweib13,DekElyYlan07,RobSam11}. The particular contribution of this paper is
+to provide a case, spelled out formally, that questions of preference evolution should take
+variability in belief representation into account as well. As a point in case, we demonstrate
+that if agents have imprecise probabilistic beliefs \citep[e.g.][]{gardsah82,levi74,walley96},
+preference representations in terms of regret that deviate from the true, objective fitness
+that evolutionary selection operates on can be selected for.
 
 % To show this, we study the evolutionary competition of choice mechanisms, or more
 % specifically the competition of subjective representations of choice situations, in a
@@ -187,18 +188,20 @@ consistent with profit maximization will survive in the long run \myalert{(Alchi
 An alternative view on rationality of choice is \emph{adaptationism}
 \citep[e.g.,][]{Anderson1991:Is-human-cognit,ChaterOaksford2000:The-Rational-An,HagenChater2012:Decision-Making}. \todo{more
   references} Adaptationism aims to explain choice behavior by appeal to evolutionary
-considerations: DMs have acquired choice mechanisms that outperform other manners of choice
-making in a rich and variable environment. A choice mechanism could be a set of distinct
-heuristics (the DM's \emph{adaptive toolbox}) that have little in common
+considerations: DMs have acquired choice mechanisms that have proved to be adpative in a rich
+and variable environment. A choice mechanism could be a set of distinct heuristics (the DM's
+\emph{adaptive toolbox}) that have little in common
 \citep[e.g.,][]{TverskyKahnemann1981:The-Framing-of-,GigerenzerGoldstein1996:Reasoning-the-F,ScheibehenneRieskamp2013:Testing-the-Ada}. But
 to relate to the philosophical debate about the nature of rational choice, we here suggest to
 think of a choice mechanism as a map from choice situations to action choices that contains an
 explicit level of subjective representation of a decision situation (see
-Figure~\ref{fig:ChoiceMechanism}).
+Figure~\ref{fig:ChoiceMechanism}). We are most interested in the question which subjective
+representation schemes, i.e., general ways of forming preferences and beliefs, are better than
+others. 
 
 \begin{figure}
   \centering
-  \begin{tikzpicture}[node distance = 2.5cm]
+  \begin{tikzpicture}[node distance = 2.25cm]
 
   \begin{scope}
 
@@ -212,11 +215,12 @@ Figure~\ref{fig:ChoiceMechanism}).
     centered, below of = situation] (representation) 
     {\textbf{subjective representation} $s$ of $d$ \\ \textcolor{gray}{[preference, beliefs, \dots]}};
 
-    \node[rounded corners, draw, rectangle, minimum height = 0.75cm, text width=6cm, text centered, below of = representation] (action)
+    \node[rounded corners, draw, rectangle, minimum height = 0.75cm, text width=6cm, text
+    centered, below of = representation] (action)
     {\textbf{action choice} $a$ based on $s$};
 
     \node[rounded corners, draw, rectangle, minimum height = 0.75cm, text width=6cm, text
-    centered, below of = action] (payoff) {\textbf{payoff} for $a$ in $d$};
+    centered, below of = action,node distance = 1.5cm] (payoff) {\textbf{payoff} for $a$ in $d$};
 
     \draw[->, thick]
     ([xshift=-1.75cm,yshift=-0.5cm]situation.center)--([xshift=-1.75cm,yshift=0.55cm]representation.center)
@@ -236,7 +240,7 @@ Figure~\ref{fig:ChoiceMechanism}).
     \begin{pgfonlayer}{background}
              \node [rounded corners, dashed,
        very thick,draw=black!40,fit={($(situation.south)+(0,-10pt)$) 
-                                     ($(mechanism.west)+(+5pt,+42pt)$) 
+                                     ($(mechanism.west)+(+5pt,+50pt)$) 
                                      % ($(action.north)+(0,+10pt)$) 
                                      ($(representation.west)+(-7pt,0)$)
                                    }] (box) {};
@@ -244,10 +248,45 @@ Figure~\ref{fig:ChoiceMechanism}).
 
   \end{scope}
 
+
+
 \end{tikzpicture}
-  \caption{bla bla bla}
+  \caption{Schematic representation of action choice. A choice mechanism maps decision
+    situation $d$ to action choice $a$ by way of representing $d$ in terms of subjective
+    preferences and subjective beliefs.}
   \label{fig:ChoiceMechanism}
 \end{figure}
+
+
+Fitness of a subjective representation scheme is measured in terms of the fitness of a
+choice mechanism that contains it, all else equal. Fitness of a choice mechanism $c$ is the
+expected payoff of $c$ over arbitrary decision situations $d$:
+\begin{align*}
+  F(c) = \int P(d) \  \utils(c,d) \text{ d} d \,,
+\end{align*}
+where $P(d)$ is the probability (density) of $d$ occurring, i.e., our model of the statistical
+properties of a rich and variable environment, and $\Utils(c,d)$ i the payoff of the
+act selected by $c$ in $d$. 
+
+The same logic also applies to situations of social decision making. A game $g$ is also a
+decision situation, albeit a more complex one. A choice mechanism $c$ maps $g$ onto an action
+choice in $g$. The fitness of $c$ is then:
+\begin{align*}
+  F(c) = \int \int P(g) \  P(c') \  \utils(c,c',g) \text{ d} g \,,
+\end{align*}
+where $P(g)$ is the probability (density) of game $g$, $P(c')$ is the probability of
+encountering a co-player who uses choice mechanism $c'$ and $\utils(c,c',g)$ is the payoff for
+a $c$-player in $g$ against the $c'$-player, given by the payoff in $g$ of the actions that $c$
+and $c'$ select in $g$. For the most part, we will focus on the more complex case of social
+decision making here. Results about solitary decision making follow almost directly.
+
+\begin{itemize}
+\item meta-games
+\end{itemize}
+
+\bigskip
+
+
 
 \bigskip
 
@@ -550,7 +589,7 @@ and justified in the following two sections.
 % belief.
 
 % The following subsection describes what these belief types are and how a single action
-% selection function (maxmin expected utility) gives rise to an intersting parallel with
+% selection function (maxmopin expected utility) gives rise to an intersting parallel with
 % classical choice rules.
 
 \subsection{Imprecise probabilistic beliefs}
