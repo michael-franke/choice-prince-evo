@@ -195,9 +195,9 @@ and variable environment. A choice mechanism could be a set of distinct heuristi
 to relate to the philosophical debate about the nature of rational choice, we here suggest to
 think of a choice mechanism as a map from choice situations to action choices that contains an
 explicit level of subjective representation of a decision situation (see
-Figure~\ref{fig:ChoiceMechanism}). We are most interested in the question which subjective
-representation schemes, i.e., general ways of forming preferences and beliefs, are better than
-others. 
+Figure~\ref{fig:ChoiceMechanism}). We are most interested in the question which
+\emph{subjective representation schemes}, i.e., general ways of forming preferences and
+beliefs, are better than others from an evolutionary point of view.
 
 \begin{figure}
   \centering
@@ -258,30 +258,58 @@ others.
 \end{figure}
 
 
-Fitness of a subjective representation scheme is measured in terms of the fitness of a
-choice mechanism that contains it, all else equal. Fitness of a choice mechanism $c$ is the
+The fitness of a subjective representation scheme is measured in terms of the fitness of a
+choice mechanism that contains it, all else equal. The fitness of a choice mechanism $c$ is the
 expected payoff of $c$ over arbitrary decision situations $d$:
-\begin{align*}
+\begin{align}
+  \label{eq:FittnessChoiceMechSolitary}
   F(c) = \int P(d) \  \utils(c,d) \text{ d} d \,,
-\end{align*}
-where $P(d)$ is the probability (density) of $d$ occurring, i.e., our model of the statistical
-properties of a rich and variable environment, and $\Utils(c,d)$ i the payoff of the
-act selected by $c$ in $d$. 
+\end{align}
+where $P(d)$ is the probability (density) of $d$ occurring and $\Utils(c,d)$ i the payoff of
+the act selected by $c$ in $d$. Probability measure $P(d)$ is our model of the statistical
+properties of a rich and variable environment.
 
 The same logic also applies to situations of social decision making. A game $g$ is also a
 decision situation, albeit a more complex one. A choice mechanism $c$ maps $g$ onto an action
-choice in $g$. The fitness of $c$ is then:
-\begin{align*}
+choice in $g$. The fitness of $c$ is then:\footnote{We assume for simplicity of exposition that
+  all games with positive occurrence probability are two player games.}
+\begin{align}
+  \label{eq:FittnessChoiceMechGame}
   F(c) = \int \int P(g) \  P(c') \  \utils(c,c',g) \text{ d} g \,,
-\end{align*}
+\end{align}
 where $P(g)$ is the probability (density) of game $g$, $P(c')$ is the probability of
 encountering a co-player who uses choice mechanism $c'$ and $\utils(c,c',g)$ is the payoff for
 a $c$-player in $g$ against the $c'$-player, given by the payoff in $g$ of the actions that $c$
 and $c'$ select in $g$. For the most part, we will focus on the more complex case of social
-decision making here. Results about solitary decision making follow almost directly.
+decision making here. Results about solitary decision making follow from parallel arguments
+(see Section~\ref{sec:extensions}).
+
+\emph{Meta games} are abstract models for the evolutionary competition between choice
+mechanisms in social decision making contexts. The expected payoff for a $c$-player of a random
+encounter with a $c'$-player is the average of payoffs obtained in a random game $g$ weighted
+by $g$'s occurrence probability:
+\begin{align}
+  F(c, c') = \int P(g) \  \utils(c,c',g) \text{ d} g \,.
+\end{align}
+A meta game is a strategic game whose action set is the set of competing choice mechanism and
+whose payoff function is $F(c,c')$ from above.
+
+
+\begin{definition}[Meta game]
+  \label{def:MetaGame}
+  Let $C$ be a set of choice mechanisms and let $P(g)$ give the occurrence probability of game
+  $g$ in the environment. The meta game for this case is one-population evolutionary game with
+  strategies $C$ and payoff function $\pi \mycolon C \times C \rightarrow \mathbb{R}$ such that
+  $\pi(c,c') = F(c,c') = \int P(g) \ \utils(c,c',g) \text{ d} g$.
+\end{definition}
+
+
+\bigskip
 
 \begin{itemize}
 \item meta-games
+\item general schemes (for regularity)
+\item which schemes (for simplicity, yet interesting argument)
 \end{itemize}
 
 \bigskip
