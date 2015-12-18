@@ -1,9 +1,15 @@
 require('gtools') # for dirichlet distribution
+require('ggplot2')
 
 # get utilities
-# load(file = 'buffered_meta_game_2x2.RDATA')
-load(file = 'buffered_meta_game_10x10.RDATA')
-U = means_total
+load(file = 'buffered_meta_game_2x2.RDATA')
+# load(file = 'buffered_meta_game_10x10.RDATA')
+
+# which strategies:
+strats = c(1,2,5,6)
+
+# U = means_total
+U = means_total[strats, strats]
 
 # parameters
 e = 0.001 # epsilon mutation probability
@@ -17,14 +23,15 @@ getMutationMatrix = function(e){
               e, e^2, e^2, e^2, x, e, e, e,
               e^2, e, e^2, e^2, e, x, e, e,
               e^2, e^2, e, e^2, e, e, x, e,
-              e^2, e^2, e^2, e, e, e, e, x), nrow=8, byrow = T)
+              e^2, e^2, e^2, e, e, e, e, x), nrow=8, byrow = T)[strats, strats]
   colnames(m) = colnames(U)
   rownames(m) = rownames(U)
   return(m)
 }
 
 # initial population
-p = rdirichlet(1, rep(1,8))[1,]
+p = rdirichlet(1, rep(1,length(strats)))[1,]
+
 show(p)
 
 
