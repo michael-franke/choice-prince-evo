@@ -109,8 +109,8 @@ preferences has been subject of recent interest in theoretical economics
 to provide a case, spelled out formally, that questions of preference evolution should take
 variability in belief representation into account as well. As a point in case, we demonstrate
 that if agents have imprecise probabilistic beliefs \citep[e.g.][]{gardsah82,levi74,walley96},
-preference representations in terms of regret that deviate from the true, objective fitness
-that evolutionary selection operates on can be selected for.
+preference representations in terms of regret can be selected for, even though they may deviate
+from the true, objective fitness that evolutionary selection operates on.
 
 % To show this, we study the evolutionary competition of choice mechanisms, or more
 % specifically the competition of subjective representations of choice situations, in a
@@ -265,7 +265,7 @@ expected payoff of $c$ over arbitrary decision situations $d$:
   \label{eq:FittnessChoiceMechSolitary}
   F(c) = \int P(d) \  \utils_d(c) \text{ d} d \,,
 \end{align}
-where $P(d)$ is the probability (density) of $d$ occurring and $\Utils_d(c)$ i the payoff of
+where $P(d)$ is the probability (density) of $d$ occurring and $\Utils_d(c)$ is the payoff of
 the act selected by $c$ in $d$. Probability measure $P(d)$ is our model of the statistical
 properties of a rich and variable environment.
 
@@ -298,7 +298,7 @@ by $g$'s occurrence probability:
   $g$ in the environment. The meta game that captures selection of choice mechanisms in this
   environment is the one-population evolutionary game with strategies $C$ and payoff function
   $\pi \mycolon C \times C \rightarrow \mathbb{R}$ such that
-  $\pi(c,c') = F(c,c')$.
+  $\pi(c,c') = F(c,c') = \int P(g) \  \utils_g(c,c') \text{ d} g$.
 \end{definition}
 
 Standard notions of evolutionary game theory can be applied to meta games as well. A choice
@@ -311,77 +311,105 @@ applied to meta games. We will later turn towards the replicator dynamic
 \citep[e.g.][]{Nowak2006:Evolutionary-Dy}.\todo{footnote with caveat about agent-level
   processes}
 
-We submit that meta games are a useful tool for structuring and sharpening conceptual inquiry
-in a domain, evolutionary justifications, that is notorious for its fuzziness and
-elusiveness. To show how this approach can be applied to benefit conceptual debate, we consider
-the evolution of preference. Concretely, we here pit two different ways of representing
-preferences against each other: (i) veridical representations that correctly reflect objective
-fitness, and (ii) non-veridical subjective preferences in terms of regret
-\citep[e.g.,][]{Savage1951:The-theory-of-s,}. We show that subjective, non-veridical preference
-representations based on a notion of regret can be adaptive and even outperform objective,
-veridical representations of the actual, true fitness, when agents, at least on occasion, hold
-\emph{imprecise probabilistic beliefs} \citep[e.g.,][]{gilsch89,levi74,gardsah82} and make
-decisions based on a security choice rule (here: the maxmin rule applied to expected
-utility). 
 
-This case study strips the generality of a meta game approach down to a perspicuous comparison
-between only four choice mechanisms: the cross-product of two different preference
-representations (veridical vs.~regret) and two different belief representations (precise
-vs.~imprecise). The following section is dedicated to introduce and justify this exclusive
-selection. 
 
 
 \section{Choice mechanisms: preferences, beliefs and action choice}
 \label{sec:basic-notions}
 
-\subsection{Classical rules for rational choice} 
+We submit that meta games are a useful tool for structuring and sharpening conceptual inquiry
+in a domain that is notorious for its fuzziness and elusiveness. To show how this approach can
+be applied to the benefit of conceptual debate, we consider the evolution of preference
+\citep[e.g.,][]{algweib13,DekElyYlan07,RobSam11}. Concretely, we here pit two different ways of
+representing preferences against each other: (i) veridical representations that correctly
+reflect objective fitness, and (ii) non-veridical subjective preferences in terms of regret
+\citep[e.g.,][]{Savage1951:The-theory-of-s,}. We show that subjective, non-veridical preference
+representations based on a notion of regret can be adaptive and even outperform objective,
+veridical representations of the actual, true fitness, when agents, at least on occasion, hold
+\emph{imprecise probabilistic beliefs} \citep[e.g.,][]{gilsch89,levi74,gardsah82} and make
+decisions based on a security choice rule (here: the maxmin rule applied to expected
+utility). This case study strips the generality of a meta game approach down to a perspicuous
+comparison between only four choice mechanisms, summarized in Table~\ref{tab:CMs}: the
+cross-product of two different preference representations (veridical vs.~regret) and two
+different belief representations (precise vs.~imprecise). 
+
+\begin{table}[t]
+  \centering
+  \begin{tabular}{cccc}
+    \multicolumn{2}{c}{subjective representation} & action selection & corresponding choice
+    rule \\  \cmidrule(r){1-2}
+    preference type & belief type  \\ \midrule
+    objective fitness & precise & maxmin EU &  Laplace \\
+    objective fitness & precise & maxmin EU & maxmin \\ 
+    regret & imprecise & maxmin EU & Laplace \\
+    regret & imprecise & maxmin EU & regret minimization \\ 
+  \end{tabular}
+  \caption{Overview relevant choice mechanisms and the corresponding (behaviorally equivalent)
+    classic choice rules. All notions are explained in the main text.}
+  \label{tab:CMs}
+\end{table}
+
+This exclusive selection of choice mechanisms is motivated by a number of
+considerations. Firstly, the set of conceivable choice mechanisms is vast. Most of that
+conceivable vastness is utter nonsense. Some selection of plausible candidates is required in
+any case. Secondly, a severe restriction to only a small number of suitable candidates will
+help demonstrate more distinctly how a meta game approach may help structure philosophical
+inquiry. This is our main goal. Thirdly, our case study adds to the recent literature on the
+evolution of preferences by clearly demonstrating the possibly non-trivial interaction between
+preference and belief representations, all else equal. This is our secondary goal. Finally, the
+four choice mechanism that we look at here, although phrased in terms of preference and belief
+representations, map onto well-known classic proposals for rational choice (see
+Table~\ref{tab:CMs}). In other words, there is also an argument by historical relevance for our
+selection. To see this, we first recapitulate the relevant classics ---to have a handy label,
+we call them \emph{classic rules}--- and then show how they relate to our notion of choice
+mechanism.
+
+\subsection{Classic rules for rational choice} 
 \label{sec:choice-rules}
 
-The classical literature on rational choice contains a number of proposals for which acts a
-player \emph{should} choose if she is rational. Maximization of expected utilities, as
+The classic literature on rational choice contains a number of proposals for which acts a
+player should choose if she is rational. Maximization of expected utilities, as
 given in Definition~\ref{def:rationality}, is only one of them. Here, we consider three others:
 (i) maxmin, (ii) Laplace's rule and (iii) regret minimization. All of these apply to games and
 solitary decision situations. We focus on games, but definitions carry over straightforwardly.
 
 A strategic game is a tuple $ G=\tuple{ N, (A_i , \pi_i)_{i \in N} }$ with $N$ a finite set of
 players, $A_i$ a finite set of acts and $\pi_i$ a payoff function for each player $i \in N$.
-For the most part, this paper will focus on symmetric games with two players. A two-player game
-is symmetric if players have the same action set, $A_1 = A_2$, and payoffs are symmetric:
+Part of this paper will focus on symmetric games with two players. A two-player game is
+symmetric if players have the same action set, $A_1 = A_2$, and payoffs are symmetric:
 $\pi_1(a_k, a_j) = \pi_2(a_j, a_k)$ for all $a_j,a_k \in A_1$. An example is given in
 Figure~\ref{coordgame1}. The numbers give the payoff for the player choosing a row act against
 an opponent choosing a column act. Since the game is symmetric, it suffices to give just these
 numbers.
 
 Rational choice from maximization of expected utilities, as given in
-Definition~\ref{def:rationality}, applies to games. To say which acts are rational, it requires
-specifying a belief of the DM. Let $A_{-i} = \bigtimes A_j$ for all $j \neq i$ be the set of
-all \emph{profiles} of acts for all players except $i$. If player $i$ has a belief
+Definition~\ref{def:rationality}, applies to games as follows. To say which acts are rational,
+it requires specifying a belief of the DM. Let $A_{-i} = \bigtimes A_j$ for all $j \neq i$ be
+the set of all \emph{profiles} of acts for all players except $i$. If player $i$ has a belief
 $\mu_i \in \Delta(A_{-i})$ about the behavior of his opponents, he chooses rationally only if
 his choice $a^*_i$ maximizes expected utility
-$\EU(a_i) := \sum_{\act_{-i} \in \Acts_{-i}} \mu_i(\act_{-i}) \myts \pi_i(a_i, a_{-i})$. So
-this requires a probabilistic belief about the opponents' action choices. In the example from
-Figure~\ref{coordgame1}, a rational player would choose act $I$ exactly when he believes that
-his opponent will choose act $I$ with a probability of at least $\nicefrac{2}{3}$.
+$\EU(a_i) := \sum_{\act_{-i} \in \Acts_{-i}} \mu_i(\act_{-i}) \myts \pi_i(a_i, a_{-i})$. For
+the example in Figure~\ref{coordgame1}, a rational player would choose act $I$ exactly when he
+believes that his opponent will choose act $I$ with a probability of at least
+$\nicefrac{2}{3}$.
 
-Perhaps the most well-known choice rule that does not require explicitly stating the DM's
+Perhaps the most well-known classic rule that does not require explicitly stating the DM's
 beliefs is the \emph{maxmin rule}. It tells our agent to choose act $\act^*$ only if it
-maximizes payoffs for all worst case scenarios. For a strategic game with 2 players this can be
-formalized as
-$\act^* \in \argmax_{\myact{i} \in \Acts_i} \min_{\myact{j} \in \Acts_j} \pi_i(\myact{i},
-\myact{j})$.
+maximizes payoffs for all worst case scenarios:
+$\act^* \in \argmax_{\myact{i} \in \Acts_i} \min_{\myact{-i} \in \Acts_{-1}} \pi_i(\myact{i},
+\myact{-1})$.
 For the example in Figure~\ref{coordgame1}, the maximim rule looks at the minima in each row,
 asking: what is the worst possible outcome for each row act? It is $0$ in either
-case. Consequently, the maxmin rule would not favor either act: players choosing by the
-maxmin rule would be indifferent between acts $I$ and $II$.
+case. Consequently, the maxmin rule would not favor either act: players choosing by the maxmin
+rule would be indifferent between acts $I$ and $II$.
 
-Another well-known choice rule is \emph{Laplace's rule} which prescribes to choose $\act^*$ if
-$\act^* \in \argmax_{a \in A} \sum_{a'} \pi(a, a')$. Laplace's rule is equivalent to expected
-utility maximization under a \emph{flat belief} that assigns equal probability to all of the
-opponent's choices. In the coordination game of Figure~\ref{coordgame1}, Laplace's rule selects
-act $II$.\todo{definitions for maxmin and Laplace are for 2 player games only; rest for
-  $n$-players; fix!}
+\emph{Laplace's rule} selects $\act^*$ if
+$\act^* \in \argmax_{\myact{-i} \in \Acts_{-i}} \sum_{\myact{-i}} \pi(\myact{i}, \myact{-i})$.
+Laplace's rule is equivalent to expected utility maximization under a \emph{flat belief} that
+assigns equal probability to all of the opponents' choices. In the coordination game of
+Figure~\ref{coordgame1}, Laplace's rule selects act $II$.
 
-The final choice rule that is relevant for our purposes here is \emph{regret
+The final classic rule that is relevant for our purposes here is \emph{regret
   minimization}. The notion of regret in decision theory dates back at least to the work by
 \citet{Savage1951:The-theory-of-s}, and has later been developed by \citet{bell82}, \citet{fish82} and \citet{loosug82} independently. Lately,
 \citet{HalpernPass2012:Iterated-Regret} showed how the use of regret minimization can give
@@ -507,8 +535,7 @@ Figure~\ref{coordgame1reg}:
 \end{center}
 
 \noindent Acts selected by the maxmin rule for the negative regret transformation of $G$ are
-always exactly the acts selected by regret minimization for the original game $G$.\todo{can we
-  cite a paper that proves this? should we give a proof ourselves?}
+always exactly the acts selected by regret minimization for the original game $G$.
 
 This means that we can think of the maxmin rule and regret minimization as essentially the same
 operation on different subjective representations of preference: while maxmin considers actual
@@ -517,7 +544,7 @@ preferences. As the example of Figure~\ref{coordgame1} shows, different subjecti
 can give rise to different choice prescriptions all else equal. While maxmin is indifferent
 between $I$ and $II$, regret minimization uniquely selects $II$.
 
-In sum, classical proposals for rational choice are normative prescription of action choices
+In sum, classic proposals for rational choice are normative prescription of action choices
 for a rational agent. Such prescriptions may rest on implicit assumptions about what the DM
 believes (e.g., when interpreting Laplace's rule as rational choice under flat beliefs). They may
 also make implicit assumptions about what the DM prefers (e.g., when reconstructing regret
@@ -527,18 +554,20 @@ disentangle and avoid confusion, we turn to choice mechanisms.
 \subsection{Choice mechanisms}
 \label{sec:choice-mechanisms}
 
-A \emph{choice mechanism} is a map from choice situations to action choices that, unlike choice
-rules, contains an explicit level of subjective representation of a decision situation. For our
-purposes, we should think of a choice mechanism as a pair of functions ($\gamma,\kappa$), where
-$\gamma$ is a \emph{subjective representation scheme} and $\kappa$ is an \emph{action selection
-  function} (see Figure~\ref{fig:ChoiceMechanism}). The subjective representation scheme
-$\gamma$ maps a decision situation onto a subjective representation of that decision
-situation. The action selection function $\kappa$ maps such a subjective representation onto a
-concrete action choice. 
+A \emph{choice mechanism} is a map from choice situations to action choices that, unlike the
+classic rules visited above, contains an explicit level of subjective representation of a
+decision situation. Let us think of a choice mechanism as a pair of functions
+($\gamma,\kappa$), where $\gamma$ is a \emph{subjective representation scheme} and $\kappa$ is
+an \emph{action selection function} (see Figure~\ref{fig:ChoiceMechanism}). 
 
-% The crucial bit for our purposes here is the representation function
-% $\gamma$, because we are interested in studying which ways of conceptualizing a decision
-% situation are evolutionarily successful.
+The subjective representation scheme $\gamma_i$ of agent $i$ is a function $\gamma_i$ that
+takes a strategic game $G = \tuple{ N, (A_i , \pi_i)_{i \in N} }$ and maps it onto
+$\gamma_i(G) = (\theta, e_i)$ where
+$\theta \mycolon \bigtimes_{i \in N} A_i \rightarrow \mathbb{R}$ is a (subjective) payoff
+function for agent $i$ suitable for $G$.
+
+$\mathcal{G} \rightarrow \Theta \times E$, where $\mathcal{G}$ is a class of 
+
 
 
 Formally, given a class of strategic games $\mathcal{G}$, the subjective representation scheme
@@ -547,11 +576,16 @@ subjective preference $\theta \in \Theta$ and an epistemic state $e \in E$ for a
 $G \in \mathcal{G}$. A subjective preference $\theta$ for $G$ and $i$ is just a utility
 function for $G$. This can but need not be different from the actual payoff function of $G$. An
 epistemic state $e$ for $G$ and $i$ is some specification of $i$'s uncertainty about the
-co-players' behavior. Finally, an action selection function for agent $i$ is a function
+co-players' behavior. 
+
+\bigskip
+
+The action selection function $\kappa$ maps such a subjective representation onto a concrete
+action choice. An action selection function for agent $i$ is a function
 $\kappa_i: \Theta \times E \rightarrow \pow{A_i} $, that associates any subjective
-representation $\gamma_i(G) = (\theta,e)$ of $G$ with a set of prescribed actions
-for $i$ in $G$ under $i$'s subjective representation of $G$. We drop the index $i$ for
-readability in the following.
+representation $\gamma_i(G) = (\theta,e)$ of $G$ with a set of prescribed actions for $i$ in
+$G$ under $i$'s subjective representation of $G$. We drop the index $i$ for readability in the
+following.
 
 To keep matters simple the focus is on \emph{uniform} and \emph{general} ways of forming
 preferences and beliefs consistently across decision situations. We consider two
@@ -575,7 +609,7 @@ action selection function $\kappa$ is fixed to \textit{maxmin expected utility}
 
 % The following subsection describes what these belief types are and how a single action
 % selection function (maxmopin expected utility) gives rise to an intersting parallel with
-% classical choice rules.
+% classic choice rules.
 
 \subsection{Imprecise probabilistic beliefs}
 \label{sec:impr-prob-beli}
@@ -637,7 +671,7 @@ given by the player's preference type over the set of probabilities given by the
 
 
 
-\subsection{Choice mechanisms \& classical choice rules}
+\subsection{Choice mechanisms \& classic choice rules}
 
 By fixing the action selection component to maxmin expected utility, and allowing two belief and
 two preference types, we regain all the choice rules considered in sectionNN from a more general and unified standpoint, as it is summed up in
@@ -663,18 +697,7 @@ $\kappa(\tau^{reg}, \overline{\mu})$ is the expected regret minimizer (with flat
 Moreover, different subjective preferences and belief types can give rise to identical action predictions,
 either in a restricted class of games, or in general. This is also the case here.
 
-\begin{table}[t]
-  \centering
-  \begin{tabular}{ccc}
-    preference type & belief type & corresponding choice rule \\ \midrule
-    $\tau^\pi$ & $\overline{\mu}$ & Laplace \\
-    $\tau^\pi$ & $\Delta$ & maxmin \\ 
-    $\tau^{reg}$ & $\overline{\mu}$ & Laplace \\
-    $\tau^{reg}$ & $\Delta$ & regret minimization \\ 
-  \end{tabular}
-  \caption{Overview relevant choice mechanisms and the corresponding (behaviorally equivalent) classical choice rule}
-  \label{tab:CMs}
-\end{table}
+
 
 
 \begin{fact} \label{fact:maxEU-minReg} For any strategic game $G$ and any arbitrary
@@ -1871,7 +1894,7 @@ maximization of subjective preferences.]
 
 
 \item We argue that this ``meta-evolutionary'' approach could eventually help explain attested
-  deviations of human decision making from the classical ideal: choice behavior evolved to be
+  deviations of human decision making from the classic ideal: choice behavior evolved to be
   an ``ecologically rational'', near-optimal adaptation to the environment
   \citep{Anderson1990:The-Adaptive-Ch,Anderson1991:Is-human-cognit,GigerenzerGoldstein1996:Reasoning-the-F,ChaterOaksford2000:The-Rational-An}. This
   is inline with recent aspirations to provide an evolutionary rationale for decision making
@@ -1968,7 +1991,7 @@ maximization of subjective preferences.]
   representations of payoffs in terms of regret.
   \begin{itemize}
   \item We argue that this ``meta-evolutionary'' approach could eventually help explain
-    attested deviations of human decision making from the classical ideal: choice behavior
+    attested deviations of human decision making from the classic ideal: choice behavior
     evolved to be an ``ecologically rational'', near-optimal adaptation to the environment
     \citep{Anderson1990:The-Adaptive-Ch,Anderson1991:Is-human-cognit,GigerenzerGoldstein1996:Reasoning-the-F,ChaterOaksford2000:The-Rational-An}. This
     is inline with recent aspirations to provide an evolutionary rationale for decision making
