@@ -555,61 +555,80 @@ disentangle and avoid confusion, we turn to choice mechanisms.
 \label{sec:choice-mechanisms}
 
 A \emph{choice mechanism} is a map from choice situations to action choices that, unlike the
-classic rules visited above, contains an explicit level of subjective representation of a
-decision situation. Let us think of a choice mechanism as a pair of functions
+classic choice rules visited above, contains an explicit level of subjective representation of
+a decision situation. Let us think of a choice mechanism as a pair of functions
 ($\gamma,\kappa$), where $\gamma$ is a \emph{subjective representation scheme} and $\kappa$ is
-an \emph{action selection function} (see Figure~\ref{fig:ChoiceMechanism}). 
+an \emph{action selection function} (see Figure~\ref{fig:ChoiceMechanism}).
 
 The subjective representation scheme $\gamma_i$ of agent $i$ is a function $\gamma_i$ that
 takes a strategic game $G = \tuple{ N, (A_i , \pi_i)_{i \in N} }$ and maps it onto
 $\gamma_i(G) = (\theta, e_i)$ where
-$\theta \mycolon \bigtimes_{i \in N} A_i \rightarrow \mathbb{R}$ is a (subjective) payoff
-function for agent $i$ suitable for $G$.
+$\theta \mycolon \bigtimes_{i \in N} A_i \rightarrow \mathbb{R}$ is payoff function suitable
+for $G$, and $e_i$ is some representation of $i$'s uncertainty about the co-player's
+behavior. We consider two \emph{preference types}: the \emph{objective type} maps each game
+onto its own, true payoff function; The \emph{regret type} maps each game onto its regret
+transformation, as introduced above. We also consider two \emph{belief types}: the
+\emph{precise type} represents uncertainty in a single probability distribution
+$\mu_i \in \Delta(\Acts_{-i})$ about the co-players' behavior; the \emph{imprecise type}
+represents uncertainty as a set of probability distributions $X \subseteq \Delta(\Acts_{-i})$.
+It is convenient to conceptualize precise beliefs as a special case of imprecise beliefs by
+looking at $\mu_i$ as a stand-in for the singleton set $\set{\mu_i}$. More details about
+imprecise probabilities and our initial assumption of ignorance are given in
+Section~\ref{sec:impr-prob-beli} below.
 
-$\mathcal{G} \rightarrow \Theta \times E$, where $\mathcal{G}$ is a class of 
+The only action choice function $\kappa$ that we consider here is \emph{maximinimization of
+  expected (subjective) utilities} (see Section~\ref{sec:impr-prob-beli} for
+motivation).
 
+\begin{definition}[Maximinimization of expected (subjective) utility]
+  \label{def:maxminSEU}
+  Fix a strategic game $G$. Let agent $i$'s subjective representation scheme
+  $\gamma_i(G) = (\theta, e_i)$ be such that $\theta$ is $i$'s subjective payoff function for
+  $G$ and $e_i$ is a (possibly singleton) set of probability distributions in
+  $\Delta(\Acts_{-i})$. Agent $i$'s expected (subjetive) utility for act $\myact{i}$ and
+  $\mu \in e$ is
+  $\EU(\myact{i}, \mu) = \sum_{\myact{-i} \in \Acts_{-i}} \mu(\myact{-i}) \theta(\myact{i},
+  \myact{-i})$.
+  Act $\myact{i}^*$ is selected by maximinimization of expected (subjective) utility iff:
+  $\myact{i}^* \in \arg \max_{\myact{i} \in \Acts_{i}} \min_{\mu \in e} \EU(\myact{i}, \mu)$.
+\end{definition}
 
+Maximinimization under a precise (singleton set) probabilistic belief is just standard
+maximization of expected utilities. Moreover, given the same precise (singleton set)
+probabilistic belief, the choices of objective and regret preference types are exactly the
+same.
 
-Formally, given a class of strategic games $\mathcal{G}$, the subjective representation scheme
-for agent $i$ is a function $\gamma_i: \mathcal{G} \rightarrow \Theta \times E$ that gives a
-subjective preference $\theta \in \Theta$ and an epistemic state $e \in E$ for any game
-$G \in \mathcal{G}$. A subjective preference $\theta$ for $G$ and $i$ is just a utility
-function for $G$. This can but need not be different from the actual payoff function of $G$. An
-epistemic state $e$ for $G$ and $i$ is some specification of $i$'s uncertainty about the
-co-players' behavior. 
+\begin{fact} \label{fact:maxEU-minReg} For any strategic game $G$ and any arbitrary precise
+  (singleton set) probabilistic belief about the opponents' behavior, the acts selected by
+  maximization of expected utility for $G$ are exactly the acts selected by the maximization of
+  expected utility for the negative regret transformation of $G$
+  \citep[e.g.,][]{HalpernPass2012:Iterated-Regret}. This also holds for solitary decision
+  problems.
+\end{fact}
 
-\bigskip
+This means that as far as behavior is concerned, regret types cannot be distinguished from
+objective types, as long as both hold precise beliefs. This will be central in understanding
+later results: under precise beliefs evolution will not favor either preference type over the
+other. On the other hand, if paired with imprecise beliefs, different behavioral predictions
+arise. However, in the special case of $2 \times 2$ symmetric games, another noteworthy general
+result holds.
 
-The action selection function $\kappa$ maps such a subjective representation onto a concrete
-action choice. An action selection function for agent $i$ is a function
-$\kappa_i: \Theta \times E \rightarrow \pow{A_i} $, that associates any subjective
-representation $\gamma_i(G) = (\theta,e)$ of $G$ with a set of prescribed actions for $i$ in
-$G$ under $i$'s subjective representation of $G$. We drop the index $i$ for readability in the
-following.
+\begin{fact} \label{fact:equivalence2x2} In the class of $2 \times 2$ symmetric games, acts
+  selected by Laplace's rule are exactly the acts selected by regret minimization. 
+\end{fact} 
 
-To keep matters simple the focus is on \emph{uniform} and \emph{general} ways of forming
-preferences and beliefs consistently across decision situations. We consider two
-\emph{preference types} and two \emph{belief types}: subjective preferences either coincide
-with the actual, true payoffs or are given by the regret transformation of the actual game;
-beliefs are either precise probabilistic beliefs modelled by a single probability distribution,
-or they are imprecise probabilistic beliefs modelled by a set of probability distributions. The
-action selection function $\kappa$ is fixed to \textit{maxmin expected utility}
-\citep{gilsch89}, for reasons explained in the following.
+In the following, we assume that agents are maximally ignorant, so that precise types have a
+(singleton set containing a) flat probability distribution
+$\overline{\mu}_i \in \Delta(\Acts_{-i})$ and imprecise types consider all probabilistic
+beliefs about the co-players' behavior $\overline{X} = \Delta(\Acts_{-i})$. In that case, the
+considered choice mechanisms are behaviorally equivalent to classic choice rules, as summarized
+in Table~\ref{tab:CMs}. This means that most of the following results which we would like to
+interpret as results about the evolutionary fitness of subjective representation schemes have
+value also for anyone interested only in a comparison of the ecological value of classic choice
+rules. This also means that, given Fact~\ref{fact:equivalence2x2}, all choice mechanisms are
+behaviorally equivalent on $2 \times 2$ symmetric games, except for objective preference types
+with imprecise beliefs.
 
-% It turns out that whether $\tau^{reg}$ can have a fitness advantage over $\tau^\pi$ depends on
-% the general \emph{kind} of (probabilistic) beliefs that DM's form about the opponent's
-% behavior. In other words, we even abstract away from the content of the DM's beliefs about his
-% opponents' behavior that he could have acquiresd by learning or observation, but first turn on
-% the more general question of how uncertainty should be represented in order to interact with
-% subjective preferences in such a way that the resulting behavior will be fitness enhancing for
-% the DM in the long run. We consider therefore two \emph{belief types} (to be defined below):
-% imprecise belief types $\Delta(A_{-i})$, who have a set of probabilistic beliefs about the
-% opponents' behavior and precise belief types $\overline{\mu}$ who have a single probabilistic
-% belief.
-
-% The following subsection describes what these belief types are and how a single action
-% selection function (maxmopin expected utility) gives rise to an intersting parallel with
-% classic choice rules.
 
 \subsection{Imprecise probabilistic beliefs}
 \label{sec:impr-prob-beli}
@@ -668,108 +687,6 @@ averse [REF]. In line with empirical data,
 we assume that players in the population are uncertainty averse and conform to maxmin expected
 utility. The resulting behavior is then produced by maximinimizing the subjective utility
 given by the player's preference type over the set of probabilities given by the belief type.
-
-
-
-\subsection{Choice mechanisms \& classic choice rules}
-
-By fixing the action selection component to maxmin expected utility, and allowing two belief and
-two preference types, we regain all the choice rules considered in sectionNN from a more general and unified standpoint, as it is summed up in
-Table~\ref{tab:CMs}. \\
-We are now in the position of formally deriving behavior from a pair $(\theta, e) \in \Theta \times E$.
-
-\begin{definition} \label{def:utility-belief}
-
-Given a game $G$, an action $a_i \in A_i$, and a belief $\mu \in \lbrace \mu' \in \mathbb{R}^{A_{-i}}: \sum_{a_{-i} \in A_{-i}} \mu'(a_{-i}) = 1 \rbrace$, we define $\tau(G)(a_i, \mu):= \sum_{a_{-i} \in A_{-i}} \tau(G)(a_i, a_{-i}) \cdot \mu(a_{-i})$. 
-
-\end{definition}
-
-\begin{definition} \label{def:maxminSEU}
-
-Given a game $G$, a preference type $\tau$ and a belief type $e$, we define $\kappa(\tau(G), e):= \lbrace a_i \in A_i : a_i \in \text{max}_{a'_i \in A_i} \text{ min}_{\mu \in e} \text{ } \tau(G)(a'_i, \mu) \rbrace$.\footnote{As already specified in the previous example, we assume that, whenever the set $\kappa(\tau(G), e)$ is not a singleton, the player $(\tau, e)$ will mix with equal probability among the actions in $\kappa(\tau(G), e)$.}
-
-\end{definition}
-
-It is then worth stressing that $\kappa(\tau^{\pi}, \Delta)$ turns out to be the actual payoff
-maximinimizer, $\kappa(\tau^{reg}, \Delta)$ corresponds to the regret minimizer,
-$\kappa(\tau^{\pi}, \overline{\mu})$ is the expected actual payoff maximizer (with flat beliefs), and
-$\kappa(\tau^{reg}, \overline{\mu})$ is the expected regret minimizer (with flat beliefs).
-Moreover, different subjective preferences and belief types can give rise to identical action predictions,
-either in a restricted class of games, or in general. This is also the case here.
-
-
-
-
-\begin{fact} \label{fact:maxEU-minReg} For any strategic game $G$ and any arbitrary
-  probabilistic belief $\mu \in \Delta$ about the opponents' behavior, the acts
-  selected by maximization of expected utility for $G$ under $\mu$ are exactly the acts
-  selected by the maximization of expected utility for the negative regret transformation of $G$
-  under $\mu$ \citep[e.g.,][]{HalpernPass2012:Iterated-Regret}.
-\end{fact}
-
-\noindent In other words, given the same probabilistic belief, maximization of expected
-(objective) payoff and minimization of expected regret are behaviorally
-equivalent. This holds for arbitrary games, as well as for solitary decision situations. On the
-other hand, the following does not hold in general:
-
-\begin{fact} \label{fact:equivalence2x2}
-In the class of $2 \times 2$ symmetric games, players $(\tau^{reg}, \Delta)$, $(\tau^{\pi}, \overline{\mu})$, and $(\tau^{reg},\overline{\mu})$ are behaviorally equivalent.
-\end{fact} 
-
-
-
-
-\begin{example}
-  Consider the game in Figure \ref{coordgame1} again. When a player characterized
-  by\footnote{To ease notation in the following we will refer to the pair
-    $(\text{preference type } \tau,\text{ belief type } e)$ as the \textit{player type}.} preference
-  type $ \tau^{reg} $ and belief type $ \Delta $ faces the game in Figure
-  \ref{coordgame1}, her preference type gives rise to the representation $\tau^{reg}(G^C)$ in
-  Figure \ref{coordgame1reg}. Then, maximinimizing expected utility over the probability
-  simplex $ \Delta $ given the game in Figure \ref{coordgame1reg} corresponds to
-  playing the standard maxmin strategy [REF] of that game.\footnote{Notice that this is the
-    case for any game: given a game $G$, maximinimizing expected utility over the probability
-    simplex $ \Delta $ amounts to playing the standard maxmin strategy of $G$.} This,
-  in turn, corresponds to the regret minimizing action of the original game $G^C$ of Figure
-  \ref{coordgame1}, namely action $II$, as we have seen in Section \ref{sec:choice-rules}. A
-  player $(\tau^{reg},\overline{\mu})$ instead has subjective representation $\tau^{reg}(G^C)$
-  of Figure \ref{coordgame1reg} and a flat probability measure
-  $\overline{\mu}=(\frac{1}{2}I,\frac{1}{2}II)$ over the co-player's actions. Consequently,
-  such a player would play action $II$, i.e., the action that maximinimizes expected utility
-  given the flat probability measure $\overline{\mu}$. Similarly, a player
-  $(\tau^{\pi},\Delta)$ will have the subjective representation coinciding with the
-  objective fitness game, i.e., $ \tau^{\pi}(G^C)= G^C $. Then, both actions $I$ and $II$
-  maximinimize expected utility over the probability simplex $ \Delta $. Hence, a
-  player $(\tau^{\pi},\Delta)$ will be indifferent between $I$ and $II$, and will
-  randomize with equal probability $(\frac{1}{2}I,\frac{1}{2}II)$. Finally, a player
-  $(\tau^{\pi},\overline{\mu})$ maximinimizes the objective fitness game $G^C$ of Figure
-  \ref{coordgame1} with flat probability $\overline{\mu}$ over the co-player's actions, i.e.,
-  maximizes objective utility given $\overline{\mu}$. In game $G^C$ this yields action $II$.
-
-\end{example}
-
-
-%\todo[inline]{should we explain here, or very soon, what the resulting types really are: regret minimizers, maxmin players \dots}
-
-Many other alternatives different from maxmin could produce behavior: choice rules like minmax, maxmax, and minmin would similarly generate behavior in case of a lack of precise probabilistic belief. As it should be clear by now, here we postulate that players use maxmin for two main reasons. First, among other possible choice rules maxmin is not only intuitively appealing but also corroborated from an empirical point of view. Secondly, our main interest is the evolution of different patterns of subjective conceptualizations of games, and we want to show that the veridical representation is not necessarily the fittest and may not be evolutionarily stable. Assuming that all players use a fixed rule (maxmin expected utility) independent of their preference and belief type allows us to factor the choice rule out of the selection process and to focus on subjective representations only.
-
-
-
-
-\iffalse
-
-\begin{fact} \label{fact:maxEU-minReg}
-
-For any probability measure $\mu$, maximization of expected utility and minimization of expected regret are behaviorally equivalent.
-
-\end{fact}
-
-\noindent As we have seen in the previous example, this is not the case in the presence of (radical) uncertainty, in the sense of representation of belief state in terms of a set of probability, as in $ \Delta $.
-\fi
-
-
-
-
 
 \section{Meta-games and the evolution of choice mechanisms}
 \label{sec:model}
