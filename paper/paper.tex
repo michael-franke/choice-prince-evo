@@ -43,40 +43,23 @@
 \newcommand{\myalert}[1]{\textcolor{red}{#1}}
 
 \title{Smart Representations: {R}ationality and Evolution in a Richer  Environment}
-\author{Paolo Galeazzi \& Michael Franke} \date{current version: November 5, 2015}
+\author{Paolo Galeazzi \& Michael Franke} \date{current version: December 19, 2015}
 
 \begin{document}
 
-% \textbf{some general notes and remarks and todo's}
-
-% \begin{itemize}
-% \item micha: let's have a term for pairs (regret type, epistemic type); I'm inclined to use ``player
-%   type'', but that's what you reserved for regret type; maybe use \myalert{meta-type}?
-% \item can we reformulate the main result (proposition 1) in terms of ``strict dominance''
-%   and/or strict Nash equilibrium? sometimes the proof is not ideally precise because it
-%   actually shows something stronger, namely strict dominance, but everything is formulated in
-%   terms of stability; using dominance is also better for arguments about evolutionary dynamics:
-%   dynamics can be attracted by states that are not evolutionarily stable (even if there is an
-%   ESS), but dominated strategies will die out in any case;
-% \item should we give definitions for ESS and NSS in the main text?
-% \item should we include definitions of the replicator dynamic and/or the replicator mutator
-%   dynamic?
-% \item the most important issue with this text is still that we need to motivate why we care
-%   about non-probabilistic beliefs and/or security strategies; everything else will fall into
-%   place when that is done
-% \item an important ingredient in our argument pro regret is that radical uncertainty could be
-%   exogenously given; as it stands this occurs rather ``suddenly'' in the paper and should
-%   ideally be prepared and motivated earlier (e.g., in Sections 2 and 3)
-% \item a major contribution of our paper is the ``meta-game'' approach, but in the current
-%   version I feel that this is not stressed sufficiently; the introduction and the beginning of
-%   section 3 could do a bit more to carve out this idea as something generally cool; especially
-%   the formula from 3.4 could occur earlier (albeit in more general notation);
-% \end{itemize}
-
-% \newpage
-
-
 \maketitle
+
+\begin{abstract}
+  Standard applications of evolutionary game theory look at a single, fixed game and focus on
+  the evolution of behavior for that game alone. Instead, this paper uses tools from
+  evolutionary game theory to study the evolutionary competition between \emph{choice
+    mechanisms} in a rich and variable environment. A choice mechanism is a way of representing
+  a decision situation, paired with a method for choosing an act based on this (possibly false)
+  subjective representation. We demonstrate the usefulness of this approach by a case study
+  that compares a number of classic proposals of what it means to make a rational choice. Our
+  main result is that regret-based preference representations can be evolutionarily selected
+  for, despite being non-veridical.
+\end{abstract}
 
 \section{Introduction}
 \label{sec:intr--motiv}
@@ -114,10 +97,10 @@ from the true, objective fitness that evolutionary selection operates on.
 
 % To show this, we study the evolutionary competition of choice mechanisms, or more
 % specifically the competition of subjective representations of choice situations, in a
-% variable environment. Concretely, we look at evolutionary ``meta-games'' whose ``acts'' are
+% variable environment. Concretely, we look at evolutionary ``meta games'' whose ``acts'' are
 % choice mechanisms and whose ``payoffs'' represent the average expected fitness that different
 % choice mechanisms would accrue when playing arbitrary games (from a given class, with a given
-% occurrence probability). In this sense, a meta-game captures (the modeller's) assumptions
+% occurrence probability). In this sense, a meta game captures (the modeller's) assumptions
 % about the relevant statistics of the environment in which evolutionary forces operate, while
 % we are still able to use standard methods from evolutionary game theory, like stability or
 % evolutionary dynamics.
@@ -316,7 +299,7 @@ meta games. We will later turn towards the replicator dynamic
 
 
 
-\section{Choice mechanisms: preferences, beliefs and action choice}
+\section{Classic choice rules and choice mechanisms}
 \label{sec:basic-notions}
 
 We submit that meta games are a useful tool for structuring and sharpening conceptual inquiry
@@ -565,33 +548,31 @@ an \emph{action selection function} (see Figure~\ref{fig:ChoiceMechanism}).
 The subjective representation scheme $\gamma_i$ of agent $i$ is a function $\gamma_i$ that
 takes a strategic game $G = \tuple{ N, (A_i , \pi_i)_{i \in N} }$ and maps it onto
 $\gamma_i(G) = (\theta, e_i)$ where
-$\theta \mycolon \bigtimes_{i \in N} A_i \rightarrow \mathbb{R}$ is payoff function suitable
+$\theta \mycolon \bigtimes_{j \in N} A_j \rightarrow \mathbb{R}$ is a payoff function suitable
 for $G$, and $e_i$ is some representation of $i$'s uncertainty about the co-player's
 behavior. We consider two \emph{preference types}: the \emph{objective type} maps each game
-onto its own, true payoff function; The \emph{regret type} maps each game onto its regret
+onto its own, true payoff function; the \emph{regret type} maps each game onto its regret
 transformation, as introduced above. We also consider two \emph{belief types}: the
 \emph{precise type} represents uncertainty in a single probability distribution
-$\mu_i \in \Delta(\Acts_{-i})$ about the co-players' behavior; the \emph{imprecise type}
+$\mu \in \Delta(\Acts_{-i})$ about the co-players' behavior; the \emph{imprecise type}
 represents uncertainty as a set of probability distributions $X \subseteq \Delta(\Acts_{-i})$.
 It is convenient to conceptualize precise beliefs as a special case of imprecise beliefs by
-looking at $\mu_i$ as a stand-in for the singleton set $\set{\mu_i}$. More details about
-imprecise probabilities and our initial assumption of ignorance are given in
-Section~\ref{sec:impr-prob-beli} below.
+looking at $\mu$ as a stand-in for the singleton set $\set{\mu}$. Background on imprecise
+probabilities is provided in Appendix~\ref{sec:impr-prob-beli}.
 
-The only action choice function $\kappa$ that we consider here is \emph{maximinimization of
-  expected (subjective) utilities} (see Section~\ref{sec:impr-prob-beli} for
-motivation).
+The action choice function $\kappa$ that we consider here is \emph{maximinimization of expected
+  (subjective) utilities} (see Section~\ref{sec:impr-prob-beli} for motivation).
 
 \begin{definition}[Maximinimization of expected (subjective) utility]
   \label{def:maxminSEU}
   Fix a strategic game $G$. Let agent $i$'s subjective representation scheme
   $\gamma_i(G) = (\theta, e_i)$ be such that $\theta$ is $i$'s subjective payoff function for
   $G$ and $e_i$ is a (possibly singleton) set of probability distributions in
-  $\Delta(\Acts_{-i})$. Agent $i$'s expected (subjetive) utility for act $\myact{i}$ and
+  $\Delta(\Acts_{-i})$. Agent $i$'s expected (subjetive) utility for act $\myact{i}$ and belief
   $\mu \in e$ is
   $\EU(\myact{i}, \mu) = \sum_{\myact{-i} \in \Acts_{-i}} \mu(\myact{-i}) \theta(\myact{i},
   \myact{-i})$.
-  Act $\myact{i}^*$ is selected by maximinimization of expected (subjective) utility iff:
+  Act $\myact{i}^*$ is selected by maximinimization of expected (subjective) utility iff
   $\myact{i}^* \in \arg \max_{\myact{i} \in \Acts_{i}} \min_{\mu \in e} \EU(\myact{i}, \mu)$.
 \end{definition}
 
@@ -608,23 +589,23 @@ maximization of expected utilities.
 
 This means that as far as behavior is concerned, regret types cannot be distinguished from
 objective types, as long as both hold precise beliefs. This will be central in understanding
-later results: under precise beliefs evolution will not favor either preference type over the
+later results: under precise beliefs, evolution will not favor either preference type over the
 other. On the other hand, if paired with imprecise beliefs, different behavioral predictions
 arise. 
 
 In the following, we assume that agents are maximally uncertain, so that precise types have a
 (singleton set containing a) flat probability distribution
-$\overline{\mu}_i \in \Delta(\Acts_{-i})$ and imprecise types consider all probabilistic
-beliefs about the co-players' behavior $\overline{X} = \Delta(\Acts_{-i})$. In that case, the
+$\overline{\mu} \in \Delta(\Acts_{-i})$ and imprecise types consider all probabilistic beliefs
+about the co-players' behavior $\overline{X} = \Delta(\Acts_{-i})$. In that case, the
 considered choice mechanisms are behaviorally equivalent to classic choice rules, as summarized
 in Table~\ref{tab:CMs}. This means that most of the following results which we would like to
 interpret as results about the evolutionary fitness of subjective representation schemes have
 value also for anyone interested only in a comparison of the ecological value of classic choice
 rules.
 
-Maximal uncertainty also means that, given Fact~\ref{fact:equivalence2x2}, all choice
-mechanisms are behaviorally equivalent on $2 \times 2$ symmetric games, except for objective
-preference types with imprecise beliefs.
+Under maximal uncertainty, all four choice mechanisms considered here are behaviorally
+equivalent on $2 \times 2$ symmetric games, except for objective preference types with
+imprecise beliefs:
 
 \begin{fact} \label{fact:equivalence2x2} In the class of $2 \times 2$ symmetric games, acts
   selected by Laplace's rule are exactly the acts selected by regret minimization. 
@@ -637,15 +618,14 @@ preference types with imprecise beliefs.
 \subsection{Simulation results}
 \label{sec:simulation-results}
 
-To demonstrate the usefulness of a meta-game approach, let us concentrate first on a basic
-model that contains the four choice mechanisms obtained from crossing the preference and belief
-types introduced in Section~\ref{sec:basic-notions}. From now on we speak of types when we mean
-pairs like $(\text{reg}, \text{imp})$, a choice mechanism with regret-based preferences and
-imprecise beliefs, or $(\text{obj}, \text{prc})$, one with objective preferences and precise
-beliefs. 
+To demonstrate the usefulness of a meta game approach, let us concentrate first on a basic
+model that contains the four choice mechanisms from Table~\ref{tab:CMs}. From now on we speak
+of types when we mean pairs like $(\text{reg}, \text{imp})$, a choice mechanism with
+regret-based preferences and imprecise beliefs, or $(\text{obj}, \text{prc})$, one with
+objective preferences and precise beliefs.
 
-Meta games factor in statistical properties of the environment. For a particular empirical
-purposes, one would consult a specific class of games $\mathcal{G}$ with appropriate, possibly
+Meta games factor in statistical properties of the environment. For particular empirical
+purposes, one would consult a specific class of games $\mathcal{G}$ with appropriate,
 empirically informed probabilities $P(G)$ in order to match the natural environment of a given
 population. But for our theoretical purposes we adopt another approach, since we would not know
 how to justify any more specific assumption. To begin with, let $\mathcal{G}$ be a set of
@@ -687,10 +667,10 @@ Table~\ref{tab:ExpectedFitness_4Types}.\footnote{Concretely, $100,000$ games wer
 Simulation results obviously reflect Fact~\ref{fact:equivalence2x2} in that all encounters in
 which types $(\text{reg}, \text{imp})$, $(\text{reg}, \text{prc})$ or
 $(\text{obj}, \text{prc})$ are substituted for one another yield identical results. More
-interestingly, Table~\ref{tab:ExpectedFitness_4Types} shows that the maxmin strategy
-$(\text{obj}, \text{imp})$ is strictly dominated by the three other strategies: in each column
-(i.e., for each kind of opponent), the maxmin strategy is strictly worse than any of the other
-three competitors. This has a number of interesting consequences.
+interestingly, Table~\ref{tab:ExpectedFitness_4Types} shows that $(\text{obj}, \text{imp})$,
+the maxmin strategy, is strictly dominated by the three other strategies: in each column (i.e.,
+for each kind of opponent), the maxmin strategy is strictly worse than any of the other three
+competitors. This has a number of interesting consequences.
 
 Let's begin with a restricted scenario and look at more and more complex cases afterwards. If
 we restrict attention to only imprecise belief types, then a state in which every agent has
@@ -721,13 +701,12 @@ we add a small mutation rate to the dynamics. Take a fixed, small mutation rate 
 the probability that a player's preference type \emph{or} her belief type changes to another
 preference type or belief type. The probability that a player randomly mutates into a
 completely different player with altogether different preference type and belief type would
-then be $\epsilon^2$. With these assumptions about ``component-wise mutations'', numerical
+then be $\epsilon^2$. With these assumptions about ``component-wise mutations,'' numerical
 simulations of the (discrete time) \emph{replicator mutator dynamics}
 \citep{Nowak2006:Evolutionary-Dy} show that already for very small mutation rates almost all
 initial populations converge to a single fixed point in which the majority of players are
 regret types. For instance, with $\epsilon = 0.001$, almost all initial populations are
-attracted to a final distribution with proportions:\todo{recalculate these numbers for the
-  actual 4x4 game!}
+attracted to a final distribution with proportions:
 
 \begin{center}
   \begin{tabular}{cccc}
@@ -752,7 +731,7 @@ behaviorally equivalent.
 \subsection{Analytical results}
 \label{sec:analytical-results}
 
-Results based on the single meta-game in Table~\ref{tab:ExpectedFitness_4Types}, which was
+Results based on the single meta game in Table~\ref{tab:ExpectedFitness_4Types}, which was
 obtained by Monte Carlo simulation, are not fully general and possibly spoiled by random
 fluctuations in the sampling procedure. Fortunately, for the case of $2 \times 2$ symmetric
 games, the main result that maxmin types $(\text{obj}, \text{imp})$ are strictly dominated can
@@ -763,7 +742,7 @@ are.
   Let $\mathcal{G}$ be the class of $2 \times 2$ symmetric games with payoffs sampled from a
   set of i.i.d.~values with at least three elements in the support. Then,
   $(\text{reg}, \text{imp})$ strictly dominates $(\text{reg}, \text{prc})$ in the resulting
-  meta-game.
+  meta game.
 \end{proposition}
 
 \begin{corollary} \label{corollary1} Considering only $(\text{obj}, \text{imp})$ and
@@ -794,56 +773,35 @@ identically and independently at random.
 
 How do the basic results from the previous section carry over to more encompassing, richer
 models? Section~\ref{sec:more-types} first introduces further conceptually interesting
-preference types that have been considered in evolutionary game theory. Section~\ref{sec:n-times-n}
-then addresses the case of $n \times n$ games for $n \ge 2$. Finally, to put our results into
-a broader perspective, Section~\ref{sec:solitary-decisions} ends with a brief comparison of
-game situations with cases of solitary decision making.
+preference types that have been considered in the recent
+literature. Section~\ref{sec:n-times-n} then addresses the case of $n \times n$ games for
+$n \ge 2$. Finally, to put our results into a broader perspective,
+Section~\ref{sec:solitary-decisions} ends with a brief comparison of game situations with cases
+of solitary decision making.
 
 \subsection{More types}
 \label{sec:more-types}
 
 
-In evolutionary game theory other types of player have been investigated. A famous example is the \textit{altruistic type} [REF], introduced in the literature in order to explain the possible survival of altruistic behavior. In our framework, we can represent the altruistic type as follows. 
+Beyond objective and regret-based preferences, other preference types have been investigated. A
+famous example is the \textit{altruistic type} \textcolor{red}{[INSERT REFERENCE]}, summoned to
+explain the possibility of altruistic behavior. At the other end of the spectrum, the \emph{competitive
+type} is located. 
 
+\begin{definition}[Altruistic and competitive types] \label{defn:alttype}
 
-\iffalse
-
-\begin{definition}[Altruistic preference] \label{defn:altpref}
-
-For a game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, we define the altruistic preference $ \theta^{alt}: A \rightarrow \mathbb{R} $ such that $ \theta^{alt}(a_i,a_{-i})=\pi(a_i,a_{-i}) + \sum_{j \neq i} \pi(a_{j},a_{-j})$.\footnote{A more general formulation [see: REFERENCES] would be to define an $ \alpha$-altruistic type, for $\alpha \in [0,1]$, with subjective utility $ \theta^{\alpha lt}(a_i,a_{-i})=\pi(a_i,a_{-i}) + \alpha \sum_{j \neq i} \pi(a_{j},a_{-j})$. Since we are not interested in the evolution of degrees of altruism here, we simply fix $ \alpha = 1 $.}
-
-\end{definition}
-
-\fi
-
-\begin{definition}[Altruistic type] \label{defn:alttype}
-
-Given a two player game  $ G $, the \textit{altruistic type} $\tau^{alt}$ is characterized by the subjective utility function $\tau^{alt}(G)(a_i, a_j):=\pi_i(a_i,a_j) + \pi_j(a_i,a_j)$.\footnote{A more general formulation would be to define an $ \alpha$-altruistic type, for $\alpha \in [0,1]$, with subjective utility $ \tau^{\alpha lt}(G)(a_i, a_j):=\pi_i(a_i,a_j) + \alpha \pi_j(a_i,a_j)$. Since we are not interested in the evolution of degrees of altruism, here we simply fix $ \alpha = 1 $.}
-
-\end{definition}
-
-\noindent As opposite to the altruistic type, it is possible to define a \textit{competitive type}. 
-
-\iffalse
-
-\begin{definition}[Competitive preference] \label{defn:compref}
-
-For a game $ G=\langle N, (A_i , \pi_i)_{i \in N} \rangle $, we define the competitive preference $ \theta^{com}: A \rightarrow \mathbb{R} $ such that $ \theta^{com}(a_i,a_{-i})=\pi(a_i,a_{-i}) - \sum_{j \neq i} \pi(a_{j},a_{-j})$.
+  Fix a two player game $G$ with actual payoff function $\pi$. The \textit{altruistic type}
+  represents $G$'s payoffs as $\theta(a_i, a_j):=\pi_i(a_i,a_j) + \pi_j(a_i,a_j)$.\footnote{A
+    more general formulation would be to define an $ \alpha$-altruistic type, for
+    $\alpha \in [0,1]$, with subjective utility
+    $ \theta_\alpha(a_i, a_j):=\pi_i(a_i,a_j) + \alpha \pi_j(a_i,a_j)$. Since we are not
+    interested in the evolution of degrees of altruism, here we simply fix $ \alpha = 1 $.} The
+  \emph{competitive type} represents $G$'s payoffs as
+  $\theta(a_i, a_j):=\pi_i(a_i,a_j) - \pi_j(a_i,a_j)$.
 
 \end{definition}
 
-\fi
 
-\begin{definition}[Competitive type] \label{defn:comtype}
-
-Given a two player game  $ G $, the \textit{competitive type} $\tau^{com}$ is characterized by the subjective utility function $\tau^{com}(G)(a_i, a_j):=\pi_i(a_i,a_j) - \pi_j(a_i,a_j)$.
-
-\end{definition}
-
-Similarly to the evolutionary competition that we simulated before, we can study the
-evolutionary fitness of this extended set of players when they are all represented in the
-population. Table~\ref{tab:ExpectedFitness_2x2_Full} shows simulation results that approximate the
-expected fitness in the relevant meta-game.
 
 \begin{table}[]
 \centering
@@ -852,94 +810,68 @@ expected fitness in the relevant meta-game.
   \hline
  & $(\text{reg}, \text{imp})$ 
  & $(\text{obj}, \text{imp})$ 
- & $(\tau^{com}, \text{imp})$
- & $(\tau^{alt}, \text{imp})$
+ & $(\text{com}, \text{imp})$
+ & $(\text{alt}, \text{imp})$
  & $(\text{reg}, \text{prc})$ 
  & $(\text{obj}, \text{prc})$ 
- & $(\tau^{com}, \text{prc})$
- & $(\tau^{alt}, \text{prc})$ \\ 
+ & $(\text{com}, \text{prc})$
+ & $(\text{alt}, \text{prc})$ \\ 
   \hline
   $(\text{reg}, \text{imp})$ & 6.663 & 6.662 & 5.829 & 7.105 & 6.663 & 6.663 & 5.829 & 7.489 \\
   $(\text{obj}, \text{imp})$ & 6.486 & 6.484 & 6.088 & 6.703 & 6.486 & 6.486 & 6.088 & 6.875 \\
-  $(\tau^{com}, \text{imp})$ & 6.323 & 6.758 & 5.496 & 6.977 & 6.323 & 6.323 & 5.496 & 7.149 \\
-  $(\tau^{alt}, \text{imp})$ & 5.949 & 5.722 & 5.326 & 6.396 & 5.949 & 5.949 & 5.326 & 6.568 \\
+  $(\text{com}, \text{imp})$ & 6.323 & 6.758 & 5.496 & 6.977 & 6.323 & 6.323 & 5.496 & 7.149 \\
+  $(\text{alt}, \text{imp})$ & 5.949 & 5.722 & 5.326 & 6.396 & 5.949 & 5.949 & 5.326 & 6.568 \\
   $(\text{reg}, \text{prc})$ & 6.663 & 6.662 & 5.829 & 7.105 & 6.663 & 6.663 & 5.829 & 7.489 \\
   $(\text{obj}, \text{prc})$ & 6.663 & 6.662 & 5.829 & 7.105 & 6.663 & 6.663 & 5.829 & 7.489 \\
-  $(\tau^{com}, \text{prc})$ & 6.323 & 6.758 & 5.496 & 6.977 & 6.323 & 6.323 & 5.496 & 7.149 \\
-  $(\tau^{alt}, \text{prc})$ & 6.331 & 5.893 & 5.497 & 6.566 & 6.331 & 6.331 & 5.497 & 7.152 \\
+  $(\text{com}, \text{prc})$ & 6.323 & 6.758 & 5.496 & 6.977 & 6.323 & 6.323 & 5.496 & 7.149 \\
+  $(\text{alt}, \text{prc})$ & 6.331 & 5.893 & 5.497 & 6.566 & 6.331 & 6.331 & 5.497 & 7.152 \\
    \hline                          
 \end{tabular}                      
-\caption{Average payoff in simulations of 100,000
-  randomly generated $2 \times 2$ symmetric games}
+\caption{Average evolutionary fitness from Monte Carlo simulations of 100,000 symmetric $2 \times 2$ games}
 \label{tab:ExpectedFitness_2x2_Full}        
 \end{table}   
  
-\todo[inline]{is it true that competitive preferences types are behaviorally equivalent under
-  either epistemic type? can we show that?}
- 
-The approximations in Table~\ref{tab:ExpectedFitness_2x2_Full} confirm basic intuitions about
-altruistic and competitive types: averaging over randomly sampled games, everybody would like
-to have an altruistic opponent and nobody would like to play against a competitive
-opponent. Perhaps more surprisingly, altruistic types come up strictly dominated by competitive
-types, but competitive types themselves are worse off against all opponent types except against
-maxmin players $(\text{obj}, \text{imp})$ than any of the behaviorally equivalent types
-$(\text{reg}, \text{imp})$, $(\text{obj}, \text{prc})$, and
-$(\text{reg}, \text{prc})$. 
-\iffalse
-This is a noteworthy results in the light of the fact that
-evolving altruistic preferences have been shown to support cooperative behavior in a single
-stage game \myalert{[CITE]}. In contrast,
-averaging over payoffs in multiple stage games, like we do here, makes altruistic preferences
-prime victims of evolutionary eradication.
-\fi
-It is easy to see then that the previous result still obtains for the larger meta-game in
+Table~\ref{tab:ExpectedFitness_2x2_Full} shows results of further Monte Carlo simulations that
+approximate the expected fitness in the relevant meta game with all types considered so
+far. These results confirm basic intuitions about altruistic and competitive types: averaging
+over randomly sampled games, everybody would like to have an altruistic opponent and nobody
+would like to play against a competitive opponent. Perhaps more surprisingly, altruistic types
+come up strictly dominated by competitive types, but competitive types themselves are worse off
+against all opponent types except against maxmin players $(\text{obj}, \text{imp})$ than any of
+the behaviorally equivalent types $(\text{reg}, \text{imp})$, $(\text{obj}, \text{prc})$, and
+$(\text{reg}, \text{prc})$.  \iffalse This is a noteworthy results in the light of the fact
+that evolving altruistic preferences have been shown to support cooperative behavior in a
+single stage game \myalert{[CITE]}. In contrast, averaging over payoffs in multiple stage
+games, like we do here, makes altruistic preferences prime victims of evolutionary eradication.
+\fi It is easy to see then that the previous result still obtains for the larger meta game in
 Table~\ref{tab:ExpectedFitness_2x2_Full}: $(\text{reg}, \text{imp})$,
 $(\text{obj}, \text{prc})$, and $(\text{reg}, \text{prc})$ are still neutrally stable;
-all simulations of the (discrete-time) replicator dynamic on the $8 \times 8$ meta-game from
-Table~\ref{tab:ExpectedFitness_2x2_Full} end up in populations consisting of only these players
-in arbitrary proportion.
-
-\iffalse
-
-The following proposition (partially) confirms this result.\todo{rephrase to acknowledge all
-  epistemic types?}
-
-\begin{proposition} \label{proposition2}
-
-Fix $\Lambda = \lbrace (\text{obj}, \text{imp}), (\text{reg}, \text{imp}), (\tau^{alt}, \text{imp}), (\tau^{com}, \text{imp}) \rbrace$ and $\mathcal{G}$ the class of symmetric $2 \times 2$ games with payoffs sampled from a finite, or compact and convex, set of i.i.d. values. Then, $(\text{reg}, \text{imp})$ is the only evolutionarily stable player in the population.
-
-\end{proposition}
-
-\begin{proof}
-See Appendix.\todo{is this there already?}
-\end{proof}
-
-\fi
-
+simulation runs of the (discrete-time) replicator dynamic on the $8 \times 8$ meta game from
+Table~\ref{tab:ExpectedFitness_2x2_Full} all ended up in populations consisting of only these
+players in arbitrary proportion.
 
 In sum, the presence of other plausible preference types, such as competitive and altruistic
-types does not undermine the previous results about the evolutionary drive towards regret-based
-subjective preferences.
+types does not undermine, but rather strengthens the previous results about the evolutionary
+drive towards regret-based subjective preferences.
 
 
                                    
 \subsection{More actions: $n \times n$ symmetric games}
 \label{sec:n-times-n}
 
-Results from Section~\ref{sec:results:-basic-model} relied heavily on
-Fact~\ref{fact:equivalence2x2} that, for the special case of $2 \times 2$ symmetric games,
-regret minimization $(\text{reg}, \text{imp})$ is behaviorally equivalent with expected
-regret minimization $(\text{reg}, \text{prc})$ and expected utility maximization
-$(\text{obj}, \text{prc})$. This is no longer true when we look at arbitrary $n \times n$
-games with $n \ge 2$. We should therefore see what happens in a broader class of games.
+Results from Section~\ref{sec:basic-model-1} relied heavily on Fact~\ref{fact:equivalence2x2}
+that, for the special case of $2 \times 2$ symmetric games, regret minimization
+$(\text{reg}, \text{imp})$ is behaviorally equivalent with expected regret minimization
+$(\text{reg}, \text{prc})$ and expected utility maximization $(\text{obj}, \text{prc})$. This
+is no longer true when we look at arbitrary $n \times n$ games with $n \ge 2$. Let us see what
+happens in a broader class of games.
 
-Table~\ref{tab:ExpectedFitness_10x10} gives approximations for expected fitness in a
-meta-game over a class of $n \times n$ symmetric games where $n$ is randomly drawn from
-$\set{2, \dots, 10}$. Concretely, the numbers in Table~\ref{tab:ExpectedFitness_10x10} are
-averages of payoffs obtained in 100,000 randomly sampled games, where each game was sampled by
-first picking a number of acts $n \in \set{2, \dots, 10}$ uniformly at random, and then filling
-the resulting $n \times n$ payoff matrix of the stage game with i.i.d.~sampled payoffs as
-before.
+Table~\ref{tab:ExpectedFitness_10x10} gives approximations of expected fitness in a class of
+$n \times n$ symmetric games where $n$ is randomly drawn from $\set{2, \dots, 10}$. Concretely,
+the numbers in Table~\ref{tab:ExpectedFitness_10x10} are averages of payoffs obtained in
+100,000 randomly sampled games, where each game was sampled by first picking a number of acts
+$n \in \set{2, \dots, 10}$ uniformly at random, and then filling the necessary $n \times n$
+payoff matrix with i.i.d.~sampled numbers, as before.
 
 
 \begin{table}[]
@@ -949,59 +881,53 @@ before.
   \toprule
  & $(\text{reg}, \text{imp})$ 
  & $(\text{obj}, \text{imp})$ 
- & $(\tau^{com}, \text{imp})$
- & $(\tau^{alt}, \text{imp})$
+ & $(\text{com}, \text{imp})$
+ & $(\text{alt}, \text{imp})$
  & $(\text{reg}, \text{prc})$ 
  & $(\text{obj}, \text{prc})$ 
- & $(\tau^{com}, \text{prc})$
- & $(\tau^{alt}, \text{prc})$ \\ 
+ & $(\text{com}, \text{prc})$
+ & $(\text{alt}, \text{prc})$ \\ 
   \midrule
   $(\text{reg}, \text{imp})$ & 6.567 & 6.570 & 5.650 & 6.992 & 6.564 & 6.564 & 5.593 & 7.409 \\
   $(\text{obj}, \text{imp})$ & 6.476 & 6.483 & 5.896 & 6.818 & 6.484 & 6.484 & 5.850 & 7.124 \\
-  $(\tau^{com}, \text{imp})$ & 6.468 & 6.647 & 5.512 & 7.169 & 6.578 & 6.578 & 5.577 & 7.354 \\
-  $(\tau^{alt}, \text{imp})$ & 5.968 & 5.923 & 5.363 & 6.685 & 5.975 & 5.975 & 5.086 & 6.973 \\
+  $(\text{com}, \text{imp})$ & 6.468 & 6.647 & 5.512 & 7.169 & 6.578 & 6.578 & 5.577 & 7.354 \\
+  $(\text{alt}, \text{imp})$ & 5.968 & 5.923 & 5.363 & 6.685 & 5.975 & 5.975 & 5.086 & 6.973 \\
   $(\text{reg}, \text{prc})$ & 6.908 & 6.918 & 5.988 & 7.456 & 6.929 & 6.929 & 5.934 & 7.783 \\
   $(\text{obj}, \text{prc})$ & 6.908 & 6.918 & 5.988 & 7.456 & 6.929 & 6.929 & 5.934 & 7.783 \\
-  $(\tau^{com}, \text{prc})$ & 6.529 & 6.680 & 5.445 & 7.276 & 6.542 & 6.542 & 5.521 & 7.440 \\
-  $(\tau^{alt}, \text{prc})$ & 6.450 & 6.337 & 5.772 & 6.978 & 6.457 & 6.457 & 5.479 & 7.500 \\
+  $(\text{com}, \text{prc})$ & 6.529 & 6.680 & 5.445 & 7.276 & 6.542 & 6.542 & 5.521 & 7.440 \\
+  $(\text{alt}, \text{prc})$ & 6.450 & 6.337 & 5.772 & 6.978 & 6.457 & 6.457 & 5.479 & 7.500 \\
    \bottomrule                         
 \end{tabular}                      
-\caption{Average payoff in simulations of 100,000
-  randomly generated $n \times n$ symmetric games with $n$ randomly drawn from $\set{2, \dots, 10}$.}
+\caption{Average evolutionary fitness for 100,000 randomly generated $n \times n$ symmetric games with $n$ randomly drawn from $\set{2, \dots, 10}$.}
 \label{tab:ExpectedFitness_10x10}        
 \end{table}
 
-As is to be expected, average payoffs obtained in games with more than 2 acts are higher, as
-can be seen by comparing Table~\ref{tab:ExpectedFitness_10x10} with
-Table~\ref{tab:ExpectedFitness_2x2_Full}. But increases in approximate expected fitness are not
-uniform. Most importantly, the regret minimizing type $(\text{reg}, \text{imp})$ is
-strictly dominated by $(\text{reg}, \text{prc})$ and by $(\text{obj}, \text{prc})$ in
-the meta-game from Table~\ref{tab:ExpectedFitness_10x10}. This means that while regret
-minimization \emph{can} thrive in some evolutionary contexts, there are also contexts where it
-is demonstrably worse off.
-
-Still, although this may be bad news for regret minimizing types
-$(\text{reg}, \text{imp})$, it is not the case that regret types \emph{as such} are weeded
-out by selection. Since, by Fact~\ref{fact:maxEU-minReg}, $(\text{reg}, \text{prc})$ and
-$(\text{obj}, \text{prc})$ are generally behaviorally equivalent, it remains that
-selection based on meta-games constructed from $n \times n$ games will still not eradicate all
-regret types. So, although regret types may not be selected for in this case, they are also not
+The most important result is that the regret minimizing type $(\text{reg}, \text{imp})$ is
+strictly dominated by $(\text{reg}, \text{prc})$ and by $(\text{obj}, \text{prc})$ in the
+meta game from Table~\ref{tab:ExpectedFitness_10x10}. This means that while regret minimization
+\emph{can} thrive in some evolutionary contexts, there are also contexts where it is
+demonstrably worse off. While this may be bad news for regret minimizing types
+$(\text{reg}, \text{imp})$, it is not the case that regret types \emph{as such} are weeded out
+by selection. Since, by Fact~\ref{fact:maxEU-minReg}, $(\text{reg}, \text{prc})$ and
+$(\text{obj}, \text{prc})$ are generally behaviorally equivalent, it remains that selection
+based on meta games constructed from $n \times n$ games will still not eradicate all regret
+types. So, although regret types may not be selected for in this case, they are also not
 selected against.
 
 On the other hand, there are plenty of ways in which the basic insight from
 Proposition~\ref{proposition1} that regret-based preferences can be strictly better than
-veridical objective preferences in case of radical uncertainty could make for situations in
-which evolution would select for regret types exclusively, even in $n \times n$ games. If, for
+veridical objective preferences in case of imprecise beliefs could make for situations in which
+evolution would select for regret types exclusively, even in $n \times n$ games. If, for
 example, epistemic types of players are not what biological evolution selects, but rather
 something that the particular choice situation would exogenously give us, then regret-based
 preference \emph{can} again drive out veridical preferences altogether. For concreteness,
-suppose that only preference types compete and that agents' belief types are exogenously
-given, in such a way that agents hold flat probabilistic beliefs $\text{prc}$ with probability
-$1-p$ and are of type $\text{imp}$ with probability $p$. This transforms the meta-game from
-Table~\ref{tab:ExpectedFitness_10x10} into the simpler $4 \times 4$ game in which the payoff
-obtained for a preference type is the weighted average over the payoffs of that preference
-types in Table~\ref{tab:ExpectedFitness_10x10}. Setting $p = 0.02$ for illustration, we get the
-meta-game in Table~\ref{tab:ExogeneousEpistemics}. 
+suppose that only preference types compete and that agents' belief types are exogenously given,
+in such a way that agents hold precise beliefs with probability $p$ and otherwise imprecise
+beliefs. This transforms the meta game from Table~\ref{tab:ExpectedFitness_10x10} into the
+simpler $4 \times 4$ game in which the payoff obtained for a preference type is the weighted
+average over the payoffs of the choice mechanisms including that preference type in
+Table~\ref{tab:ExpectedFitness_10x10}. Setting $p = 0.98$ for illustration, we get the meta
+game in Table~\ref{tab:ExogeneousEpistemics}.
 
 \begin{table}[]
 \centering
@@ -1009,54 +935,48 @@ meta-game in Table~\ref{tab:ExogeneousEpistemics}.
   \toprule
   & $\text{reg}$ 
   & $\text{obj}$ 
-  & $\tau^{com}$
-  & $\tau^{alt}$ \\ 
+  & $\text{com}$
+  & $\text{alt}$ \\ 
   \midrule
   $\text{reg} $ & 6.926 & 6.926 & 5.942 & 7.757 \\ 
   $\text{obj} $ & 6.924 & 6.924 & 5.948 & 7.751 \\ 
   $\tau^{com }$ & 6.566 & 6.570 & 5.481 & 7.434 \\ 
-  $\tau^{alt} $ & 6.463 & 6.461 & 5.478 & 7.469 \\ 
+  $\text{alt} $ & 6.463 & 6.461 & 5.478 & 7.469 \\ 
    \bottomrule
 \end{tabular}
-\caption{Meta-game for the evolutionary competition between preference types when epistemic types are exogenously
-  given}
+\caption{Meta game for the evolutionary competition between preference types when epistemic types are exogenously
+  given (see main text)}
 \label{tab:ExogeneousEpistemics}
 \end{table}
 
-The only evolutionarily stable state of this meta-game is the regret type. Accordingly, all of
+The only evolutionarily stable state of this meta game is the regret type. Accordingly, all of
 our simulation runs of the (discrete-time) replicator dynamic converged to monomorphic
 regret-type populations. The reason why regret types prosper is because they have a substantial
-payoff advantage if paired with radical uncertainty. If radical uncertainty is exogenously
-given as something unavoidable that happens to agents (e.g., in situation where they really have no
-way of narrowing down the probability set), and even if that happens only very
-infrequently (i.e., for rather low $p$), regret types \emph{will} outperform veridical
-preference types, as well as competitive and altruistic types.
+payoff advantage if paired with imprecise beliefs. If radical uncertainty is exogenously given
+as something unavoidable that happens to agents (e.g., in situation where they really have no
+way of narrowing down the probability set), and even if that happens only very infrequently
+(i.e., for rather low $p$), regret types \emph{will} outperform veridical preference types, as
+well as competitive and altruistic types.
 
 
 \subsection{Solitary decisions}
 \label{sec:solitary-decisions}
 
-\todo[inline]{text in this section and the next is rough and unpolished, only intended to have
-  the basic results recorded, so that we can reshape the article around the basic results}
-
-To see how different choice mechanisms behave in evolutionary competition based on solitary decision
-problems, we approximated, much in the spirit of meta-games, average accumulated payoffs
-obtained in randomly generated solitary decision problems. For our purposes, a decision problem
-$\tuple{S, \Acts, u}$ consists of a set of world states $S$, a set of acts
-$\Acts$, and a utility function $u \mycolon S \times \Acts \rightarrow
-\mathbb{R}$.
-We generated arbitrary decision problems by selecting numbers of states and acts
+To see how different choice mechanisms behave in evolutionary competition based on solitary
+decision problems, we approximated, much in the spirit of meta games, average accumulated
+payoffs obtained in randomly generated solitary decision problems. For our purposes, a decision
+problem $\tuple{S, \Acts, u}$ consists of a set of world states $S$, a set of acts $\Acts$, and
+a utility function $u \mycolon S \times \Acts \rightarrow \mathbb{R}$.  We generated arbitrary
+decision problems by selecting, uniformly at random, numbers of states and acts
 $n_s, n_\act \in \set{2, \dots, 10}$ and then filling the utility table, so to speak, by
-independently picking a number $u(s, \act) \in \set{0, 10}$ uniformly at random, just
-as we did before with symmetric games. Unlike with two-player games, we need to also sample the
-actual state of the world, which we selected uniformly at random from the available states in
-the current decision problem. Player types, consisting of epistemic types $\text{prc}$ and
-$\text{imp}$ and preference types $\text{reg}$ and $\text{obj}$, give rise to behavior in
-the same way as before.\footnote{Obviously, now with $ \text{imp} \equiv \text{imp}(S) :=\lbrace \mu \in \mathbb{R}^{S}: \sum_{s \in S} \mu(s) = 1 \rbrace$.} (It is obviously not possible to carry altruistic or competitive
-preference types over to solitary decision making.) As before, we recorded the behavioral
-decisions for each of the four relevant player types in each sampled decision problem, and
-determined the actual payoff obtained, given the actual state. Average payoff over 100,000 decision
-problems are given in Table~\ref{tab:SolitaryDecisions}.
+i.i.d.~samples for each $u(s, \act) \in \set{0, 10}$, uniformly at random. Unlike with
+two-player games, we need to also sample the actual state of the world, which we selected
+uniformly at random from the available states in the current decision problem. As player types,
+we considered the original cast of four from Table~\ref{tab:CMs} again, since altruistic and
+competitive preferences are meaningless in solitary decision situations. As before, the
+relevant fitness measure, defined in Equation~(\ref{eq:FittnessChoiceMechSolitary}), was
+approximated by Monte Carlo simulation, the results of which are given in
+Table~\ref{tab:SolitaryDecisions}.
 
 \begin{table}
   \centering
@@ -1069,29 +989,28 @@ problems are given in Table~\ref{tab:SolitaryDecisions}.
  \\ \midrule
     6.318 & 6.237 & 6.661 & 6.661 \\ \bottomrule
   \end{tabular}
-  \caption{Average payoffs over 100,000 simulated solitary decision problems}
+  \caption{Expected fitness of choice mechanisms approximated from 100,000 simulated solitary
+    decision problems (see main text)}
   \label{tab:SolitaryDecisions}
 \end{table}
 
 Facts~\ref{fact:maxEU-minReg} and \ref{fact:equivalence2x2} still apply:
-$(\text{reg}, \text{prc})$ and $(\text{obj}, \text{prc})$ are behaviorally equivalent
-in general, and $(\text{reg}, \text{imp})$ is behaviorally equivalent to the former two in
-decision problems with 2 states and 2 acts. \todo{show this?} We see this in part in the
-results in Table~\ref{tab:SolitaryDecisions} in that the averages for $(\text{reg},
-  \text{prc})$ and $(\text{obj}, \text{prc})$ are identical. But since we included decision
-problems with more acts and more states as well, the averages for regret minimizers
-$(\text{reg}, \text{imp})$ are not identical to the one of $(\text{reg},
-  \text{prc})$ and $(\text{obj}, \text{prc})$. They are, in fact, lower, but not as low as
-those of the minimax choosers. 
+$(\text{reg}, \text{prc})$ and $(\text{obj}, \text{prc})$ are behaviorally equivalent in
+general, and $(\text{reg}, \text{imp})$ is behaviorally equivalent to the former two in
+decision problems with 2 states and 2 acts. This shows in the results from
+Table~\ref{tab:SolitaryDecisions} in that the averages for $(\text{reg}, \text{prc})$ and
+$(\text{obj}, \text{prc})$ are identical. But since we included decision problems with more
+acts and more states as well, the averages for regret minimizers $(\text{reg}, \text{imp})$ are
+not identical to the one of $(\text{reg}, \text{prc})$ and $(\text{obj}, \text{prc})$. They
+are, in fact, lower, but not as low as those of $(\text{obj}, \text{imp})$.
 
-What that means is that basically every relevant result we have seen about game situations is also borne out
-when reasoning about solitary decisions. Evolutionary selection based on objective fitness will
-not select against regret-based subjective preferences, as these are indistinguishable from
-veridical preferences when paired with probabilistic beliefs. But when paired with
-non-probabilistic belief types, regret-based preferences actually outperform veridical
-preferences. Consequently, if there is a chance, however small, that agents must fall back onto
-non-probabilistic beliefs, evolution will actually positively select for non-veridical
-regret-based preferences.
+This means that every relevant result we have seen about game situations is also borne out for
+solitary decisions. Evolutionary selection based on objective fitness will not select against
+regret-based subjective preferences, as these are indistinguishable from veridical preferences
+when paired with precise beliefs. But when paired with imprecise beliefs, regret-based
+preferences outperform veridical preferences. Consequently, if there is a chance, however
+small, that agents fall back onto imprecise beliefs, evolution will actually positively select
+for non-veridical regret-based preferences.
 
 
 \iffalse
@@ -1142,14 +1061,22 @@ subjective utilities coincide with the actual payoffs.
 While the literature on evolution of preference has focused
 on fixed games, or fixed types of games, we have adopted a
 more general approach here. We suggested that attention
-to “meta-games” is crucial, because what may be a good
+to “meta games” is crucial, because what may be a good
 subjective representation in one type of game (e.g., cooperative preferences in the Prisoner’s Dilemma class) need not
 be generally beneficial. Taken together, we presented a variety of plausible circumstances in which evolutionary competition between choice
 mechanisms on a larger class of games can favor subjective
 preference representations focusing on regret.
 
-Finally, we hope to help the research direction towards a broader perspective on evolutionary game theory, as outlined by recent works in theoretical biology \citep[e.g.,][]{FawcettHamblin2013:Exposing-the-be}. In partcular, the meta-game approach allows the researcher to both explicitly model the relevant features of the environment and shift the target of evolution from plain behavior to more general behavioral patterns, or choice mechanisms.
-Several uses and improvements of the present model are still possible in many respects. We can sketch some of them here. For example, the evolutionary investigation of different risk and ambiguity attitudes when competing against each other in an evolutionarily richer environment may bring new insights on both behavioral and theoretic decision making under uncertainty, as well as on many issues in theoretical biology and behavioral ecology.
+Meta games are a useful tool for probing into conceptual questions about the ecological
+rationality of choice mechanisms. The approach is rich and general, with many possible further
+applications imaginable beyond the case study presented here. For example, the evolutionary
+investigation of different risk and ambiguity attitudes when competing against each other in an
+evolutionarily richer environment may bring new insights on both behavioral and theoretic
+decision making under uncertainty, as well as on many issues in theoretical biology and
+behavioral ecology. Moreover, variability in the action selection function has been entirely
+ignored in this paper. Finally, while this paper only used dummy models of diverse decision
+environments, the meta game approach also allows for empirically informed models of rich and
+variable environments.
 
 
 \appendix
