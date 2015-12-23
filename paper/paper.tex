@@ -105,17 +105,12 @@ from the true, objective fitness that evolutionary selection operates on.
 % we are still able to use standard methods from evolutionary game theory, like stability or
 % evolutionary dynamics.
 
-Section \ref{sec:rati--subj} reviews different accounts of rationality in decision theory and
-relates the approach we take here to the existing literature on the topic. Section
-\ref{sec:basic-notions} introduces relevant decision- and game-theoretic notions. Sections
-\ref{sec:model} and \ref{sec:basic-model-1} define the evolutionary framework, and Section
-\ref{sec:results:-basic-model} presents the main results of the paper. Section
-\ref{sec:extensions} extends the evolutionary analysis by introducing more choice mechanisms in
-the model and by investigating the evolutionary performances of different choice mechanisms
-when facing arbitrary decision problems. Finally, in Section \ref{sec:conclusion} we reflect on
-the results achieved.
-
-\todo[inline]{rewrite overview after restructuring}
+Section \ref{sec:rati--subj} reviews different views of rational choice and relates the
+approach we take here to the existing literature. Section \ref{sec:basic-notions} introduces
+relevant decision- and game-theoretic notions and spells out four choice mechanisms on whose
+evolutionary competition we will zoom in Section~\ref{sec:basic-model-1}, which presents the
+main results of the paper. Section \ref{sec:extensions} extends the evolutionary analysis by
+introducing more choice mechanisms and alternative models of the environment.
 
 
 \section{Rationality, subjective representation schemes \& meta games}
@@ -129,10 +124,10 @@ and \citet{Savage1954:The-Foundations}. It says that choice is rational only if 
 \begin{definition}[Rational choice from maximization of expected utility]
   \label{def:rationality}
   Let $S$ be a (finite) set of states of the world and $A$ a (finite) set of actions. Given a
-  probability distribution $\mu$ over $S$ and a utility function
-  $u \mycolon S \times A \rightarrow \mathbb{R} $, an action $a^* \in A$ is a rational choice
- if it maximizes the \emph{(subjective) expected utility} 
-  $\EU(a) = \sum_{s \in S} \mu(s) \ u(s, a)$.
+  probability distribution $\mu$ over $S$ and a payoff function
+  $\pi \mycolon S \times A \rightarrow \mathbb{R} $, an action $a^* \in A$ is a rational choice
+  if it maximizes the \emph{(subjective) expected utility}
+  $\EU(a) = \sum_{s \in S} \mu(s) \ \pi(s, a)$.
 \end{definition}
 
 \noindent Expected utility is subjective in the sense that it is a function of subjective
@@ -246,9 +241,9 @@ choice mechanism that contains it, all else equal. The fitness of a choice mecha
 expected payoff of $c$ over arbitrary decision situations $d$:
 \begin{align}
   \label{eq:FittnessChoiceMechSolitary}
-  F(c) = \int P(d) \  \utils_d(c) \text{ d} d \,,
+  F(c) = \int P(d) \  \pi_d(c) \text{ d} d \,,
 \end{align}
-where $P(d)$ is the probability (density) of $d$ occurring and $\Utils_d(c)$ is the payoff of
+where $P(d)$ is the probability (density) of $d$ occurring and $\pi_d(c)$ is the payoff of
 the act selected by $c$ in $d$. Probability measure $P(d)$ is our model of the statistical
 properties of a rich and variable environment.
 
@@ -258,10 +253,10 @@ choice in $g$. The fitness of $c$ is then:\footnote{We assume for simplicity of 
   all games with positive occurrence probability are two player games.}
 \begin{align}
   \label{eq:FittnessChoiceMechGame}
-  F(c) = \int \int P(g) \  P(c') \  \utils_g(c,c') \text{ d} g \,,
+  F(c) = \int \int P(g) \  P(c') \  \pi_g(c,c') \text{ d} g \,,
 \end{align}
 where $P(g)$ is the probability (density) of game $g$, $P(c')$ is the probability of
-encountering a co-player who uses choice mechanism $c'$ and $\utils_g(c,c')$ is the payoff for
+encountering a co-player who uses choice mechanism $c'$ and $\pi_g(c,c')$ is the payoff for
 a $c$-player in $g$ against the $c'$-player, given by the payoff in $g$ of the actions that $c$
 and $c'$ select in $g$. For the most part, we will focus on the more complex case of social
 decision making here. Results about solitary decision making follow from parallel arguments
@@ -273,7 +268,7 @@ encounter with a $c'$-player is the average of payoffs obtained in a random game
 by $g$'s occurrence probability:
 \begin{align}
   \label{eq:FittnessChoiceMechGamePairwise}
-  F(c, c') = \int P(g) \  \utils_g(c,c') \text{ d} g \,.
+  F(c, c') = \int P(g) \  \pi_g(c,c') \text{ d} g \,.
 \end{align}
 
 \begin{definition}[Meta game]
@@ -282,7 +277,7 @@ by $g$'s occurrence probability:
   $g$ in the environment. The meta game that captures selection of choice mechanisms in this
   environment is the one-population evolutionary game with strategies $C$ and payoff function
   $\pi \mycolon C \times C \rightarrow \mathbb{R}$ such that
-  $\pi(c,c') = F(c,c') = \int P(g) \  \utils_g(c,c') \text{ d} g$.
+  $\pi(c,c') = F(c,c') = \int P(g) \  \pi_g(c,c') \text{ d} g$.
 \end{definition}
 
 Standard notions of evolutionary game theory can be applied to meta games as well. A choice
@@ -752,21 +747,21 @@ are.
   $(\text{reg}, \text{imp})$-players.
 \end{corollary}
 
-Proofs for Proposition \ref{proposition1} and Corollary~\ref{corollary1} are given in
-Appendix~\ref{sec:proofs}. They tell us that the main conclusions drawn in the previous section
-based on the approximated meta game in Table~\ref{tab:ExpectedFitness_4Types} hold more
-generally for any class of games in which the probability of encountering a game is the product
-of independently sampling four identically distributed payoff values. As before,
-$(\text{reg}, \text{imp})$, $(\text{obj}, \text{prc})$, and $(\text{reg}, \text{prc})$ players
-will be neutrally stable, and fitness-based selection will tend to weed out maxmin play and
-leave us with a population of arbitrary frequency of $(\text{reg}, \text{imp})$,
-$(\text{obj}, \text{prc})$, and $(\text{reg}, \text{prc})$ players. This shows that there is
-support for the main conceptual point that we wanted to make: non-veridical subjective
-preference relations \emph{can}, under specific circumstances, persist under evolutionary
-selection based on objective fitness. Moreover, regret-based preferences can not only persist,
-but even be favored by natural selection if agents may have imprecise beliefs. This holds
-generally for playing arbitrary $2 \times 2$ symmetric games whose payoffs are sampled
-identically and independently at random.
+A proofs for Proposition \ref{proposition1} is given in Appendix~\ref{sec:proofs}. The result
+tells us that the main conclusions drawn in the previous section based on the approximated meta
+game in Table~\ref{tab:ExpectedFitness_4Types} hold more generally for any class of games in
+which the probability of encountering a game is the product of independently sampling four
+identically distributed payoff values. As before, $(\text{reg}, \text{imp})$,
+$(\text{obj}, \text{prc})$, and $(\text{reg}, \text{prc})$ players will be neutrally stable,
+and fitness-based selection will tend to weed out maxmin play and leave us with a population of
+arbitrary frequency of $(\text{reg}, \text{imp})$, $(\text{obj}, \text{prc})$, and
+$(\text{reg}, \text{prc})$ players. This shows that there is support for the main conceptual
+point that we wanted to make: non-veridical subjective preference relations \emph{can}, under
+specific circumstances, persist under evolutionary selection based on objective
+fitness. Moreover, regret-based preferences can not only persist, but even be favored by
+natural selection if agents may have imprecise beliefs. This holds generally for playing
+arbitrary $2 \times 2$ symmetric games whose payoffs are sampled identically and independently
+at random.
 
 \section{Extensions}
 \label{sec:extensions}
@@ -1180,25 +1175,36 @@ probabilities given by the belief type.
 \section{Proofs}
 \label{sec:proofs}
 
-
-The proof of Proposition \ref{proposition1} relies on a partition of $\mathcal{G}$,
-and on some lemmas. For brevity, let us denote the regret minimizer
-by $R$ and the maximinimizer by $M$, i.e, $R \equiv \kappa(\text{reg}, \text{imp})$ and $M \equiv  \kappa(\text{obj}, \text{imp})$. Recall from Equation \ref{eq:pairwiseEF} that $EF_{\mathcal{G}}(X,Y)$ denotes the expected evolutionary fitness of choice mechanism $X$ against choice mechanism $Y$
-with respect to the class of fitness games $\mathcal{G}$.
+The proof of Proposition \ref{proposition1} relies on a partition of $\mathcal{G}$, and on some
+lemmas. For brevity, let us denote the regret minimizer $(\text{reg}, \text{imp})$ by $R$ and
+the maximinimizer $(\text{obj}, \text{imp})$ by $M$. Following
+Equation~(\ref{eq:FittnessChoiceMechGamePairwise}), let $F_{\mathcal{G}}(X,Y)$ denotes the of
+choice mechanism $X$ against choice mechanism $Y$ on the possibly restricted class of fitness
+games $\mathcal{G}$.
 
 \vspace{.5cm}
 
 
-\noindent \textbf{Proof of Proposition \ref{proposition1}.} By definition of strict Nash equilibrium, we have to
-show that in the class $\mathcal{G}$ of symmetric $2\times2$ games with payoffs sampled from a set of i.i.d. values with at least 3 elements in the support, it holds:
-\begin{itemize}
-\item[(i)] $EF_{\mathcal{G}}(R,R)>EF_{\mathcal{G}}(M,R);$
-\item[(ii)] $EF_{\mathcal{G}}(M,M)<EF_{\mathcal{G}}(R,M).$
-\end{itemize}
+\noindent \textbf{Proof of Proposition \ref{proposition1}.} By definition of strict dominance,
+we have to show that in the class $\mathcal{G}$ of symmetric $2\times2$ games with payoffs
+sampled from a set of i.i.d. values with at least 3 elements in the support, it holds:
+\begin{multicols}{2}
+  \begin{itemize}
+  \item[(i)] $F_{\mathcal{G}}(R,R)>F_{\mathcal{G}}(M,R);$
+  \item[(ii)] $F_{\mathcal{G}}(M,M)<F_{\mathcal{G}}(R,M).$
+  \end{itemize}
+\end{multicols}
 
-
-\noindent To show
-the result we will use the following partition of $\mathcal{G}$.
+\noindent To show this we use the following partition of $\mathcal{G}$, based on payoffs parameterized as
+follows:
+\begin{center}
+  \begin{tabular}{ccc}
+    \toprule
+    & $I$ & $II$ \\ \midrule
+    $I$ & $a$ & $b$ \\
+    $II$ & $c$ & $d$ \\ \bottomrule
+  \end{tabular}
+\end{center}
 \begin{enumerate}
 \item Coordination games $\mathcal{C}$: $a>c$ and $d>b$;
 \item Anti-coordination games $\mathcal{A}$: $a<c$ and $d<b$;
@@ -1207,97 +1213,87 @@ aut $(a<c$ and $b<d)$;
 \item Weak dominance games $\mathcal{W}$: aut $a=c$ aut $b=d$;
 \item Boring games $\mathcal{B}$: $a=c$ and $b=d$.
 \end{enumerate}
-Before proving the lemmas, it is convenient to fix some notation. Let us call $x,y,z$ the 3 elements in the support, and without loss of generality suppose that $ x > y > z $. 
-We denote by $C$ a coordination game in $\mathcal{C}$ with
-payoffs $a_{C}$, $b_{C}$, $c_{C}$, and $d_{C}$;
-similarly for games $A \in \mathcal{A}$, $S \in \mathcal{S}$, $W \in \mathcal{W}$, and $B \in \mathcal{B}$. 
-Let us denote by $I_{RC}$ the event that a $R$-player plays action $I$ in the game $C$; and similarly for action $II$, for player $M$, and for games $A$, $S$, $W$ and $B$. We first consider the case of i.i.d. sampling with finite support.
+Before proving the lemmas, it is convenient to fix some notation. Let us call $x,y,z$ the 3
+elements in the support, and without loss of generality suppose that $ x > y > z $.  We denote
+by $C$ a coordination game in $\mathcal{C}$ with payoffs $a_{C}$, $b_{C}$, $c_{C}$, and
+$d_{C}$; similarly for games $A \in \mathcal{A}$, $S \in \mathcal{S}$, $W \in \mathcal{W}$, and
+$B \in \mathcal{B}$.  Let us denote by $I_{RC}$ the event that an $R$-player plays action $I$ in
+the game $C$; and similarly for action $II$, for player $M$, and for games $A$, $S$, $W$ and
+$B$. We first consider the case of i.i.d. sampling with finite support.
 
-
-\medskip{}
-
-
-\begin{lemma} \label{lemma:S-B games}
-$R$ and $M$ perform equally well in $\mathcal{S}$
-and in $\mathcal{B}$. 
+\begin{lemma} \label{lemma:S-B games} $R$ and $M$ perform equally well in $\mathcal{S}$ and in
+  $\mathcal{B}$.
 \end{lemma}
 
 \begin{proof}
-By definition of regret minimization and maxmin it
-is easy to check that whenever in a game there is a strongly dominant
-action $a^{\$}$, then $a^{\$}$ is both the maxmin action and the
-regret minimizing action. Then, for all the games in $\mathcal{S}$,
-$R$ chooses action $a$ if and only if $M$ chooses action $a$. Consequently,
-$R$ and $M$ always perform equally (well) in $\mathcal{S}$. In
-the case of $\mathcal{B}$ it is trivial to see that all the players
-perform equally.
+  By definition of regret minimization and maxmin it is easy to check that whenever in a game
+  there is a strongly dominant action $a^{\$}$, then $a^{\$}$ is both the maxmin action and the
+  regret minimizing action. Then, for all the games in $\mathcal{S}$, $R$ chooses action $a$ if
+  and only if $M$ chooses action $a$. Consequently, $R$ and $M$ always perform equally (well)
+  in $\mathcal{S}$. In the case of $\mathcal{B}$ it is trivial to see that all the players
+  perform equally.
 \end{proof}
 
-\medskip{}
-
-\begin{lemma} \label{lemma:W games}
-In $\mathcal{W}$, $(R,R)$ is the only (strict) Nash equilibrium.
+\begin{lemma} \label{lemma:W games} In $\mathcal{W}$, $R$ strictly dominates $M$.
 \end{lemma}
 
 \begin{proof}
-Assume without loss of generality that $b=d$. There are two situations that we have to check: (i) $b=d \geq a,c$ and $ a \neq c $; (ii) $b=d \leq a,c$ and $ a \neq c $.
-In the first case it
-is easy to see that $R$ and $M$ perform equally well. Indeed, given
-(i), both $R$ and $M$ choose action $I$ if $a>c$, and action $II$
-if $c>a$. If case (ii) holds instead, we have that $R$ plays $I$
-if $a>c$ and $II$ if $c>a$ as before, but $M$ plays $(\frac{1}{2}I;\frac{1}{2}II)$,
-since both $I$ and $II$ maximize the minimal payoff. Consider now
-a population of $R$ and $M$ playing games from the class $\mathcal{W}$.
-Whenever (i) is the case both $R$ and $M$ perform equally. Suppose that
-(ii) is the case and that $a>c$, without loss of generality. Then,  $EF(R,R)=a>\frac{1}{2}a+\frac{1}{2}c=EF(M,R)$, whereas $EF(M,M)=\frac{1}{4}a+\frac{1}{4}b+\frac{1}{4}c+\frac{1}{4}d<\frac{1}{2}a+\frac{1}{2}b=EF(R,M)$.
-Hence, we have that in general $EF_{\mathcal{W}}(R,R)>EF_{\mathcal{W}}(M,R),\mbox{ and }EF_{\mathcal{W}}(M,M)<EF_{\mathcal{W}}(R,M)$.
+  Assume without loss of generality that $b=d$. There are two situations that we have to check:
+  (i) $b=d \geq a,c$ and $ a \neq c $; (ii) $b=d \leq a,c$ and $ a \neq c $.\todo{what about
+    $a < b = d < c$ and $c < b = d < a$?}\ In the first case it is easy to see that $R$ and $M$
+  perform equally well. Indeed, given (i), both $R$ and $M$ choose action $I$ if $a>c$, and
+  action $II$ if $c>a$. If case (ii) holds instead, we have that $R$ plays $I$ if $a>c$ and
+  $II$ if $c>a$ as before, but $M$ plays $(\frac{1}{2}I;\frac{1}{2}II)$, since both $I$ and
+  $II$ maximize the minimal payoff. Consider now a population of $R$ and $M$ playing games from
+  the class $\mathcal{W}$.  Whenever (i) is the case both $R$ and $M$ perform equally. Suppose
+  that (ii) is the case and $W \in mathcal{W}$ is such that $a>c$, without loss of generality. Then,
+  $\pi_W(R,R)=a>\frac{1}{2}a+\frac{1}{2}c=\pi_W(M,R)$, whereas
+  $\pi_W(M,M)=\frac{1}{4}a+\frac{1}{4}b+\frac{1}{4}c+\frac{1}{4}d<\frac{1}{2}a+\frac{1}{2}b=\pi_W(R,M)$.
+  Hence, we have that in general
+  $F_{\mathcal{W}}(R,R)>F_{\mathcal{W}}(M,R),\mbox{ and
+  }F_{\mathcal{W}}(M,M)<F_{\mathcal{W}}(R,M)$.
 \end{proof}
 
-\medskip{}
-
-
-Since it is not difficult to see that both $(R,R)$ and $(M,M)$ are strict Nash equilibria in $\mathcal{C}$, and that $(R,R)$ and $(M,M)$ are not Nash equilibria in $\mathcal{A}$, the main part of
-the proof will be to show that $(R,R)$ is the only (strict) Nash equilibrium in the class $\mathcal{C}\cup\mathcal{A}$, that is:
-\begin{itemize}
-\item[(i')] $EF_{\mathcal{C}\cup\mathcal{A}}(R,R)>EF_{\mathcal{C}\cup\mathcal{A}}(M,R),$
-\item[(ii')] $EF_{\mathcal{C}\cup\mathcal{A}}(M,M)<EF_{\mathcal{C}\cup\mathcal{A}}(R,M).$
-\end{itemize}
-
+Since it is not difficult to see that both $(R,R)$ and $(M,M)$ are strict Nash equilibria in
+$\mathcal{C}$, and that $(R,R)$ and $(M,M)$ are not Nash equilibria in $\mathcal{A}$, the main
+part of the proof will be to show that $R$ strictly dominates $C$ in the class
+$\mathcal{C}\cup\mathcal{A}$, that is:
+\begin{multicols}{2}
+  \begin{itemize}
+  \item[(i')] $F_{\mathcal{C}\cup\mathcal{A}}(R,R)>F_{\mathcal{C}\cup\mathcal{A}}(M,R),$
+  \item[(ii')] $F_{\mathcal{C}\cup\mathcal{A}}(M,M)<F_{\mathcal{C}\cup\mathcal{A}}(R,M).$
+  \end{itemize}
+\end{multicols}
 
 \noindent This part needs some more lemmas to be proven, but firstly we introduce
 the following bijective function $\phi$ between coordination and
 anti-coordination games.
 
-\medskip{}
-
-\begin{definition}[$\phi$] \label{def:bijection phi}
-The permutation $\phi(a,b,c,d)=(c,d,a,b)$ defines a bijective function $\phi:\mathcal{C}\rightarrow\mathcal{A}$ that for each
-coordination game $C\in\mathcal{C}$ with payoffs $(a_{C},b_{C},c_{C},d_{C})$
-gives the anti-coordination game $A\in\mathcal{A}$ with payoffs
-$(a_{A},b_{A},c_{A},d_{A})=(c_{C},d_{C},a_{C},b_{C})$.
+\begin{definition}[$\phi$] \label{def:bijection phi} The permutation $\phi(a,b,c,d)=(c,d,a,b)$
+  defines a bijective function $\phi:\mathcal{C}\rightarrow\mathcal{A}$ that for each
+  coordination game $C\in\mathcal{C}$ with payoffs $(a_{C},b_{C},c_{C},d_{C})$ gives the
+  anti-coordination game $A\in\mathcal{A}$ with payoffs
+  $(a_{A},b_{A},c_{A},d_{A})=(c_{C},d_{C},a_{C},b_{C})$. Essentially, $\phi$ is swapping rows
+  in the payoff matrix.
 \end{definition}
 
-\medskip{}
-
 \begin{lemma} \label{lemma:probabilities coord-ant}
-$P(\phi(C))=P(C)$.
+Occurrence probability of $C$ equals that of $\phi(C)$: $P(\phi(C))=P(C)$.
 \end{lemma}
 
 \begin{proof}
-By definition, each game $C\equiv(a_{C},b_{C},c_{C},d_{C})$
-is such that $a_{C}>c_{C}$ and $d_{C}>b_{C}$, and
-each game $A\equiv(a_{A},b_{A},c_{A},d_{A})$
-is such that $a_{A}<c_{A}$ and $d_{A}>b_{A}$. Given that
-$a,b,c,d$ are i.i.d. random variables and that a sequence of i.i.d. random variables is exchangeable,
-it is clear that the probability of $(a_{C},b_{C},c_{C},d_{C})$ equals the probability of $(c_{C},d_{C},a_{C},b_{C})$.
-Hence, $P(\phi(C))=P(C)$.
+  By definition, each game $C\equiv(a_{C},b_{C},c_{C},d_{C})$ is such that $a_{C}>c_{C}$ and
+  $d_{C}>b_{C}$, and each game $A\equiv(a_{A},b_{A},c_{A},d_{A})$ is such that $a_{A}<c_{A}$
+  and $d_{A}>b_{A}$. Given that $a,b,c,d$ are i.i.d. random variables and that a sequence of
+  i.i.d. random variables is exchangeable, it is clear that the probability of
+  $(a_{C},b_{C},c_{C},d_{C})$ equals the probability of $(c_{C},d_{C},a_{C},b_{C})$.  Hence,
+  $P(\phi(C))=P(C)$.
 \end{proof}
 
-\medskip{}
-
-\begin{lemma} \label{lemma:probabilities actions coord-ant}
-Let $P(E)$ be the probability of event $E$, then
-it holds that:
+\begin{lemma} \label{lemma:probabilities actions coord-ant} Let $P(E)$ be the probability of
+  event $E$, e.g., $P(I_{RC})$ is the probability that a random $R$-player plays act $I$ is
+  fixed coordination game $C$, which is either 0, $.5$ or 1, depending on $C$.  It then holds
+  that:
 \begin{itemize}
 \item $P(I_{RC})=P(II_{R\phi(C)})$, and $P(II_{RC})=P(I_{R\phi(C)})$;
 \item $P(I_{MC})=P(II_{M\phi(C)})$, and $P(II_{MC})=P(I_{M\phi(C)})$.
@@ -1305,106 +1301,128 @@ it holds that:
 \end{lemma}
 
 \begin{proof}
-It is easy to check that if $b_{C}-d_{C}>c_{C}-a_{C}$,
-a $R$-player plays action $I$ in $C$; that if $b_{C}-d_{C}<c_{C}-a_{C}$,
-$R$ plays $II$; and that if $b_{C}-d_{C}=c_{C}-a_{C}$,
-a $R$-player is indifferent between $I$ and $II$ in $C$, and
-we assume that randomizes with $(\frac{1}{2}I;\frac{1}{2}II)$. Similarly,
-if $a_{A}-c_{A}>d_{A}-b_{A}$, a $R$-player plays action
-$I$ in $A$; if $a_{A}-c_{A}<d_{A}-b_{A}$, $R$
-plays $II$; and if $a_{A}-c_{A}=d_{A}-b_{A}$, a
-$R$-player is indifferent between $I$ and $II$ in $A$, and randomizes
-with $(\frac{1}{2}I;\frac{1}{2}II)$. Consequently, if $b_{C}-d_{C}>c_{C}-a_{C}$,
-then $P(I_{RC})=1$, and by definition of $\phi$ we have
-$P(II_{R\phi(C)})=1$. Likewise, if $b_{C}-d_{C}<c_{C}-a_{C}$,
-then $P(II_{RC})=1=P(I_{R\phi(C)})$; and if $b_{C}-d_{C}=c_{C}-a_{C}$,
-then $P(I_{RC})=P(II_{RC})=\frac{1}{2}=P(II_{R\phi(C)})=P(I_{R\phi(C)})$. \\
-In the same way, in coordination games we have that if $b_{C}>c_{C}$,
-a $M$-player plays $I$; if $c_{C}>b_{C}$, a $M$-player plays
-$II$; and if $b_{C}=c_{C}$, $M$ is indifferent between $I$
-and $II$, and plays $(\frac{1}{2}I;\frac{1}{2}II)$. In anti-coordination
-games instead, if $a_{A}>d_{A}$, $M$ plays $I$; if $a_{A}<d_{A}$,
-$M$ plays $II$; if $a_{A}=d_{A}$, $M$ plays $(\frac{1}{2}I;\frac{1}{2}II)$.
-By definition of $\phi$: $P(I_{MC})=1=P(II_{M\phi(C)})$
-if $b_{C}>c_{C}$; $P(II_{MC})=1=P(I_{M\phi(C)})$
-if $c_{C}>b_{C}$; and $P(I_{MC})=P(II_{MC})=\frac{1}{2}=P(II_{M\phi(C)})=P(I_{M\phi(C)})$
-if $b_{C}=c_{C}$.
+  It is easy to check that if $b_{C}-d_{C}>c_{C}-a_{C}$, an $R$-player plays action $I$ in $C$;
+  that if $b_{C}-d_{C}<c_{C}-a_{C}$, $R$ plays $II$; and that if $b_{C}-d_{C}=c_{C}-a_{C}$, a
+  $R$-player is indifferent between $I$ and $II$ in $C$, and so randomizes with
+  $(\frac{1}{2}I;\frac{1}{2}II)$. Similarly, if $a_{A}-c_{A}>d_{A}-b_{A}$, an $R$-player plays
+  action $I$ in $A$; if $a_{A}-c_{A}<d_{A}-b_{A}$, $R$ plays $II$; and if
+  $a_{A}-c_{A}=d_{A}-b_{A}$, an $R$-player is indifferent between $I$ and $II$ in $A$, and
+  randomizes with $(\frac{1}{2}I;\frac{1}{2}II)$. Consequently, if $b_{C}-d_{C}>c_{C}-a_{C}$,
+  then $P(I_{RC})=1$, and by definition of $\phi$ we have $P(II_{R\phi(C)})=1$. Likewise, if
+  $b_{C}-d_{C}<c_{C}-a_{C}$, then $P(II_{RC})=1=P(I_{R\phi(C)})$; and if
+  $b_{C}-d_{C}=c_{C}-a_{C}$,
+  then $P(I_{RC})=P(II_{RC})=\frac{1}{2}=P(II_{R\phi(C)})=P(I_{R\phi(C)})$. \\
+  In the same way, in coordination games we have that if $b_{C}>c_{C}$, an $M$-player plays $I$;
+  if $c_{C}>b_{C}$, an $M$-player plays $II$; and if $b_{C}=c_{C}$, $M$ is indifferent between
+  $I$ and $II$, and plays $(\frac{1}{2}I;\frac{1}{2}II)$. In anti-coordination games instead,
+  if $a_{A}>d_{A}$, $M$ plays $I$; if $a_{A}<d_{A}$, $M$ plays $II$; if $a_{A}=d_{A}$, $M$
+  plays $(\frac{1}{2}I;\frac{1}{2}II)$.  By definition of $\phi$:
+  $P(I_{MC})=1=P(II_{M\phi(C)})$ if $b_{C}>c_{C}$; $P(II_{MC})=1=P(I_{M\phi(C)})$ if
+  $c_{C}>b_{C}$; and $P(I_{MC})=P(II_{MC})=\frac{1}{2}=P(II_{M\phi(C)})=P(I_{M\phi(C)})$ if
+  $b_{C}=c_{C}$.
 \end{proof}
-
-\medskip{}
 
 \begin{lemma} \label{lemma:action implications}
 It holds that:
-\begin{itemize}
-\item $a_{C}>d_{C}\rightarrow(I_{MC}\subset I_{RC})$;
-\item $a_{C}<d_{C}\rightarrow(II_{MC}\subset II_{RC})$;
-\item $a^{C}=d^{C}\rightarrow I_{MC}=I_{RC}$.
-\end{itemize}
+\begin{multicols}{2}
+  \begin{itemize}
+  \item $a_{C}>d_{C}\rightarrow(I_{MC}\subset I_{RC})$;
+  \item $a^{C}=d^{C}\rightarrow I_{MC}=I_{RC}$.
+  \item $a_{C}<d_{C}\rightarrow(II_{MC}\subset II_{RC})$;
+  \end{itemize}
+\end{multicols}
 \end{lemma}
 
 \begin{proof}
-If $b_{C}-d_{C}>c_{C}-a_{C}$, $R$ plays
-$I$, and if $b_{C}-d_{C}=c_{C}-a_{C}$, $R$ plays
-$(\frac{1}{2}I;\frac{1}{2}II)$, whereas if $b_{C}>c_{C}$,
-$M$ plays $I$, and if $b_{C}=c_{C}$, $M$ plays $(\frac{1}{2}I;\frac{1}{2}II)$.
-Then, $I_{RC}$ implies that $b_{C}-d_{C}\geq c_{C}-a_{C}$,
-and $I_{MC}$ implies that $b_{C}\geq c_{C}$. Moreover,
-on the assumption that $a_{C}>d_{C}$, it is easy to check
-that $b_{C}\geq c_{C}$ implies $b_{C}-d_{C}>c_{C}-a_{C}$.
-Hence, in any $C$ with $a_{C}>d_{C}$ it holds that $I_{MC}\mbox{ implies }I_{RC}$,
-i.e., $a_{C}>d_{C}\rightarrow(I_{MC}\subseteq I_{RC})$.
-Instead, it is possible that $a_{C}>d_{C}$, $b_{C}-d_{C}>c_{C}-a_{C}$
-and $b_{C}<c_{C}$ hold simultaneously, so that $I_{MC}\nsupseteq I_{RC}$.
-Consequently: $a_{C}>d_{C}\rightarrow(I_{MC}\subset I_{RC})$.
-By symmetric argument it can be shown that $a_{C}<d_{C}\rightarrow(II_{MC}\subset II_{RC})$
-too. \\
-Finally, when $a_{C}=d_{C}$ it holds that: $b_{C}-d_{C}>c_{C}-a_{C}$
-iff $b_{C}>c_{C}$; $b_{C}-d_{C}<c_{C}-a_{C}$
-iff $b_{C}<c_{C}$; and $b_{C}-d_{C}=c_{C}-a_{C}$
-iff $b_{C}=c_{C}$. Hence, $a_{C}=d_{C}\rightarrow I_{MC}=I_{RC}$.
+  If $b_{C}-d_{C}>c_{C}-a_{C}$, $R$ plays $I$, and if $b_{C}-d_{C}=c_{C}-a_{C}$, $R$ plays
+  $(\frac{1}{2}I;\frac{1}{2}II)$, whereas if $b_{C}>c_{C}$, $M$ plays $I$, and if
+  $b_{C}=c_{C}$, $M$ plays $(\frac{1}{2}I;\frac{1}{2}II)$.  Then, $I_{RC}$ implies that
+  $b_{C}-d_{C}\geq c_{C}-a_{C}$, and $I_{MC}$ implies that $b_{C}\geq c_{C}$. Moreover, on the
+  assumption that $a_{C}>d_{C}$, it is easy to check that $b_{C}\geq c_{C}$ implies
+  $b_{C}-d_{C}>c_{C}-a_{C}$.  Hence, in any $C$ with $a_{C}>d_{C}$ it holds that
+  $I_{MC}\mbox{ implies }I_{RC}$, i.e., $a_{C}>d_{C}\rightarrow(I_{MC}\subseteq I_{RC})$.
+  Instead, it is possible that $a_{C}>d_{C}$, $b_{C}-d_{C}>c_{C}-a_{C}$ and $b_{C}<c_{C}$ hold
+  simultaneously, so that $I_{MC}\nsupseteq I_{RC}$.  Consequently:
+  $a_{C}>d_{C}\rightarrow(I_{MC}\subset I_{RC})$.  By a symmetric argument it can be shown that
+  $a_{C}<d_{C}\rightarrow(II_{MC}\subset II_{RC})$ too. Finally, when $a_{C}=d_{C}$ it holds
+  that: $b_{C}-d_{C}>c_{C}-a_{C}$ iff $b_{C}>c_{C}$; $b_{C}-d_{C}<c_{C}-a_{C}$ iff
+  $b_{C}<c_{C}$; and $b_{C}-d_{C}=c_{C}-a_{C}$ iff $b_{C}=c_{C}$. Hence,
+  $a_{C}=d_{C}\rightarrow I_{MC}=I_{RC}$.
 \end{proof}
 
-\medskip{}
+We are now ready to prove that
+$F_{\mathcal{C}\cup\mathcal{A}}(R,R)>F_{\mathcal{C}\cup\mathcal{A}}(M,R)$. With notation like
+$P(I_{RC} \cup I_{RC})$ denoting the probability that a random $R$-player plays $I$ and another
+$R$-player plays $I$ as well in game $C$, rewrite this as:
+\begin{align*}
+  & \sum_{C \in \mathcal{C}}P(C)[P(I_{RC}\cap I_{RC})\cdot a_{C}+P(II_{RC}\cap II_{RC})\cdot
+  d_{C}+P(I_{RC}\cap II_{RC})\cdot b_{C}+P(II_{RC}\cap I_{RC})\cdot c_{C}] 
+  \\ + & \sum_{A \in
+    \mathcal{A}}P(A)[P(I_{RA}\cap I_{RA})\cdot a_{A}+P(II_{RA}\cap II_{RA})\cdot
+  d_{A}+P(I_{RA}\cap II_{RA})\cdot b_{A}+P(II_{RA}\cap I_{RA})\cdot c_{A}]\\
+  > & \sum_{C \in
+    \mathcal{C}}P(C)[P(I_{RC}\cap I_{MC})\cdot a_{C}+P(II_{RC}\cap II_{MC})\cdot
+  d_{C}+P(I_{RC}\cap II_{MC})\cdot c_{C}+P(II_{RC}\cap I_{MC})\cdot b_{C}] \\
+   + & \sum_{A \in
+    \mathcal{A}}P(A)[P(I_{RA}\cap I_{MA})\cdot a_{A}+P(II_{RA}\cap II_{MA})\cdot
+  d_{A}+P(I_{RA}\cap II_{MA})\cdot c_{A}+P(II_{RA}\cap I_{MA})\cdot b_{A}]
+\end{align*}
 
 
-\noindent We are now ready to prove that:
-\begin{itemize}
-\item[(i')] $EF_{\mathcal{C}\cup\mathcal{A}}(R,R)>EF_{\mathcal{C}\cup\mathcal{A}}(M,R);$
-\item[(ii')] $EF_{\mathcal{C}\cup\mathcal{A}}(M,M)<EF_{\mathcal{C}\cup\mathcal{A}}(R,M).$
-\end{itemize}
-We can rewrite $EF_{\mathcal{C}\cup\mathcal{A}}(R,R)>EF_{\mathcal{C}\cup\mathcal{A}}(M,R)$
-more explicitly as:
+\noindent By Lemma \ref{lemma:probabilities coord-ant} and Lemma \ref{lemma:probabilities
+  actions coord-ant}, we can express everything in terms of $C$ only:
+\begin{align*}
+  & \textstyle{\sum_{C}} P(C)[P(I_{RC}\cap I_{RC})\cdot a_{C}+P(II_{RC}\cap II_{RC})\cdot d_{C}+P(I_{RC}\cap
+  II_{RC})\cdot b_{C}+P(II_{RC}\cap I_{RC})\cdot c_{C} + \\
+  & \ \ \ \ P(II_{RC}\cap II_{RC})\cdot c_{C}+P(I_{RC}\cap I_{RC})\cdot b_{C}+P(II_{RC}\cap
+  I_{RC})\cdot d_{C}+P(I_{RC}\cap
+  II_{RC})\cdot a_{C}] \\
+  > & \textstyle{\sum_{C}}P(C)[P(I_{RC}\cap I_{MC})\cdot a_{C}+P(II_{RC}\cap II_{MC})\cdot
+  d_{C}+P(I_{RC}\cap II_{MC})\cdot c_{C}+P(II_{RC}\cap I_{MC})\cdot b_{C} + \\
+  & \ \ \ \ P(II_{RC}\cap II_{MC})\cdot c_{C}+P(I_{RC}\cap I_{MC})\cdot b_{C}+P(II_{RC}\cap
+  I_{MC})\cdot a_{C}+P(I_{RC}\cap II_{MC})\cdot d_{C}]
+\end{align*}
+This simplifies to:
+\begin{align*}
+  & \textstyle{\sum_{C}}P(C)[a_{C} \cdot (P(I_{RC}\cap I_{RC}) + P(I_{RC}\cap II_{RC})) + b_{C}
+  \cdot (P(I_{RC}\cap II_{RC}) + P(I_{RC}\cap I_{RC})) + 
+\\ & \ \ \ \ c_{C} \cdot
+  (P(II_{RC}\cap I_{RC}) +P(II_{RC}\cap II_{RC})) + d_{C} \cdot (P(II_{RC}\cap
+  II_{RC})+P(II_{RC}\cap I_{RC}))] 
+\\ > & \textstyle{\sum_{C}}P(C)[a_{C} \cdot (P(I_{RC}\cap
+  I_{MC})+P(II_{RC}\cap I_{MC})) + b_{C} \cdot (P(II_{RC}\cap I_{MC})+P(I_{RC}\cap I_{MC})) + \\
+  & \ \ \ \ c_{C} \cdot (P(I_{RC}\cap II_{MC})+P(II_{RC}\cap II_{MC})) + d_{C} \cdot (P(II_{RC}\cap
+  II_{MC})+P(I_{RC}\cap II_{MC}))]
+\end{align*}
 
-\medskip{}
+\noindent Now let us split into $a>d$ and $a<d$, and consider $a>d$ first.  Notice that, by
+Lemma \ref{lemma:action implications}, the case $a=d$ is irrelevant in order to discriminate
+between $R$ and $M$. If $a>d$, by Lemma \ref{lemma:action implications} we can eliminate the
+cases where $R$ plays $II$ and $M$ plays $I$:
+\begin{align*}
+  & \textstyle{\sum_{C_{a>d}}} P(C)[a_{C} \cdot (P(I_{RC}\cap I_{RC}) + P(I_{RC}\cap II_{RC})) + b_{C} \cdot
+  (P(I_{RC}\cap II_{RC}) + P(I_{RC}\cap I_{RC})) \\ 
+  & \ \ \ \ + c_{C} \cdot (P(II_{RC}\cap I_{RC})
+  +P(II_{RC}\cap II_{RC})) + d_{C} \cdot (P(II_{RC}\cap II_{RC})+P(II_{RC}\cap I_{RC}))] \\
+  > & 
+  \textstyle{\sum_{C_{a>d}}} P(C)[a_{C} \cdot P(I_{RC}\cap I_{MC}) + b_{C} \cdot P(I_{RC}\cap I_{MC}) +
+  c_{C} \cdot (P(I_{RC}\cap II_{MC})+P(II_{RC}\cap II_{MC})) \\ 
+  & \ \ \ \ + d_{C} \cdot (P(II_{RC}\cap
+  II_{MC})+P(I_{RC}\cap II_{MC}))]
+\end{align*}
+Rewrite:
+\begin{align*}
+  & \textstyle{\sum_{C_{a>d}}} P(C)[a_{C} \cdot (P(I_{RC}\cap I_{RC}) + P(I_{RC}\cap II_{RC})-
+  P(I_{RC}\cap I_{MC})) \\ 
+  & \ \ \ \ + b_{C} \cdot (P(I_{RC}\cap II_{RC}) + P(I_{RC}\cap I_{RC})-
+  P(I_{RC}\cap I_{MC})) \\ 
+  & \ \ \ \ + c_{C} \cdot (P(II_{RC}\cap I_{RC}) +P(II_{RC}\cap II_{RC})-
+  P(I_{RC}\cap II_{MC})- P(II_{RC}\cap II_{MC})) \\ 
+  & \ \ \ \ + d_{C} \cdot (P(II_{RC}\cap
+  II_{RC})+P(II_{RC}\cap I_{RC})- P(II_{RC}\cap II_{MC})- P(I_{RC}\cap II_{MC}))]> 0
+\end{align*}
 
-\noindent $\sum_{C \in \mathcal{C}}P(C)[P(I_{RC}\cap I_{RC})\cdot a_{C}+P(II_{RC}\cap II_{RC})\cdot d_{C}+P(I_{RC}\cap II_{RC})\cdot b_{C}+P(II_{RC}\cap I_{RC})\cdot c_{C}]+\sum_{A \in \mathcal{A}}P(A)[P(I_{RA}\cap I_{RA})\cdot a_{A}+P(II_{RA}\cap II_{RA})\cdot d_{A}+P(I_{RA}\cap II_{RA})\cdot b_{A}+P(II_{RA}\cap I_{RA})\cdot c_{A}] > \sum_{C \in \mathcal{C}}P(C)[P(I_{RC}\cap I_{MC})\cdot a_{C}+P(II_{RC}\cap II_{MC})\cdot d_{C}+P(I_{RC}\cap II_{MC})\cdot c_{C}+P(II_{RC}\cap I_{MC})\cdot b_{C}]+\sum_{A \in \mathcal{A}}P(A)[P(I_{RA}\cap I_{MA})\cdot a_{A}+P(II_{RA}\cap II_{MA})\cdot d_{A}+P(I_{RA}\cap II_{MA})\cdot c_{A}+P(II_{RA}\cap I_{MA})\cdot b_{A}]$
-\medskip{}
 
-\noindent Then, the next derivation follows. By Lemma \ref{lemma:probabilities coord-ant} and Lemma \ref{lemma:probabilities actions coord-ant}, we can express
-everything in terms of $C$ only:
-\begin{itemize}
-
-%\item $\sum_{C}P(C)[P(I_{RC}\cap I_{RC})\cdot a_{C}+P(II_{RC}\cap II_{RC})\cdot d_{C}+P(I_{RC}\cap II_{RC})\cdot b_{C}+P(II_{RC}\cap I_{RC})\cdot c_{C}]+\sum_{A}P(A)[P(I_{RA}\cap I_{RA})\cdot a_{A}+P(II_{RA}\cap II_{RA})\cdot d_{A}+P(I_{RA}\cap II_{RA})\cdot b_{A}+P(II_{RA}\cap I_{RA})\cdot c_{A}] > \sum_{C}P(C)[P(I_{RC}\cap I_{MC})\cdot a_{C}+P(II_{RC}\cap II_{MC})\cdot d_{C}+P(I_{RC}\cap II_{MC})\cdot c_{C}+P(II_{RC}\cap I_{MC})\cdot b_{C}]+\sum_{A}P(A)[P(I_{RA}\cap I_{MA})\cdot a_{A}+P(II_{RA}\cap II_{MA})\cdot d_{A}+P(I_{RA}\cap II_{MA})\cdot c_{A}+P(II_{RA}\cap I_{MA})\cdot b_{A}]$
-
-\item $\sum_{C}P(C)[P(I_{RC}\cap I_{RC})\cdot a_{C}+P(II_{RC}\cap II_{RC})\cdot d_{C}+P(I_{RC}\cap II_{RC})\cdot b_{C}+P(II_{RC}\cap I_{RC})\cdot c_{C} +P(II_{RC}\cap II_{RC})\cdot c_{C}+P(I_{RC}\cap I_{RC})\cdot b_{C}+P(II_{RC}\cap I_{RC})\cdot d_{C}+P(I_{RC}\cap II_{RC})\cdot a_{C}] > \sum_{C}P(C)[P(I_{RC}\cap I_{MC})\cdot a_{C}+P(II_{RC}\cap II_{MC})\cdot d_{C}+P(I_{RC}\cap II_{MC})\cdot c_{C}+P(II_{RC}\cap I_{MC})\cdot b_{C}+P(II_{RC}\cap II_{MC})\cdot c_{C}+P(I_{RC}\cap I_{MC})\cdot b_{C}+P(II_{RC}\cap I_{MC})\cdot a_{C}+P(I_{RC}\cap II_{MC})\cdot d_{C}]$
-
-\item $\sum_{C}P(C)[a_{C} \cdot (P(I_{RC}\cap I_{RC}) + P(I_{RC}\cap II_{RC})) + b_{C} \cdot  (P(I_{RC}\cap II_{RC}) + P(I_{RC}\cap I_{RC})) + c_{C} \cdot (P(II_{RC}\cap I_{RC}) +P(II_{RC}\cap II_{RC})) + d_{C} \cdot (P(II_{RC}\cap II_{RC})+P(II_{RC}\cap I_{RC}))]> \sum_{C}P(C)[a_{C} \cdot (P(I_{RC}\cap I_{MC})+P(II_{RC}\cap I_{MC})) + b_{C} \cdot (P(II_{RC}\cap I_{MC})+P(I_{RC}\cap I_{MC})) + c_{C} \cdot (P(I_{RC}\cap II_{MC})+P(II_{RC}\cap II_{MC})) + d_{C} \cdot (P(II_{RC}\cap II_{MC})+P(I_{RC}\cap II_{MC}))]$
-
-\end{itemize}
-
-\noindent Now let us split into $a>d$ and $a<d$, and consider $a>d$ first.
-Notice that, by Lemma \ref{lemma:action implications}, the case $a=d$ is irrelevant in order to
-discriminate between $R$ and $M$. If $a>d$, by Lemma \ref{lemma:action implications} we can eliminate
-the cases where $R$ plays $II$ and $M$ plays $I$:
-
-\begin{itemize}
-
-\item $\sum_{C_{a>d}} P(C)[a_{C} \cdot (P(I_{RC}\cap I_{RC}) + P(I_{RC}\cap II_{RC})) + b_{C} \cdot  (P(I_{RC}\cap II_{RC}) + P(I_{RC}\cap I_{RC})) + c_{C} \cdot (P(II_{RC}\cap I_{RC}) +P(II_{RC}\cap II_{RC})) + d_{C} \cdot (P(II_{RC}\cap II_{RC})+P(II_{RC}\cap I_{RC}))]> 
-\sum_{C_{a>d}} P(C)[a_{C} \cdot P(I_{RC}\cap I_{MC}) + b_{C} \cdot P(I_{RC}\cap I_{MC}) + c_{C} \cdot (P(I_{RC}\cap II_{MC})+P(II_{RC}\cap II_{MC})) + d_{C} \cdot (P(II_{RC}\cap II_{MC})+P(I_{RC}\cap II_{MC}))]$
-
-\item $\sum_{C_{a>d}} P(C)[a_{C} \cdot (P(I_{RC}\cap I_{RC}) + P(I_{RC}\cap II_{RC})- P(I_{RC}\cap I_{MC})) + b_{C} \cdot  (P(I_{RC}\cap II_{RC}) + P(I_{RC}\cap I_{RC})- P(I_{RC}\cap I_{MC})) + c_{C} \cdot (P(II_{RC}\cap I_{RC}) +P(II_{RC}\cap II_{RC})- P(I_{RC}\cap II_{MC})- P(II_{RC}\cap II_{MC})) + d_{C} \cdot (P(II_{RC}\cap II_{RC})+P(II_{RC}\cap I_{RC})- P(II_{RC}\cap II_{MC})- P(I_{RC}\cap II_{MC}))]> 0$
-
-\end{itemize}
 
 \noindent We now distinguish between two cases: (1) $ a-c = d-b $ and (2) $  a-c \neq d-b $. Notice that $P(I_{RC}\cap II_{RC}) \neq 0$ if and only if case (1) obtains, and that $a>d$ and (1) imply $II_{MC}$. Then, from (1) we have\footnote{Note that when we have only 3 elements in the support it is not guaranteed that case (1), together with $a>d$, may arise in a coordination game, whereas it is guaranteed that case (2), together with $a>d$, occurs with some positive probability. If we take for instance $x= 5, y= 2, z= 1$, then case (1) cannot obtain, whereas if we take $x= 3, y= 2, z= 1$, both (1) and (2) may obtain ($a=3, b=1, c=2, d=2$ for case (1), and $a=3, b=1, c=2, d=2$ for case (2). Moreover, under the assumption that $a>d$, having 3 elements in the support is a necessary and sufficient condition for case (2) to have positive occurrence in a coordination game. As it will be clear in the following, a positive occurrence of case (2) only is enough for the theorem to hold.}:
 
@@ -1422,10 +1440,12 @@ the cases where $R$ plays $II$ and $M$ plays $I$:
 
 $$ \sum_{C_{a>d}} P(C)[\frac{1}{2}a_{C}+ \frac{1}{2}b_{C} - \frac{1}{2}c_{C} - \frac{1}{2}d_{C}]= 0 $$
 
-\noindent This means that, when (1) is the case, $(R,R)$ is not a strict Nash equilibrium. To prove that $(R,R)$ is strict we then have to show that the inequality is strict when case (2) obtains. \\
-When (2) is the case, it is easy to check, by Lemma \ref{lemma:action implications}, that $P(I_{RC} \cap I_{RC})-P(I_{RC}\cap I_{MC})=P(I_{RC}\cap II_{MC})$
-and $P(II_{RC}\cap II_{MC})=P(II_{RC} \cap II_{RC})$.
-Consequently, we have:
+\noindent This means that, on the class of $\mathcal{C} \cup \mathcal{A}$-games where $a>c$ and
+where (1) is the case, $R$ and $M$ are equally fit. This changes when we turn to (2). In that
+case, it is easy to check, by Lemma \ref{lemma:action implications}, that
+$P(I_{RC} \cap I_{RC})-P(I_{RC}\cap I_{MC})=P(I_{RC}\cap II_{MC})$ and
+$P(II_{RC}\cap II_{MC})=P(II_{RC} \cap II_{RC})$.\todo{please explain a bit}\ Consequently, we
+have:
 
 \begin{itemize}
 
@@ -1436,36 +1456,29 @@ Consequently, we have:
 \item $\sum_{C_{a>d}} P(C)[P(I_{RC}\cap II_{MC})\cdot (a_{C} + b_{C} - c_{C} - d_{C})]> 0$
 
 \end{itemize}
-\medskip{}
 
 \noindent We know that $I_{RC}$ implies that $a_{C}-c_{C}\geq d_{C}-b_{C}$.
-%and $II_{MC}$ implies that $b_{C}\leq c_{C}$. 
-Since we have assumed that $a_{C}-c_{C}\neq d_{C}-b_{C}$, we have that $a_{C}-c_{C} > d_{C}-b_{C}$. Hence, the inequality 
+% and $II_{MC}$ implies that $b_{C}\leq c_{C}$.
+Since we have assumed that $a_{C}-c_{C}\neq d_{C}-b_{C}$, we have that
+$a_{C}-c_{C} > d_{C}-b_{C}$. Hence, the inequality
 $$\sum_{C_{a>d}} P(C)[P(I_{RC}\cap II_{MC})\cdot (a_{C} + b_{C} - c_{C} - d_{C})]> 0$$
-is satisfied. So, when (2) obtains, $(R,R)$ is a strict Nash equilibrium.
-%From $b_{C}-d_{C}\geq c_{C}-a_{C}$, it is easy to see that $\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})\cdot P(I_{RC}\cap II_{MC})\cdot[a_{C}-c_{C}]\geq\sum_{G_{a>d}^{C}}P(G_{a>d}^{C})\cdot P(I_{RC}\cap II_{MC})\cdot[d_{C}-b_{C}]$ holds. When the event $I_{RC}\cap II_{MC}$ obtains on the assumption that $a_{C}>d_{C}$, there are only three possible payoff orderings: $a>c\geq d>b$, $a>d>c>b$, and $a>d>c=b$. If games are randomly sampled from a finite set with i.i.d. values for $a,b,c$ and $d$, then $a>d>c=b$ occurs with positive probability, and the last formula of the derivation holds with strict inequality too. Hence, RM is evolutionarily stable when the value set for $a,b,c,d$ is finite. \\ 
-%If i.i.d. values are sampled from a compact and convex set instead, it is again easy to see that $\forall a,d,c\ \exists\epsilon$ such that $\forall b\in(d,d+\epsilon)$ the above formula holds with strict inequality. We can simply take $\epsilon\equiv\frac{a-c}{2}$, and the interval $(d,d+\epsilon)$ always has positive probability. Hence, RM is evolutionarily stable when the value set for $a,b,c,d$ is a compact and convex set too. \\ 
-Symmetrically, from $a<d$ and by distinguishing between the two cases (1) and (2) as before, in the end  we get:
-
+is satisfied. So, in the class of $\mathcal{C} \cup \mathcal{A}$-games where $a >c$, $R$
+strictly dominates $C$. Symmetrically, from $a<d$ and by distinguishing between the two cases
+(1) and (2) as before, in the end we get:
 \begin{itemize}
-
-\item[(1)] $\sum_{C_{a<d}} P(C)[-\frac{1}{2}a_{C}- \frac{1}{2}b_{C} + \frac{1}{2}c_{C} + \frac{1}{2}d_{C}]= 0$; and
-
-\item[(2)] $\sum_{C_{a<d}} P(C)[P(II_{RC}\cap I_{MC})\cdot (-a_{C} - b_{C} + c_{C} + d_{C})]> 0$.
-
+\item $\sum_{C_{a<d}} P(C)[-\frac{1}{2}a_{C}- \frac{1}{2}b_{C} + \frac{1}{2}c_{C} + \frac{1}{2}d_{C}]= 0$; and
+\item $\sum_{C_{a<d}} P(C)[P(II_{RC}\cap I_{MC})\cdot (-a_{C} - b_{C} + c_{C} + d_{C})]> 0$.
 \end{itemize}
-
-
-\noindent Hence, we can conclude that $(R,R)$ is a strict Nash equilibrium in the class $\mathcal{C}\cup\mathcal{A}$. \\
-In case of i.i.d. sampling with infinite support instead, games in $\mathcal{B} $ and $\mathcal{W} $ never arise, and the proof is the same for the remaining games in $\mathcal{S}$,  $\mathcal{C} $ and $\mathcal{A} $.
-
-\medskip{}
-
-The second half of the result is that $(M,M)$ is not a (strict) Nash equilibrium in $\mathcal{C}\cup\mathcal{A}$: $EF_{\mathcal{C}\cup\mathcal{A}}(M,M)<EF_{\mathcal{C}\cup\mathcal{A}}(R,M)$.
-As before, we write it more explicitly as:
+\noindent Hence, we can conclude that $R$ strictly dominates $M$ on the class
+$\mathcal{C}\cup\mathcal{A}$. Notice that in case of i.i.d. sampling with infinite support,
+games in $\mathcal{B} $ and $\mathcal{W} $ never arise, but the proof is the same for the
+remaining games in $\mathcal{S}$, $\mathcal{C} $ and $\mathcal{A}$.
 
 \medskip{}
 
+It remains to be shown that
+$F_{\mathcal{C}\cup\mathcal{A}}(M,M)<F_{\mathcal{C}\cup\mathcal{A}}(R,M)$. As before, spell
+this out as:
 
 \noindent $\sum_{C}P(C)[P(I_{MC}\cap I_{MC})\cdot a_{C}+P(II_{MC}\cap II_{MC})\cdot d_{C}+P(I_{MC}\cap II_{MC})\cdot b_{C}+P(II_{MC}\cap I_{MC})\cdot c_{C}]+\sum_{A}P(A)[P(I_{MA}\cap I_{MA})\cdot a_{A}+P(II_{MA}\cap II_{MA})\cdot d_{A}+P(I_{MA}\cap II_{MA})\cdot b_{A}+P(II_{MA}\cap I_{MA})\cdot c_{A}] < \sum_{C}P(C)[P(I_{RC}\cap I_{MC})\cdot a_{C}+P(II_{RC}\cap II_{MC})\cdot d_{C}+P(I_{RC}\cap II_{MC})\cdot b_{C}+P(II_{RC}\cap I_{MC})\cdot c_{C}]+\sum_{A}P(A)[P(I_{RA}\cap I_{MA})\cdot a_{A}+P(II_{RA}\cap II_{MA})\cdot d_{A}+P(I_{RA}\cap II_{MA})\cdot b_{A}+P(II_{RA}\cap I_{MA})\cdot c_{A}]$.
 \medskip{}
@@ -1476,7 +1489,10 @@ As before, we write it more explicitly as:
 \noindent $\sum_{C_{a>d}} P(C)[a_{C} \cdot (P(I_{MC}\cap I_{MC}) + P(I_{MC}\cap II_{MC})- P(I_{RC}\cap I_{MC}) - P(I_{RC}\cap II_{MC})) + b_{C} \cdot  (P(I_{MC}\cap I_{MC}) + P(I_{MC}\cap II_{MC})- P(I_{RC}\cap I_{MC}) - P(I_{RC}\cap II_{MC})) + c_{C} \cdot (P(II_{MC}\cap I_{MC}) +P(II_{MC}\cap II_{MC})- P(II_{RC}\cap II_{MC})) + d_{C} \cdot (P(II_{MC}\cap II_{MC})+P(II_{MC}\cap I_{MC})- P(II_{RC}\cap II_{MC}))]< 0$
 \medskip{}
 
-\noindent We now distinguish between (1) $b=c$, (2) $b>c$, and (3) $b<c$. Notice that either (1) or (2), together with $a>d$, implies $I_{RC}$. Then we obtain\footnote{Note that here, when we only have 3 elements in the support, case (2) is impossible. However, we can insure that cases (1) and (3) will eventually obtain. Again, this will be enough for the theorem to hold.}:
+\noindent We now distinguish between (1) $b=c$, (2) $b>c$, and (3) $b<c$. Notice that either
+(1) or (2), together with $a>d$, implies $I_{RC}$. Then we obtain\footnote{Note that here, when
+  we only have 3 elements in the support, case (2) is impossible, but cases (1) and (3) can
+  occur with positive probability, and this enough for our purpose.}:
 \begin{itemize}
 
 \item[(1)] $\sum_{C_{a>d}} P(C)[-\frac{1}{2}a_{C} - \frac{1}{2}b_{C} + \frac{1}{2}c_{C} + \frac{1}{2}d_{C}]< 0$;
@@ -1500,74 +1516,16 @@ As before, we write it more explicitly as:
 \end{itemize}
 
 
-\noindent Finally, we can conclude that $(M,M)$ is
-not a (strict) Nash equilibrium, and therefore $(R,R)$ is the unique strict Nash equilibrium. \\
-As before, when we have i.i.d. sampling with infinite support, games in $\mathcal{W}$ and $\mathcal{B}$ never occur, and the proof is the same for all the other cases. Hence, both when the support of $a,b,c,d$
-is finite, and when the support is infinite, $(R,R)$ is the only (strict) Nash equilibrium. This concludes the proof. $\dashv$
-
-\vspace{1cm}
-
-
-
-
-\noindent \textbf{Proof of Corollary \ref{corollary1}.} Let us recall the definition of evolutionarily stable strategy and neutrally stable strategy.
-
-\medskip{}
-
-\begin{definition}[ESS-NSS] \label{def:ESS-NSS}
-A strategy $s^{\$}$ is \emph{evolutionarily stable
-(ESS)} if for any other strategy $s$:
-\begin{enumerate}
-\item $\pi(s^{\$},s^{\$})>\pi(s,s^{\$})$, or
-\item $\pi(s^{\$},s^{\$})=\pi(s,s^{\$})$ and $\pi(s^{\$},s)>\pi(s,s)$.
-\end{enumerate}
-\noindent A strategy $s^{\$}$ is \emph{neutrally stable (NSS)} if
-for any other strategy $s$:
-\begin{enumerate}
-\item $\pi(s^{\$},s^{\$})>\pi(s,s^{\$})$, or
-\item $\pi(s^{\$},s^{\$})=\pi(s,s^{\$})$ and $\pi(s^{\$},s)\geq\pi(s,s)$.
-\end{enumerate}
-\end{definition}
-
-\medskip{}
-
-\noindent Then we extend Definition \ref{def:ESS-NSS} to include choice mechanisms. 
-
-\begin{definition}[ESM-NSM] \label{def:ESM-NSM}
-Given a class of games $\mathcal{G}$, a choice mechanism $(\gamma, \kappa)$ is \emph{evolutionarily stable
-(ESM)} if for any other choice mechanism $(\gamma', \kappa')$:
-\begin{enumerate}
-\item $EF_{\mathcal{G}}((\gamma, \kappa),(\gamma, \kappa))>EF_{\mathcal{G}}((\gamma', \kappa'),(\gamma, \kappa))$, or
-\item $EF_{\mathcal{G}}((\gamma, \kappa),(\gamma, \kappa))=EF_{\mathcal{G}}((\gamma', \kappa'),(\gamma, \kappa))$ and $EF_{\mathcal{G}}((\gamma, \kappa),(\gamma', \kappa'))>EF_{\mathcal{G}}((\gamma', \kappa'),(\gamma', \kappa'))$.
-\end{enumerate}
-\noindent A choice mechanism $(\gamma, \kappa)$ is \emph{neutrally stable (NSM)} if
-for any other choice mechanism $(\gamma', \kappa')$:
-\begin{enumerate}
-\item $EF_{\mathcal{G}}((\gamma, \kappa),(\gamma, \kappa))>EF_{\mathcal{G}}((\gamma', \kappa'),(\gamma, \kappa))$, or
-\item $EF_{\mathcal{G}}((\gamma, \kappa),(\gamma, \kappa))= EF_{\mathcal{G}}((\gamma', \kappa'),(\gamma, \kappa))$ and $EF_{\mathcal{G}}((\gamma, \kappa),(\gamma', \kappa'))\geq EF_{\mathcal{G}}((\gamma', \kappa'),(\gamma', \kappa'))$.
-\end{enumerate}
-\end{definition}
-
-\noindent From Proposition \ref{proposition1} we know that: 
-
-\begin{itemize}
-\item[(i)] $EF_{\mathcal{G}}(R,R)>EF_{\mathcal{G}}(M,R);$
-\item[(ii)] $EF_{\mathcal{G}}(M,M)<EF_{\mathcal{G}}(R,M).$
-\end{itemize}
-
-\noindent Then, from Definition \ref{def:ESM-NSM} it immediately follows that the unique evolutionarily stable state is a monomorphic population of $R$-players. $\dashv$
-
+\noindent Finally, we can conclude that
+$F_{\mathcal{C}\cup\mathcal{A}}(M,M)<F_{\mathcal{C}\cup\mathcal{A}}(R,M)$. As before, notice
+that, when we have i.i.d. sampling with infinite support, games in $\mathcal{W}$ and
+$\mathcal{B}$ never occur, but the proof is the same for all the other cases. Hence, both when
+the support of $a,b,c,d$ is finite, and when the support is infinite, $R$ strictly dominates
+$M$ under the conditions assumed. \hfill $\dashv$
 
 
 
 \printbibliography[heading=bibintoc]
-
-
-
-
-
-
-
 
 \end{document}
 
