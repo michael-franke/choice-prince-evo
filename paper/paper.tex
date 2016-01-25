@@ -81,9 +81,8 @@ variable environment
 \citep[e.g.,][]{FawcettHamblin2013:Exposing-the-be,McNamara2013:Towards-a-Riche}. To show that
 there is no tension here, this paper introduces a method for reconciling established notions of
 evolutionary game theory with evolutionary selection of choice mechanisms in variable
-environments \citep[see related work
-by][]{ZollmanSmead2010:Plasticity-and-,SmeadZollman2013:The-Stability-o}.\todo{More references
-  Harley 1981!!!, O Conor \dots}
+environments \citep[see, inter alia, related work
+by][]{Harley1981:Learning-the-Ev,ZollmanSmead2010:Plasticity-and-,SmeadZollman2013:The-Stability-o,OConnor2016:Evolving-to-Gen}.
 
 In full generality, a choice mechanism associates decision situations with action choices. A crucial
 part of a choice mechanism is the \emph{subjective representation} of the decision situation,
@@ -170,17 +169,20 @@ objective fitness. For instance, profit maximization seems a necessary requireme
 evolution in a competitive market because only firms behaving according to profit maximization will survive in the long run \citep[e.g.,][]{alch50,Fried53}.
 
 An alternative view on rationality of choice is \emph{adaptationism}
-\citep[e.g.,][]{Anderson1991:Is-human-cognit,ChaterOaksford2000:The-Rational-An,HagenChater2012:Decision-Making}. \todo{more
-  references} Adaptationism aims to explain rational behavior by appeal to evolutionary
-considerations: DMs have acquired choice mechanisms that have proved to be adpative with respect to the variable environment where they have evolved. A choice mechanism can be a set of distinct heuristics (the DM's
+\citep[e.g.,][]{Anderson1991:Is-human-cognit,ChaterOaksford2000:The-Rational-An,HagenChater2012:Decision-Making}. Adaptationism
+aims to explain rational behavior by appeal to evolutionary considerations: DMs have acquired
+choice mechanisms that have proved to be adpative with respect to the variable environment
+where they have evolved. A choice mechanism can be a set of distinct heuristics (the DM's
 \emph{adaptive toolbox}) that have little in common
 \citep[e.g.,][]{TverskyKahnemann1981:The-Framing-of-,GigerenzerGoldstein1996:Reasoning-the-F,ScheibehenneRieskamp2013:Testing-the-Ada}. But
-to closely relate to the literature on evolution of preferences and to the philosophical debate about the nature of rational choice in general, we here suggest to
-think of a choice mechanism as a map from choice situations to action choices which includes an
-explicit level of subjective representation of the situation, that we call \emph{subjective representation scheme} (see
-Figure~\ref{fig:ChoiceMechanism}). Specifically, a subjective representation scheme is a general way of forming preferences and
-beliefs about the choice situation, and we are most interested in the question which
-subjective representations are better than others from an evolutionary point of view.
+to closely relate to the literature on evolution of preferences and to the philosophical debate
+about the nature of rational choice in general, we here suggest to think of a choice mechanism
+as a map from choice situations to action choices which includes an explicit level of
+subjective representation of the situation, that we call \emph{subjective representation
+  scheme} (see Figure~\ref{fig:ChoiceMechanism}). Specifically, a subjective representation
+scheme is a general way of forming preferences and beliefs about the choice situation, and we
+are most interested in the question which subjective representations are better than others
+from an evolutionary point of view.
 
 \begin{figure}
   \centering
@@ -348,12 +350,11 @@ Finally,
 The
 four choice mechanisms,  
 %that we look at here
-although phrased in terms of preference and belief
-representations, map onto well-known classic proposals for rational decision making (see
-Table~\ref{tab:CMs}). In other words, there is also an argument by historical relevance for our
-selection. To see this, we first recapitulate the relevant classics ---to have a handy label,
-we call them \emph{classic rules}--- and then show how they relate to our notion of choice
-mechanism.
+although phrased in terms of preference and belief representations, map onto well-known classic
+proposals for rational decision making (see Table~\ref{tab:CMs}). In other words, there is also
+motivation from historical relevance for our selection. To see this, we first recapitulate the
+relevant classics ---to have a handy label, we call them \emph{classic rules}--- and then show
+how they relate to our notion of choice mechanism.
 
 \subsection{Classic rules for decision making}
 \label{sec:choice-rules}
@@ -748,7 +749,7 @@ point that we wanted to make:
 %non-veridical representations \emph{can}, under
 %specific circumstances, persist under evolutionary selection based on objective
 %fitness. Moreover, 
-non-veridical regret-based preferences representations can not only persist, but even be favored by
+non-veridical regret-based preference representations can not only persist, but even be favored by
 natural selection if agents may have imprecise beliefs.
 This
 tells us that the main conclusions drawn in the previous section based on the approximated meta-game of Table~\ref{tab:ExpectedFitness_4Types} hold more generally 
@@ -758,12 +759,11 @@ arbitrary $2 \times 2$ symmetric games with i.i.d. sampled payoffs.
 \section{Extensions}
 \label{sec:extensions}
 
-How do the basic results from the previous section carry over to even more encompassing and richer
-models? Section~\ref{sec:more-types} first introduces further conceptually interesting
-preference types that have been considered in the literature. Section~\ref{sec:n-times-n} then addresses the case of $n \times n$ games for
-$n \ge 2$. Finally, to put our results into a broader perspective,
-Section~\ref{sec:solitary-decisions} ends with a brief comparison of game situations with cases
-of solitary decision making.
+How do the basic results from the previous section carry over to richer models?
+Section~\ref{sec:more-types} first introduces further conceptually interesting preference types
+that have been considered in the literature. Section~\ref{sec:n-times-n} then addresses the
+case of $n \times n$ games for $n \ge 2$. Finally, Section~\ref{sec:solitary-decisions} ends
+with a brief comparison of game situations with cases of solitary decision making.
 
 \subsection{More types}
 \label{sec:more-types}
@@ -820,7 +820,7 @@ type} is located.
 Table~\ref{tab:ExpectedFitness_2x2_Full} shows results of Monte Carlo simulations that
 approximate the expected fitness in the relevant meta-game with all types considered so
 far. These results confirm basic intuitions about altruistic and competitive types: everybody would like to have an altruistic co-player and nobody
-would like to play with a competitive player. Perhaps more surprisingly, $(\text{alt}, \text{imp})$
+would like to play against a competitive player. Perhaps more surprisingly, $(\text{alt}, \text{imp})$
 come up strictly dominated by $(\text{com}, \text{imp})$, but competitive types themselves are worse off
 against all types except against maxmin players $(\text{obj}, \text{imp})$ than any of
 the behaviorally equivalent types $(\text{reg}, \text{imp})$, $(\text{obj}, \text{prc})$, and
@@ -834,7 +834,7 @@ It is easy to see then that the previous result still obtains for the larger met
 Table~\ref{tab:ExpectedFitness_2x2_Full}: $(\text{reg}, \text{imp})$,
 $(\text{obj}, \text{prc})$, and $(\text{reg}, \text{prc})$ are still neutrally stable;
 simulation runs of the (discrete-time) replicator dynamics on the $8 \times 8$ meta-game from
-Table~\ref{tab:ExpectedFitness_2x2_Full} all end up in population states consisting of only these
+Table~\ref{tab:ExpectedFitness_2x2_Full} end up in population states consisting of only these
 three types in arbitrary proportion.
 
 In sum, the presence of other plausible preference types, such as competitive and altruistic
@@ -1097,7 +1097,7 @@ about the co-player that they are randomly paired with at each round and about t
 action. 
 
 We therefore represent maximal uncertainty in two different ways that correspond to the two
-approaches discussed above: a Bayesian uniform measure and an imprecise probability
+approaches discussed in the main text: a Bayesian uniform measure and an imprecise probability
 set. The latter represents uncertainty for players who are not able to narrow down the set of
 probability measures to a single one and they consider all of them as possible. The former
 precise belief type conceptualizes the uncertainty about the population by using the principle
@@ -1148,10 +1148,10 @@ expected utility of any available action, and then to choosing the action that g
 highest minimal expected utility. 
 
 Evidence from experimental literature suggests that agents are mostly uncertainty averse
-[REF]. In line with empirical data, we assume that players in the population are uncertainty
-averse and conform to maxmin expected utility. The resulting behavior is then produced by
-maximinimizing the subjective utility given by the player's preference type over the set of
-probabilities given by the belief type.
+\textcolor{red}{[REF]}. In line with empirical data, we assume that players in the population
+are uncertainty averse and conform to maxmin expected utility. The resulting behavior is then
+produced by maximinimizing the subjective utility given by the player's preference type over
+the set of probabilities given by the belief type.
 
 
 \section{Proofs}
@@ -1160,16 +1160,16 @@ probabilities given by the belief type.
 The proof of Proposition \ref{proposition1} relies on a partition of $\mathcal{G}$, and on some
 lemmas. For brevity, let us denote the regret minimizer $(\text{reg}, \text{imp})$ by $R$ and
 the maximinimizer $(\text{obj}, \text{imp})$ by $M$. Following
-Equation~(\ref{eq:FittnessChoiceMechGamePairwise}), let $F_{\mathcal{G}}(X,Y)$ denotes the of
-choice mechanism $X$ against choice mechanism $Y$ on the possibly restricted class of fitness
-games $\mathcal{G}$.
+Equation~(\ref{eq:FittnessChoiceMechGamePairwise}), let $F_{\mathcal{G}}(X,Y)$ denote the
+expected payoff of choice mechanism $X$ against choice mechanism $Y$ on the possibly restricted
+class of fitness games $\mathcal{G}$.
 
 \vspace{.5cm}
 
 
 \noindent \textbf{Proof of Proposition \ref{proposition1}.} By definition of strict dominance,
 we have to show that in the class $\mathcal{G}$ of symmetric $2\times2$ games with payoffs
-sampled from a set of i.i.d. values with at least 3 elements in the support, it holds:
+sampled from a set of i.i.d. values with at least 3 elements in the support, it holds that:
 \begin{multicols}{2}
   \begin{itemize}
   \item[(i)] $F_{\mathcal{G}}(R,R)>F_{\mathcal{G}}(M,R);$
@@ -1469,9 +1469,9 @@ this out as:
 \end{align*}
 
 \noindent We now distinguish between (1) $b=c$, (2) $b>c$, and (3) $b<c$. Notice that either
-(1) or (2), together with $a>d$, implies $I_{RC}$. Then we obtain\footnote{Note that here, when
+(1) or (2), together with $a>d$, implies $I_{RC}$. Then we obtain:\footnote{Note that here, when
   we only have 3 elements in the support, case (2) is impossible, but cases (1) and (3) can
-  occur with positive probability, and this enough for our purpose.}:
+  occur with positive probability, and this enough for our purpose.}
 \begin{itemize}
 
 \item[(1)] $\sum_{C_{a>d}} P(C)[-\frac{1}{2}a_{C} - \frac{1}{2}b_{C} + \frac{1}{2}c_{C} + \frac{1}{2}d_{C}]< 0$;
