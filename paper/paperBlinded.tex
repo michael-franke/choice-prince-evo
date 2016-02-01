@@ -5,11 +5,388 @@
 %========================================
 
 \usepackage{etex}
-\usepackage[nobiblatex]{helpers/mypackages}
+
+\RequirePackage{amsmath}            % Formeln
+\RequirePackage{amsfonts}           % Fonts for Formulas
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{dsfont}             % double stroke fonts
+\RequirePackage[final]{graphicx}
+\RequirePackage{booktabs}
+\RequirePackage{enumerate}
+\RequirePackage{paralist}
+\RequirePackage[all]{xy}            
+\RequirePackage{url}
+
+\RequirePackage{txfonts} % for strict implication symbols
+\RequirePackage{soul}
+\RequirePackage{relsize} % provides command \relsize{+/-x} for relative
+                     % font size changes
+\RequirePackage[german,english]{babel}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc} 
+\RequirePackage{xypic}
+\RequirePackage{multicol}
+\RequirePackage{subcaption}
+\RequirePackage{tikz}
+\usetikzlibrary{arrows,shapes,automata,backgrounds,petri,fit,decorations.pathmorphing}
+\RequirePackage{units}
+
+\RequirePackage{dialogue}
+
+\RequirePackage{setspace}
+
+\RequirePackage[colorinlistoftodos,color=lightgray,bordercolor=blue,textsize=footnotesize]{todonotes}
+
+\RequirePackage{xspace} % for \xspace in definition of acronyms etc.
+
+
+\RequirePackage[final,            % override "draft" which means "no nothing"
+            colorlinks,       % rather than outlining them in boxes
+            linkcolor=black,   % override truly awful colour choices
+            citecolor=black,   %   (ditto)
+            urlcolor=black,    %   (ditto)
+            plainpages=false, % to overcome complaints with multiple
+            pdfpagelabels,    % multiple page 1-s due to preface
+            hypertexnames=false % solves warning, but interferes with
+                                % index and \autoref apparently
+            ]{hyperref}
+
+
 \usepackage[backend=bibtex,natbib=true,style=authoryear-comp,backend=bibtex,doi=false,url=false]{biblatex}
+
 \bibliography{choicePrince,biblio}
-\usepackage{helpers/myenvironments}
-\usepackage{helpers/mycommands}
+
+\newtheoremstyle{Satz}
+   {}                      %Space above
+   {1em}                  %Space below
+   {\normalfont}           %Body font
+   {}                      %Indent amount (empty = no indent,
+                           %\parindent = para indent)
+   {\normalfont}           %Thm head font
+   {.}                     %Punctuation after thm head
+   {.8em}                  %Space after thm head: " " = normal interword
+                           %space; \newline = linebreak
+   {\bfseries\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+                           %Thm head spec (can be left empty, meaning
+                           %`normal')
+
+\theoremstyle{Satz}
+\newtheorem{theorem}{Theorem} 
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{fact}{Fact}
+\newtheorem{claim}{Claim} 
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{exercise}{Exercise} 
+\newtheorem{problem}{Problem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{example}{Example}
+
+\newtheoremstyle{Bsp}
+   {}                      %Space above
+   {1em}                  %Space below
+   {\itshape}           %Body font
+   {}                      %Indent amount (empty = no indent,
+                           %\parindent = para indent)
+   {\normalfont}           %Thm head font
+   {.}                     %Punctuation after thm head
+   {.8em}                  %Space after thm head: " " = normal interword
+                           %space; \newline = linebreak
+   {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+                           %Thm head spec (can be left empty, meaning
+                           %`normal')
+\theoremstyle{Bsp}
+% \newtheorem{example}[theorem]{Example}
+
+
+% Math --------------------
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\tuple}[1]{\left \langle #1\right\rangle}
+\newcommand{\card}[1]{\left \lvert \, #1 \, \right\rvert}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\setbar}{\ensuremath{\thinspace \mid \thinspace}}
+\newcommand{\probbar}{\ensuremath{\mid}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\df}{\rightarrow}
+\newcommand{\es}{\emptyset}
+\newcommand{\den}[1]{\left [\! \left [ #1 \right ]\! \right]}
+% \newcommand{\den}[1]{\left \llbracket #1  \right \rrbracket} % this would use fourier package which makes 'cases' environment bad
+\newcommand{\no}{\noindent}
+\newcommand{\hin}{"$\Rightarrow$" }
+\newcommand{\rueck}{"$\Leftarrow$" }
+\newcommand{\exs}{\vspace{.15cm}}
+\newcommand{\pow}[1]{\ensuremath{\mathcal{P}(#1)}}	% Powerset
+\newcommand{\restr}{{\restriction}}
+\newcommand{\implicates}{\ensuremath{\leadsto}}  % arrow for
+                                % implicatures in examples
+\newcommand{\update}[2]{\ensuremath{#1[#2]}}
+\newcommand{\myts}{\ensuremath{\thinspace}}
+\newcommand{\mycolon}{\ensuremath{\thinspace \colon \thinspace}}
+\newcommand{\mydot}{\ensuremath{\thinspace . \thinspace}}
+
+
+\makeatletter
+\newcommand{\prob}{\@ifstar
+  \simpleprob%
+  \condprob%
+}
+\def\simpleprob(#1){\ensuremath{\Pr(#1)}}
+\def\condprob(#1|#2){\ensuremath{\Pr(#1 \,|\, #2)}}
+\makeatother
+
+% General Text Markup--------------------
+\newcommand{\runex}[1]{\begin{center}#1\end{center}}
+\newcommand{\mydef}[1]{\textsc{#1}}  		% definitions
+\newcommand{\markdef}[1]{\textsc{#1}}  		% definitions; alternative
+\newcommand{\myment}[1]{\emph{#1}}  	% first mentions
+\newcommand{\myword}[1]{\textbf{\texttt{#1}}}	% refering to the word
+\newcommand{\myemph}[1]{\emph{#1}}			% emphasis
+\newenvironment{exnonum}{
+  \begin{list}{}{
+    \setlength{\leftmargin}{2.5em}
+    \setlength{\rightmargin}{2.5em}
+    %\setlength{\itemindent}{-1.5em}
+  }
+}{
+  \end{list}
+}
+
+
+% Slanted Fractions
+\newcommand{\myslantfrac}[2]{\msf{#1}{#2}}
+\newcommand{\msf}[2]{\ensuremath{\nicefrac{#1}{#2}}}
+\newcommand{\msftext}[2]{\nicefrac{#1}{#2}}
+
+
+% Symbols for Conditionals
+\newcommand{\cond}{\ensuremath{>}}
+\newcommand{\bicond}{\ensuremath{\Leftrightarrow}}
+\newcommand{\strcondWill}{\ensuremath{\boxRight}}
+\newcommand{\strcondMight}{\ensuremath{\DiamondRight}}
+
+% Signaling Games & IBR
+\newcommand{\sen}{\ensuremath{S}\xspace}		% Sender variable
+\newcommand{\mysen}[1]{\ensuremath{\sen^{#1}}} % Sender of type XYZ
+\newcommand{\rec}{\ensuremath{R}\xspace}		% Receiver variable
+\newcommand{\myrec}[1]{\ensuremath{\rec_{#1}}} % Receiver of type XYZ
+\newcommand{\States}{\ensuremath{T}\xspace}		% Set of States
+\newcommand{\state}{\ensuremath{t}\xspace}		% single states
+\newcommand{\mystate}[1]{\ensuremath{\state_{\text{#1}}}\xspace} %meaningful states
+\newcommand{\Messgs}{\ensuremath{M}\xspace}		% Set of Messages
+\newcommand{\messg}{\ensuremath{m}\xspace}		% single messages
+\newcommand{\mymessg}[1]{\ensuremath{\messg_{\text{#1}}}\xspace} %meaningful messages
+\newcommand{\cost}{\ensuremath\operatorname{C}} % cost function
+\newcommand{\Acts}{\ensuremath{A}\xspace}		% Set of R-actions
+\newcommand{\act}{\ensuremath{a}\xspace}		% single action
+\newcommand{\myact}[1]{\ensuremath{\act_{\text{#1}}}\xspace} %meaningful
+\newcommand{\Worlds}{\ensuremath{W}}		% Worlds
+\newcommand{\world}{\ensuremath{w}}		% single world
+\newcommand{\myworld}[1]{\ensuremath{\world_{\text{#1}}}} %named world
+\newcommand{\util}{\ensuremath{\operatorname{U}}}	% Utility function
+\newcommand{\Util}{\ensuremath{\operatorname{U}}}	% Utility function
+\newcommand{\utils}{\ensuremath{\operatorname{U}}}	% Utility function
+\newcommand{\Utils}{\ensuremath{\operatorname{U}}}	% Utility function
+\newcommand{\RealUtil}{\ensuremath{\operatorname{V}}}	% material payoffs
+\newcommand{\Sstrat}{\ensuremath{\sigma}} % Behav/Probab Sender strategy
+\newcommand{\Sstrats}{\ensuremath{\mathcal{S}}}	% Set of S-strategies
+\newcommand{\Spure}{\ensuremath{s}} % Pure sender strategy
+\newcommand{\Spures}{\ensuremath{\mathsf{S}}} % Set of pure sen strategies
+\newcommand{\Smixed}{\ensuremath{\tilde{s}}} % Mixed sender strategy
+\newcommand{\Smixeds}{\ensuremath{\Delta(\Messgs^\States)}}
+\newcommand{\SpuresW}{\ensuremath{\mathsf{S}}} 
+\newcommand{\SpuresS}{\ensuremath{\mathsf{S}^{{\mathrm{S}}}}}
+\newcommand{\Rstrat}{\ensuremath{\rho}} % Behav/Probab Receiver strategy
+\newcommand{\Rstrats}{\ensuremath{\mathcal{R}}}	% Set of R-Strategies
+\newcommand{\Rpure}{\ensuremath{r}} % Pure receiver strategy
+\newcommand{\Rpures}{\ensuremath{\mathsf{R}}} % Set of pure rec strategies
+\newcommand{\Rmixed}{\ensuremath{\tilde{r}}} % Mixed receiver strategy
+\newcommand{\Rmixeds}{\ensuremath{\Delta(\Acts^\Messgs)}} 
+\newcommand{\RpuresW}{\ensuremath{\mathsf{R}}} 
+\newcommand{\RpuresS}{\ensuremath{\mathsf{R}^{\mathrm{S}}}} 
+\newcommand{\PureBR}{\ensuremath{\operatorname{BR}}} % Set of pure best responses
+\newcommand{\ProbBR}{\ensuremath{\operatorname{BR_{Prob}}}} % Set of mixed best responses
+\newcommand{\bel}{\ensuremath{\pi}}
+\newcommand{\Bels}{\ensuremath{\Pi}}
+\newcommand{\Sbel}{\ensuremath{\pi_{\sen}}}
+\newcommand{\Sbels}{\ensuremath{\Pi_{\sen}}}
+\newcommand{\Rbel}{\ensuremath{\pi_{\rec}}}
+\newcommand{\Rbels}{\ensuremath{\Pi_{\rec}}}
+\newcommand{\EU}{\ensuremath{\operatorname{EU}}} % Expected Utility
+\newcommand{\EV}{\ensuremath{\operatorname{EV}}} % Expected Response Utility
+\newcommand{\BR}{\ensuremath{\operatorname{BR}}} % Best Response
+\newcommand{\QR}{\ensuremath{\operatorname{QR}}} % Quantal Response
+\newcommand{\WBR}{\ensuremath{\text{{\relsize{-1}W}BR}}} % Weak Best Response
+\newcommand{\SBR}{\ensuremath{\text{{\relsize{-1}W}BR}}} % Strong Best Response
+\newcommand{\interpr}{\ensuremath{\delta}} % Interpretation strategy
+
+% OT Stuff
+\newcommand{\Gen}{\ensuremath{\operatorname{Gen}}} % Generator
+\newcommand{\Eval}{\ensuremath{\operatorname{Eval}}} % Evaluator
+\newcommand{\Con}{\ensuremath{\operatorname{Con}}} % Constraints
+\newcommand{\metsuc}{\ensuremath{\succ}} % Symbol for BiOT metric
+\newcommand{\metsuceq}{\ensuremath{\succeq}} % Symbol for BiOT metric
+\newcommand{\Go}[1]{\operatorname{Pool}_{#1}}
+\newcommand{\Oo}[1]{\operatorname{Opt}_{#1}}
+\newcommand{\Bo}[1]{\operatorname{Blo}_{#1}}
+\newcommand{\Gr}[1]{\operatorname{GAM^{\rho}}_{#1}}
+\newcommand{\Or}[1]{\operatorname{OPT^{\rho}}_{#1}}
+\newcommand{\Br}[1]{\operatorname{BLO^{\rho}}_{#1}}
+
+% Abbreviations/Acronyms:
+\newcommand{\acro}[1]{\textsc{#1}\xspace}
+\newcommand{\acros}[1]{\textsc{#1}{\relsize{-1}s}\xspace}
+\newcommand{\bc}{\acro{bc}} % Biscuit Conditional(s)
+\newcommand{\bcs}{\acros{bc}}
+\newcommand{\cbc}{\acro{cbc}} % Counterfactual BCs
+\newcommand{\cbcs}{\acros{cbc}}
+\newcommand{\ibr}{\acro{ibr}} % IBR model
+\newcommand{\iqr}{\acro{iqr}} % IQR model
+\newcommand{\rsa}{\acro{rsa}} % RSA model
+\newcommand{\ot}{\acro{ot}} % BiOT
+\newcommand{\biot}{\acro{b{\relsize{-1}i}ot}} % BiOT
+\newcommand{\tom}{\acro{t{\relsize{-1}o}m}} % ToM
+\newcommand{\fc}{\acro{fc}} % Free Choice
+\newcommand{\cp}{\acro{cp}} % Conditional Perfection
+\newcommand{\uc}{\acro{uc}} % Unconditional Readings
+\newcommand{\pbe}{\acro{pbe}}   % Perfect Bayesian Equil.
+\newcommand{\pbes}{\acros{pbe}}
+\newcommand{\forind}{\acro{fi}} % forward induction
+\newcommand{\tcp}{\acro{tcp}} % truth ceteris paribus
+\newcommand{\cmr}{\acro{cmr}} % credible message rationalizability
+\newcommand{\cm}{\acro{cm}} % credible message (profile) (Rabin)
+\newcommand{\condition}[2]{\acro{#1}{#2}} % conditions 
+\newcommand{\br}{\acro{br}} % best response (property)
+\newcommand{\wbr}{\acro{{\relsize{-1}w}br}} % weak best response (property)
+\newcommand{\sbr}{\acro{{\relsize{-1}s}br}} % strong best response (property)
+\newcommand{\curb}{\acro{curb}} % curb sets
+\newcommand{\gtp}{\acro{gtp}} % game theoretic pragmatics
+\newcommand{\sda}{\acro{sda}} % simplification of disjunctive antecedents
+\newcommand{\decprob}{\ensuremath{\mathcal{D}}}
+\newcommand{\ques}{\ensuremath{\mathfrak{Q}}}
+\newcommand{\vsi}{\acro{vsi}}
+\newcommand{\evsi}{\acro{evsi}}
+\newcommand{\uv}{\acro{uv}}
+\newcommand{\qud}{\acro{qud}}
+\newcommand{\NE}{\acro{ne}}
+\newcommand{\NEs}{\acros{ne}}
+\newcommand{\SNE}{\acro{sne}}
+\newcommand{\SNEs}{\acros{sne}}
+\newcommand{\SG}{\acro{sg}}
+\newcommand{\SGs}{\acros{sg}}
+\newcommand{\KO}{\textsc{ko\relsize{-1}bs}} % Kennedy's observation
+\newcommand{\EVP}{\acro{evp}}    % extreme-value principle
+\newcommand{\illc}{\acro{illc}}
+
+% Evolution
+\newcommand{\EGT}{\acro{egt}}
+\newcommand{\ESS}{\acro{ess}}
+\newcommand{\ESSs}{\acros{ess}}
+\newcommand{\NSS}{\acro{nss}}
+\newcommand{\NSSs}{\acros{nss}}
+\newcommand{\sigsys}{\textsc{SigSys}\xspace} % signaling system
+\newcommand{\sigsyss}{\textsc{SigSys{\relsize{-1}s}}\xspace} % signaling system Plural
+
+\newcommand{\fin}{\rule{0mm}{1mm}\hfill{\rule{1.5cm}{0.2pt}}}
+
+%Properly typeset tilde for URLs
+\def\urltilde{\kern -.15em\lower .7ex\hbox{\~{}}\kern .04em}
+
+
+% Beamer footnote for references:
+\newcommand{\beamfn}[1]{
+  \vfill
+      \begin{footnotesize}
+        \leftskip 0.1in
+        \parindent -0.1in
+       \hspace{-0.3cm}\rule{2cm}{0.01cm}\\ \vspace{-0.15cm}
+        #1
+      \end{footnotesize}
+}
+
+\newcommand{\myvec}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\transpose}[1]{\ensuremath{\operatorname{T}(#1)}}
+\newcommand{\normalize}[1]{\ensuremath{\operatorname{N}(#1)}}
+
+\newcommand{\dn}[1]{\draftnote{#1}}
+\newcommand{\fn}[1]{\footnote{#1}}
+
+\newcommand{\stateunmarked}{\ensuremath{\state}\xspace}
+\newcommand{\statemarked}{\ensuremath{\state^*}\xspace}
+\newcommand{\messgunmarked}{\ensuremath{\messg}\xspace}
+\newcommand{\messgmarked}{\ensuremath{\messg^*}\xspace}
+\newcommand{\actunmarked}{\ensuremath{\act}\xspace}
+\newcommand{\actmarked}{\ensuremath{\act^*}\xspace}
+
+\newcommand{\sunmarked}{\ensuremath{\state}\xspace}
+\newcommand{\smarked}{\ensuremath{\state^*}\xspace}
+\newcommand{\munmarked}{\ensuremath{\messg}\xspace}
+\newcommand{\mmarked}{\ensuremath{\messg^*}\xspace}
+\newcommand{\aunmarked}{\ensuremath{\act}\xspace}
+\newcommand{\amarked}{\ensuremath{\act^*}\xspace}
+
+\newcommand{\ssome}{\mystate{\exists\neg\forall}}
+\newcommand{\sall}{\mystate{\forall}}
+\newcommand{\msome}{\mymessg{some}}
+\newcommand{\mall}{\mymessg{all}}
+\newcommand{\asome}{\myact{\exists\neg\forall}}
+\newcommand{\aall}{\myact{\forall}}
+
+% for repeating examples with gb4e
+
+\newcounter{myexememory}
+\newenvironment{exer}[1]
+{
+\setcounter{myexememory}{\value{exx}}
+\setcounter{exx}{\getrefnumber{#1}}
+\addtocounter{exx}{-1}  
+\begin{exe}
+}
+{
+\end{exe}
+\setcounter{exx}{\value{myexememory}}
+}
+
+\newenvironment{nakedlist}{
+  \begin{list}{\quad}{}
+}
+{
+  \end{list}
+}
+
+\DefineNamedColor{named}{mycol}{cmyk}{0.6,0.6,0,0}
+\DefineNamedColor{named}{mygray}{cmyk}{0.05,0.05,0.05,0.05}
+\DefineNamedColor{named}{mygraylight}{cmyk}{0.017,0.017,0.017,0.017}
+\DefineNamedColor{named}{mycol2}{cmyk}{0.8,0,0.8,0.2}
+
+\newcommand{\mymark}[1]{{\color{mycol}{#1}}}
+
+\DeclareMathOperator{\expo}{exp}
+
+\newcommand{\mygray}[1]{{\textcolor{gray}{#1}}}
+\newcommand{\mycol}[1]{{\textcolor{mycol}{#1}}}
+\newcommand{\mycolh}[1]{{\textcolor{mycol2}{#1}}}
+
+
+% \usepackage{calc}
+\newsavebox\CBox
+\newcommand\msout[2][0.5pt]{%
+  \ifmmode\sbox\CBox{$#2$}\else\sbox\CBox{#2}\fi%
+  \makebox[0pt][l]{\usebox\CBox}%  
+  \rule[0.5\ht\CBox-#1/2]{\wd\CBox}{#1}}
+
+\newcommand{\greensquare}{\raisebox{1.5pt}{\textcolor{Green}{\Large{\ensuremath{\blacksquare}}}}}
+\newcommand{\bluecircle}{\textcolor{blue}{\Huge{\ensuremath{\bullet}}}}
+\newcommand{\greencircle}{\textcolor{Green}{\Huge{\ensuremath{\bullet}}}}
+
+\newcommand{\greensquareS}{\raisebox{1.5pt}{\textcolor{Green}{\normalsize{\ensuremath{\blacksquare}}}}}
+\newcommand{\greensquareSS}{\raisebox{1.5pt}{\textcolor{Green}{\footnotesize{\ensuremath{\blacksquare}}}}}
+\newcommand{\bluecircleS}{\textcolor{blue}{\Large{\ensuremath{\bullet}}}}
+\newcommand{\greencircleS}{\textcolor{Green}{\Large{\ensuremath{\bullet}}}}
+
+\newcommand{\soc}{\ensuremath{\theta}\xspace}
 
 \usepackage{todonotes}
 \usepackage{subcaption}
@@ -22,6 +399,7 @@
 \usepackage{bigints}
 \usepackage{MnSymbol}
 
+\usepackage{titlesec}
 
 \usepackage{geometry}
  % \geometry{
@@ -33,7 +411,24 @@
  % }
 
 \pagenumbering{gobble} 
-\usepackage[document]{ragged2e}
+% left justification:
+\raggedright
+
+%\usepackage{authblk}
+
+% misc
+\usepackage{graphicx}
+\usepackage{babel}
+\usepackage{amsmath}
+
+\makeatletter
+\makeatother
+
+% Customisations specific to Philosophy of Science:
+
+% paper size, margins, etc:
+\usepackage{geometry}
+\geometry{verbose,letterpaper,tmargin=1.5in,bmargin=1.5in,lmargin=1.25in,rmargin=1in}
 
 \doublespacing
 
@@ -48,10 +443,23 @@
 % Description
 \renewcommand{\descriptionlabel}[1]{\hspace\labelsep\textsc{#1}}
 
+\renewcommand{\footnotesize}{\normalsize}
+
+\usepackage{setspace} % load setspace before footmisc
+
+\usepackage{footmisc}
+\setlength{\footnotesep}{\baselineskip}
+
+\usepackage{setspace,caption}
+\AtBeginCaption{\doublespacing} 
+
+\renewcommand{\footnotelayout}{\doublespacing}
+
+
 % Figure Captions
 \usepackage{caption} % use corresponding myfiguresize!
 \setlength{\captionmargin}{20pt}
-\renewcommand{\captionfont}{\small}
+\renewcommand{\captionfont}{\normalsize}
 \setlength{\belowcaptionskip}{7pt} % standard is 0pt
 
 \newcommand{\myalert}[1]{\textcolor{red}{#1}}
@@ -60,11 +468,24 @@
 
 \date{}
 
+%\titleformat{\subsection}
+%       {\normalfont\fontfamily{phv}\fontsize{12}{17}\itshape}{\thesubsection}{1em}{}
+     
+     
+\usepackage{titlesec}
+\titleformat*{\section}{\bf}
+\titleformat*{\subsection}{\it}
+\titleformat*{\subsubsection}{\it}
+
+% indentation
+\setlength\parindent{12pt}
+
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
+\normalsize
   Standard applications of evolutionary game theory look at a single, fixed game and focus on
   the evolution of behavior for that game alone. Instead, this paper uses tools from
   evolutionary game theory to study the evolutionary competition between \emph{choice
@@ -75,6 +496,8 @@
   main result is that regret-based preference representations can be evolutionarily selected
   for, despite being non-veridical.
 \end{abstract}
+
+\newpage
 
 \section{Introduction}
 \label{sec:intr--motiv}
@@ -102,7 +525,7 @@ by][]{Harley1981:Learning-the-Ev,ZollmanSmead2010:Plasticity-and-,SmeadZollman20
 In full generality, a choice mechanism associates decision situations with action choices. A crucial
 part of a choice mechanism is the \emph{subjective representation} of the decision situation,
 in particular the manner of forming preferences and beliefs about a possibly uncertain world (see
-Figure~\ref{fig:ChoiceMechanism} below). This paper asks: which preference and belief
+figure~\ref{fig:ChoiceMechanism} below). This paper asks: which preference and belief
 representations are ecologically valuable and lead to high fitness?
 The evolution of
 preferences has been subject of recent interest in theoretical economics
@@ -133,7 +556,7 @@ main results of the paper. Section \ref{sec:extensions} extends the evolutionary
 introducing more choice mechanisms and alternative models of the environment.
 
 
-\section{Rationality, representations \& meta-games}
+\section{Rationality, Representations and Meta-games}
 \label{sec:rati--subj}
 
 The standard textbook definition of \textit{rationality} in economics and decision theory
@@ -186,7 +609,7 @@ evolution in a competitive market because only firms behaving according to profi
 An alternative view on rationality of choice is \emph{adaptationism}
 \citep[e.g.,][]{Anderson1991:Is-human-cognit,ChaterOaksford2000:The-Rational-An,HagenChater2012:Decision-Making}. Adaptationism
 aims to explain rational behavior by appeal to evolutionary considerations: DMs have acquired
-choice mechanisms that have proved to be adpative with respect to the variable environment
+choice mechanisms that have proved to be adaptive with respect to the variable environment
 where they have evolved. A choice mechanism can be a set of distinct heuristics (the DM's
 \emph{adaptive toolbox}) that have little in common
 \citep[e.g.,][]{TverskyKahnemann1981:The-Framing-of-,GigerenzerGoldstein1996:Reasoning-the-F,ScheibehenneRieskamp2013:Testing-the-Ada}. But
@@ -194,7 +617,7 @@ to closely relate to the literature on evolution of preferences and to the philo
 about the nature of rational choice in general, we here suggest to think of a choice mechanism
 as a map from choice situations to action choices which includes an explicit level of
 subjective representation of the situation, that we call \emph{subjective representation
-  scheme} (see Figure~\ref{fig:ChoiceMechanism}). Specifically, a subjective representation
+  scheme} (see figure~\ref{fig:ChoiceMechanism}). Specifically, a subjective representation
 scheme is a general way of forming preferences and beliefs about the choice situation, and we
 are most interested in the question which subjective representations are better than others
 from an evolutionary point of view.
@@ -316,7 +739,7 @@ meta-games. We will later turn towards replicator dynamics
 
 
 
-\section{Classic choice rules and choice mechanisms}
+\section{Classic Choice Rules and Choice Mechanisms}
 \label{sec:basic-notions}
 
 We submit that meta-games are a useful tool for structuring and sharpening conceptual inquiry
@@ -333,7 +756,7 @@ representations based on a notion of regret can be adaptive and even outperform 
 decisions based on a security choice rule (here: the maxmin rule).\footnote{Decision-theoretic background and justifications for the use of maxmin and imprecise probabilities is given in Appendix~\ref{sec:impr-prob-beli}.}
 
 The case study under consideration strips the generality of a meta-game approach down to a perspicuous
-comparison between four choice mechanisms, summarized in Table~\ref{tab:CMs}.
+comparison between four choice mechanisms, summarized in table~\ref{tab:CMs}.
 % the cross-product of two different preference representations (veridical vs.~regret) and two
 %different belief representations (precise vs.~imprecise). 
 \begin{table}[t]
@@ -366,12 +789,12 @@ The
 four choice mechanisms,  
 %that we look at here
 although phrased in terms of preference and belief representations, map onto well-known classic
-proposals for rational decision making (see Table~\ref{tab:CMs}). In other words, there is also
+proposals for rational decision making (see table~\ref{tab:CMs}). In other words, there is also
 motivation from historical relevance for our selection. To see this, we first recapitulate the
 relevant classics ---to have a handy label, we call them \emph{classic rules}--- and then show
 how they relate to our notion of choice mechanism.
 
-\subsection{Classic rules for decision making}
+\subsection{Classic Rules for Decision Making}
 \label{sec:choice-rules}
 
 The classic literature on rational choice contains a number of proposals for which acts a
@@ -388,7 +811,7 @@ players, $A_i$ a finite set of acts and $\pi_i: \bigtimes_{j \in N} A_j \rightar
 Part of this paper will focus on symmetric games with two players. A two-player game is
 symmetric if players have the same action set, $A_1 = A_2$, and payoffs are symmetric:
 $\pi_1(a_k, a_j) = \pi_2(a_j, a_k)$ for all $a_j,a_k \in A_1$. An example is given in
-Figure~\ref{coordgame1}. The numbers give the payoff for the player choosing a row act against
+figure~\ref{coordgame1}. The numbers give the payoff for the player choosing a row act against
 a co-player choosing a column act. Since the game is symmetric, it suffices to give just these
 numbers.
 
@@ -399,7 +822,7 @@ the set of all \emph{profiles} of acts for all players except $i$. If player $i$
 $\mu_i \in \Delta(A_{-i})$ about the behavior of his co-players, he chooses rationally only if
 his choice $a^*_i$ maximizes expected utility
 $\EU(a_i, \mu) := \sum_{\act_{-i} \in \Acts_{-i}} \mu_i(\act_{-i}) \myts \pi_i(a_i, a_{-i})$. For
-the example in Figure~\ref{coordgame1}, an expected utility maximizer would choose act $I$ only if he
+the example in figure~\ref{coordgame1}, an expected utility maximizer would choose act $I$ only if he
 believes that his co-player is going to choose act $I$ with a probability of at least
 $\nicefrac{2}{3}$.
 
@@ -408,14 +831,14 @@ beliefs is the \emph{maxmin rule}. It prescribes to choose act $\act^*$ only if 
 maximizes payoffs for all worst case scenarios:
 $\act^* \in \argmax_{a_i \in \Acts_i} \min_{a_{-i} \in \Acts_{-i}} \pi_i(a_{i},
 a_{-i})$.
-For the example in Figure~\ref{coordgame1}, the minimum of both acts is 0: players choosing by maxmin
+For the example in figure~\ref{coordgame1}, the minimum of both acts is 0: players choosing by maxmin
 rule would be indifferent between acts $I$ and $II$.
 
 \emph{Laplace rule} selects $\act^*$ if
 $\act^* \in \argmax_{a_{i} \in \Acts_{i}} \sum_{a_{-i}} \pi(a_{i}, a_{-i})$.
 Laplace rule is equivalent to expected utility maximization under a \emph{flat belief} that
 assigns equal probability to all of the co-players' choices. In the coordination game of
-Figure~\ref{coordgame1}, Laplace rule selects act $II$.
+figure~\ref{coordgame1}, Laplace rule selects act $II$.
 
 The final classic rule that is relevant for our purposes is \emph{regret
   minimization}. The notion of regret in decision theory dates back at least to the work by
@@ -436,7 +859,7 @@ everyday intuition and empirical data. In this paper the notion of regret is def
   $a^{*}_i \in \text{argmin}_{a_i} \text{max}_{a_{-i}} \text{preg}(a_i,a_{-i})$.
 \end{definition}
 
-\noindent To illustrate, Figure~\ref{coordgame1reg} shows the pairwise regrets and the regrets for the game of Figure~\ref{coordgame1}. 
+\noindent To illustrate, figure~\ref{coordgame1reg} shows the pairwise regrets and the regrets for the game of figure~\ref{coordgame1}. 
 We have
 $\text{reg}(I)=2$, because $\text{preg}(I,II)=2$, whereas $ \text{preg}(I,I)=0 $. With the same reasoning, $\text{reg}(II)=1$. A regret minimizer would therefore choose act $II$.
 
@@ -521,9 +944,9 @@ $\text{reg}(I)=2$, because $\text{preg}(I,II)=2$, whereas $ \text{preg}(I,I)=0 $
 Regret minimization is intimately related to the maxmin rule. Let the \emph{negative regret
   transformation} of a strategic game $G$ be the game $G^r$ derived from $G$ by replacing the payoff
 functions $\pi_i$ of $G$ with the negative pairwise regrets $-\text{preg}(a_i,a_{-i})$. For
-example, the negative regret transformation of the game in Figure~\ref{coordgame1} would have the
+example, the negative regret transformation of the game in figure~\ref{coordgame1} would have the
 following payoff matrix, i.e., the negatives of the pairwise regrets given in
-Figure~\ref{coordgame1reg}:
+figure~\ref{coordgame1reg}:
 
 \begin{center}
     \begin{tabular}{ccc}
@@ -541,7 +964,7 @@ always exactly the acts selected by regret minimization for the original game $G
 This means that we can think of the maxmin rule and regret minimization as essentially the same
 action selection function on different subjective representations of preferences: while maxmin considers actual
 objective payoffs, regret minimization considers non-veridical, regret-based subjective
-utilities. As the example of Figure~\ref{coordgame1} shows, different subjective preferences
+utilities. As the example of figure~\ref{coordgame1} shows, different subjective preferences
 can give rise to different choices, all else equal. While maxmin is indifferent
 between $I$ and $II$, regret minimization uniquely selects $II$.
 
@@ -550,13 +973,13 @@ for DM. Such prescriptions may rest on implicit assumptions about what DM
 believes (e.g., when interpreting Laplace rule as expected utility maximization under flat beliefs). They may
 also make implicit assumptions about what DM prefers (e.g., when considering regret-based preferences). This is rather messy. To disentangle, we rephrase all the above in terms of choice mechanisms.
 
-\subsection{Choice mechanisms}
+\subsection{Choice Mechanisms}
 \label{sec:choice-mechanisms}
 
 A \emph{choice mechanism} is a map from choice situations to action choices that contains an explicit level, in terms of preferences and beliefs, of subjective representation of
 the choice situation. Concretely, let us think of a choice mechanism as a pair of functions
 ($\gamma,\kappa$), where $\gamma$ is a \emph{subjective representation scheme} and $\kappa$ is
-an \emph{action selection function} (see Figure~\ref{fig:ChoiceMechanism}).
+an \emph{action selection function} (see figure~\ref{fig:ChoiceMechanism}).
 
 The subjective representation scheme $\gamma_i$ of agent $i$ is a function that
 takes a game $G = \tuple{ N, (A_i , \pi_i)_{i \in N} }$ and maps it onto
@@ -607,7 +1030,7 @@ In the following, we assume that agents are maximally uncertain, so that precise
 $\overline{\mu} \in \Delta(\Acts_{-i})$ and imprecise types entertain all probabilistic beliefs
 about the co-players' behavior $\overline{\Gamma} = \Delta(\Acts_{-i})$. In that case, the
 considered choice mechanisms are behaviorally equivalent to classic choice rules, as summarized
-in Table~\ref{tab:CMs}. This means that most of the following results which we interpret as results about the evolutionary fitness of different subjective representations are also relevant for a comparison of the ecological value of classic choice
+in table~\ref{tab:CMs}. This means that most of the following results which we interpret as results about the evolutionary fitness of different subjective representations are also relevant for a comparison of the ecological value of classic choice
 rules.
 
 Under maximal uncertainty, all four choice mechanisms considered here are behaviorally
@@ -619,14 +1042,14 @@ imprecise beliefs:
 \end{fact} 
 
 
-\section{The model}
+\section{The Model}
 \label{sec:basic-model-1}
 
-\subsection{Simulation results}
+\subsection{Simulation Results}
 \label{sec:simulation-results}
 
 To demonstrate the usefulness of the meta-game approach, let us concentrate first on a basic
-model that contains the four choice mechanisms from Table~\ref{tab:CMs}. From now on we speak
+model that contains the four choice mechanisms from table~\ref{tab:CMs}. From now on we speak
 of types when we mean pairs $(\text{preference type}, \text{belief type})$, like $(\text{reg}, \text{imp})$ or $(\text{obj}, \text{prc})$.
 
 Meta-games factor in statistical properties of the environment. For particular empirical
@@ -641,12 +1064,12 @@ games, we imagine that entries in a game's matrix are i.i.d.~random variables sa
 uniformly from set $ \lbrace 0, \dots, 10 \rbrace$.  Using Monte Carlo simulations, we can then
 approximate the values of Equation~(\ref{eq:FittnessChoiceMechGamePairwise})
 to construct meta-game payoffs. Results based on $100,000$ randomly sampled games are given in
-Table~\ref{tab:ExpectedFitness_4Types}.\footnote{Concretely, $100,000$ games were sampled
+table~\ref{tab:ExpectedFitness_4Types}.\footnote{Concretely, $100,000$ games were sampled
   repeatedly by choosing independently four integers between 0 and 10 uniformly at random. For
   each game, the action choices of all four choice mechanisms were determined and payoffs from
   all pairwise encounters recorded. (Whenever a choice mechanism would not select a unique
   action in a given game, we recorded unbiased averages over all selected actions.)  The number
-  in each cell of Table~\ref{tab:ExpectedFitness_4Types} is the average payoff for the choice
+  in each cell of table~\ref{tab:ExpectedFitness_4Types} is the average payoff for the choice
   mechanism listed in the row when matched with the choice mechanism in the column.}
 
 
@@ -673,7 +1096,7 @@ Table~\ref{tab:ExpectedFitness_4Types}.\footnote{Concretely, $100,000$ games wer
 Simulation results obviously reflect Fact~\ref{fact:equivalence2x2} in that all encounters in
 which types $(\text{reg}, \text{imp})$, $(\text{reg}, \text{prc})$ or
 $(\text{obj}, \text{prc})$ are substituted for one another yield identical results. More
-interestingly, Table~\ref{tab:ExpectedFitness_4Types} shows that $(\text{obj}, \text{imp})$,
+interestingly, table~\ref{tab:ExpectedFitness_4Types} shows that $(\text{obj}, \text{imp})$,
 the maxmin strategy, is strictly dominated by the three other types: in each column (i.e.,
 for each kind of co-player), the maxmin strategy is strictly worse than any of the other three
 competitors. This has a number of interesting consequences.
@@ -688,7 +1111,7 @@ minimization is a better classic rule than maxmin from an evolutionary point of
 view.
 
 Next, if we look at the competition between all four types represented in
-Table~\ref{tab:ExpectedFitness_4Types}, $(\text{reg}, \text{imp})$ is no longer evolutionarily
+table~\ref{tab:ExpectedFitness_4Types}, $(\text{reg}, \text{imp})$ is no longer evolutionarily
 stable. Rather, given behavioral equivalence (Fact~\ref{fact:equivalence2x2}), types
 $(\text{reg}, \text{imp})$, $(\text{reg}, \text{prc})$, and $(\text{obj}, \text{prc})$ are all
 \emph{neutrally stable} \citep{Maynard-Smith1982:Evolution-and-t}. But since
@@ -730,10 +1153,10 @@ $(\text{reg}, \text{prc})$, in the attracting state is substantially higher than
 expected utility maximizers, $(\text{obj}, \text{prc})$, even though these types are
 behaviorally equivalent.
 
-\subsection{Analytical results}
+\subsection{Analytical Results}
 \label{sec:analytical-results}
 
-Results based on the single meta game in Table~\ref{tab:ExpectedFitness_4Types} are not fully general and possibly spoiled by random
+Results based on the single meta game in table~\ref{tab:ExpectedFitness_4Types} are not fully general and possibly spoiled by random
 fluctuations in the sampling procedure. Fortunately, for the case of $2 \times 2$ symmetric
 games, the main result that maxmin types $(\text{obj}, \text{imp})$ are strictly dominated can
 also be shown analytically for generous general conditions.
@@ -767,7 +1190,7 @@ point that we wanted to make:
 non-veridical regret-based preference representations can not only persist, but even be favored by
 natural selection if agents may have imprecise beliefs.
 This
-tells us that the main conclusions drawn in the previous section based on the approximated meta-game of Table~\ref{tab:ExpectedFitness_4Types} hold more generally 
+tells us that the main conclusions drawn in the previous section based on the approximated meta-game of table~\ref{tab:ExpectedFitness_4Types} hold more generally 
 for
 arbitrary $2 \times 2$ symmetric games with i.i.d. sampled payoffs.
 
@@ -780,7 +1203,7 @@ that have been considered in the literature. Section~\ref{sec:n-times-n} then ad
 case of $n \times n$ games for $n \ge 2$. Finally, Section~\ref{sec:solitary-decisions} ends
 with a brief comparison of game situations with cases of solitary decision making.
 
-\subsection{More types}
+\subsection{More Types}
 \label{sec:more-types}
 
 
@@ -807,6 +1230,7 @@ type} is located.
 \begin{table}[]
 \centering
 \footnotesize
+\resizebox{\columnwidth}{!}{
 \begin{tabular}{ccccccccc}
   \hline
  & $(\text{reg}, \text{imp})$ 
@@ -827,7 +1251,8 @@ type} is located.
   $(\text{com}, \text{prc})$ & 6.323 & 6.758 & 5.496 & 6.977 & 6.323 & 6.323 & 5.496 & 7.149 \\
   $(\text{alt}, \text{prc})$ & 6.331 & 5.893 & 5.497 & 6.566 & 6.331 & 6.331 & 5.497 & 7.152 \\
    \hline                          
-\end{tabular}                      
+\end{tabular}    
+}                  
 \caption{Average evolutionary fitness from Monte Carlo simulations of 100,000 symmetric $2 \times 2$ games}
 \label{tab:ExpectedFitness_2x2_Full}        
 \end{table}   
@@ -846,10 +1271,10 @@ single stage game \myalert{[CITE]}. In contrast, averaging over payoffs in multi
 games, like we do here, makes altruistic preferences prime victims of evolutionary eradication.
 \fi
 It is easy to see then that the previous result still obtains for the larger meta-game in
-Table~\ref{tab:ExpectedFitness_2x2_Full}: $(\text{reg}, \text{imp})$,
+table~\ref{tab:ExpectedFitness_2x2_Full}: $(\text{reg}, \text{imp})$,
 $(\text{obj}, \text{prc})$, and $(\text{reg}, \text{prc})$ are still neutrally stable;
 simulation runs of the (discrete-time) replicator dynamics on the $8 \times 8$ meta-game from
-Table~\ref{tab:ExpectedFitness_2x2_Full} end up in population states consisting of only these
+table~\ref{tab:ExpectedFitness_2x2_Full} end up in population states consisting of only these
 three types in arbitrary proportion.
 
 In sum, the presence of other plausible preference types, such as competitive and altruistic
@@ -858,7 +1283,7 @@ drive towards regret-based preferences.
 
 
                                    
-\subsection{More actions}
+\subsection{More Actions}
 \label{sec:n-times-n}
 
 Results from Section~\ref{sec:basic-model-1} relied heavily on Fact~\ref{fact:equivalence2x2}, that
@@ -867,7 +1292,7 @@ happens in a broader class of games.
 
 Table~\ref{tab:ExpectedFitness_10x10} gives approximations of expected fitness in the class of
 $n \times n$ symmetric games. Concretely,
-the numbers in Table~\ref{tab:ExpectedFitness_10x10} are averages of evolutionary payoffs obtained in
+the numbers in table~\ref{tab:ExpectedFitness_10x10} are averages of evolutionary payoffs obtained in
 100,000 randomly sampled symmetric games, where each game was sampled by first picking a number of acts
 $n \in \set{2, \dots, 10}$ uniformly at random, and then filling the necessary $n \times n$
 payoff matrix with i.i.d.~sampled numbers, as before.
@@ -876,6 +1301,7 @@ payoff matrix with i.i.d.~sampled numbers, as before.
 \begin{table}[]
 \centering
 \footnotesize
+\resizebox{\columnwidth}{!}{
 \begin{tabular}{ccccccccc}
   \toprule
  & $(\text{reg}, \text{imp})$ 
@@ -896,14 +1322,15 @@ payoff matrix with i.i.d.~sampled numbers, as before.
   $(\text{com}, \text{prc})$ & 6.529 & 6.680 & 5.445 & 7.276 & 6.542 & 6.542 & 5.521 & 7.440 \\
   $(\text{alt}, \text{prc})$ & 6.450 & 6.337 & 5.772 & 6.978 & 6.457 & 6.457 & 5.479 & 7.500 \\
    \bottomrule                         
-\end{tabular}                      
+\end{tabular}  
+}                    
 \caption{Average evolutionary fitness for 100,000 randomly generated $n \times n$ symmetric games with $n$ randomly drawn from $\set{2, \dots, 10}$.}
 \label{tab:ExpectedFitness_10x10}        
 \end{table}
 
 The most important result is that the regret minimizing type $(\text{reg}, \text{imp})$ is
 strictly dominated by $(\text{reg}, \text{prc})$ and by $(\text{obj}, \text{prc})$ in the
-meta-game from Table~\ref{tab:ExpectedFitness_10x10}. This means that while simple regret minimization
+meta-game from table~\ref{tab:ExpectedFitness_10x10}. This means that while simple regret minimization
 \emph{can} thrive in some evolutionary contexts, there are also contexts where it is
 demonstrably worse off. While this may be bad news for regret minimizing types
 $(\text{reg}, \text{imp})$, it is not the case that regret types \emph{as such} are weeded out
@@ -922,10 +1349,10 @@ something that the particular choice situation would exogenously give us, then r
 preferences \emph{can} again drive out veridical preferences altogether. For concreteness,
 suppose that only preference types compete and that agents' belief types are exogenously given,
 in such a way that both players hold precise beliefs with probability $p$ and they both have imprecise
-beliefs otherwise. This transforms the meta-game from Table~\ref{tab:ExpectedFitness_10x10} into a
+beliefs otherwise. This transforms the meta-game from table~\ref{tab:ExpectedFitness_10x10} into a
 simpler $4 \times 4$ meta-game in which the payoff obtained for a preference type is the weighted
 average over the payoffs of the choice mechanisms including that preference type in
-Table~\ref{tab:ExpectedFitness_10x10}. Setting $p = 0.98$ for illustration, we get the meta-game in Table~\ref{tab:ExogeneousEpistemics}.
+table~\ref{tab:ExpectedFitness_10x10}. Setting $p = 0.98$ for illustration, we get the meta-game in table~\ref{tab:ExogeneousEpistemics}.
 \begin{table}[]
 \centering
 \begin{tabular}{ccccc}
@@ -955,7 +1382,7 @@ way of narrowing down the probability set), and even if that happens only very i
 well as competitive and altruistic types.
 
 
-\subsection{Solitary decisions}
+\subsection{Solitary Decisions}
 \label{sec:solitary-decisions}
 
 To see how different choice mechanisms behave in evolutionary competition based on solitary
@@ -968,11 +1395,11 @@ $n_s, n_\act \in \set{2, \dots, 10}$ and then filling the utility table, so to s
 i.i.d.~samples for each $\pi(s, \act) \in \set{0, 10}$. Unlike with
 two-player games, we need to also sample the actual state of the world, which we selected
 uniformly at random from the available states in the current decision problem. As player types,
-we considered the original cast of four from Table~\ref{tab:CMs}, since altruistic and
+we considered the original cast of four from table~\ref{tab:CMs}, since altruistic and
 competitive types are meaningless in solitary decision situations. As before, the
 relevant fitness measure, defined in Equation~(\ref{eq:FittnessChoiceMechSolitary}), was
 approximated by Monte Carlo simulation, the results of which are given in
-Table~\ref{tab:SolitaryDecisions}.
+table~\ref{tab:SolitaryDecisions}.
 
 \begin{table}
   \centering
@@ -994,7 +1421,7 @@ Facts~\ref{fact:maxEU-minReg} and \ref{fact:equivalence2x2} still apply:
 $(\text{reg}, \text{prc})$ and $(\text{obj}, \text{prc})$ are behaviorally equivalent in
 general, and $(\text{reg}, \text{imp})$ is behaviorally equivalent to the former two in
 decision problems with two states and two acts. This shows in the results from
-Table~\ref{tab:SolitaryDecisions} in that the averages for $(\text{reg}, \text{prc})$ and
+table~\ref{tab:SolitaryDecisions} in that the averages for $(\text{reg}, \text{prc})$ and
 $(\text{obj}, \text{prc})$ are identical. But since we included decision problems with more
 acts and more states as well, the average for regret minimizers $(\text{reg}, \text{imp})$ is
 not identical to the one of $(\text{reg}, \text{prc})$ and $(\text{obj}, \text{prc})$. It
@@ -1075,7 +1502,7 @@ variable environments.
 
 \appendix
 
-\section{Background on imprecise probabilistic beliefs}
+\section{Background on Imprecise Probabilities}
 \label{sec:impr-prob-beli}
 
 Consider the following problem. I have, on the desk in front of me, a bag containing either red
@@ -1103,7 +1530,7 @@ in a game theoretical context. Indeed, in a recent paper \citet{BattCerrMM15} wr
 
 \begin{quote}
   Such uncertainty is inherent in situations of strategic interaction. This is quite obvious
-  when such situations have been faced only a few times. (p. 646)
+  when such situations have been faced only a few times. (p.~646)
 \end{quote}
 
 \noindent In evolutionary game theory, for instance, players in a population obviously face
@@ -1127,7 +1554,7 @@ and seems justified by empirical observations too. A prominent example is Ellsbe
 or yellow. A marble is to be drawn and DM can win 100€ if she guesses the color of the drawn
 marble. DM is offered two different bets. In the first one she can choose to bet either on
 red (R) or on yellow (Y), while in the second she can bet either on red or black (RB) or on
-yellow or black (YB), as shown in Table \ref{Ellsberg}.
+yellow or black (YB), as shown in table \ref{Ellsberg}.
 
 \definecolor{yellow}{RGB}{255,188,1}
 
@@ -1146,7 +1573,7 @@ $f_{{\color{yellow}Y}B}$             & 0   & 100 & 100 \\ \bottomrule
 \label{Ellsberg}
 \end{table}
 
-The pattern consistently observed in experimets is:
+The pattern consistently observed in experiments is:
 $f_{{\color{red}R}} \succ f_{{\color{yellow}Y}}$ and
 $f_{{\color{red}R}B} \prec f_{{\color{yellow}Y}B}$. This is clearly incompatible with any
 precise probabilistic belief about the proportion of black and yellow marbles. This kind of
@@ -1191,7 +1618,7 @@ sampled from a set of i.i.d. values with at least 3 elements in the support, it 
   \end{itemize}
 \end{multicols}
 
-\noindent To show this we use the following partition of $\mathcal{G}$, based on payoffs parameterized as
+\noindent To show this we use the following partition of $\mathcal{G}$, based on payoffs parametrized as
 follows:
 \begin{center}
   \begin{tabular}{ccc}
@@ -1346,20 +1773,18 @@ $F_{\mathcal{C}\cup\mathcal{A}}(R,R)>F_{\mathcal{C}\cup\mathcal{A}}(M,R)$. With 
 $P(I_{RC} \cap I_{RC})$ denoting the probability that a random $R$-player plays $I$ and another
 $R$-player plays $I$ as well in game $C$, rewrite the inequality as:
 \begin{align*}
-  & \sum_{C \in \mathcal{C}}P(C)[P(I_{RC}\cap I_{RC})\cdot a_{C}+P(II_{RC}\cap II_{RC})\cdot
+   \sum_{C \in \mathcal{C}}P(C) & [P(I_{RC}\cap I_{RC})\cdot a_{C}+P(II_{RC}\cap II_{RC})\cdot
   d_{C}+P(I_{RC}\cap II_{RC})\cdot b_{C}+P(II_{RC}\cap I_{RC})\cdot c_{C}] 
-  \\ + & \sum_{A \in
-    \mathcal{A}}P(A)[P(I_{RA}\cap I_{RA})\cdot a_{A}+P(II_{RA}\cap II_{RA})\cdot
+  \\ + \sum_{A \in
+    \mathcal{A}}P(A) & [P(I_{RA}\cap I_{RA})\cdot a_{A}+P(II_{RA}\cap II_{RA})\cdot
   d_{A}+P(I_{RA}\cap II_{RA})\cdot b_{A}+P(II_{RA}\cap I_{RA})\cdot c_{A}]\\
-  > & \sum_{C \in
-    \mathcal{C}}P(C)[P(I_{RC}\cap I_{MC})\cdot a_{C}+P(II_{RC}\cap II_{MC})\cdot
+  > \sum_{C \in
+    \mathcal{C}}P(C) & [P(I_{RC}\cap I_{MC})\cdot a_{C}+P(II_{RC}\cap II_{MC})\cdot
   d_{C}+P(I_{RC}\cap II_{MC})\cdot c_{C}+P(II_{RC}\cap I_{MC})\cdot b_{C}] \\
-   + & \sum_{A \in
-    \mathcal{A}}P(A)[P(I_{RA}\cap I_{MA})\cdot a_{A}+P(II_{RA}\cap II_{MA})\cdot
+   + \sum_{A \in
+    \mathcal{A}}P(A) & [P(I_{RA}\cap I_{MA})\cdot a_{A}+P(II_{RA}\cap II_{MA})\cdot
   d_{A}+P(I_{RA}\cap II_{MA})\cdot c_{A}+P(II_{RA}\cap I_{MA})\cdot b_{A}]
 \end{align*}
-
-
 \noindent By Lemma \ref{lemma:probabilities coord-ant} and Lemma \ref{lemma:probabilities
   actions coord-ant}, we can express everything in terms of $C$ only:
 \begin{align*}
@@ -1385,7 +1810,6 @@ This simplifies to:
   & \ \ \ \ c_{C} \cdot (P(I_{RC}\cap II_{MC})+P(II_{RC}\cap II_{MC})) + d_{C} \cdot (P(II_{RC}\cap
   II_{MC})+P(I_{RC}\cap II_{MC}))]
 \end{align*}
-
 \noindent Now let us split into $a>d$ and $a<d$, and consider $a>d$ first.  Notice that, by
 Lemma \ref{lemma:action implications}, the case $a=d$ is irrelevant in order to discriminate
 between $R$ and $M$. If $a>d$, by Lemma \ref{lemma:action implications} we can eliminate the
@@ -1393,7 +1817,7 @@ cases where $R$ plays $II$ and $M$ plays $I$:
 \begin{align*}
   & \textstyle{\sum_{C_{a>d}}} P(C)[a_{C} \cdot (P(I_{RC}\cap I_{RC}) + P(I_{RC}\cap II_{RC})) + b_{C} \cdot
   (P(I_{RC}\cap II_{RC}) + P(I_{RC}\cap I_{RC})) \\ 
-  & \ \ \ \ + c_{C} \cdot (P(II_{RC}\cap I_{RC})
+  & \ \ + c_{C} \cdot (P(II_{RC}\cap I_{RC})
   +P(II_{RC}\cap II_{RC})) + d_{C} \cdot (P(II_{RC}\cap II_{RC})+P(II_{RC}\cap I_{RC}))] \\
   > & 
   \textstyle{\sum_{C_{a>d}}} P(C)[a_{C} \cdot P(I_{RC}\cap I_{MC}) + b_{C} \cdot P(I_{RC}\cap I_{MC}) +
@@ -1412,22 +1836,20 @@ Rewrite:
   & \ \ \ \ + d_{C} \cdot (P(II_{RC}\cap
   II_{RC})+P(II_{RC}\cap I_{RC})- P(II_{RC}\cap II_{MC})- P(I_{RC}\cap II_{MC}))]> 0
 \end{align*}
-
-
-
 \noindent We now distinguish between two cases: (1) $ a-c = d-b $ and (2) $  a-c \neq d-b $. Notice that $P(I_{RC}\cap II_{RC}) \neq 0$ if and only if case (1) obtains, and that $a>d$ and (1) imply $II_{MC}$. Then, from (1) we have\footnote{Note that when we have only 3 elements in the support it is not guaranteed that case (1), together with $a>d$, may arise in a coordination game, whereas it is guaranteed that case (2), together with $a>d$, occurs with some positive probability. If we take for instance $x= 5, y= 2, z= 1$, then case (1) cannot obtain, whereas if we take $x= 3, y= 2, z= 1$, both (1) and (2) may obtain ($a=3, b=1, c=2, d=2$ for case (1), and $a=3, b=1, c=2, d=2$ for case (2)). Moreover, under the assumption that $a>d$, having 3 elements in the support is a necessary and sufficient condition for case (2) to have positive occurrence in a coordination game. As it will be clear in the following, a positive occurrence of case (2) only is enough for the theorem to hold.}:
+
 \begin{align*} 
 & \textstyle{\sum_{C_{a>d}}} P(C)[a_{C} \cdot (P(I_{RC}\cap I_{RC}) + P(I_{RC}\cap II_{RC})) + b_{C} \cdot  (P(I_{RC}\cap II_{RC}) + P(I_{RC}\cap I_{RC}))\\
 & \ \ \ \ + c_{C} \cdot (P(II_{RC}\cap I_{RC}) +P(II_{RC}\cap II_{RC})- P(I_{RC}\cap II_{MC})- P(II_{RC}\cap II_{MC}))\\
 & \ \ \ \ + d_{C} \cdot (P(II_{RC}\cap II_{RC})+P(II_{RC}\cap I_{RC})- P(II_{RC}\cap II_{MC})- P(I_{RC}\cap II_{MC}))]> 0
 \end{align*}
+that is
 \begin{align*}
 \textstyle{\sum_{C_{a>d}}} P(C)[a_{C} \cdot (\frac{1}{4}+\frac{1}{4}) + b_{C} \cdot  (\frac{1}{4}+\frac{1}{4}) + c_{C} \cdot (\frac{1}{4}+\frac{1}{4}-\frac{1}{2}-\frac{1}{2}) + d_{C} \cdot (\frac{1}{4}+\frac{1}{4}-\frac{1}{2}-\frac{1}{2})]> 0
 \end{align*}
-\begin{align*}
-\textstyle{\sum_{C_{a>d}}} P(C)[\frac{1}{2}a_{C}+ \frac{1}{2}b_{C} - \frac{1}{2}c_{C} - \frac{1}{2}d_{C}]> 0
-\end{align*}
-
+%\begin{align*}
+%\textstyle{\sum_{C_{a>d}}} P(C)[\frac{1}{2}a_{C}+ \frac{1}{2}b_{C} - \frac{1}{2}c_{C} - \frac{1}{2}d_{C}]> 0
+%\end{align*}
 \noindent Since we have assumed $ a-c = d-b $, the last inequality is not satisfied. We have instead:
 
 $$ \sum_{C_{a>d}} P(C)[\frac{1}{2}a_{C}+ \frac{1}{2}b_{C} - \frac{1}{2}c_{C} - \frac{1}{2}d_{C}]= 0 $$
@@ -1443,7 +1865,7 @@ $P(I_{RC} \cap I_{RC})-P(I_{RC}\cap I_{MC})=P(I_{RC}\cap II_{MC})$. Moreover, wh
 & \ \ \ \ + d_{C} \cdot (P(II_{RC}\cap II_{RC})- P(II_{RC}\cap II_{MC})- P(I_{RC}\cap II_{MC}))]> 0
 \end{align*}
 \begin{align*}
-\textstyle{\sum_{C_{a>d}}} P(C)[a_{C} \cdot P(I_{RC}\cap II_{MC}) + b_{C} \cdot  P(I_{RC}\cap II_{MC}) - c_{C} \cdot P(I_{RC}\cap II_{MC}) - d_{C} \cdot P(I_{RC}\cap II_{MC})]> 0
+\textstyle{\sum_{C_{a>d}}} P(C)[a_{C} \cdot P(I_{RC}\cap II_{MC}) + b_{C} \cdot  P(I_{RC}\cap II_{MC}) \\- c_{C} \cdot P(I_{RC}\cap II_{MC}) - d_{C} \cdot P(I_{RC}\cap II_{MC})]> 0
 \end{align*}
 \begin{align*}
 \textstyle{\sum_{C_{a>d}}} P(C)[P(I_{RC}\cap II_{MC})\cdot (a_{C} + b_{C} - c_{C} - d_{C})]> 0
@@ -1476,12 +1898,9 @@ this out as:
 < & \sum_{C}P(C)[P(I_{RC}\cap I_{MC})\cdot a_{C}+P(II_{RC}\cap II_{MC})\cdot d_{C}+P(I_{RC}\cap II_{MC})\cdot b_{C}+P(II_{RC}\cap I_{MC})\cdot c_{C}]\\ 
 + & \sum_{A}P(A)[P(I_{RA}\cap I_{MA})\cdot a_{A}+P(II_{RA}\cap II_{MA})\cdot d_{A}+P(I_{RA}\cap II_{MA})\cdot b_{A}+P(II_{RA}\cap I_{MA})\cdot c_{A}]
 \end{align*}
-
 \noindent When $a>d$, similarly to the above derivation, we get: 
-
 \begin{align*} & \textstyle{\sum_{C_{a>d}}} P(C)[a_{C} \cdot (P(I_{MC}\cap I_{MC}) + P(I_{MC}\cap II_{MC})- P(I_{RC}\cap I_{MC}) - P(I_{RC}\cap II_{MC}))\\ & + b_{C} \cdot  (P(I_{MC}\cap I_{MC}) + P(I_{MC}\cap II_{MC})- P(I_{RC}\cap I_{MC}) - P(I_{RC}\cap II_{MC}))\\ & + c_{C} \cdot (P(II_{MC}\cap I_{MC}) +P(II_{MC}\cap II_{MC})- P(II_{RC}\cap II_{MC})) \\ & + d_{C} \cdot (P(II_{MC}\cap II_{MC})+P(II_{MC}\cap I_{MC})- P(II_{RC}\cap II_{MC}))]< 0
 \end{align*}
-
 \noindent We now distinguish between (1) $b=c$, (2) $b>c$, and (3) $b<c$. Notice that either
 (1) or (2), together with $a>d$, implies $I_{RC}$. Then we obtain:\footnote{Note that here, when
   we only have 3 elements in the support, case (2) is impossible, but cases (1) and (3) can
@@ -1495,9 +1914,7 @@ this out as:
 \item[(3)] $\sum_{C_{a>d}} P(C)[a_{C} \cdot (- P(I_{RC}\cap II_{MC})) + b_{C} \cdot  (- P(I_{RC}\cap II_{MC})) + c_{C} \cdot (P(II_{MC}\cap II_{MC})- P(II_{RC}\cap II_{MC})) + d_{C} \cdot (P(II_{MC}\cap II_{MC})- P(II_{RC}\cap II_{MC}))] \leq 0$.
 
 \end{itemize}
-
 \noindent When $a<d$, the derivation proceeds symmetrically and we get: 
-
 \begin{itemize}
 
 \item[(1)] $\sum_{C_{a<d}} P(C)[\frac{1}{2}a_{C} + \frac{1}{2}b_{C} - \frac{1}{2}c_{C} - \frac{1}{2}d_{C}]< 0$;
@@ -1507,15 +1924,12 @@ this out as:
 \item[(3)] $\sum_{C_{a<d}} P(C)[c_{C} \cdot (P(II_{MC}\cap II_{MC})- P(II_{RC}\cap II_{MC})) + d_{C} \cdot (P(II_{MC}\cap II_{MC})- P(II_{RC}\cap II_{MC}))] = 0$.
 
 \end{itemize}
-
-
 \noindent Finally, we can conclude that
 $F_{\mathcal{C}\cup\mathcal{A}}(M,M)<F_{\mathcal{C}\cup\mathcal{A}}(R,M)$. As before, notice
 that, when we have i.i.d. sampling with infinite support, games in $\mathcal{W}$ and
 $\mathcal{B}$ never occur, but the proof is the same for all the other cases. Hence, both when
 the support of $a,b,c,d$ is finite, and when the support is infinite, $R$ strictly dominates
 $M$ under the conditions assumed. \hfill $\dashv$
-
 
 
 \printbibliography[heading=bibintoc]
