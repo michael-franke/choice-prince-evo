@@ -467,6 +467,8 @@
 \usetikzlibrary{decorations.pathreplacing}
 \usetikzlibrary{calc}
 
+\definecolor{Red}{RGB}{178,34,34}
+\newcommand{\mf}[1]{\textcolor{Red}{[mf: #1]}} 
 
 \title{Smart Representations: {R}ationality and Evolution in a Richer  Environment}
 
@@ -489,16 +491,14 @@
 \maketitle
 
 \begin{abstract}
-\normalsize
-  Standard applications of evolutionary game theory look at a single, fixed game and focus on
-  the evolution of behavior for that game alone. Instead, this paper uses tools from
-  evolutionary game theory to study the evolutionary competition between \emph{choice
-    mechanisms} in a rich and variable environment. A choice mechanism is a way of representing
-  a decision situation, paired with a method for choosing an act based on this 
+  \normalsize Standard applications of evolutionary game theory look at a single, fixed game
+  and focus on the evolution of behavior for that game alone. Instead, this paper uses tools
+  from evolutionary game theory to study the evolutionary competition between \emph{choice
+    mechanisms} in a rich and variable environment. A choice mechanism is a way of subjectively
+  representing a decision situation, paired with a method for choosing an act based on this
   subjective representation. We demonstrate the usefulness of this approach by a case study
-  that compares a number of classic proposals for decision making. The
-  main result is that regret-based preference representations can be evolutionarily selected
-  for, despite being non-veridical.
+  that shows how subjective preference representations in terms of regret that differ from the
+  actual fitness can be evolutionarily advantageous.
 \end{abstract}
 
 \newpage
@@ -513,34 +513,33 @@
 %abstraction.  Abstraction entails simplifying assumptions. 
 
 If agents deal with a rich and variable environment, they have to face many different choice
-situations.
-Standard evolutionary game models frequently
-simplify reality in two ways that are relevant for present purposes. Firstly, the environment
-is represented as a fixed \emph{stage game}; secondly, the focus of
-evolutionary selection is behavior for that stage game alone. In contrast, some argue for
+situations.  Standard evolutionary game models frequently simplify reality in at least two
+ways. Firstly, the environment is represented as a fixed \emph{stage game}; secondly, the focus
+of evolutionary selection is behavior for that stage game alone. In contrast, some argue for
 studying the evolutionary competition of general \emph{choice mechanisms} in a rich and
 variable environment
-\citep[e.g.,][]{FawcettHamblin2013:Exposing-the-be,McNamara2013:Towards-a-Riche,HammStev12}. To show that
-there is no tension here, this paper introduces a method for reconciling established notions of
-evolutionary game theory with evolutionary selection of choice mechanisms in variable
-environments \citep[see, inter alia, related work
-by][]{Harley1981:Learning-the-Ev,ZollmanSmead2010:Plasticity-and-,SmeadZollman2013:The-Stability-o,OConnor2016:Evolving-to-Gen}.
+\citep[e.g.,][]{FawcettHamblin2013:Exposing-the-be,McNamara2013:Towards-a-Riche,HammStev12}. In
+response to this and adding to recent like-minded approaches, this paper introduces a general
+meta-game model that conservatively extends the scope of evolutionary game theory to deal with
+evolutionary selection of choice mechanisms in variable environments \citep[see, inter alia,
+related work
+by][]{Harley1981:Learning-the-Ev,ZollmanSmead2010:Plasticity-and-,SmeadZollman2013:The-Stability-o,OConnor2016:Evolving-to-Gen}.\mf{please
+insert more references here; maybe use a footnote right here to pick out some of the most
+important related pieces and say how our contribution is novel and shiny}
 
-In full generality, a choice mechanism associates decision situations with action choices. A crucial
-part of a choice mechanism is the \emph{subjective representation} of the decision situation,
-in particular the manner of forming preferences and beliefs about a possibly uncertain world (see
-figure~\ref{fig:ChoiceMechanism} below). This paper asks: which preference and belief
-representations are ecologically valuable and lead to high fitness?
-The evolution of
+A choice mechanism associates decision situations with action choices. A crucial part of a
+choice mechanism is the \emph{subjective representation} of the decision situation, in
+particular the manner of forming preferences and beliefs about a possibly uncertain world. To
+show the usefulness of the meta-game approach, this paper asks: which preference and belief
+representations are ecologically valuable and lead to high fitness? The evolution of
 preferences has been subject of recent interest in theoretical economics
-\citep[e.g.,][]{algweib13,DekElyYlan07,RobSam11}. Here, we argue that questions of preference evolution should take
-variability in uncertainty representation into account as well. In relation to this, 
-the main contributions of this work are essentially three. First, we show that the way agents form beliefs, and the type of uncertainty that they entertain in particular, is a key aspect for the evolutionary success. 
-Second, we demonstrate
-that if agents have imprecise probabilistic beliefs \citep[e.g.][]{gardsah82,levi74,walley96}, faithful and objective representation in terms of true, real evolutionary fitness can be outperformed by
-subjective (e.g., regret-based) preference representations that deviate
-from the true fitness that natural selection operates on.
-Third, although a few examples along similar lines have recently been introduced (REFERENCES), our approach based on a meta-game model is very uncustomary in the literature, and contributes to widen the methods of evolutionary game theory beyond the traditional single-game framework.
+\citep[e.g.,][]{algweib13,DekElyYlan07,RobSam11}. Here, we argue that questions of preference
+evolution should take variability in uncertainty representation into account as well. We
+demonstrate that if agents have imprecise probabilistic beliefs
+\citep[e.g.][]{gardsah82,levi74,walley96}, faithful and objective representation in terms of
+true, real evolutionary fitness can be outperformed by subjective (e.g., regret-based)
+preference representations that deviate from the true fitness that natural selection operates
+on.
 
 % To show this, we study the evolutionary competition of choice mechanisms, or more
 % specifically the competition of subjective representations of choice situations, in a
@@ -552,15 +551,15 @@ Third, although a few examples along similar lines have recently been introduced
 % we are still able to use standard methods from evolutionary game theory, like stability or
 % evolutionary dynamics.
 
-The paper is organized as follows. Section \ref{sec:rati--subj} reviews different views of rational choice and relates the
-approach we take here to the existing literature. Sections \ref{sec:subj-ut,bel,dec-rules} and \ref{sec:subj-rep,ev-fit} introduce the
-relevant decision-theoretic and game-theoretic notions, while Sections \ref{sec:metagame} and \ref{sec:model} present the model.
-%spells out four choice mechanisms on whose
-%evolutionary competition we zoom in 
-The main results of the paper are in Section~\ref{sec:results}, and Section \ref{sec:extensions} extends the evolutionary analysis by
-introducing more choice mechanisms and alternative models of the environment. Finally, Section \ref{sec:conclusion} concludes.
+The paper is organized as follows. Section \ref{sec:rati--subj} sets the scene by reviewing
+different perspectives no rational choice. Section~\ref{sec:subj-ut,bel,dec-rules} then
+introduces the meta-game approach. In doing so it covers key notions such as choice mechanism,
+decision rules and subjective representations, all with an eye towards the specific application
+to the evolution of preferences in Section~\ref{sec:model}. Section~\ref{sec:results} contains
+our main results for this application and Section \ref{sec:extensions} discusses some
+interesting extensions.
 
-\section{Rationality and Representations}
+\section{Rationality and Subjective Representations}
 \label{sec:rati--subj}
 
 The standard textbook definition of \textit{rationality} in economics and decision theory
@@ -580,27 +579,24 @@ and/or aberrant preferences. % (Indeed, while
 
 If beliefs and preferences are subjective, there is room for \emph{rationalization} or
 \emph{redescriptionism} of observable behavior. For example,
-\citet{KahnemannTversky1979:Prospect-Theory} famously demonstrated that what appear to be
-violations of rationality norms in human decision making can be explained on the assumption
-that subjects' beliefs and preferences deviate systematically from the objectively given
-parameters in the presented choice task. Similarly for social decision making, including social
-preferences such as fairness, altruism or similar, allows us to describe as rational
-empirically observed behavior, such as in experimental Prisoner's Dilemmas or public goods
-games, that might otherwise appear irrational \citep[e.g.,][]{fehrschmidt99,charrab02}.
+% \citet{KahnemannTversky1979:Prospect-Theory} famously demonstrated that what appear to be
+% violations of rationality norms in human decision making can be explained on the assumption
+% that subjects' beliefs and preferences deviate systematically from the objectively given
+% parameters in the presented choice task. Similarly
+in the case of social decision making, including considerations of fairness allows us to
+describe as rational empirically observed behavior, such as in experimental Prisoner's Dilemmas
+or public goods games, that might otherwise appear irrational
+\citep[e.g.,][]{fehrschmidt99,charrab02}.
 
 The main objection to redescriptionism is that, without additional constraints, the notion of
 rationality is likely to collapse, as it seems possible to deem rational almost everything that
 is observed, given the freedom to adjust beliefs and preferences at will. \emph{Normativism}
 therefore emphasizes that there are many ways in which ascriptions of beliefs and preferences
-should be constrained by normative considerations of rationality as well. As for beliefs, where
-possible, subjective beliefs should reflect objective chance. 
-%Where this is impossible,
-%temporal consistency of choices constrains rational subjective beliefs, else exploitation by
-%Dutch books is possible. 
-As for preferences, in certain situations it may make sense to
-postulate on normative grounds that subjective preferences should be oriented towards tracking
-objective fitness. For instance, profit maximization seems a necessary requirement for
-evolution in a competitive market because only firms behaving according to profit maximization will survive in the long run \citep[e.g.,][]{alch50,Fried53}.
+should be constrained by normative considerations of rationality as well: e.g., subjective
+beliefs should reflect objective chance where possible; subjective preferences should be
+oriented towards tracking objective fitness. For instance, profit maximization seems a
+necessary requirement for evolution in a competitive market because only firms behaving
+according to profit maximization will survive in the long run \citep[e.g.,][]{alch50,Fried53}.
 
 An alternative view on rationality of choice is \emph{adaptationism}
 \citep[e.g.,][]{Anderson1991:Is-human-cognit,ChaterOaksford2000:The-Rational-An,HagenChater2012:Decision-Making}. Adaptationism
@@ -617,215 +613,100 @@ are most interested in the question which subjective representations, and which 
 from an evolutionary point of view.
 
 
-\iffalse
-
-\begin{figure}
-  \centering
-  \begin{tikzpicture}[node distance = 2.25cm]
-
-  \begin{scope}
-
-    \node[] (environment) {};
-
-    \node[rounded corners, draw, rectangle, minimum height = 0.75cm, text width=6cm, text
-    centered, below of = environment, node distance = 2cm] (situation)
-    {environment produces random \\ \textbf{decision situation} $D$};
-
-    \node[rounded corners, draw, rectangle, minimum height = 0.75cm, text width=6cm, text
-    centered, below of = situation] (representation) 
-    {\textbf{subjective representation} of $D$ \\ \textcolor{gray}{[preference, beliefs, \dots]}};
-
-    \node[rounded corners, draw, rectangle, minimum height = 0.75cm, text width=6cm, text
-    centered, below of = representation] (action)
-    {\textbf{action choice} $a$};
-
-    \node[rounded corners, draw, rectangle, minimum height = 0.75cm, text width=6cm, text
-    centered, below of = action,node distance = 1.5cm] (payoff) {\textbf{payoff} for $a$ in $D$};
-
-    \draw[->, thick]
-    ([xshift=-1.75cm,yshift=-0.5cm]situation.center)--([xshift=-1.75cm,yshift=0.55cm]representation.center)
-    node[midway, right] {subj.~representation scheme $\gamma$};
-
-    \draw[->, thick]
-    ([xshift=-1.75cm,yshift=-0.55cm]representation.center)--([xshift=-1.75cm,yshift=0.5cm]action.center)
-    node[midway, right] {action selection function $\kappa$};
-
-    \draw[->, thick]
-    ([xshift=-1.75cm,yshift=-0.55cm]action.center)--([xshift=-1.75cm,yshift=0.5cm]payoff.center)
-    node[midway, right] {};
-
-    \node[minimum height = 0.75cm, text width=6cm, text
-    centered, right of = representation, xshift = 2cm, rotate = 90] (mechanism) {choice mechanism};
-
-    \begin{pgfonlayer}{background}
-             \node [rounded corners, dashed,
-       very thick,draw=black!40,fit={($(situation.south)+(0,-10pt)$) 
-                                     ($(mechanism.west)+(+5pt,+50pt)$) 
-                                     % ($(action.north)+(0,+10pt)$) 
-                                     ($(representation.west)+(-7pt,0)$)
-                                   }] (box) {};
-    \end{pgfonlayer}
-
-  \end{scope}
-
-
-
-\end{tikzpicture}
-  \caption{Schematic representation of action choice. A choice mechanism maps decision
-    situation $D$ to action choice $a$ by means of a representation of $D$ in terms of a subjective
-    preference and a subjective belief.}
-  \label{fig:ChoiceMechanism}
-\end{figure}
-
-
-
-
-
-We submit that meta-games are a useful tool for structuring and sharpening conceptual inquiry
-in a domain that is notorious for its fuzziness and elusiveness. To show how this approach can
-be applied to the benefit of conceptual debate, we consider the evolution of preferences
-\citep[e.g.,][]{algweib13,DekElyYlan07,RobSam11}. 
-%Concretely, we here pit two different ways of
-%representing preferences against each other: (i) veridical representations that correctly
-%reflect objective fitness, and (ii) non-veridical subjective preferences in terms of regret
-%\citep[e.g.,][]{Savage1951:The-theory-of-s,}. 
-We show that subjective, non-veridical preference
-representations based on a notion of regret can be adaptive and even outperform objective representations of the true evolutionary fitness, when agents, at least on occasion, hold
-\emph{imprecise probabilistic beliefs} \citep[e.g.,][]{gilsch89,levi74,gardsah82} and make
-decisions based on a security choice rule (here: the maxmin rule).\footnote{Decision-theoretic background and justifications for the use of maxmin and imprecise probabilities is given in Appendix~\ref{sec:impr-prob-beli}.}
-
-The case study under consideration strips the generality of a meta-game approach down to a perspicuous
-comparison between four choice mechanisms, summarized in table~\ref{tab:CMs}.
-% the cross-product of two different preference representations (veridical vs.~regret) and two
-%different belief representations (precise vs.~imprecise). 
-\begin{table}[t]
-  \centering
-  \begin{tabular}{cccc}
-  \multicolumn{3}{c}{choice mechanism} \\  \cmidrule(r){1-3}
-    \multicolumn{2}{c}{subjective representation} & action selection & corresponding classic rule \\  \cmidrule(r){1-2}
-    preference type & belief type  \\ \midrule
-    objective fitness & precise & maxmin EU &  Laplace rule \\
-    objective fitness & imprecise & maxmin EU & maxmin \\ 
-    regret & precise & maxmin EU & Laplace rule \\
-    regret & imprecise & maxmin EU & regret minimization \\ 
-  \end{tabular}
-  \caption{Overview relevant choice mechanisms and the corresponding (behaviorally equivalent)
-    classic choice rules.}
-  \label{tab:CMs}
-\end{table}
-\iffalse
-This exclusive selection of choice mechanisms is motivated by a number of
-considerations. Firstly, the set of conceivable choice mechanisms is vast. Most of that
-conceivable vastness is utter nonsense, and some selection of plausible candidates is required in
-any case. Secondly, a restriction to only a small number of suitable candidates will
-help demonstrate more distinctly how a meta game approach may help structure philosophical
-inquiry, which is our main goal. Thirdly, our case study adds to the recent literature on the
-evolution of preferences by making evident the possibly non-trivial interaction between
-preference and belief representations, all else equal. This is our secondary goal. 
-Finally,
-\fi 
-The
-four choice mechanisms,  
-%that we look at here
-although phrased in terms of preference and belief representations, map onto well-known classic
-proposals for rational decision making (see table~\ref{tab:CMs}). In other words, there is also
-motivation from historical relevance for our selection. To see this, we first recapitulate the
-relevant classics ---to have a handy label, we call them \emph{classic rules}--- and then show
-how they relate to our notion of choice mechanism.
-
-
-
-The classic literature on rational choice contains a number of proposals for which acts a
-player should choose if she is rational. Maximization of expected utility, as
-given in Definition~\ref{def:rationality}, is just one of them, possible only if DM holds a precise probabilistic belief.
-Here, we consider three others:
-(i) maxmin, (ii) Laplace rule, and (iii) regret minimization. 
-%All of these apply to games and
-%solitary decision situations.
-We focus on games first, but definitions carry over straightforwardly to solitary decisions.
-
-
-
-A \emph{choice mechanism} is a map from choice situations to action choices that contains an explicit level, in terms of preferences and beliefs, of subjective representation of
-the choice situation. Concretely, let us think of a choice mechanism as a pair of functions
-($\gamma,\kappa$), where $\gamma$ is a \emph{subjective representation scheme} and $\kappa$ is
-an \emph{action selection function} (see figure~\ref{fig:ChoiceMechanism}).
-
-
-
-\noindent This means that objective and regret types are behaviorally indistinguishable, as long as both hold precise beliefs. 
-%This will be central in understanding later results. 
-On the other hand, if paired with imprecise beliefs, different behavioral predictions
-arise.
-
-In the following, we assume that agents are maximally uncertain, so that precise types have a
-(singleton set containing a) uniform probability measure
-$\overline{\mu} \in \Delta(\Acts_{-i})$ and imprecise types entertain all probabilistic beliefs
-about the co-players' behavior $\overline{\Gamma} = \Delta(\Acts_{-i})$. In that case, the
-considered choice mechanisms are behaviorally equivalent to classic choice rules, as summarized
-in table~\ref{tab:CMs}. This means that most of the following results which we interpret as results about the evolutionary fitness of different subjective representations are also relevant for a comparison of the ecological value of classic choice
-rules.
-
-\fi
-
-
-
-
-\section{Subjective Utilities, Beliefs and Decision Rules} \label{sec:subj-ut,bel,dec-rules}
+\section{Choice Mechanisms  \& Meta-Games} 
+\label{sec:subj-ut,bel,dec-rules}
 
 
 We view a choice mechanism as the combination of three different things: a \textit{subjective utility} (or preference), a \textit{subjective belief} and a \textit{decision rule}. In general, the agent's action choice will depend both on the agent's utility at different possible outcomes of the choice situation and on the agent's beliefs about the realization of these outcomes. The decision rule then combines the agent's subjective utility and belief, and dictates how the agent should act in case of a choice situation whose consequences are uncertain. Therefore, a decision rule is a function that associates an action choice with the agent's utility and beliefs:
 $$ \text{Decision Rule: Utility }\times\text{ Beliefs } \rightarrow \text{ Actions.}  $$
-The utility of an agent can be formally expressed by a function $u:W \times A \rightarrow \mathbb{R} $, where $A$ stands for a (finite) set of actions available to the agent and $W$ is a (finite) set of possible states of the world. There are many different ways to describe beliefs, but here we assume that the agent's beliefs are represented in terms of a (possibly singleton) set of probability functions $\Gamma \subseteq \Delta(W) $ over the possible states of the world. In line with this definition, we can consider different decision rules, such as:
+The utility of an agent can be formally expressed by a function
+$u:W \times A \rightarrow \mathbb{R} $, where $A$ stands for a (finite) set of actions
+available to the agent and $W$ is a (finite) set of possible states of the world. There are
+many different ways to describe beliefs, but for concreteness of later applications we here
+assume that the agent's beliefs are represented in terms of a (possibly singleton) set of
+probability functions $\Gamma \subseteq \Delta(W) $ over the possible states of the
+world. Examples of well-known decision rules from the literature that will be useful later are:
 \begin{enumerate}
 
-\item \textbf{Maxmin}: $$ a^*(u,\Gamma)= \argmax_{a \in A} \min_{\mu \in \Gamma} \sum_{w\in W} u(w,a)  \mu(w).$$
+\item \textbf{Maxmin}: $$ a^*(u,\Gamma)= \argmax_{a \in A} \min_{\mu \in \Gamma} \sum_{w\in W} u(w,a)  \mu(w)$$
 
-\item \textbf{Maximax}: $$ a^*(u,\Gamma)= \argmax_{a \in A} \max_{\mu \in \Gamma} \sum_{w\in W} u(w,a)  \mu(w).$$
+\item \textbf{Maximax}: $$ a^*(u,\Gamma)= \argmax_{a \in A} \max_{\mu \in \Gamma} \sum_{w\in W} u(w,a)  \mu(w)$$
 
-\item \textbf{Laplace rule}: $$ a^*(u,\Gamma)= \argmax_{a \in A} \sum_{w\in W} \frac{1}{|W|}  u(w,a) .$$
+\item \textbf{Laplace rule}: $$ a^*(u,\Gamma)= \argmax_{a \in A} \sum_{w\in W} \frac{1}{|W|}  u(w,a) $$
 
-\item \textbf{Expected utility maximization} (for $\Gamma$ singleton): $$ a^*(u,\Gamma)= \argmax_{a \in A} \sum_{w\in W} u(w,a)  \mu(w).$$
+\item \textbf{Expected utility maximization} (for $\Gamma$ singleton): $$ a^*(u,\Gamma)= \argmax_{a \in A} \sum_{w\in W} u(w,a)  \mu(w)$$
 
 \end{enumerate}
 
-It is worth noticing that both maxmin and maximax boil down to expected utility maximization when the set  $\Gamma$ is a singleton, and in turn expected utility maximization reduces to Laplace rule when the belief $\mu$ is a uniform probability over the states. 
+It is worth noticing that both maxmin and maximax boil down to expected utility maximization
+when the set $\Gamma$ is a singleton, and in turn expected utility maximization reduces to
+Laplace rule when the belief $\mu$ is a uniform probability over the states.  \mf{do we need
+  ``maximax''?}
  
-\section{Subjective Representations and Evolutionary Fitness} \label{sec:subj-rep,ev-fit}
 
-For a choice mechanism to prescribe an action, the decision rule  needs to be given a specific subjective utility and belief as input, as described in the previous section. We then call \textit{subjective representation} of the decision problem the pair $(u,\Gamma)$ of a subjective utility and a subjective belief.
-In other words, a subjective representation is a general way of forming preferences and beliefs about the choice situation.
+As mentioned previously, for a choice mechanism to prescribe an action, the decision rule needs
+to be given a specific subjective utility and belief as input. A \textit{subjective
+  representation} of a decision problem is the pair $(u,\Gamma)$, consisting of a subjective
+utility and a subjective belief. We are specifically interest in general and systematic ways of
+forming such subjective representations across many different decision situations. 
 
-The literature on evolution of preferences (REFERENCES) mainly focuses on the evolutionary selection of subjective utilities uniquely. Instead, it will be clear from our model that different subjective beliefs may have a fundamental role in determining the evolutionary success of subjective utilities, and therefore the interplay between utilities and beliefs needs to be taken into account explicitly.
-So, here we
-are most interested in the question which subjective representations are better than others
-from an evolutionary point of view. In order to investigate this issue we are going to use the machinery of evolutionary game theory.
+% The literature on evolution of preferences (REFERENCES) mainly focuses on the evolutionary
+% selection of subjective utilities uniquely. Instead, it will be clear from our model that
+% different subjective beliefs may have a fundamental role in determining the evolutionary
+% success of subjective utilities, and therefore the interplay between utilities and beliefs
+% needs to be taken into account explicitly.  So, here we are most interested in the question
+% which subjective representations are better than others from an evolutionary point of
+% view. In order to investigate this issue we are going to use the machinery of evolutionary
+% game theory.
 
-A game is an interactive decision situation. 
-For a given game $G=\langle N, (A_i,\pi^G_i)_{i \in N} \rangle$, let us denote the evolutionary payoff, or \textit{fitness}, of player $i$ by the function $\pi^G_i: \Pi_{i \in N} A_i \rightarrow \mathbb{R}$, where $A_i$ is player $i$'s (finite) set of actions. For simplicity of exposition we assume that
-  all games that are played are symmetric two-player games, that is, games such that: $N:=\{1,2\}$, $A_1 = A_2 $, and $\pi^G_1(a_1, a'_2)= \pi^G_2(a'_1, a_2)=:\pi^G(a,a')$.\footnote{Since payoff functions are symmetric, we will simply write $\pi^G(a, a')$ for $\pi^G_1(a_1, a'_2)$ and $A:=A_1=A_2$, as usual. However, notice that all the definitions and results can be extended to more general cases.} Then, the evolutionary fitness of a subjective representation $(u,\Gamma)$ is measured in terms of the fitness of a
-choice mechanism that contains it, all else equal. 
-Formally, the fitness of a choice mechanism $c$ against choice mechanism $c'$ in a symmetric two-player game $G=\langle \{1,2\}, A, \pi^G \rangle$ is the
-expected payoff of $c$ against $c'$ in $G$:
+A game is an interactive decision situation.  For a given game
+$G=\langle N, (A_i,\pi^G_i)_{i \in N} \rangle$, let us denote the evolutionary payoff, or
+\textit{fitness}, of player $i$ by the function
+$\pi^G_i: \Pi_{i \in N} A_i \rightarrow \mathbb{R}$, where $A_i$ is player $i$'s (finite) set
+of actions. For simplicity of exposition we assume that all games that are played are symmetric
+two-player games where $N:=\{1,2\}$, $A_1 = A_2 $ and
+$\pi^G_1(a_1, a'_2)= \pi^G_2(a'_1, a_2)=:\pi^G(a,a')$.\footnote{Since payoff functions are
+  symmetric, we will simply write $\pi^G(a, a')$ for $\pi^G_1(a_1, a'_2)$ and $A:=A_1=A_2$, as
+  usual. However, notice that all the definitions and results can be extended to more general
+  cases.} Then, the evolutionary fitness of a subjective representation $(u_c,\Gamma_c)$ is
+measured in terms of the fitness of a choice mechanism that contains it, all else equal.
+Formally, the fitness payoff of a choice mechanism $c$ against choice mechanism $c'$ in a
+symmetric two-player game $G=\langle \{1,2\}, A, \pi^G \rangle$ is the expected payoff of $c$
+against $c'$ in $G$:
 
 $$
- F_G(c,c')= \pi^G(a_c^*(u^G,\Gamma),a_{c'}^*(u^G,\Gamma)), \footnote{Whenever a choice mechanism would not select a unique
-  action, we assume that the player chooses one of the equally optimal actions at random. I.e., $F_G(c,c')= \sum_{a \in a_c^*(u^G,\Gamma)} \sum_{a' \in a_{c'}^*(u^G,\Gamma)} \frac{1}{|a_c^*(u^G,\Gamma)|} \frac{1}{|a_{c'}^*(u^G,\Gamma)|} \pi^G(a,a')$.}
+F_G(c,c')= \pi^G(a_c^*(u_c^G,\Gamma_c),a_{c'}^*(u_{c'}^G,\Gamma_{c'})), \footnote{Whenever a choice mechanism
+  would not select a unique action, we assume that the player chooses one of the equally
+  optimal actions at random. I.e., $F_G(c,c')=
+  \sum_{a \in a_c^*(u_c^G,\Gamma_c)} \sum_{a' \in a_{c'}^*(u_{c'}^G,\Gamma_{c'})}
+  \frac{1}{|a_c^*(u_c^G,\Gamma_c)|} \frac{1}{|a_{c'}^*(u_{c'}^G,\Gamma_{c'})|} \pi^G(a,a')$.}
 $$
-where $a^*_c$ is the decision rule of choice mechanism $c$. Given the game theoretic setting, the subjective utility $u$ is now a function $u^G:A \times A \rightarrow \mathbb{R}$, and the subjective belief $\Gamma$ is a set of probability functions over the co-player's actions, $ \Gamma \subseteq \Delta(A) $.
+where $a^*_c$ is the decision rule of choice mechanism $c$. Given the game theoretic setting,
+the subjective utility $u_c$ is now a function $u_c^G:A \times A \rightarrow \mathbb{R}$, and
+the subjective belief $\Gamma_c$ is a set of probability functions over the co-player's
+actions, $ \Gamma \subseteq \Delta(A)$.
 
-However, studying the fitness and the evolutionary selection of different choice mechanisms by the use of a fixed, single game may look like a rather restrictive perspective and possibly biased by the choice of the particular game. To avoid these limitations, we extend the standard single-game framework of evolutionary game theory by considering a \textit{class} of possible games that can be played within a population. Although not completely novel (seeREFERENCES), this approach has started being investigated only very recently, and we maintain that it can shed new light on the evolution of behavior, and it can open to much broader perspectives on evolutionary game theory in general.
-
-
-\section{The Meta-Game} \label{sec:metagame}
-
-The ground for the evolutionary competition of choice mechanisms will consist of a class $\mathcal{G}$ of possible two-player symmetric games, together with a probability measure $P_{\mathcal{G}}(G)$ for the occurrence probability of game $G \in \mathcal{G}$. In more biological terms, the probability measure $P_{\mathcal{G}}$ encodes the statistical
-properties of the environment. We then call \textit{meta-game} the tuple $ MG=\langle CM, \mathcal{G}, P_{\mathcal{G}},F \rangle$, where $CM$ is a set of choice mechanisms, $\mathcal{G}$ is a class of possible games, $P_{\mathcal{G}}(G)$ is the probability of game $G$ to occur, and $F:CM \times CM \rightarrow \mathbb{R}$ is the fitness function, defined as:
+However, studying the fitness and the evolutionary selection of different choice mechanisms by
+the use of a fixed, single game may look like a rather restrictive perspective and possibly
+biased by the choice of the particular game. To avoid these limitations, we consider a
+\textit{class} of possible games that can be played within a population
+(REFERENCES). \mf{please insert some references to other papers that use a multi-game approach
+  as well.} Towards this end, fix a class $\mathcal{G}$ of possible two-player symmetric games,
+together with a probability measure $P_{\mathcal{G}}(G)$ for the occurrence probability of game
+$G \in \mathcal{G}$. The probability measure $P_{\mathcal{G}}$ encodes the statistical
+properties of the environment. A \textit{meta-game} is the tuple
+$ MG=\langle CM, \mathcal{G}, P_{\mathcal{G}},F \rangle$, where $CM$ is a set of choice
+mechanisms, $\mathcal{G}$ is a class of possible games, $P_{\mathcal{G}}(G)$ is the probability
+of game $G$ to occur, and $F:CM \times CM \rightarrow \mathbb{R}$ is the fitness function,
+defined as:
 \begin{align}
   \label{eq:FittnessChoiceMechGamePairwise}
   F(c, c') = \int P_{\mathcal{G}}(G) \  F_G(c,c') \text{ d} G \,.
 \end{align}
-Hence, $F(c,c')$ determines the evolutionary payoff of choice mechanism $c$ against $c'$ in the meta-game. The set $CM$ is though of as the set of choice mechanisms present within a given population that is playing the games from the class $\mathcal{G}$. Consequently, it is possible to compute the average fitness of $c$ against the population, that is given by:
+Hence, $F(c,c')$ determines the evolutionary payoff of choice mechanism $c$ against $c'$ in the
+meta-game. The set $CM$ can be thought of as the set of choice mechanisms present within a given
+population that is playing the games from the class $\mathcal{G}$. Consequently, it is possible
+to compute the average fitness of $c$ against the population, that is given by:
 \begin{align}
   \label{eq:FittnessChoiceMechGame}
   F(c) = \int P_{M}(c') \ F(c,c') \text{ d} c' = \int \int P_{\mathcal{G}}(G) \  P_{M}(c') \  F_G(c,c') \text{ d} c' \text{ d} G  \,,
@@ -833,22 +714,22 @@ Hence, $F(c,c')$ determines the evolutionary payoff of choice mechanism $c$ agai
 where $P_{M}(c')$ is the probability of
 encountering a co-player with choice mechanism $c'$.
 
-Meta-games are then abstract models for the evolutionary competition between choice
-mechanisms in interactive decision making contexts.
-Standard notions of evolutionary game theory apply to meta-games as well. A choice
-mechanism $c$ is a strict Nash equilibrium if $F(c,c) > F(c',c)$ for all $c'$; it is
-evolutionarily stable if for all $c'$ either (i) $F(c,c) > F(c',c)$ or (ii) $F(c,c) = F(c',c)$
-and $F(c,c') > F(c',c')$; it is neutrally stable if for all $c'$ either (i) $F(c,c) > F(c',c)$
-or (ii) $F(c,c) = F(c',c)$ and $F(c,c') \ge F(c',c')$
-\citep{Maynard-Smith1982:Evolution-and-t}. Similarly, evolutionary dynamics can be applied to
-meta-games. We will later turn towards replicator dynamics
-\citep{TaylorJonker1978:Evolutionary-St} and replicator mutator dynamics
+Meta-games are then abstract models for the evolutionary competition between choice mechanisms
+in interactive decision making contexts.  Standard notions of evolutionary game theory apply to
+meta-games as well. For example, a choice mechanism $c$ is a strict Nash equilibrium if
+$F(c,c) > F(c',c)$ for all $c'$; it is evolutionarily stable if for all $c'$ either (i)
+$F(c,c) > F(c',c)$ or (ii) $F(c,c) = F(c',c)$ and $F(c,c') > F(c',c')$; it is neutrally stable
+if for all $c'$ either (i) $F(c,c) > F(c',c)$ or (ii) $F(c,c) = F(c',c)$ and
+$F(c,c') \ge F(c',c')$ \citep{Maynard-Smith1982:Evolution-and-t}. Similarly, evolutionary
+dynamics can be applied to meta-games. We will later turn towards the replicator dynamic
+\citep{TaylorJonker1978:Evolutionary-St} and the replicator mutator dynamic
 \citep[e.g.][]{Nowak2006:Evolutionary-Dy}.
-%\todo{footnote with caveat about agent-level processes}
 
-\section{The Model} \label{sec:model}
+\section{Example Application: Evolution of Preferences} \label{sec:model}
 
-At first, the main subjective utilities that are going to compete against each other for the survival of the fittest are essentially two:
+To demonstrate the potential usefulness of a meta-game approach, we will compare a small
+selection of general ways of forming utility and preference representations against each
+other. As for utilities, consider initially:
 \begin{enumerate}
 \item the \textit{objective} utility, defined by: for all $G \in \mathcal{G}$,
 $$\text{obj}^G(a,a')=\pi^G(a,a');$$
@@ -862,32 +743,55 @@ For a start, the subjective beliefs that we take into consideration are also two
 \item $imp$: a maximally imprecise belief $\overline{\Gamma}=\Delta(A)$.
 \end{enumerate}
 
-Although a thorough discussion of this issue goes beyond the scope of this work, let us say that these two kinds of belief underlie two different and alternative views on uncertainty. In front of uncertain events, a strict Bayesian will always form a precise belief, specified by a \textit{single} probability $\mu$. In the absence of any information about future uncertain events, the Bayesian would then invoke the \textit{principle of insufficient reason}, and accordingly choose a uniform probability over the possible outcomes. On the contrary, more recently many authors (REFERENCES) argued against the obligation of representing a belief by means of a single probability measure, opposite to the Bayesian prescriptions. They argue instead in favor of a more general account, according to which uncertainty can be unmeasurable, and represented by a (closed and convex) set of probabilities. This line of thought has been originated in decision theory by the famous Ellsberg's paradoxes (REF), and appears extremely relevant
-in game-theoretical contexts too. Indeed, in a recent paper \citet{BattCerrMM15} write:
+Although a thorough discussion of this issue goes beyond the scope of this work, let us say
+that these two kinds of belief underlie two different and alternative views on
+uncertainty. Faced with uncertain events, a strict Bayesian will always form a precise belief,
+specified by a \textit{single} probability $\mu$. In the absence of any information about
+future uncertain events, the Bayesian would then invoke the \textit{principle of insufficient
+  reason}, and accordingly choose a uniform probability over the possible outcomes. In
+contrast, others have argued against the obligation of representing a belief by means of a
+single probability measure, opposite to the Bayesian prescriptions (REFERENCES). They argue
+instead in favor of a more general account, according to which uncertainty can be unmeasurable,
+and represented by a (closed and convex) set of probabilities. This line of thought has been
+originated in decision theory by the famous Ellsberg's paradoxes (REF), and appears extremely
+relevant in game-theoretical contexts too. Indeed, in a recent paper \citet{BattCerrMM15}
+write:
 
 \begin{quote}
   Such uncertainty is inherent in situations of strategic interaction. This is quite obvious
   when such situations have been faced only a few times. (p.~646)
 \end{quote}
 
-\noindent In evolutionary game theory, for instance, players will obviously face
-uncertainty about the composition of the population that they are part of, and consequently
-about the co-player that they are randomly paired with at each round and about the co-player's
-action. In case of complete lack of information, a non-Bayesian player would thus entertain maximal unmeasurable uncertainty, i.e., a maximally imprecise belief. 
-As already anticipated,  we will see that the way agents can form beliefs, and the possibility of holding imprecise beliefs in particular, may have a fundamental impact on their evolutionary success.
+\noindent In evolutionary game theory, for instance, players will obviously face uncertainty
+about the composition of the population that they are part of, and consequently about the
+co-player that they are randomly paired with at each round and about the co-player's action. In
+case of complete lack of information, a non-Bayesian player would thus entertain maximal
+unmeasurable uncertainty, i.e., a maximally imprecise belief.\footnote{Such a radical
+  uncertainty could ensue, for example, if agents had no conception of their co-player or her
+  preferences. Unsophisticated agents, as considered in evolutionary game theory, might be
+  entirely unaware of the fact that they are engaged in social decision making \cite[e.g.,][for
+  game theoretic models of unawareness]{HeifetzMeier2009:Dynamic-Unaware}. IT is therefore
+  certainly not entirely ludicrous to consider radical uncertainty first and tend to more
+  sophisticated ways of forming beliefs later (more on this below).} As already anticipated, we
+will see that the way agents can form beliefs, and the possibility of holding imprecise beliefs
+in particular, may have a fundamental impact on their evolutionary success.
 
 As for the decision rule, we assume that the players use the maxmin rule. This is in line with most of the representation
 results of decision making under uncertainty \citep[e.g.,][]{gilsch89,KlibMarMuk05,GhirMar02},
 and seems justified by empirical observations too. Ellsberg's paradoxes are prominent examples (\citet{ells61}), and evidence from experimental literature suggests that agents are mostly uncertainty averse \citep[e.g.,][]{TrautKuil16}.
 
-Finally, note that when the maxmin rule acts on subjective representation (obj, imp), the generated behavior corresponds to the classic maxmin (REF:vNM). When the maxmin rule acts on subjective representation (reg, imp), the agent's behavior is known as \textit{regret minimization}.
-The notion of regret in decision theory dates back at least to the work by
-\citet{Savage1951:The-theory-of-s}, and has later been developed by \citet{bell82}, \citet{fish82} and \citet{loosug82} independently. Recently,
-\citet{HalpernPass2012:Iterated-Regret} showed how the use of regret minimization can give
-solutions to game theoretical-puzzles (like the Traveller's dilemma and the Centipede game) in a way that is closer to
-everyday intuition and empirical data. In this paper the notion of regret defined earlier is the same as in
-\citet{HalpernPass2012:Iterated-Regret}. Two facts stem from these observations.
-The first is related to our focus on different types of uncertainty that players may entertain.
+Finally, note that when the maxmin rule acts on subjective representation (obj, imp), the
+generated behavior corresponds to the classic maxmin (REF:vNM). When the maxmin rule acts on
+subjective representation (reg, imp), the agent's behavior is known as \textit{regret
+  minimization}.\footnote{The notion of regret in decision theory dates back at least to the
+  work by \citet{Savage1951:The-theory-of-s}, and has later been developed by \citet{bell82},
+  \citet{fish82} and \citet{loosug82} independently. Recently,
+  \citet{HalpernPass2012:Iterated-Regret} showed how the use of regret minimization can give
+  solutions to game theoretical-puzzles (like the Traveller's dilemma and the Centipede game)
+  in a way that is closer to everyday intuition and empirical data. In this paper the notion of
+  regret defined earlier is the same as in \citet{HalpernPass2012:Iterated-Regret}.} Two facts
+stem from these observations.  The first is related to our focus on different types of
+uncertainty that players may entertain.
 \begin{fact} \label{fact:maxEU-minReg} 
 %Under an identical precise (singleton set) belief, the
 %  acts selected by maximization of expected evolutionary payoff in game $G$ are exactly the acts selected
@@ -899,9 +803,14 @@ Under any identical precise (Bayesian) belief, maximization of expected evolutio
   selected by Laplace rule are exactly the acts selected by regret minimization.
 \end{fact} 
 
-\subsection{Example}
-Consider the coordination game in evolutionary payoffs $G$ depicted in figure \ref{coordgame1}. Since the game is symmetric, it suffices to specify the payoffs for the row player. Figure \ref{coordgame1} also represents the objective utility $\text{obj}^G$, since $\text{obj}^G= \pi^G$ by definition, whereas figure \ref{coordgame1reg} pictures the representation of $G$ in terms of regret-based utilities. While classic maxmin is indifferent
-between $I$ and $II$ (figure \ref{coordgame1}), regret minimization uniquely selects $II$ (figure \ref{coordgame1reg}).
+Here is a simple example that shows these choice mechanisms in action. Consider the
+coordination game in evolutionary payoffs $G$ depicted in figure \ref{coordgame1}. Since the
+game is symmetric, it suffices to specify the payoffs for the row player. Figure
+\ref{coordgame1} also represents the objective utility $\text{obj}^G$, since
+$\text{obj}^G= \pi^G$ by definition, whereas figure \ref{coordgame1reg} pictures the
+representation of $G$ in terms of regret-based utilities. While classic maxmin is indifferent
+between $I$ and $II$ (figure \ref{coordgame1}), regret minimization uniquely selects $II$
+(figure \ref{coordgame1reg}).
 \begin{figure}
 \begin{center}
   \begin{subfigure}[b]{0.3\textwidth}
@@ -937,7 +846,7 @@ between $I$ and $II$ (figure \ref{coordgame1}), regret minimization uniquely sel
 \end{figure}
 
 
-\section{Results}\label{sec:results}
+\section{Some Results for the Example Scenario}\label{sec:results}
 
 \subsection{Simulation Results}
 \label{sec:simulation-results}
