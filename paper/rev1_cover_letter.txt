@@ -1,0 +1,11 @@
+## Reviewer 2
+
+1. exposition
+2. “thin result”
+3. justify restriction on belief sets
+   - only maximal imprecision
+   - NE representation
+
+## Reviewer 3
+
+The reviewer kindly provided very useful pointers to related literature. We have carefully studied or reread the mentioned papers and have included all references in the paper. Footnote XYZ picks out the most striking resemblances and differences between our work and the previous literature. We have chosen not to summarize all of the mentioned papers in detail in the paper because of space constraints, since we felt it was more important to clearly and extensively cover our own positive contribution.
