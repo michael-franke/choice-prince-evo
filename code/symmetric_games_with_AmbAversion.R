@@ -1,6 +1,5 @@
 source('functions.R')
 
-
 CP_names = c("Sec-Reg", "Sec-Id", # security strategy
              "BFl-Reg", "BFl-Id", # flat belief
              "BAr-Reg", "BAr-Id", # arbitrary belief
@@ -8,7 +7,7 @@ CP_names = c("Sec-Reg", "Sec-Id", # security strategy
              "AAa-Reg", "AAa-Id"  # aymmetric ambiguity aversion
              )
 
-rounds = 50000
+rounds = 10000
 # game_type = c()
 row_util = rep(0,rounds*length(CP_names)^2)
 nActs = rep(2,rounds)
@@ -26,39 +25,43 @@ for (i in 1:rounds){
   
   BAr = matrix(rep(rdirichlet(1,rep(1,dim(U)[2]))[1,], each=dim(U)[1]), nrow=dim(U)[1], ncol=dim(U)[2]) # arbitrary belief
   x = runif(n = 1, min = 0, max = 0.5)
-  BAAs = c(x, 1-x)
-  BAAa = sort(runif(n = 2, min = 0, max = 1))
-
-  choices = c(maximin(regret_transform(U)), #Sec-Reg
+  BAAs = c(x, 1-x) # symmetric bounds for imprecise beliefs
+  BAAa = sort(runif(n = 2, min = 0, max = 1)) # arbitrary bounds for imprecise beliefs
+  
+  choices = list(maximin(regret_transform(U)), #Sec-Reg
               maximin(U), # Sec-Id
-              max_value(regret_transform(U)), #BFl-Reg
-              max_value(U), # BFl-Id
-              max_value(regret_transform(U) * BAr), #BAr-Reg
-              max_value(U * BAr), # BAr-Id
+              max_value(regret_transform(U),1), #BFl-Reg
+              max_value(U,1), # BFl-Id
+              max_value(regret_transform(U) * BAr,1), #BAr-Reg
+              max_value(U * BAr,1), # BAr-Id
               maximin(AA_transform(regret_transform(U), BAAs)), #AAs-Reg
               maximin(AA_transform(U, BAAs)), # AAs-Id
               maximin(AA_transform(regret_transform(U), BAAa)), #AAa-Reg
               maximin(AA_transform(U, BAAa)) # AAa-Id
-  )
-  
-  choices.c = c(maximin(regret_transform(U)), #Sec-Reg
+  ) 
+  # repeat for col-player
+  BArC = matrix(rep(rdirichlet(1,rep(1,dim(U)[2]))[1,], each=dim(U)[1]), nrow=dim(U)[1], ncol=dim(U)[2]) # arbitrary belief
+  xC = runif(n = 1, min = 0, max = 0.5)
+  BAAsC = c(xC, 1-xC) # symmetric bounds for imprecise beliefs
+  BAAaC = sort(runif(n = 2, min = 0, max = 1)) # arbitrary bounds for imprecise beliefs
+  choices.c = list(maximin(regret_transform(U)), #Sec-Reg
             maximin(U), # Sec-Id
-            max_value(regret_transform(U) * BAr), #BAr-Reg
-            max_value(U * BAr), # BAr-Id
-            max_value(regret_transform(U)), #BFl-Reg
-            max_value(U), # BFl-Id
-            maximin(AA_transform(regret_transform(U), BAAs)), #AAs-Reg
-            maximin(AA_transform(U, BAAs)), # AAs-Id
-            maximin(AA_transform(regret_transform(U), BAAa)), #AAa-Reg
-            maximin(AA_transform(U, BAAa)) # AAa-Id
+            max_value(regret_transform(U),1), #BFl-Reg
+            max_value(U,1), # BFl-Id
+            max_value(regret_transform(U) * BArC,1), #BAr-Reg
+            max_value(U * BArC,1), # BAr-Id
+            maximin(AA_transform(regret_transform(U), BAAsC)), #AAs-Reg
+            maximin(AA_transform(U, BAAsC)), # AAs-Id
+            maximin(AA_transform(regret_transform(U), BAAaC)), #AAa-Reg
+            maximin(AA_transform(U, BAAaC)) # AAa-Id
   )
-
   
   for (c in 1:length(CP_names)){
     for (d in 1:length(CP_names)){
-      row_util[((i-1)*length(CP_names)^2) + ((c-1)*length(CP_names))+(d)] = U[choices[c],choices.c[d]]
+      payoff = mean(as.vector(U[choices[[c]],choices.c[[d]]]))
+      row_util[((i-1)*length(CP_names)^2) + ((c-1)*length(CP_names))+(d)] = payoff
     }
-  }  
+  } 
   
 }
 
